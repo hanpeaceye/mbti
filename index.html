@@ -6,6 +6,21 @@
     <title>연인과 나의 MBTI 궁합 & 안 싸우는 꿀팁</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-33VJ9T8RW5');
+    </script>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="연인과 나의 MBTI 궁합 & 안 싸우는 꿀팁 💖">
+    <meta property="og:description" content="우리 커플은 왜 싸울까? 서로의 속마음부터 200% 리얼 연애 처방전까지! 16가지 유형 완벽 분석 보고서">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2074/2074844.png">
+    <meta property="og:url" content="https://aimbti.xyz">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
         body { font-family: 'Pretendard', sans-serif; background-color: #fff0f5; }
@@ -20,31 +35,41 @@
         .bubble-left::before { content: ''; position: absolute; left: -12px; top: 24px; border-width: 12px 12px 12px 0; border-color: transparent white transparent transparent; filter: drop-shadow(-2px 0 2px rgba(0,0,0,0.05)); }
         .bubble-right::before { content: ''; position: absolute; right: -12px; top: 24px; border-width: 12px 0 12px 12px; border-color: transparent white transparent transparent; filter: drop-shadow(2px 0 2px rgba(0,0,0,0.05)); }
         
-        .coupang-btn-gradient { background: linear-gradient(to right, #e11f1f, #ff9000); box-shadow: 0 4px 15px rgba(225, 31, 31, 0.3); }
+        .coupang-btn-gradient { background: linear-gradient(to right, #e11f1f, #ff9000); }
         
         .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ef4444 !important; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-        /* 귀여운 튀어오르는 애니메이션 */
+        /* 귀여운 튀어오르는 애니메이션 (추천템 버튼용) */
         .bounce-custom { animation: bounce-custom 2s infinite; }
         @keyframes bounce-custom {
             0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
         }
+
+        /* =========================================
+           [추가됨] 시크릿 가이드 전용 애니메이션
+        ========================================= */
+        /* 1. 자물쇠 둥실둥실 */
+        @keyframes float-lock {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        }
+        .animate-float-lock {
+            animation: float-lock 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* 2. 버튼 강력한 발광(Pulse Glow) */
+        @keyframes pulse-glow-btn {
+            0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); }
+            100% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow-btn 1.5s infinite ease-in-out;
+        }
     </style>
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-33VJ9T8RW5');
-    </script>
-    <meta property="og:type" content="website">
-<meta property="og:title" content="연인과 나의 MBTI 궁합 & 안 싸우는 꿀팁 💖">
-<meta property="og:description" content="우리 커플은 왜 싸울까? 서로의 속마음부터 200% 리얼 연애 처방전까지! 16가지 유형 완벽 분석 보고서">
-<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2074/2074844.png">
-<meta property="og:url" content="https://aimbti.xyz">
 </head>
 <body class="text-slate-800 min-h-screen">
 
@@ -105,10 +130,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            const validMbtiList = [
-                "ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP",
-                "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"
-            ];
+            const validMbtiList = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"];
 
             // [개별 데이터]
             const mbtiTraits = {
@@ -136,7 +158,6 @@
                     { tag: "♟️ 츤데레 전략가", desc: "표현은 서툴지만, 머릿속엔 이미 우리 미래 계획까지 다 세워놨어요. 알면 알수록 진국!", strength: "깊은 통찰력", weakness: "감정 표현 서툼" },
                     { tag: "🦉 지적인 뇌섹남녀", desc: "배울 점이 많은 사람이에요. 논리적으로 대화하는 걸 좋아하고, 자기 사람에겐 충실해요.", strength: "문제 해결 능력", weakness: "지나친 완벽주의" }
                 ],
-                 // 나머지 기본 데이터
             };
             
             const defaultTraits = {
@@ -206,7 +227,7 @@
                 return `"너랑은 정말 달라서 신기해. 도대체 무슨 생각으로 사는 걸까? 그래서 더 알고 싶어."`;
             }
 
-            // 1. 첫 번째 버튼 로직 수정
+            // 1. 첫 번째 버튼 로직 (세션 확인)
             function validateAndAnalyze() {
                 const inputA = document.getElementById('mbti-a');
                 const inputB = document.getElementById('mbti-b');
@@ -232,8 +253,12 @@
 
                 if (!isValid) { alert(errorMsg); return; }
 
-                // [수정] 쿠팡 링크 열고 -> 결과 분석 실행
-                window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                // [수정] 세션 기록 확인 후 쿠팡 열기
+                if (!sessionStorage.getItem('coupang_visited')) {
+                    window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                    sessionStorage.setItem('coupang_visited', 'true');
+                }
+
                 analyzeRelationship(valA, valB);
             }
 
@@ -325,11 +350,11 @@
                             <div id="lock-screen" class="bg-slate-900 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden group">
                                 <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                                 <div class="relative z-10">
-                                    <i class="fas fa-lock text-5xl text-slate-600 mb-4 group-hover:text-yellow-400 transition-colors duration-500"></i>
+                                    <i class="fas fa-lock text-5xl text-slate-600 mb-4 group-hover:text-yellow-400 transition-colors duration-500 animate-float-lock"></i>
                                     <h3 class="font-bold text-white text-2xl mb-2">🔒 안 싸우는 <span class="text-yellow-400">시크릿 꿀팁</span></h3>
                                     <p class="text-slate-400 text-sm mb-8">대화법, 데이트 추천, 절대 금기사항 확인하기</p>
                                     
-                                    <button id="coupang-trigger-btn" class="w-full md:w-auto px-10 py-4 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 coupang-btn-gradient flex items-center justify-center gap-3 mx-auto text-lg">
+                                    <button id="coupang-trigger-btn" class="w-full md:w-auto px-10 py-4 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 coupang-btn-gradient flex items-center justify-center gap-3 mx-auto text-lg animate-pulse-glow">
                                         <span>쿠팡 아이쇼핑 10초만 하고 확인하기</span> <i class="fas fa-unlock-alt"></i>
                                     </button>
                                 </div>
@@ -360,8 +385,14 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
+                // 2. 두 번째 버튼 로직 (수정)
                 document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
-                    window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                    // 세션 확인 후 쿠팡 열기
+                    if (!sessionStorage.getItem('coupang_visited')) {
+                        window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                        sessionStorage.setItem('coupang_visited', 'true');
+                    }
+                    
                     document.getElementById('lock-screen').classList.add('hidden');
                     const unlocked = document.getElementById('unlocked-content');
                     unlocked.classList.remove('hidden');
