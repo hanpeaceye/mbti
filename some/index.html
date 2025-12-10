@@ -188,7 +188,14 @@
                     return;
                 }
 
-                window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                // [수정된 부분] 세션 기록 확인하기
+                // 'coupang_visited'라는 기록이 없으면(!null) 창을 열고 기록을 남김
+                if (!sessionStorage.getItem('coupang_visited')) {
+                    window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                    sessionStorage.setItem('coupang_visited', 'true'); // "나 갔다 왔어!" 도장 찍기
+                } 
+                // 기록이 있으면 window.open을 건너뛰고 바로 결과를 보여줌
+
                 showResult(valA, valB);
             }
 
@@ -291,13 +298,22 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
-                    window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                // ... (showResult 함수 내부 위쪽 코드는 그대로 두세요) ...
+
+                // 2. 두 번째 버튼 로직 (수정됨)
+                document.getElementById('coupang-trigger-btn').onclick = function() {
+                    // 여기도 똑같이 체크! (위에서 한 번 갔다 왔으면 안 열림)
+                    if (!sessionStorage.getItem('coupang_visited')) {
+                        window.open('https://link.coupang.com/a/dcbQl7', '_blank');
+                        sessionStorage.setItem('coupang_visited', 'true');
+                    }
+
+                    // 잠금 해제 애니메이션
                     document.getElementById('lock-screen').classList.add('hidden');
                     const unlocked = document.getElementById('unlocked-content');
                     unlocked.classList.remove('hidden');
                     unlocked.classList.add('fade-in');
-                });
+                };
             }
 
             function resetPage() {
