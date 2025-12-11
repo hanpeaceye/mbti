@@ -44,20 +44,6 @@
             0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
         }
-
-        /* 시크릿 가이드 애니메이션 */
-        @keyframes float-lock {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        }
-        .animate-float-lock { animation: float-lock 3s ease-in-out infinite; display: inline-block; }
-
-        @keyframes pulse-glow-btn {
-            0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
-            50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); }
-            100% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
-        }
-        .animate-pulse-glow { animation: pulse-glow-btn 1.5s infinite ease-in-out; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen">
@@ -118,42 +104,94 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"];
+            
+            // [데이터 업그레이드] 설명을 더 풍부하게 수정
             const mbtiTraits = {
-                "ENTP": [{ tag: "🎤 아이디어 뱅크", desc: "장난기 넘치지만 머릿속은 사업 구상으로 가득 차 있죠.", strength: "창의력", weakness: "뒷심 부족" }, { tag: "🤡 천재 악동", desc: "남들이 '예' 할 때 '아니오'라고 말하는 짜릿함을 즐겨요.", strength: "혁신", weakness: "눈치 부족" }],
-                "ISTJ": [{ tag: "📉 인간 엑셀", desc: "약속 시간 1분도 어기지 않아요. 계획적인 든든한 애인!", strength: "책임감", weakness: "융통성" }, { tag: "🛡️ 원칙주의자", desc: "빈말은 못 하지만, 한번 뱉은 말은 무조건 지켜요.", strength: "안정감", weakness: "변화 거부" }],
-                "ISFJ": [{ tag: "🌻 수호 천사", desc: "나보다 연인을 먼저 챙겨요. 속으로 참는 게 많아요.", strength: "배려심", weakness: "거절 못 함" }, { tag: "🏡 가정적", desc: "소소한 행복을 중요시해요. 내 사람에겐 다 퍼줍니다.", strength: "헌신", weakness: "변화 두려움" }],
-                "ENFP": [{ tag: "🎉 댕댕이", desc: "사람을 너무 좋아하고 금방 사랑에 빠져요.", strength: "해피 바이러스", weakness: "상처받음" }, { tag: "✨ 영감 부자", desc: "하고 싶은 게 100가지! 불도저 같은 매력.", strength: "열정", weakness: "변덕" }],
-                "ESFJ": [{ tag: "🍰 핵인싸", desc: "기념일, 이벤트 하나도 놓치지 않고 챙겨줘요.", strength: "공감 능력", weakness: "비판에 취약" }, { tag: "🤝 내조의 왕", desc: "내 연인이 어디 가서 기죽는 꼴 못 보죠.", strength: "사교성", weakness: "시선 의식" }],
-                "INTJ": [{ tag: "♟️ 전략가", desc: "표현은 서툴지만 미래 계획까지 다 세워놨어요.", strength: "통찰력", weakness: "감정 서툼" }, { tag: "🦉 뇌섹남녀", desc: "배울 점이 많은 사람. 논리적인 대화를 좋아해요.", strength: "문제 해결", weakness: "완벽주의" }],
-                // ... 나머지 유형들은 기본값 사용
+                "ENTP": [{ tag: "🎤 멈추지 않는 아이디어 뱅크", desc: "머릿속은 항상 새로운 사업과 모험 구상으로 가득 차 있어요. '지루한 것'이 죽기보다 싫은 재치 만점 매력쟁이!", strength: "혁신적인 창의력과 위트", weakness: "뒷심 부족과 잦은 싫증" }, { tag: "🤡 천재적인 악동", desc: "남들이 '예' 할 때 '아니오'라고 말하며 토론하기를 즐겨요. 엉뚱해 보이지만 문제 해결 능력은 타의 추종을 불허합니다.", strength: "비판적 사고와 해결능력", weakness: "눈치 없는 팩트 폭격" }],
+                "ISTJ": [{ tag: "📉 걸어 다니는 엑셀 파일", desc: "약속 시간 1분도 어기지 않는 철두철미함의 소유자. 데이트 코스부터 미래 계획까지 완벽하게 짜여 있는 든든한 애인입니다.", strength: "무한한 책임감과 성실함", weakness: "예상 밖 상황에 당황함" }, { tag: "🛡️ 흔들리지 않는 원칙주의자", desc: "빈말은 절대 못 하지만, 한번 뱉은 말은 하늘이 두 쪽 나도 지켜요. 결혼 상대로는 최고의 안정감을 줍니다.", strength: "깊은 신뢰감", weakness: "새로운 변화 거부" }],
+                "ISFJ": [{ tag: "🌻 다정한 수호 천사", desc: "나보다 연인을 먼저 챙기는 배려의 아이콘. 겉으론 웃고 있어도 속으로는 많은 생각을 하고 있으니 세심하게 살펴줘야 해요.", strength: "섬세한 기억력과 배려", weakness: "거절을 못 해 끙끙 앓음" }, { tag: "🏡 가정적인 평화주의자", desc: "화려한 이벤트보다 소소하고 안정적인 행복을 추구해요. 내 사람에게는 간 쓸개 다 빼주는 헌신적인 사랑꾼입니다.", strength: "헌신적인 태도", weakness: "변화에 대한 막연한 두려움" }],
+                "ENFP": [{ tag: "🎉 인간 골든 리트리버", desc: "사람을 너무 좋아하고 금방 사랑에 빠지는 사랑둥이. 감정 표현이 솔직하고 리액션이 좋아서 같이 있으면 시간 가는 줄 몰라요.", strength: "긍정적인 해피 바이러스", weakness: "사소한 말에 쉽게 상처받음" }, { tag: "✨ 반짝이는 영감 부자", desc: "하고 싶은 게 100가지! 꽂히면 뒤도 안 돌아보고 직진하는 불도저 같은 열정이 매력적이에요.", strength: "사람을 모으는 힘", weakness: "극심한 감정 기복" }],
+                "ESFJ": [{ tag: "🍰 사랑둥이 핵인싸", desc: "기념일, 사소한 이벤트 하나도 놓치지 않고 챙겨줘요. 주변 사람들까지 챙기는 센스 덕분에 어디서나 환영받아요.", strength: "최고의 공감 능력", weakness: "비판에 크게 상처받음" }, { tag: "🤝 내조/외조의 끝판왕", desc: "내 연인이 어디 가서 기죽는 꼴은 절대 못 보죠. 사회생활 만렙 스킬로 연인을 빛나게 해주는 능력자입니다.", strength: "탁월한 사교성", weakness: "타인의 시선을 너무 의식함" }],
+                "INTJ": [{ tag: "♟️ 차가운 도시의 전략가", desc: "표현은 서툴지만, 머릿속엔 이미 우리 미래 계획(노후 대비까지)이 다 세워져 있어요. 알면 알수록 진국인 사람!", strength: "깊은 통찰력과 비전", weakness: "감정 표현이 매우 서툼" }, { tag: "🦉 지적인 뇌섹남녀", desc: "배울 점이 정말 많은 사람이에요. 무논리, 감정 호소보다는 논리적이고 건설적인 대화를 나눌 때 섹시함을 느낍니다.", strength: "냉철한 문제 해결", weakness: "지나친 완벽주의 성향" }],
+                "INFP": [{ tag: "🧚 꿈꾸는 낭만가", desc: "자신만의 세계가 확고하고 예술적 감수성이 풍부해요. 현실 감각은 좀 떨어져도 낭만적인 사랑을 꿈꾸는 순수함이 있습니다.", strength: "깊은 이해심과 순수함", weakness: "유리멘탈과 회피 성향" }, { tag: "📚 속 깊은 문학소년/소녀", desc: "말하지 않아도 상대의 감정을 기가 막히게 캐치해요. 다만 혼자만의 시간이 꼭 필요한 내향적인 영혼입니다.", strength: "따뜻한 위로 능력", weakness: "현실적인 문제 해결 미흡" }],
+                "ESTJ": [{ tag: "👑 든든한 리더", desc: "호불호가 확실하고 리드하는 걸 좋아해요. 답답한 상황을 딱 정리해주는 사이다 같은 결단력이 매력 포인트!", strength: "강력한 추진력", weakness: "직설적 화법으로 상처 줌" }, { tag: "📝 현실적인 계획왕", desc: "데이트도 효율적으로! 징징거리는 것보다는 딱 떨어지는 해결책을 제시해주는 믿음직한 파트너입니다.", strength: "현실적인 생활력", weakness: "공감 능력 부족" }],
+                // ... (나머지 유형도 기본 패턴 유지하되 로직으로 보완)
             };
+            
             const defaultTraits = {
-                "INFJ": { tag: "🔮 예언가", desc: "겉은 부드럽지만 속은 단단해요. 섬세함이 있죠.", strength: "통찰력", weakness: "예민함" },
-                "INTP": { tag: "🧪 게으른 천재", desc: "관심 분야엔 미친 듯이 파고들지만 밀당은 귀찮아해요.", strength: "분석력", weakness: "공감 서툼" },
-                "INFP": { tag: "🧚 낭만가", desc: "자신만의 세계가 확고해요. 예술적 감수성이 최고입니다.", strength: "순수함", weakness: "유리멘탈" },
-                "ESTJ": { tag: "👑 리더", desc: "호불호가 확실하고 리드하는 걸 좋아해요. 사이다 같은 애인!", strength: "추진력", weakness: "직설적" },
-                "ENTJ": { tag: "🔥 불도저", desc: "함께 성장하는 연애를 원해요. 야망 있는 멋진 사람.", strength: "리더십", weakness: "공감 부족" },
-                "ENFJ": { tag: "🎤 언변가", desc: "연인의 성장을 돕는 걸 기쁨으로 알아요. 사랑이 넘칩니다.", strength: "설득력", weakness: "희생" },
-                "ISTP": { tag: "🔧 만능맨", desc: "귀찮은 건 싫지만 필요할 땐 뚝딱 해결해줘요.", strength: "손재주", weakness: "무관심" },
-                "ISFP": { tag: "🎨 집순이/집돌이", desc: "침대 밖은 위험해! 하지만 막상 데이트하면 잘 놀아요.", strength: "예술적", weakness: "게으름" },
-                "ESTP": { tag: "⚡ 승부사", desc: "고민할 시간에 저질러요! 뒤끝 없는 쿨한 성격.", strength: "행동력", weakness: "충동성" },
-                "ESFP": { tag: "💃 연예인", desc: "인생은 즐거워야죠! 분위기 메이커.", strength: "스타성", weakness: "진지함 부족" }
-            };
-            const specialPairs = {
-                "ENTP-ISFJ": { title: "🪁 연과 얼레", desc: "사고뭉치 ENTP를 조용히 수습해주는 ISFJ! 최고의 궁합입니다.", synergy: "상호 보완", conflict: "무계획 vs 계획", score: 98 },
-                "ENTP-ISTJ": { title: "⚔️ 창과 방패", desc: "새로운 걸 시도하려는 ENTP와 원칙을 지키려는 ISTJ.", synergy: "효율적 문제해결", conflict: "혁신 vs 전통", score: 65 },
-                "ENTP-ENTP": { title: "🤡 거울 보기", desc: "만나면 시간 가는 줄 모르고 떠들어요. 티키타카 최고!", synergy: "지루할 틈 없음", conflict: "단점이 보임", score: 80 },
-                "INFP-ENFJ": { title: "👸 왕자와 공주", desc: "서로를 동경하고 아껴주는 낭만적인 관계.", synergy: "정서적 지지", conflict: "현실 회피", score: 95 }
+                "INFJ": { tag: "🔮 속 깊은 예언가", desc: "겉은 부드럽지만 속은 단단한 외유내강. 말하지 않아도 내 마음을 꿰뚫어 보는 듯한 섬세한 통찰력이 있어요.", strength: "통찰력", weakness: "예민함" },
+                "INTP": { tag: "🧪 게으른 천재", desc: "관심 있는 분야엔 미친 듯이 파고들지만, 연애의 밀당이나 감정 싸움은 귀찮아해요. 솔직담백함이 매력!", strength: "분석력", weakness: "공감 서툼" },
+                "ENTJ": { tag: "🔥 열정 불도저", desc: "함께 성장하는 연애를 원해요. 일도 사랑도 최고로 해내고 싶은 야망 있는 멋진 파트너입니다.", strength: "리더십", weakness: "공감 부족" },
+                "ENFJ": { tag: "🎤 정의로운 언변가", desc: "연인의 성장을 돕는 걸 기쁨으로 알아요. 오지랖이 넓다는 소릴 듣지만 그만큼 사랑과 정이 넘칩니다.", strength: "설득력", weakness: "지나친 희생" },
+                "ISTP": { tag: "🔧 시크한 만능맨", desc: "귀찮은 걸 싫어하지만 필요할 땐 뚝딱 해결해줘요. 무뚝뚝해 보이지만 은근히 뒤에서 챙겨주는 츤데레!", strength: "손재주", weakness: "무관심" },
+                "ISFP": { tag: "🎨 침대 밖은 위험해", desc: "집순이/집돌이지만 막상 데이트하면 잘 놀아요. 갈등을 싫어해서 웬만하면 다 맞춰주는 평화주의자입니다.", strength: "예술적 감각", weakness: "게으름" },
+                "ESTP": { tag: "⚡ 스릴 즐기는 승부사", desc: "고민할 시간에 저질러요! 내기를 좋아하고 뒤끝 없는 쿨한 성격 덕분에 늘 즐거운 연애가 가능해요.", strength: "행동력", weakness: "충동성" },
+                "ESFP": { tag: "💃 흥 부자 연예인", desc: "인생은 즐거워야죠! 우울할 틈을 안 주는 분위기 메이커. 진지한 대화보다는 신나는 경험을 좋아해요.", strength: "스타성", weakness: "진지함 부족" }
             };
 
             function generateDynamicChemistry(typeA, typeB) {
-                let score = 70; let title = "알 수 없는 이끌림"; let desc = "서로 다르지만 끌리는 묘한 매력이 있어요."; let synergy = "새로운 발견"; let conflict = "성향 차이";
-                let diffCount = 0; for(let i=0; i<4; i++) if(typeA[i] !== typeB[i]) diffCount++;
-                if (diffCount === 0) { title = "거울을 보는 사이"; desc = "나랑 똑같은 사람! 편하지만 단점도 똑같이 보여요."; score = 80; conflict = "동족 혐오"; }
-                else if (diffCount === 4) { title = "다른 행성 커플"; desc = "머리부터 발끝까지 달라요. 그래서 더 강렬하게 끌립니다."; score = 95; synergy = "완벽한 보완"; }
+                let score = 75; 
+                let title = "알 수 없는 이끌림"; 
+                let desc = "서로 너무 달라서 처음엔 이해하기 힘들 수 있어요. 하지만 그 '다름'이 서로에게 없는 부분을 채워주며 강렬하게 끌리는 이유가 됩니다."; 
+                let synergy = "새로운 세계의 발견"; 
+                let conflict = "생활 패턴의 차이";
+                
+                let diffCount = 0; 
+                for(let i=0; i<4; i++) if(typeA[i] !== typeB[i]) diffCount++;
+
+                if (diffCount === 0) { 
+                    title = "거울을 보는 사이"; 
+                    desc = "마치 나 자신을 보는 것 같아요. 말이 잘 통하고 편안하지만, 내가 싫어하는 나의 단점이 상대에게서 보일 때 묘하게 짜증 날 수 있어요."; 
+                    score = 85; conflict = "똑같은 문제로 똑같이 주저함"; 
+                } else if (diffCount === 4) { 
+                    title = "다른 행성에서 온 커플"; 
+                    desc = "머리부터 발끝까지 달라요! 처음엔 도저히 이해가 안 가지만, 내가 가지지 못한 능력을 가진 상대에게 미친 듯이 끌리게 됩니다."; 
+                    score = 95; synergy = "서로의 약점을 완벽히 보완"; 
+                } else {
+                    if (typeA[1] !== typeB[1]) { // S vs N
+                        title = "현실과 이상의 줄다리기";
+                        desc = "한 명은 숲을 보고(N), 한 명은 나무를 봅니다(S). 대화의 핀트가 자주 어긋날 수 있지만 서로에게 새로운 시각을 선물해요.";
+                        synergy = "시야의 확장"; conflict = "대화 주제의 불일치"; score -= 5;
+                    }
+                }
                 return { title, desc, synergy, conflict, score };
             }
 
+            // [NEW] MBTI 조합별 맞춤형 조언 생성기 (1.5배 보강 핵심)
+            // [NEW] MBTI 조합별 맞춤형 조언 생성기 (실제 MBTI 반영 버전)
+            function getAdviceContent(typeA, typeB) {
+                // 기본 멘트에도 MBTI 넣기
+                let conv = `서로 다른 <b>${typeA}</b>와 <b>${typeB}</b>가 만났네요. 비난보다는 '나' 화법을 사용하세요.`;
+                let date = `<b>${typeA}</b>와 <b>${typeB}</b>가 모두 만족할 수 있도록, 활동적인 데이트와 정적인 데이트를 5:5로 섞어보세요.`;
+                let taboo = `<b>${typeB}</b>를 <b>${typeA}</b>의 방식대로 바꾸려 하지 마세요. 있는 그대로 사랑해주세요.`;
+
+                // 1. T(사고) vs F(감정) 대화 갈등
+                if (typeA.includes('T') && typeB.includes('F')) {
+                    conv = `<b class="text-blue-600">${typeA}(당신)</b>: 해결책부터 주지 말고 공감부터 해주세요.<br><b class="text-pink-500">${typeB}(상대)</b>: 상대의 직설적인 말을 비난으로 듣지 마세요.`;
+                    taboo = `<b>${typeA}</b>는 "그래서 결론이 뭐야?" 금지,<br><b>${typeB}</b>는 "나 안 사랑해?" 금지.`;
+                } else if (typeA.includes('F') && typeB.includes('T')) {
+                    conv = `<b class="text-pink-500">${typeA}(당신)</b>: 서운함을 논리적으로 설명하는 연습이 필요해요.<br><b class="text-blue-600">${typeB}(상대)</b>: 영혼 없는 리액션이라도 노력하고 있음을 알아주세요.`;
+                    taboo = `<b>${typeA}</b>는 징징거림 주의,<br><b>${typeB}</b>는 "그게 왜 기분 나빠?" 금지.`;
+                }
+
+                // 2. J(계획) vs P(인식) 데이트 갈등
+                if (typeA.includes('J') && typeB.includes('P')) {
+                    date = `계획적인 <b>${typeA}</b>가 큰 틀을 짜고, 유연한 <b>${typeB}</b>가 그 안에서 맛집을 고르는 '반반 데이트'를 추천해요.`;
+                    taboo = `<b>${typeA}</b>는 시간 닥달 금지, <b>${typeB}</b>는 약속 시간 늦기 금지.`;
+                } else if (typeA.includes('P') && typeB.includes('J')) {
+                    date = `<b>${typeB}</b>인 연인을 위해 최소한의 예약은 필수! <b>${typeA}</b>인 당신의 즉흥성은 '깜짝 선물'할 때만 발휘하세요.`;
+                    taboo = `<b>${typeB}</b>의 계획 변경에 토 달지 말기, <b>${typeA}</b>의 무계획 무시하지 말기.`;
+                }
+
+                // 3. E(외향) vs I(내향) 에너지 갈등 (요청하신 부분!)
+                if (typeA.includes('E') && typeB.includes('I')) {
+                    date = `밖에서 에너지를 얻는 <b>${typeA}</b>와 달리, <b>${typeB}</b>는 집에서 쉬어야 충전이 됩니다. 야외 데이트 후에는 <b>${typeB}</b>에게 혼자만의 시간을 꼭 선물하세요.`;
+                } else if (typeA.includes('I') && typeB.includes('E')) {
+                    date = `에너지가 넘치는 <b>${typeB}</b>인 연인을 위해 가끔은 시끌벅적한 모임에 같이 가주세요. <b>${typeB}</b>는 당신과 함께 밖에서 추억을 쌓고 싶어 합니다.`;
+                }
+
+                return { conv, date, taboo };
+            }
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
@@ -167,7 +205,7 @@
                 if (!validMbtiList.includes(valA)) { alert("나의 MBTI를 확인해주세요!"); inputA.focus(); return; }
                 if (!validMbtiList.includes(valB)) { alert("연인의 MBTI를 확인해주세요!"); inputB.focus(); return; }
                 
-                // [수정] 쿠팡 열기 제거하고 바로 분석 시작
+                // [수정] 바로 분석 시작 (쿠팡 로직 제거)
                 analyzeRelationship(valA, valB);
             }
 
@@ -175,7 +213,10 @@
                 const getTrait = (t) => (mbtiTraits[t] ? mbtiTraits[t][Math.floor(Math.random() * mbtiTraits[t].length)] : defaultTraits[t]);
                 let traitA = getTrait(mbtiA); let traitB = getTrait(mbtiB);
                 let pairKey = [mbtiA, mbtiB].sort().join("-");
-                let chemistry = specialPairs[pairKey] || generateDynamicChemistry(mbtiA, mbtiB);
+                let chemistry = generateDynamicChemistry(mbtiA, mbtiB); // 기본 로직 사용
+
+                // 맞춤형 조언 가져오기
+                const advice = getAdviceContent(mbtiA, mbtiB);
 
                 const resultHTML = `
                     <div class="max-w-4xl mx-auto space-y-12">
@@ -211,23 +252,21 @@
                         </div>
 
                         <div class="mt-12">
-                            <div id="lock-screen" class="bg-slate-900 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden group">
-                                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                                <div class="relative z-10">
-                                    <i class="fas fa-lock text-5xl text-slate-600 mb-4 group-hover:text-yellow-400 transition-colors duration-500 animate-float-lock"></i>
-                                    <h3 class="font-bold text-white text-2xl mb-2">🔒 안 싸우는 <span class="text-yellow-400">시크릿 꿀팁</span></h3>
-                                    <p class="text-slate-400 text-sm mb-8">대화법, 데이트 추천, 절대 금기사항 확인하기</p>
-                                    <button id="coupang-trigger-btn" class="w-full md:w-auto px-10 py-4 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 coupang-btn-gradient flex items-center justify-center gap-3 mx-auto text-lg animate-pulse-glow">
-                                        <span>쿠팡 아이쇼핑 10초만 하고 확인하기</span> <i class="fas fa-unlock-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="unlocked-content" class="hidden bg-white border-2 border-slate-900 rounded-3xl p-8 shadow-2xl relative">
-                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-slate-900 text-yellow-400 px-6 py-2 rounded-full font-bold text-sm shadow-lg"><i class="fas fa-crown mr-2"></i>SECRET TIPS UNLOCKED</div>
+                            <div id="unlocked-content" class="bg-white border-2 border-slate-900 rounded-3xl p-8 shadow-2xl relative fade-in">
+                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-slate-900 text-yellow-400 px-6 py-2 rounded-full font-bold text-sm shadow-lg"><i class="fas fa-crown mr-2"></i>SPECIAL GUIDE</div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                                    <div class="bg-blue-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">💬 대화의 기술</h4><p class="text-sm text-slate-600">서로 다름을 인정하고 '나' 화법으로 대화하세요.</p></div>
-                                    <div class="bg-pink-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">🎟️ 추천 데이트</h4><p class="text-sm text-slate-600">이번 주는 ${mbtiA}의 취향, 다음 주는 ${mbtiB}의 취향대로!</p></div>
-                                    <div class="bg-yellow-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">⚠️ 절대 금기사항</h4><p class="text-sm text-slate-600">상대를 바꾸려 하지 마세요. 있는 그대로 사랑해주세요.</p></div>
+                                    <div class="bg-blue-50 p-6 rounded-2xl text-center">
+                                        <h4 class="font-bold text-slate-800 mb-3">💬 대화의 기술</h4>
+                                        <p class="text-sm text-slate-600 break-keep leading-relaxed">${advice.conv}</p>
+                                    </div>
+                                    <div class="bg-pink-50 p-6 rounded-2xl text-center">
+                                        <h4 class="font-bold text-slate-800 mb-3">🎟️ 추천 데이트</h4>
+                                        <p class="text-sm text-slate-600 break-keep leading-relaxed">${advice.date}</p>
+                                    </div>
+                                    <div class="bg-yellow-50 p-6 rounded-2xl text-center">
+                                        <h4 class="font-bold text-slate-800 mb-3">⚠️ 절대 금기사항</h4>
+                                        <p class="text-sm text-slate-600 break-keep font-bold leading-relaxed">${advice.taboo}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -244,36 +283,19 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // 시크릿 버튼 로직 (세션 체크)
-                document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
-                    if (!sessionStorage.getItem('coupang_visited')) {
-                        window.open('https://link.coupang.com/a/dcbQl7', '_blank');
-                        sessionStorage.setItem('coupang_visited', 'true');
-                    }
-                    document.getElementById('lock-screen').classList.add('hidden');
-                    document.getElementById('unlocked-content').classList.remove('hidden');
-                    document.getElementById('unlocked-content').classList.add('fade-in');
-                });
-
-                // [중요] 쿠팡 파트너스 배너 스크립트 안전 주입 (0.1초 후 실행)
+                // 쿠팡 배너 주입
                 setTimeout(() => {
                     const bannerFrame = document.getElementById('coupang-banner-frame');
                     if (bannerFrame) {
                         const iframe = document.createElement('iframe');
-                        iframe.style.width = '100%';
-                        iframe.style.height = '100%';
-                        iframe.style.border = 'none';
-                        iframe.scrolling = 'no';
+                        iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = 'none'; iframe.scrolling = 'no';
                         bannerFrame.appendChild(iframe);
-
                         const doc = iframe.contentWindow.document;
                         doc.open();
                         doc.write(`
                             <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; overflow:hidden;">
                                 <script src="https://ads-partners.coupang.com/g.js"><\/script>
-                                <script>
-                                    new PartnersCoupang.G({"id":949693,"template":"carousel","trackingCode":"AF3238435","width":"680","height":"160","tsource":""});
-                                <\/script>
+                                <script> new PartnersCoupang.G({"id":949693,"template":"carousel","trackingCode":"AF3238435","width":"680","height":"160","tsource":""}); <\/script>
                             </body>
                         `);
                         doc.close();
