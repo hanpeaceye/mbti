@@ -47,10 +47,7 @@
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
         }
 
-        /* =========================================
-           [추가됨] 시크릿 가이드 전용 애니메이션
-        ========================================= */
-        /* 1. 자물쇠 둥실둥실 */
+        /* 시크릿 가이드 전용 애니메이션 */
         @keyframes float-lock {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.2); }
@@ -60,7 +57,6 @@
             display: inline-block;
         }
 
-        /* 2. 버튼 강력한 발광(Pulse Glow) */
         @keyframes pulse-glow-btn {
             0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
             50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); }
@@ -105,7 +101,7 @@
                     </div>
                     
                     <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-6 rounded-2xl shadow-xl hover:shadow-2xl text-lg md:text-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group">
-                        <span>쿠팡 살짝 다녀와서 결과확인하기</span> <i class="fas fa-rocket group-hover:translate-x-1 transition-transform"></i>
+                        <span>결과 보기</span> <i class="fas fa-rocket group-hover:translate-x-1 transition-transform"></i>
                     </button>
                 </div>
             </div>
@@ -227,7 +223,7 @@
                 return `"너랑은 정말 달라서 신기해. 도대체 무슨 생각으로 사는 걸까? 그래서 더 알고 싶어."`;
             }
 
-            // 1. 첫 번째 버튼 로직 (세션 확인)
+            // [수정] 첫 번째 버튼 로직 (쿠팡 연동 제거)
             function validateAndAnalyze() {
                 const inputA = document.getElementById('mbti-a');
                 const inputB = document.getElementById('mbti-b');
@@ -253,12 +249,7 @@
 
                 if (!isValid) { alert(errorMsg); return; }
 
-                // [수정] 세션 기록 확인 후 쿠팡 열기
-                if (!sessionStorage.getItem('coupang_visited')) {
-                    window.open('https://link.coupang.com/a/dcbQl7', '_blank');
-                    sessionStorage.setItem('coupang_visited', 'true');
-                }
-
+                // 바로 분석 시작 (쿠팡 열기 코드 삭제됨)
                 analyzeRelationship(valA, valB);
             }
 
@@ -385,7 +376,7 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // 2. 두 번째 버튼 로직 (수정)
+                // 2. 두 번째 버튼 로직 (세션 확인)
                 document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
                     // 세션 확인 후 쿠팡 열기
                     if (!sessionStorage.getItem('coupang_visited')) {
