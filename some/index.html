@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimbti.xyz/some">
     <meta property="og:title" content="🔒 그 사람의 마음을 여는 열쇠 | MBTI 썸 공략 가이드">
-    <meta property="og:description" content="내 성향은 살리고 상대방 취향은 저격하는 200% 맞춤형 플러팅 전략! 카톡 말투부터 절대 금기어까지 시크릿 비법 공개 💘">
+    <meta property="og:description" content="내 성향은 살리고 상대방 취향은 저격하는 200% 맞춤형 플러팅 전략! 만남 어필 포인트부터 절대 금기어까지 대공개 💘">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
     
     <style>
@@ -32,14 +32,12 @@
         .vs-badge { background: linear-gradient(45deg, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .coupang-btn-gradient { background: linear-gradient(to right, #e11f1f, #ff9000); }
         
-        @keyframes float-lock { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.3); } }
-        .animate-float-lock { animation: float-lock 3s ease-in-out infinite; display: inline-block; }
-
-        @keyframes pulse-glow-btn { 0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); } 50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); } 100% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); } }
-        .animate-pulse-glow { animation: pulse-glow-btn 1.5s infinite ease-in-out; }
-        
         .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ef4444 !important; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+        
+        /* 포인트 박스 스타일 */
+        .strategy-box { border-left-width: 4px; transition: transform 0.2s; }
+        .strategy-box:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen">
@@ -85,7 +83,7 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-800 font-bold flex items-center gap-2 transition-colors px-4 py-2 rounded-lg hover:bg-white/50">
                     <i class="fas fa-arrow-left"></i> 다시하기
                 </button>
-                <span class="text-xs font-bold text-purple-500 bg-purple-100 px-3 py-1 rounded-full">SECRET GUIDE</span>
+                <span class="text-xs font-bold text-purple-500 bg-purple-100 px-3 py-1 rounded-full">PREMIUM REPORT</span>
             </div>
             <div id="result-content"></div>
         </div>
@@ -101,89 +99,103 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. [상대방 분석] 상세 데이터 (썸 공략용)
+            // 1. [상대방 분석] 상세 데이터 (2배 보강)
             const targetAnalysis = {
-                "ISTJ": { type: "신중한 원칙주의자", like: "약속 시간 10분 전 도착, 깔끔한 옷차림, 구체적인 일정 제안", dislike: "갑작스러운 변경, 시끄러운 곳, 예의 없는 행동", tip: "애매한 표현 금지! '시간 될 때 보자'보다 '토요일 2시에 만나'를 선호합니다." },
-                "ISFJ": { type: "섬세한 배려왕", like: "사소한 말 기억해주기, 예의 바른 태도, 감사 인사", dislike: "강한 자기주장, 연락 두절, 무례함", tip: "천천히 다가가세요. 확신이 들 때까지 마음을 잘 안 엽니다." },
-                "INFJ": { type: "속 깊은 철학자", like: "깊은 대화, 가치관 존중, 조용한 곳, 진정성", dislike: "가벼운 농담 반복, 거짓말, 시끄러운 파티", tip: "가벼운 플러팅보다 '너의 생각이 궁금해'라는 태도로 접근하세요." },
-                "INTJ": { type: "지적인 야망가", like: "논리적인 대화, 배울 점이 있는 사람, 비전 공유", dislike: "징징거림, 감정 호소, 무계획적인 시간 낭비", tip: "능력 있고 스마트한 사람이라는 걸 어필하세요. 뻔한 칭찬은 안 통합니다." },
-                "ISTP": { type: "시크한 마이웨이", like: "혼자만의 시간 존중, 함께 즐기는 취미, 깔끔한 용건", dislike: "집착과 구속, 감정적인 드라마, 답장 재촉", tip: "고양이처럼 다루세요. 너무 들이대면 도망갑니다." },
-                "ISFP": { type: "감성적인 예술가", like: "예쁜 카페/전시회, 세심한 챙김, 부드러운 말투", dislike: "결정 강요, 갈등 상황, 목소리 큰 사람", tip: "리드는 당신이 하되, 강요는 하지 마세요. '이거 어때?'라고 물어봐 주세요." },
-                "INFP": { type: "낭만적인 몽상가", like: "깊은 공감, 취향 존중, 낭만적인 분위기, 예쁜 말", dislike: "차가운 팩트 폭격, 무시하는 태도, 속물적인 대화", tip: "현실적인 조언보다 무조건적인 내 편이 되어주세요." },
-                "INTP": { type: "호기심 많은 괴짜", like: "관심 분야 들어주기, 멍 때리는 시간 존중, 지적 자극", dislike: "뻔한 스몰토크(날씨 얘기), 감정 강요, 논리 없는 주장", tip: "그 사람의 관심사에 대해 질문하세요. 신나서 떠들면 성공입니다." },
-                "ESTP": { type: "화끈한 직진러", like: "스릴 넘치는 액티비티, 쿨한 성격, 직설적인 호감 표현", dislike: "답답하게 구는 것, 빙빙 돌려 말하기, 진지충", tip: "밀당 금지! 같이 있으면 재밌는 사람이라는 걸 보여주세요." },
-                "ESFP": { type: "주인공 본능 연예인", like: "나에게 쏟아지는 관심, 서프라이즈, 리액션, 힙한 장소", dislike: "침묵, 진지한 설교, 집에만 있는 데이트", tip: "텐션을 올리세요! '너랑 있으니까 진짜 재밌다'는 말을 가장 좋아합니다." },
-                "ENFP": { type: "사랑둥이 댕댕이", like: "우쭈쭈 해주기, 엉뚱한 말 받아주기, 즉흥 여행", dislike: "무관심, 반복되는 일상, 엄격한 규칙", tip: "사소한 변화도 알아봐 주고 칭찬해주세요." },
-                "ENTP": { type: "매력적인 논쟁가", like: "토론 받아주기, 새로운 아이디어, 인정해 주기", dislike: "권위적인 태도, 뻔한 칭찬, 통제하려는 시도", tip: "논쟁을 피하지 마세요. 지적으로 대등하다고 느낄 때 끌립니다." },
-                "ESTJ": { type: "확실한 리더형", like: "능력 있는 모습, 시간 약속 칼같이 지키기, 확실한 표현", dislike: "우유부단함, 게으름, 징징거리는 것", tip: "감정보다 이성에 호소하세요. 배울 점이 있는 사람을 좋아합니다." },
-                "ESFJ": { type: "다정한 인싸", like: "고맙다는 표현, 내 지인 챙겨주기, 칼답, 리액션", dislike: "차가운 반응, 비판, 내 호의 무시하기", tip: "친절에 크게 감동하세요. '너 같은 사람 처음이야'가 특효약입니다." },
-                "ENFJ": { type: "열정적인 코치", like: "꿈 응원해주기, 먼저 다가와서 챙겨주기, 긍정적 대화", dislike: "이기적인 행동, 무례함, 고마워할 줄 모르는 태도", tip: "당신 덕분에 내가 더 좋은 사람이 된 것 같다고 말해주세요." },
-                "ENTJ": { type: "카리스마 대장", like: "도전적인 모습, 자기계발, 직설적 화법, 일 잘하는 사람", dislike: "감성팔이, 무능력, 시간 낭비, 주관 없는 모습", tip: "주눅 들지 말고 당당하게 대하세요. 프로페셔널한 모습을 보여주세요." }
+                "ISTJ": { type: "신중한 원칙주의자", like: "예측 가능한 일정과 약속 시간 10분 전 도착을 사랑합니다. 흐트러짐 없는 단정한 옷차림과 본인의 말에 책임을 지는 태도에서 깊은 신뢰를 느낍니다. 빈말이나 아부보다는 솔직하고 담백한 화법을 선호합니다.", dislike: "당일에 갑자기 '지금 나와'라고 하는 것, 시끄럽고 정신없는 장소, 허세를 부리거나 앞뒤가 다른 행동, 기본적인 예의를 지키지 않는 것을 극도로 싫어합니다.", tip: "애매한 표현은 독입니다. '시간 될 때 보자'가 아니라 '이번 주 토요일 2시에 OO카페에서 보자'라고 구체적인 플랜을 제시하세요." },
+                "ISFJ": { type: "섬세한 배려왕", like: "내가 지나가듯 했던 사소한 말을 기억해 줄 때 큰 감동을 받습니다. 식당 종업원에게 친절한 모습, 정숙하고 차분한 데이트 분위기, 그리고 헤어질 때 진심 어린 '고마워'라는 인사가 필수입니다.", dislike: "강한 자기주장으로 몰아붙이는 것, 연락이 묘연해지는 것, 다른 사람을 무시하거나 무례하게 구는 행동, 갈등 상황을 만드는 것을 견디기 힘들어합니다.", tip: "급하게 다가가면 문을 닫습니다. 천천히 스며드세요. 당신이 '안전하고 따뜻한 사람'이라는 확신이 들 때까지 기다려주는 인내심이 필요합니다." },
+                "INFJ": { type: "속 깊은 철학자", like: "가벼운 농담보다는 둘만의 깊은 대화(인생관, 가치관)를 나누는 것을 좋아합니다. 사람이 붐비지 않는 조용한 곳, 나의 독특한 생각까지 존중해주는 태도, 거짓 없는 진정성에 마음을 엽니다.", dislike: "의미 없는 가벼운 농담만 계속하는 것, 거짓말이나 위선적인 태도, 훅 들어오는 과도한 스킨십, 시끄러운 클럽이나 파티 분위기는 에너지를 방전시킵니다.", tip: "당신의 화려한 모습보다는 내면의 생각에 관심을 보여주세요. '너의 생각이 궁금해', '너는 어떻게 느껴?'라는 질문이 마법의 열쇠입니다." },
+                "INTJ": { type: "지적인 야망가", like: "논리적이고 건설적인 대화, 배울 점이 있는 유능한 사람, 자신의 비전과 목표를 지지해주는 태도, 시간 낭비 없는 효율적인 데이트 코스를 선호합니다.", dislike: "징징거리거나 감정에만 호소하는 대화, 멍청하거나 무능력해 보이는 행동, 계획 없이 시간을 허비하는 것, 뻔한 칭찬이나 아부를 질색합니다.", tip: "당신이 자신의 분야에서 얼마나 프로페셔널한지 어필하세요. 감정적인 위로보다는 지적인 토론을 나눌 때 '이 사람 섹시하다'고 느낍니다." },
+                "ISTP": { type: "시크한 마이웨이", like: "혼자만의 시간을 확실히 존중해주는 쿨함, 이것저것 간섭하지 않는 태도, 함께 몸을 움직이거나 취미를 공유하는 활동, 빙빙 돌리지 않는 직설적이고 깔끔한 용건.", dislike: "집착하고 구속하려는 모든 시도, 감정적인 드라마를 찍으려 하는 것, 오글거리는 멘트나 과한 애정 표현, 답장을 닥달하는 행위.", tip: "고양이 다루듯 하세요. 다가오면 놀아주고, 멀어지면 놔두세요. 너무 들이대면 도망가지만, 무심한 듯 챙겨주면 호기심을 갖습니다." },
+                "ISFP": { type: "감성적인 예술가", like: "감각적인 인테리어의 카페나 전시회, 섬세하게 챙겨주는 매너, 부드럽고 다정하게 말하는 목소리, 나의 패션이나 취향을 구체적으로 칭찬해주는 것.", dislike: "결정을 빨리 하라고 강요하는 것, 목소리 큰 사람, 싸움이나 갈등 상황, 나의 취향이나 가치관을 비판적으로 지적하는 것.", tip: "리드는 당신이 하되, 강요는 하지 마세요. '이거 하자!' 대신 '이거 어때? 너 좋은 대로 하자'라고 부드럽게 선택권을 넘겨주는 게 포인트입니다." },
+                "INFP": { type: "낭만적인 몽상가", like: "나의 감정에 깊이 공감해주고 리액션해주는 것, 독특한 나만의 취향을 존중해주는 태도, 영화 같은 낭만적인 분위기, 진심이 담긴 예쁜 말과 편지.", dislike: "차가운 팩트 폭격으로 상처 주는 것, 내 말을 무시하거나 건성으로 듣는 태도, 속물적인 대화(돈, 현실 얘기만 하는 것), 전통적인 가치관 강요.", tip: "해결책을 주려 하지 말고 무조건적인 내 편이 되어주세요. 감수성을 자극하는 작은 선물이나 손편지가 명품 가방보다 효과적입니다." },
+                "INTP": { type: "호기심 많은 괴짜", like: "나의 마이너한 관심 분야에 대해 흥미롭게 들어주는 것, 멍 때리는 시간을 방해하지 않는 것, 엉뚱한 상상을 함께 나누는 것, 지적인 자극을 주는 대화.", dislike: "뻔한 스몰토크(날씨, 밥 얘기)만 반복하는 것, 감정적인 위로를 강요하는 것, 논리 없이 우기는 태도, 사생활을 꼬치꼬치 캐묻는 간섭.", tip: "그 사람의 관심사에 대해 질문을 던지세요. 평소에 조용하던 사람이 신나서 떠들기 시작하면 이미 당신에게 호감을 느끼고 있는 겁니다." },
+                "ESTP": { type: "화끈한 직진러", like: "스릴 넘치는 액티비티나 맛집 탐방, 쿨하고 뒤끝 없는 성격, 돌려 말하지 않는 직설적인 호감 표현, 함께 있을 때 끊임없이 웃게 해주는 유머 감각.", dislike: "답답하게 구는 것, 빙빙 돌려 말하며 눈치 보게 하는 것, 진지하고 무거운 분위기 잡는 것, 나를 구속하거나 통제하려는 시도.", tip: "밀당은 시간 낭비입니다. 같이 있으면 세상에서 제일 재밌고 신나는 사람이라는 인식을 심어주세요. 고민할 시간에 일단 지르세요!" },
+                "ESFP": { type: "주인공 본능 연예인", like: "나에게 쏟아지는 관심과 애정, 깜짝 서프라이즈 이벤트, 나의 말에 대한 크고 확실한 리액션, 핫플레이스나 힙한 장소 데이트.", dislike: "침묵과 정적, 진지한 설교나 훈계, 집에만 있는 지루한 데이트, 나를 무시하거나 투명 인간 취급하는 것.", tip: "함께 텐션을 올리세요! '너랑 있으니까 진짜 재밌다', '네가 최고야'라는 말을 아끼지 마세요. 즐거움이 곧 사랑입니다." },
+                "ENFP": { type: "사랑둥이 댕댕이", like: "우쭈쭈 해주며 칭찬 감옥에 가두기, 나의 엉뚱한 말에도 맞장구쳐주는 태도, 갑자기 떠나는 즉흥 여행, 끊임없는 애정 표현과 스킨십.", dislike: "무관심, 반복되는 지루한 일상과 데이트, 엄격한 규칙이나 규율 강요, 혼자 방치해 두는 것.", tip: "사소한 변화(머리스타일, 옷)도 기가 막히게 알아채고 칭찬해주세요. 당신의 관심이 곧 사랑의 척도라고 생각합니다." },
+                "ENTP": { type: "매력적인 논쟁가", like: "말싸움(토론)을 즐겁게 받아주는 티키타카, 끊임없이 새로운 아이디어 제안, 나를 인정하고 치켜세워 주는 것, 쿨하고 독립적인 태도.", dislike: "권위적으로 찍어 누르려는 태도, 뻔하고 지루한 칭찬, 나를 통제하거나 가르치려 드는 시도, 감정적으로 징징거리는 것.", tip: "논쟁을 피하지 말고 즐기세요. 지적으로 대등하거나 배울 점이 있는 상대라고 느낄 때 강렬한 끌림을 느낍니다." },
+                "ESTJ": { type: "확실한 리더형", like: "자신의 일에 몰입하는 능력 있는 모습, 시간 약속을 칼같이 지키는 태도, 호불호가 확실한 표현, 체계적이고 효율적인 데이트.", dislike: "우유부단하게 결정 못 하는 모습, 게으르고 나태한 태도, 징징거리며 감정 쓰레기통 취급하는 것, 약속을 어기는 것.", tip: "감정보다는 이성에 호소하세요. 당신이 배울 점이 있고 성실하며, 미래를 함께 그릴 수 있는 든든한 사람이라는 걸 보여주세요." },
+                "ESFJ": { type: "다정한 인싸", like: "고맙다는 표현을 자주 하는 것, 내 친구나 가족까지 챙겨주는 세심함, 빠른 답장과 활발한 리액션, 계획적인 데이트.", dislike: "차가운 반응이나 읽씹, 비판적인 태도나 지적, 내가 베푼 호의를 당연하게 여기는 것, 예의 없는 행동.", tip: "그 사람이 베푸는 친절에 크게 감동하고 표현하세요. '너 같은 사람 처음이야', '진짜 고마워'라는 말이 특효약입니다." },
+                "ENFJ": { type: "열정적인 코치", like: "나의 꿈과 비전을 진심으로 응원해주는 것, 먼저 다가와서 챙겨주는 따뜻함, 긍정적이고 희망찬 대화, 열정적인 리액션.", dislike: "이기적인 행동이나 계산적인 태도, 사회적 약자에 대한 무례함, 고마워할 줄 모르는 태도, 비관적인 말.", tip: "그 사람의 선한 영향력을 칭찬하세요. '너 덕분에 내가 더 좋은 사람이 된 것 같아'라는 말은 최고의 고백입니다." },
+                "ENTJ": { type: "카리스마 대장", like: "도전적이고 야망 있는 모습, 끊임없이 자기계발하는 사람, 빙빙 돌리지 않는 직설적이고 솔직한 화법, 일 잘하는 프로페셔널함.", dislike: "감성팔이하며 의존하려는 모습, 무능력하고 게으른 태도, 시간 낭비하는 무의미한 대화, 주관 없이 휩쓸리는 모습.", tip: "주눅 들지 말고 당당하게 대하세요. 자신의 일에 몰입하고 성취해내는 멋진 모습을 보여줄 때 반하게 됩니다." }
             };
 
-            // 2. [맞춤형 전략] 기본 분석
+            // 2. [맞춤형 전략] 기본 분석 (ME based)
             function getMyStrategy(me, you) {
-                let text = ""; let subText = "";
+                let text = "";
+                let subText = "";
+
                 if (me.includes('E') && you.includes('I')) {
-                    text = "🔥 당신의 넘치는 에너지가 상대에겐 부담일 수 있어요. 대답을 재촉하지 말고 <b>'침묵의 3초'</b>를 견디세요.";
+                    text = "🔥 <b>당신의 넘치는 에너지가 상대에겐 부담일 수 있어요.</b><br>질문하고 대답을 재촉하지 말고 <b>'침묵의 3초'</b>를 견디세요. 상대방은 생각할 시간이 필요합니다.";
                     subText = "천천히 다가가면 의외로 말문이 터질 거예요.";
                 } else if (me.includes('I') && you.includes('E')) {
-                    text = "🔊 상대방은 당신의 반응을 목빠지게 기다립니다. 평소보다 <b>리액션 볼륨을 1.5배 키우고</b> 먼저 선톡해보세요.";
+                    text = "🔊 <b>상대방은 당신의 반응을 목빠지게 기다리고 있어요.</b><br>평소보다 <b>리액션 볼륨을 1.5배 키우고</b>, 가끔은 먼저 '뭐해?'라고 선톡을 날려보세요.";
                     subText = "당신의 작은 표현에 상대는 감동합니다.";
                 } else {
-                    text = "🤝 에너지 레벨이 비슷하네요! 하지만 너무 친구같이 편해질 수 있으니, 가끔은 이성적인 긴장감을 주는 멘트를 던지세요.";
+                    text = "🤝 <b>에너지 레벨이 비슷해서 금방 친해지겠네요!</b><br>하지만 너무 친구같이 편해질 수 있으니, 가끔은 이성적인 긴장감을 주는 멘트나 스킨십을 시도하세요.";
                     subText = "편안함 속에 설렘 한 스푼이 필요해요.";
                 }
                 return { text, subText };
             }
 
-            // 3. [NEW] 메신저 필승 공략법 (KakaoTalk Strategy) - 비중 대폭 강화
-            function getMessengerStrategy(targetMBTI) {
-                let style = "";
-                let good = "";
-                let bad = "";
+            // 3. [NEW] 실전 만남 전략 (어필 & 조심) - 2배 보강된 로직
+            function getMeetingStrategy(me, you) {
+                let appeal = "";
+                let beware = "";
 
-                // E vs I (연락 빈도/속도)
-                if (targetMBTI.includes('E')) {
-                    style = "🚀 <b>칼답과 티키타카가 생명!</b><br>연락 텀이 길어지면 '나한테 관심 없나?' 하고 식어버립니다. 별거 아닌 일상 공유도 대환영!";
+                // APPEAL: 상대방이 좋아하는 것(Target's Preference) + 나의 강점(Me's Strength)
+                if (you.includes('S')) {
+                    appeal = `👀 <b>시각적/감각적 디테일 챙기기</b><br>
+                    ${you}는 눈에 보이는 것을 믿습니다. <b>단정하고 센스 있는 옷차림, 좋은 향기</b>는 기본입니다.
+                    추상적인 미래 얘기보다는 <b>"지금 맛있는 거", "오늘 날씨", "눈앞의 예쁜 풍경"</b>에 대해 구체적으로 이야기하세요.
+                    당신이 현실 감각이 있고 세심한 사람이라는 것을 행동으로 보여주세요.`;
+                } else { // N Target
+                    appeal = `✨ <b>상상력과 가치관 자극하기</b><br>
+                    ${you}는 뻔한 일상 대화보다 <b>"만약에 우리가...", "너는 인생에서 뭐가 제일 중요해?"</b> 같은 심오한 질문을 좋아합니다.
+                    당신의 <b>독특한 취향이나 꿈</b>을 솔직하게 이야기하세요.
+                    "너랑 대화하면 통하는 게 있어"라는 느낌을 주는 것이 외모보다 중요합니다.`;
+                }
+
+                // BEWARE: 상대방이 싫어하는 것(Target's Dislike) + 나의 약점(Me's Weakness)
+                if (you.includes('J')) {
+                    beware = `⏰ <b>시간 약속과 계획 변경 주의</b><br>
+                    ${you}에게 <b>지각은 곧 신뢰 하락</b>입니다. 약속 시간 10분 전에 도착해 있는 모습을 보여주세요.
+                    "그냥 만나서 정하자"는 말은 ${you}를 불안하게 합니다.
+                    최소한 <b>식당 하나, 카페 하나 정도는 미리 찾아가서</b> 선택지를 주는 센스를 발휘하세요.`;
+                } else { // P Target
+                    beware = `🙅‍♂️ <b>통제하려는 태도 금지</b><br>
+                    ${you}는 자유로운 영혼입니다. <b>"이거 해야 돼", "저거 해야 돼"</b> 하며 가르치려 들거나 통제하려 하지 마세요.
+                    예상치 못한 변수가 생겨도 <b>"오히려 좋아! 다른 데 가보자"</b> 하며 웃어넘기는 유연함이 필요합니다.
+                    너무 빡빡한 일정보다는 여유로운 흐름을 즐기세요.`;
+                }
+
+                // 추가 디테일 (T/F)
+                if (you.includes('T')) {
+                    appeal += `<br><br>🧠 <b>논리적이고 똑부러지는 모습</b><br>고민을 말할 때 감정에만 호소하기보다 <b>"그래서 이렇게 해결하려고 해"</b>라고 주관을 보여주세요.`;
                 } else {
-                    style = "🐢 <b>천천히, 그러나 꾸준히!</b><br>답장이 늦다고 닥달하면 도망갑니다. 혼자만의 시간을 존중해주되, 끊기지 않게 잔잔하게 이어가세요.";
+                    appeal += `<br><br>💖 <b>무조건적인 공감과 리액션</b><br>대화 중간중간 <b>눈을 맞추고 고개를 끄덕여주세요.</b> 사소한 변화를 알아봐 주는 것이 킬링 포인트입니다.`;
                 }
 
-                // S vs N (대화 주제)
-                if (targetMBTI.includes('S')) {
-                    good = "📸 <b>'지금 먹는 거', '오늘 날씨' 같은 눈에 보이는 사진!</b><br>구체적인 약속 잡기 ('이번 주 토요일에 거기 가자')";
-                    bad = "☁️ <b>밑도 끝도 없는 '만약에' 질문.</b><br>너무 추상적인 시 구절이나 감성 글귀 보내기.";
-                } else { // N
-                    good = "🔮 <b>흥미로운 기사, 밈(Meme), 밸런스 게임.</b><br>'너는 어떻게 생각함?' 하고 가치관 물어보기.";
-                    bad = "📉 <b>너무 현실적인 얘기만 반복하기.</b><br>'응', '아니'로 대화 끊어버리기.";
-                }
-
-                // T vs F (리액션/공감)
-                if (targetMBTI.includes('T')) {
-                    good += "<br>🧠 <b>정보가 담긴 유용한 링크 공유.</b><br>고민 상담 시 감정보다는 해결책 제시해주기.";
-                    bad += "<br>😭 <b>이유 없이 '나 우울해' 시전.</b><br>돌려 말하거나 삐진 티 내기 (못 알아들음).";
-                } else { // F
-                    good += "<br>🥰 <b>이모티콘 남발 + 무한 공감 리액션.</b><br>'오늘 고생했어' 같은 따뜻한 위로의 말.";
-                    bad += "<br>🤖 <b>'그래서 결론이 뭐야?' (절대 금지).</b><br>맞춤법 지적이나 팩트 폭격.";
-                }
-
-                return { style, good, bad };
+                return { appeal, beware };
             }
 
-            // [NEW] 일반 조언 (시크릿 가이드 하단용)
-            function getAdviceContent(typeA, typeB) {
-                let date = `<b>${typeA}</b>와 <b>${typeB}</b>가 모두 만족할 수 있도록, 활동적인 데이트와 정적인 데이트를 5:5로 섞어보세요.`;
-                let taboo = `<b>${typeB}</b>를 <b>${typeA}</b>의 방식대로 바꾸려 하지 마세요. 있는 그대로 사랑해주세요.`;
+            // 4. [NEW] 메신저 필승 공략법 (카톡)
+            function getMessengerStrategy(targetMBTI) {
+                let style = "", good = "", bad = "";
 
-                if (typeA.includes('J') && typeB.includes('P')) {
-                    date = `계획적인 <b>${typeA}</b>가 큰 틀을 짜고, 유연한 <b>${typeB}</b>가 그 안에서 맛집을 고르는 '반반 데이트' 추천!`;
-                    taboo = `<b>${typeA}</b>는 닥달 금지, <b>${typeB}</b>는 지각 금지.`;
-                } else if (typeA.includes('P') && typeB.includes('J')) {
-                    date = `<b>${typeB}</b>를 위해 예약은 필수! <b>${typeA}</b>의 즉흥성은 '이벤트'할 때만 발휘하세요.`;
-                    taboo = `<b>${typeB}</b>의 계획 변경에 토 달지 말기.`;
+                if (targetMBTI.includes('E')) {
+                    style = "🚀 <b>칼답과 티키타카가 생명!</b> 연락 텀이 길어지면 식어버립니다.";
+                } else {
+                    style = "🐢 <b>천천히, 그러나 꾸준히!</b> 재촉하지 말고 일상을 잔잔하게 공유하세요.";
                 }
-                return { date, taboo };
+
+                if (targetMBTI.includes('F')) {
+                    good = "🥰 <b>공감+질문:</b> '오늘 힘들었지?ㅠㅠ 저녁은 맛있는 거 먹어!'";
+                    bad = "🤖 <b>단답형 팩트:</b> 'ㅇㅇ', '그래서?', '해결책은 이거네'";
+                } else { // T
+                    good = "🧠 <b>유용한 정보/흥미로운 기사:</b> '이거 너가 좋아할 것 같아서 가져옴'";
+                    bad = "😭 <b>밑도 끝도 없는 징징거림:</b> '나 우울해... (이유 안 말함)'";
+                }
+                return { style, good, bad };
             }
 
             function validateAndAnalyze() {
@@ -202,8 +214,8 @@
             function showResult(me, you) {
                 const target = targetAnalysis[you];
                 const strategy = getMyStrategy(me, you);
-                const messenger = getMessengerStrategy(you); // 메신저 공략 가져오기
-                const advice = getAdviceContent(me, you);
+                const meeting = getMeetingStrategy(me, you); // 실전 만남 전략
+                const messenger = getMessengerStrategy(you); // 카톡 전략
 
                 const resultHTML = `
                     <div class="max-w-4xl mx-auto space-y-10">
@@ -240,25 +252,27 @@
                             </div>
                         </div>
 
-                        <div class="mt-10">
-                            <div id="lock-screen" class="bg-slate-900 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden">
-                                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                                <div class="relative z-10">
-                                    <i class="fas fa-lock text-6xl text-slate-500 mb-6 animate-float-lock"></i>
-                                    <h3 class="font-bold text-white text-2xl mb-3">🔒 ${you} 마음 해킹 <span class="text-pink-400">시크릿 가이드</span></h3>
-                                    <p class="text-slate-300 text-sm mb-8">연락 잘 되는 메신저 스킬 & 결정적 한방 확인하기</p>
-                                    
-                                    <button id="coupang-trigger-btn" class="w-full md:w-auto px-10 py-5 text-white font-bold rounded-full shadow-lg coupang-btn-gradient flex items-center justify-center gap-3 mx-auto text-lg animate-pulse-glow">
-                                        <span>🔒 시크릿 가이드 확인하기</span> <i class="fas fa-unlock-alt"></i>
-                                    </button>
+                        <div class="mt-12">
+                            <div class="bg-white border-2 border-purple-500 rounded-3xl p-8 shadow-2xl relative fade-in">
+                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg">
+                                    <i class="fas fa-crown mr-2"></i>PREMIUM GUIDE UNLOCKED
                                 </div>
-                            </div>
-
-                            <div id="unlocked-content" class="hidden bg-white border-2 border-purple-500 rounded-3xl p-8 shadow-2xl relative">
-                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg">SECRET UNLOCKED</div>
                                 
-                                <div class="bg-yellow-50 rounded-2xl p-6 mb-6 border border-yellow-200">
-                                    <h4 class="font-bold text-xl text-yellow-800 mb-4 text-center"><i class="fas fa-comment-dots mr-2"></i>${you} 맞춤형 카톡/연락 공략</h4>
+                                <h4 class="font-bold text-2xl text-center text-slate-800 mb-8 mt-4">✨ 실전 만남 & 연락 전략</h4>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                                    <div class="bg-green-50 rounded-2xl p-6 strategy-box border-green-400">
+                                        <h5 class="font-bold text-green-700 text-lg mb-3 flex items-center"><i class="fas fa-bullseye mr-2"></i>만났을 때 어필 포인트</h5>
+                                        <p class="text-slate-700 text-sm leading-relaxed break-keep">${meeting.appeal}</p>
+                                    </div>
+                                    <div class="bg-orange-50 rounded-2xl p-6 strategy-box border-orange-400">
+                                        <h5 class="font-bold text-orange-700 text-lg mb-3 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i>만났을 때 조심할 점</h5>
+                                        <p class="text-slate-700 text-sm leading-relaxed break-keep">${meeting.beware}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-yellow-50 rounded-2xl p-6 border border-yellow-200">
+                                    <h5 class="font-bold text-yellow-800 text-lg mb-4 text-center"><i class="fas fa-comment-dots mr-2"></i>${you} 맞춤형 카톡 공략</h5>
                                     <div class="space-y-4">
                                         <div class="bg-white p-4 rounded-xl border border-yellow-100">
                                             <p class="font-bold text-slate-800 mb-1">📢 연락 스타일</p>
@@ -266,27 +280,17 @@
                                         </div>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                             <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                                                <p class="font-bold text-blue-600 mb-1">🙆‍♂️ 추천 주제 (Good)</p>
+                                                <p class="font-bold text-blue-600 mb-1">🙆‍♂️ 추천 (Good)</p>
                                                 <p class="text-sm text-slate-600 leading-relaxed">${messenger.good}</p>
                                             </div>
                                             <div class="bg-red-50 p-4 rounded-xl border border-red-100">
-                                                <p class="font-bold text-red-500 mb-1">🙅‍♀️ 절대 금지 (Bad)</p>
+                                                <p class="font-bold text-red-500 mb-1">🙅‍♀️ 금지 (Bad)</p>
                                                 <p class="text-sm text-slate-600 leading-relaxed">${messenger.bad}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="bg-purple-50 p-5 rounded-2xl text-center">
-                                        <h4 class="font-bold text-slate-800 mb-2">🎟️ 추천 데이트</h4>
-                                        <p class="text-sm text-slate-600 break-keep leading-relaxed">${advice.date}</p>
-                                    </div>
-                                    <div class="bg-gray-100 p-5 rounded-2xl text-center">
-                                        <h4 class="font-bold text-slate-800 mb-2">⚠️ 주의사항</h4>
-                                        <p class="text-sm text-slate-600 break-keep font-bold leading-relaxed">${advice.taboo}</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -306,17 +310,6 @@
                 document.getElementById('input-page').classList.add('hidden');
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
-
-                document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
-                    if (!sessionStorage.getItem('coupang_visited')) {
-                        window.open('https://link.coupang.com/a/dcbQl7', '_blank');
-                        sessionStorage.setItem('coupang_visited', 'true');
-                    }
-                    document.getElementById('lock-screen').classList.add('hidden');
-                    const unlocked = document.getElementById('unlocked-content');
-                    unlocked.classList.remove('hidden');
-                    unlocked.classList.add('fade-in');
-                });
 
                 // 쿠팡 배너 주입
                 setTimeout(() => {
