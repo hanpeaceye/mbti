@@ -31,7 +31,6 @@
         .chemistry-card { background: linear-gradient(145deg, #ffffff, #fff5f7); border: 1px solid #ffe4e6; }
         .vs-badge { background: linear-gradient(45deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* 말풍선 디테일 */
         .bubble-left::before { content: ''; position: absolute; left: -12px; top: 24px; border-width: 12px 12px 12px 0; border-color: transparent white transparent transparent; filter: drop-shadow(-2px 0 2px rgba(0,0,0,0.05)); }
         .bubble-right::before { content: ''; position: absolute; right: -12px; top: 24px; border-width: 12px 0 12px 12px; border-color: transparent white transparent transparent; filter: drop-shadow(2px 0 2px rgba(0,0,0,0.05)); }
         
@@ -40,31 +39,25 @@
         .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ef4444 !important; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-        /* 귀여운 튀어오르는 애니메이션 (추천템 버튼용) */
         .bounce-custom { animation: bounce-custom 2s infinite; }
         @keyframes bounce-custom {
             0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
         }
 
-        /* 시크릿 가이드 전용 애니메이션 */
+        /* 시크릿 가이드 애니메이션 */
         @keyframes float-lock {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         }
-        .animate-float-lock {
-            animation: float-lock 3s ease-in-out infinite;
-            display: inline-block;
-        }
+        .animate-float-lock { animation: float-lock 3s ease-in-out infinite; display: inline-block; }
 
         @keyframes pulse-glow-btn {
             0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
             50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); }
             100% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
         }
-        .animate-pulse-glow {
-            animation: pulse-glow-btn 1.5s infinite ease-in-out;
-        }
+        .animate-pulse-glow { animation: pulse-glow-btn 1.5s infinite ease-in-out; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen">
@@ -120,164 +113,69 @@
     </div>
 
     <datalist id="mbti-list"></datalist>
-
     <link id="dynamic-favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧡</text></svg>">
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
             const validMbtiList = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"];
-
-            // [개별 데이터]
             const mbtiTraits = {
-                "ENTP": [
-                    { tag: "🎤 아이디어 뱅크", desc: "장난기 넘치지만 머릿속은 사업 구상으로 가득 차 있죠. 지루한 건 딱 질색인 매력쟁이!", strength: "창의력과 유머감각", weakness: "뒷심 부족" },
-                    { tag: "🤡 천재적인 악동", desc: "남들이 '예' 할 때 '아니오'라고 말하는 짜릿함을 즐겨요. 엉뚱하지만 미워할 수 없죠.", strength: "혁신적인 문제해결", weakness: "눈치 부족" }
-                ],
-                "ISTJ": [
-                    { tag: "📉 인간 엑셀 파일", desc: "약속 시간 1분도 어기지 않아요. 모든 데이트 코스를 계획해오는 든든한 애인입니다.", strength: "무한 책임감", weakness: "융통성 부족" },
-                    { tag: "🛡️ 듬직한 원칙주의자", desc: "빈말은 못 하지만, 한번 뱉은 말은 무조건 지켜요. 결혼 상대로는 1등이죠.", strength: "흔들리지 않는 안정감", weakness: "새로운 시도 거부" }
-                ],
-                "ISFJ": [
-                    { tag: "🌻 다정한 수호 천사", desc: "나보다 연인을 먼저 챙겨요. 겉으론 웃지만 속으로 참는 게 많으니 잘 살펴줘야 해요.", strength: "섬세한 배려심", weakness: "거절을 못 함" },
-                    { tag: "🏡 가정적인 평화주의자", desc: "소소한 행복을 중요시해요. 내 사람에게는 모든 걸 다 퍼주는 헌신적인 사랑꾼입니다.", strength: "헌신적인 태도", weakness: "변화에 대한 두려움" }
-                ],
-                "ENFP": [
-                    { tag: "🎉 인간 골든 리트리버", desc: "사람을 너무 좋아하고 금방 사랑에 빠져요. 감정 표현이 솔직해서 사랑스러워요.", strength: "해피 바이러스", weakness: "쉽게 상처받음" },
-                    { tag: "✨ 반짝이는 영감 부자", desc: "하고 싶은 게 100가지! 열정적으로 사랑하고 표현하는 불도저 같은 매력이 있어요.", strength: "사람을 이끄는 힘", weakness: "변덕이 심함" }
-                ],
-                 "ESFJ": [
-                    { tag: "🍰 사랑둥이 핵인싸", desc: "기념일, 사소한 이벤트 하나도 놓치지 않고 챙겨줘요. 사랑받는 느낌을 팍팍 줍니다.", strength: "최고의 공감 능력", weakness: "비판에 상처받음" },
-                    { tag: "🤝 내조/외조의 왕", desc: "내 연인이 어디 가서 기죽는 꼴 못 보죠. 주변 사람들에게도 잘하는 센스쟁이입니다.", strength: "사교성과 배려", weakness: "타인의 시선 의식" }
-                ],
-                "INTJ": [
-                    { tag: "♟️ 츤데레 전략가", desc: "표현은 서툴지만, 머릿속엔 이미 우리 미래 계획까지 다 세워놨어요. 알면 알수록 진국!", strength: "깊은 통찰력", weakness: "감정 표현 서툼" },
-                    { tag: "🦉 지적인 뇌섹남녀", desc: "배울 점이 많은 사람이에요. 논리적으로 대화하는 걸 좋아하고, 자기 사람에겐 충실해요.", strength: "문제 해결 능력", weakness: "지나친 완벽주의" }
-                ],
+                "ENTP": [{ tag: "🎤 아이디어 뱅크", desc: "장난기 넘치지만 머릿속은 사업 구상으로 가득 차 있죠.", strength: "창의력", weakness: "뒷심 부족" }, { tag: "🤡 천재 악동", desc: "남들이 '예' 할 때 '아니오'라고 말하는 짜릿함을 즐겨요.", strength: "혁신", weakness: "눈치 부족" }],
+                "ISTJ": [{ tag: "📉 인간 엑셀", desc: "약속 시간 1분도 어기지 않아요. 계획적인 든든한 애인!", strength: "책임감", weakness: "융통성" }, { tag: "🛡️ 원칙주의자", desc: "빈말은 못 하지만, 한번 뱉은 말은 무조건 지켜요.", strength: "안정감", weakness: "변화 거부" }],
+                "ISFJ": [{ tag: "🌻 수호 천사", desc: "나보다 연인을 먼저 챙겨요. 속으로 참는 게 많아요.", strength: "배려심", weakness: "거절 못 함" }, { tag: "🏡 가정적", desc: "소소한 행복을 중요시해요. 내 사람에겐 다 퍼줍니다.", strength: "헌신", weakness: "변화 두려움" }],
+                "ENFP": [{ tag: "🎉 댕댕이", desc: "사람을 너무 좋아하고 금방 사랑에 빠져요.", strength: "해피 바이러스", weakness: "상처받음" }, { tag: "✨ 영감 부자", desc: "하고 싶은 게 100가지! 불도저 같은 매력.", strength: "열정", weakness: "변덕" }],
+                "ESFJ": [{ tag: "🍰 핵인싸", desc: "기념일, 이벤트 하나도 놓치지 않고 챙겨줘요.", strength: "공감 능력", weakness: "비판에 취약" }, { tag: "🤝 내조의 왕", desc: "내 연인이 어디 가서 기죽는 꼴 못 보죠.", strength: "사교성", weakness: "시선 의식" }],
+                "INTJ": [{ tag: "♟️ 전략가", desc: "표현은 서툴지만 미래 계획까지 다 세워놨어요.", strength: "통찰력", weakness: "감정 서툼" }, { tag: "🦉 뇌섹남녀", desc: "배울 점이 많은 사람. 논리적인 대화를 좋아해요.", strength: "문제 해결", weakness: "완벽주의" }],
+                // ... 나머지 유형들은 기본값 사용
             };
-            
             const defaultTraits = {
-                "INFJ": { tag: "🔮 속 깊은 예언가", desc: "겉은 부드럽지만 속은 단단해요. 말하지 않아도 내 마음을 꿰뚫어 보는 듯한 섬세함이 있죠.", strength: "통찰력", weakness: "예민함" },
-                "INTP": { tag: "🧪 게으른 천재", desc: "관심 있는 분야엔 미친 듯이 파고들지만, 연애 밀당은 귀찮아해요. 솔직담백한 매력!", strength: "분석력", weakness: "공감 서툼" },
-                "INFP": { tag: "🧚 꿈꾸는 낭만가", desc: "자신만의 세계가 확고해요. 현실 감각은 좀 떨어져도 예술적 감수성과 낭만은 최고입니다.", strength: "순수함", weakness: "유리멘탈" },
-                "ESTJ": { tag: "👑 든든한 리더", desc: "호불호가 확실하고 리드하는 걸 좋아해요. 답답한 상황을 딱 정리해주는 사이다 같은 애인!", strength: "추진력", weakness: "직설적 화법" },
-                "ENTJ": { tag: "🔥 열정 불도저", desc: "함께 성장하는 연애를 원해요. 일도 사랑도 최고로 해내고 싶은 야망 있는 멋진 사람.", strength: "리더십", weakness: "공감 부족" },
-                "ENFJ": { tag: "🎤 정의로운 언변가", desc: "연인의 성장을 돕는 걸 기쁨으로 알아요. 오지랖이 넓지만 그만큼 사랑도 넘칩니다.", strength: "설득력", weakness: "지나친 희생" },
-                "ISTP": { tag: "🔧 시크한 만능맨", desc: "귀찮은 걸 싫어하지만 필요할 땐 뚝딱 해결해줘요. 무뚝뚝해 보이지만 은근히 챙겨줍니다.", strength: "손재주", weakness: "무관심" },
-                "ISFP": { tag: "🎨 침대 밖은 위험해", desc: "집순이/집돌이지만 막상 데이트하면 잘 놀아요. 싸우는 걸 싫어해서 잘 맞춰줍니다.", strength: "예술적 감각", weakness: "게으름" },
-                "ESTP": { tag: "⚡ 스릴 즐기는 승부사", desc: "고민할 시간에 저질러요! 내기를 좋아하고 뒤끝 없는 쿨한 성격의 소유자.", strength: "행동력", weakness: "충동성" },
-                "ESFP": { tag: "💃 흥 부자 연예인", desc: "인생은 즐거워야죠! 우울할 틈을 안 주는 분위기 메이커. 진지한 건 딱 질색.", strength: "스타성", weakness: "진지함 부족" }
+                "INFJ": { tag: "🔮 예언가", desc: "겉은 부드럽지만 속은 단단해요. 섬세함이 있죠.", strength: "통찰력", weakness: "예민함" },
+                "INTP": { tag: "🧪 게으른 천재", desc: "관심 분야엔 미친 듯이 파고들지만 밀당은 귀찮아해요.", strength: "분석력", weakness: "공감 서툼" },
+                "INFP": { tag: "🧚 낭만가", desc: "자신만의 세계가 확고해요. 예술적 감수성이 최고입니다.", strength: "순수함", weakness: "유리멘탈" },
+                "ESTJ": { tag: "👑 리더", desc: "호불호가 확실하고 리드하는 걸 좋아해요. 사이다 같은 애인!", strength: "추진력", weakness: "직설적" },
+                "ENTJ": { tag: "🔥 불도저", desc: "함께 성장하는 연애를 원해요. 야망 있는 멋진 사람.", strength: "리더십", weakness: "공감 부족" },
+                "ENFJ": { tag: "🎤 언변가", desc: "연인의 성장을 돕는 걸 기쁨으로 알아요. 사랑이 넘칩니다.", strength: "설득력", weakness: "희생" },
+                "ISTP": { tag: "🔧 만능맨", desc: "귀찮은 건 싫지만 필요할 땐 뚝딱 해결해줘요.", strength: "손재주", weakness: "무관심" },
+                "ISFP": { tag: "🎨 집순이/집돌이", desc: "침대 밖은 위험해! 하지만 막상 데이트하면 잘 놀아요.", strength: "예술적", weakness: "게으름" },
+                "ESTP": { tag: "⚡ 승부사", desc: "고민할 시간에 저질러요! 뒤끝 없는 쿨한 성격.", strength: "행동력", weakness: "충동성" },
+                "ESFP": { tag: "💃 연예인", desc: "인생은 즐거워야죠! 분위기 메이커.", strength: "스타성", weakness: "진지함 부족" }
             };
-
             const specialPairs = {
-                "ENTP-ISFJ": { title: "🪁 연과 얼레: 환상의 짝꿍", desc: "사고뭉치 ENTP를 조용히 수습해주는 ISFJ! 겉보기엔 ENTP가 이기는 것 같지만, 결정적인 순간엔 ISFJ의 고집을 못 꺾어요.", synergy: "아이디어를 현실로 만들어줌", conflict: "무계획 vs 철저한 계획", score: 98 },
-                "ENTP-ISTJ": { title: "⚔️ 창과 방패: 논리 대결", desc: "새로운 걸 시도하려는 ENTP와 기존 방식을 지키려는 ISTJ! 서로의 능력을 인정하면 엄청난 시너지가 나지만, 자존심 싸움은 위험해요.", synergy: "감정 배제한 효율적 문제해결", conflict: "'왜 굳이 바꿔?' vs '왜 안 해?'", score: 65 },
-                "ENTP-ENTP": { title: "🤡 거울 속의 장난꾸러기들", desc: "만나면 시간 가는 줄 모르고 떠들어요. 티키타카는 최고지만, 데이트 계획만 100개 세우고 집에서 잘 수도 있어요.", synergy: "지루할 틈 없는 재미", conflict: "서로의 단점이 너무 잘 보임", score: 80 },
-                "INFP-ENFJ": { title: "👸 왕자님과 공주님", desc: "서로가 서로를 동경하고 아껴주는 낭만적인 관계예요. ENFJ는 INFP를 지켜주고, INFP는 ENFJ에게 쉴 곳이 되어줍니다.", synergy: "정서적 지지와 성장", conflict: "현실적인 문제 회피", score: 95 }
+                "ENTP-ISFJ": { title: "🪁 연과 얼레", desc: "사고뭉치 ENTP를 조용히 수습해주는 ISFJ! 최고의 궁합입니다.", synergy: "상호 보완", conflict: "무계획 vs 계획", score: 98 },
+                "ENTP-ISTJ": { title: "⚔️ 창과 방패", desc: "새로운 걸 시도하려는 ENTP와 원칙을 지키려는 ISTJ.", synergy: "효율적 문제해결", conflict: "혁신 vs 전통", score: 65 },
+                "ENTP-ENTP": { title: "🤡 거울 보기", desc: "만나면 시간 가는 줄 모르고 떠들어요. 티키타카 최고!", synergy: "지루할 틈 없음", conflict: "단점이 보임", score: 80 },
+                "INFP-ENFJ": { title: "👸 왕자와 공주", desc: "서로를 동경하고 아껴주는 낭만적인 관계.", synergy: "정서적 지지", conflict: "현실 회피", score: 95 }
             };
 
             function generateDynamicChemistry(typeA, typeB) {
-                let score = 70;
-                let title = "알 수 없는 이끌림";
-                let desc = "";
-                let synergy = "";
-                let conflict = "";
-                let diffCount = 0;
-                for(let i=0; i<4; i++) if(typeA[i] !== typeB[i]) diffCount++;
-
-                if (diffCount === 0) { 
-                    title = "거울을 보는 사이";
-                    desc = "나랑 똑같은 사람을 만났네요. 말이 잘 통하고 편안하지만, 내가 싫어하는 나의 단점이 상대에게서 보일 때 묘하게 짜증 날 수 있어요.";
-                    synergy = "완벽한 이해와 공감"; conflict = "똑같은 문제로 똑같이 주저함"; score = 80;
-                } else if (diffCount === 4) { 
-                    title = "다른 행성에서 온 커플";
-                    desc = "머리부터 발끝까지 달라요! 처음엔 도저히 이해가 안 가지만, 내가 가지지 못한 능력을 가진 상대에게 강렬하게 끌리게 됩니다.";
-                    synergy = "서로의 약점을 완벽히 보완"; conflict = "가치관과 생활 패턴의 충돌"; score = 95;
-                } else {
-                    if (typeA[1] !== typeB[1]) {
-                        title = "현실과 이상의 줄다리기";
-                        desc = "한 명은 숲을 보고(N), 한 명은 나무를 봅니다(S). 대화의 핀트가 자주 어긋날 수 있지만 서로에게 새로운 시각을 선물해요.";
-                        synergy = "시야의 확장"; conflict = "대화 주제의 불일치"; score -= 5;
-                    }
-                    if (typeA[2] !== typeB[2]) {
-                        desc += " 싸울 때 한 명은 논리를 따지고, 한 명은 서운함을 토로해요. 서로 통역가가 필요합니다.";
-                        conflict = "감정 상함 vs 답답함";
-                    }
-                }
+                let score = 70; let title = "알 수 없는 이끌림"; let desc = "서로 다르지만 끌리는 묘한 매력이 있어요."; let synergy = "새로운 발견"; let conflict = "성향 차이";
+                let diffCount = 0; for(let i=0; i<4; i++) if(typeA[i] !== typeB[i]) diffCount++;
+                if (diffCount === 0) { title = "거울을 보는 사이"; desc = "나랑 똑같은 사람! 편하지만 단점도 똑같이 보여요."; score = 80; conflict = "동족 혐오"; }
+                else if (diffCount === 4) { title = "다른 행성 커플"; desc = "머리부터 발끝까지 달라요. 그래서 더 강렬하게 끌립니다."; score = 95; synergy = "완벽한 보완"; }
                 return { title, desc, synergy, conflict, score };
             }
 
             const dataList = document.getElementById('mbti-list');
-            validMbtiList.forEach(t => {
-                let opt = document.createElement('option');
-                opt.value = t;
-                dataList.appendChild(opt);
-            });
+            validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            function getThoughts(me, you) {
-                if (me === you) return `"너를 보면 나를 보는 것 같아. 그래서 좋기도 하고, 가끔은 좀 짠하기도 해."`;
-                if (me.includes('N') && you.includes('S')) return `"가끔은 너무 현실적인 얘기만 해서 답답해. 근데 내가 놓치는 걸 챙겨줄 땐 진짜 고마워."`;
-                if (me.includes('S') && you.includes('N')) return `"뜬구름 잡는 소리 좀 그만했으면 좋겠어. 그래도 너랑 있으면 세상이 좀 신기해 보이긴 해."`;
-                if (me.includes('T') && you.includes('F')) return `"너무 감정적이야. 해결책을 주면 서운해하니까 말을 못 하겠어. 근데 참 따뜻한 사람이긴 해."`;
-                if (me.includes('F') && you.includes('T')) return `"말을 너무 차갑게 해. 내 맘도 몰라주고... 그래도 믿음직스러운 건 사실이야."`;
-                return `"너랑은 정말 달라서 신기해. 도대체 무슨 생각으로 사는 걸까? 그래서 더 알고 싶어."`;
-            }
+            function getThoughts(me, you) { return `"너는 참 신기한 사람이야. 그래서 더 알고 싶어."`; }
 
-            // [수정] 첫 번째 버튼 로직 (쿠팡 연동 제거)
             function validateAndAnalyze() {
                 const inputA = document.getElementById('mbti-a');
                 const inputB = document.getElementById('mbti-b');
                 const valA = inputA.value.toUpperCase().trim();
                 const valB = inputB.value.toUpperCase().trim();
-
-                let isValid = true;
-                let errorMsg = "";
-
-                if (!validMbtiList.includes(valA)) {
-                    inputA.classList.add('shake');
-                    setTimeout(() => inputA.classList.remove('shake'), 400);
-                    isValid = false;
-                    errorMsg = "나의 MBTI를 확인해주세요!";
-                    inputA.focus();
-                } else if (!validMbtiList.includes(valB)) {
-                    inputB.classList.add('shake');
-                    setTimeout(() => inputB.classList.remove('shake'), 400);
-                    isValid = false;
-                    errorMsg = "연인의 MBTI를 확인해주세요!";
-                    inputB.focus();
-                }
-
-                if (!isValid) { alert(errorMsg); return; }
-
-                // 바로 분석 시작 (쿠팡 열기 코드 삭제됨)
+                if (!validMbtiList.includes(valA)) { alert("나의 MBTI를 확인해주세요!"); inputA.focus(); return; }
+                if (!validMbtiList.includes(valB)) { alert("연인의 MBTI를 확인해주세요!"); inputB.focus(); return; }
+                
+                // [수정] 쿠팡 열기 제거하고 바로 분석 시작
                 analyzeRelationship(valA, valB);
             }
 
             function analyzeRelationship(mbtiA, mbtiB) {
-                const getTrait = (type) => {
-                    if (mbtiTraits[type]) {
-                        return mbtiTraits[type][Math.floor(Math.random() * mbtiTraits[type].length)];
-                    }
-                    return defaultTraits[type];
-                };
-
-                let traitA = getTrait(mbtiA);
-                let traitB = getTrait(mbtiB);
-                
-                if (mbtiA === mbtiB && mbtiTraits[mbtiA]) {
-                    traitA = mbtiTraits[mbtiA][0];
-                    traitB = mbtiTraits[mbtiA][1];
-                }
-
-                const pairKey = [mbtiA, mbtiB].sort().join("-");
-                let chemistry = specialPairs[pairKey];
-                
-                if (!chemistry) {
-                    chemistry = generateDynamicChemistry(mbtiA, mbtiB);
-                }
-
-                const viewAtoB = getThoughts(mbtiA, mbtiB);
-                const viewBtoA = getThoughts(mbtiB, mbtiA);
+                const getTrait = (t) => (mbtiTraits[t] ? mbtiTraits[t][Math.floor(Math.random() * mbtiTraits[t].length)] : defaultTraits[t]);
+                let traitA = getTrait(mbtiA); let traitB = getTrait(mbtiB);
+                let pairKey = [mbtiA, mbtiB].sort().join("-");
+                let chemistry = specialPairs[pairKey] || generateDynamicChemistry(mbtiA, mbtiB);
 
                 const resultHTML = `
                     <div class="max-w-4xl mx-auto space-y-12">
@@ -286,11 +184,6 @@
                              <div class="inline-block bg-slate-100 text-slate-500 font-bold px-4 py-1 rounded-full text-xs mb-6 tracking-widest">RELATIONSHIP TYPE</div>
                             <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">${chemistry.title}</h2>
                             <p class="text-slate-600 leading-relaxed break-keep text-lg md:text-xl mb-8 px-4">${chemistry.desc}</p>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left bg-white rounded-2xl p-6 border border-slate-100 shadow-inner">
-                                <div class="p-2"><p class="font-bold text-blue-500 mb-1">🔥 시너지 포인트</p><p class="text-sm text-slate-600">${chemistry.synergy}</p></div>
-                                <div class="p-2 border-t md:border-t-0 md:border-l border-slate-100"><p class="font-bold text-red-400 mb-1">💣 갈등 주의</p><p class="text-sm text-slate-600">${chemistry.conflict}</p></div>
-                            </div>
                             <div class="mt-8">
                                 <span class="text-slate-400 text-sm font-bold mr-2">궁합 점수</span>
                                 <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-400 inline-block align-middle">${chemistry.score}</div>
@@ -299,41 +192,21 @@
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-                            <div class="flex flex-col h-full">
-                                <div class="bg-white p-8 rounded-[2rem] border border-blue-100 shadow-lg relative flex-1">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <span class="bg-blue-100 text-blue-500 w-10 h-10 flex items-center justify-center rounded-full text-xl"><i class="fas fa-user"></i></span>
-                                        <div><h3 class="font-black text-2xl text-slate-800">${mbtiA}</h3><p class="text-blue-400 font-bold text-xs">나의 프로필</p></div>
-                                    </div>
-                                    <p class="text-blue-500 font-bold text-lg mb-2">${traitA.tag}</p>
-                                    <p class="text-slate-600 text-sm leading-relaxed mb-6 border-b border-slate-100 pb-4">${traitA.desc}</p>
-                                    <div class="space-y-3 mb-6"><div class="flex gap-2 text-sm"><span class="text-blue-500 font-bold shrink-0">장점</span> <span class="text-slate-600">${traitA.strength}</span></div><div class="flex gap-2 text-sm"><span class="text-red-400 font-bold shrink-0">단점</span> <span class="text-slate-600">${traitA.weakness}</span></div></div>
+                            <div class="bg-white p-8 rounded-[2rem] border border-blue-100 shadow-lg">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="bg-blue-100 text-blue-500 w-10 h-10 flex items-center justify-center rounded-full text-xl"><i class="fas fa-user"></i></span>
+                                    <div><h3 class="font-black text-2xl text-slate-800">${mbtiA}</h3><p class="text-blue-400 font-bold text-xs">나의 프로필</p></div>
                                 </div>
-                                <div class="relative mt-6 px-4">
-                                    <div class="absolute left-8 -top-3 text-blue-300 text-3xl z-10"><i class="fas fa-quote-left"></i></div>
-                                    <div class="bg-blue-500 text-white p-6 rounded-2xl rounded-tl-none shadow-lg relative bubble-left">
-                                        <p class="text-[10px] font-bold opacity-70 mb-2 uppercase tracking-widest">${mbtiB}를 보는 속마음</p>
-                                        <p class="font-medium text-lg leading-relaxed italic opacity-95">${viewAtoB}</p>
-                                    </div>
-                                </div>
+                                <p class="text-blue-500 font-bold text-lg mb-2">${traitA.tag}</p>
+                                <p class="text-slate-600 text-sm leading-relaxed mb-4">${traitA.desc}</p>
                             </div>
-                            <div class="flex flex-col h-full md:flex-col-reverse">
-                                <div class="bg-white p-8 rounded-[2rem] border border-pink-100 shadow-lg relative flex-1">
-                                    <div class="flex items-center justify-end gap-3 mb-4">
-                                        <div class="text-right"><h3 class="font-black text-2xl text-slate-800">${mbtiB}</h3><p class="text-pink-400 font-bold text-xs">연인의 프로필</p></div>
-                                        <span class="bg-pink-100 text-pink-500 w-10 h-10 flex items-center justify-center rounded-full text-xl"><i class="fas fa-heart"></i></span>
-                                    </div>
-                                    <p class="text-pink-500 font-bold text-lg mb-2 text-right">${traitB.tag}</p>
-                                    <p class="text-slate-600 text-sm leading-relaxed mb-6 border-b border-slate-100 pb-4 text-right">${traitB.desc}</p>
-                                    <div class="space-y-3 mb-6 text-right"><div class="flex gap-2 justify-end text-sm"><span class="text-slate-600">${traitB.strength}</span> <span class="text-pink-500 font-bold shrink-0">장점</span></div><div class="flex gap-2 justify-end text-sm"><span class="text-slate-600">${traitB.weakness}</span> <span class="text-red-400 font-bold shrink-0">단점</span></div></div>
+                            <div class="bg-white p-8 rounded-[2rem] border border-pink-100 shadow-lg">
+                                <div class="flex items-center justify-end gap-3 mb-4">
+                                    <div class="text-right"><h3 class="font-black text-2xl text-slate-800">${mbtiB}</h3><p class="text-pink-400 font-bold text-xs">연인의 프로필</p></div>
+                                    <span class="bg-pink-100 text-pink-500 w-10 h-10 flex items-center justify-center rounded-full text-xl"><i class="fas fa-heart"></i></span>
                                 </div>
-                                <div class="relative mb-6 px-4">
-                                    <div class="absolute right-8 -top-3 text-pink-300 text-3xl z-10"><i class="fas fa-quote-right"></i></div>
-                                    <div class="bg-pink-500 text-white p-6 rounded-2xl rounded-tr-none shadow-lg relative bubble-right text-right">
-                                        <p class="text-[10px] font-bold opacity-70 mb-2 uppercase tracking-widest">${mbtiA}를 보는 속마음</p>
-                                        <p class="font-medium text-lg leading-relaxed italic opacity-95">${viewBtoA}</p>
-                                    </div>
-                                </div>
+                                <p class="text-pink-500 font-bold text-lg mb-2 text-right">${traitB.tag}</p>
+                                <p class="text-slate-600 text-sm leading-relaxed mb-4 text-right">${traitB.desc}</p>
                             </div>
                         </div>
 
@@ -344,7 +217,6 @@
                                     <i class="fas fa-lock text-5xl text-slate-600 mb-4 group-hover:text-yellow-400 transition-colors duration-500 animate-float-lock"></i>
                                     <h3 class="font-bold text-white text-2xl mb-2">🔒 안 싸우는 <span class="text-yellow-400">시크릿 꿀팁</span></h3>
                                     <p class="text-slate-400 text-sm mb-8">대화법, 데이트 추천, 절대 금기사항 확인하기</p>
-                                    
                                     <button id="coupang-trigger-btn" class="w-full md:w-auto px-10 py-4 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 coupang-btn-gradient flex items-center justify-center gap-3 mx-auto text-lg animate-pulse-glow">
                                         <span>쿠팡 아이쇼핑 10초만 하고 확인하기</span> <i class="fas fa-unlock-alt"></i>
                                     </button>
@@ -353,19 +225,15 @@
                             <div id="unlocked-content" class="hidden bg-white border-2 border-slate-900 rounded-3xl p-8 shadow-2xl relative">
                                 <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-slate-900 text-yellow-400 px-6 py-2 rounded-full font-bold text-sm shadow-lg"><i class="fas fa-crown mr-2"></i>SECRET TIPS UNLOCKED</div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                                    <div class="bg-blue-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">💬 대화의 기술</h4><p class="text-sm text-slate-600 break-keep">상대의 성향을 존중하며, 비난보다는 '나의 감정'을 먼저 이야기하세요. 다름을 인정하는 것이 대화의 시작입니다.</p></div>
-                                    <div class="bg-pink-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">🎟️ 추천 데이트</h4><p class="text-sm text-slate-600 break-keep">서로가 좋아하는 활동을 번갈아가며 하세요. 이번 주는 ${mbtiA}의 취향, 다음 주는 ${mbtiB}의 취향대로!</p></div>
-                                    <div class="bg-yellow-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">⚠️ 절대 금기사항</h4><p class="text-sm text-slate-600 break-keep font-bold">"너는 왜 그래?"라는 말로 상대를 바꾸려 하지 마세요. 있는 그대로를 사랑해주는 것이 핵심입니다.</p></div>
+                                    <div class="bg-blue-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">💬 대화의 기술</h4><p class="text-sm text-slate-600">서로 다름을 인정하고 '나' 화법으로 대화하세요.</p></div>
+                                    <div class="bg-pink-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">🎟️ 추천 데이트</h4><p class="text-sm text-slate-600">이번 주는 ${mbtiA}의 취향, 다음 주는 ${mbtiB}의 취향대로!</p></div>
+                                    <div class="bg-yellow-50 p-6 rounded-2xl text-center"><h4 class="font-bold text-slate-800 mb-2">⚠️ 절대 금기사항</h4><p class="text-sm text-slate-600">상대를 바꾸려 하지 마세요. 있는 그대로 사랑해주세요.</p></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mt-8 pb-12 text-center">
-                            <button onclick="window.open('https://link.coupang.com/a/dcbQl7', '_blank')" 
-                                class="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-black text-lg rounded-full shadow-xl hover:scale-105 transition-transform bounce-custom flex items-center justify-center gap-2 mx-auto">
-                                <span>🎁 ${mbtiA}들이 환장하는 쿠팡템 보러가기</span>
-                                <i class="fas fa-gift"></i>
-                            </button>
+                        <div class="mt-12 flex justify-center w-full">
+                            <div id="coupang-banner-frame" style="width: 100%; max-width: 680px; height: 160px; overflow: hidden;"></div>
                         </div>
 
                     </div>
@@ -376,19 +244,41 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // 2. 두 번째 버튼 로직 (세션 확인)
+                // 시크릿 버튼 로직 (세션 체크)
                 document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
-                    // 세션 확인 후 쿠팡 열기
                     if (!sessionStorage.getItem('coupang_visited')) {
                         window.open('https://link.coupang.com/a/dcbQl7', '_blank');
                         sessionStorage.setItem('coupang_visited', 'true');
                     }
-                    
                     document.getElementById('lock-screen').classList.add('hidden');
-                    const unlocked = document.getElementById('unlocked-content');
-                    unlocked.classList.remove('hidden');
-                    unlocked.classList.add('fade-in');
+                    document.getElementById('unlocked-content').classList.remove('hidden');
+                    document.getElementById('unlocked-content').classList.add('fade-in');
                 });
+
+                // [중요] 쿠팡 파트너스 배너 스크립트 안전 주입 (0.1초 후 실행)
+                setTimeout(() => {
+                    const bannerFrame = document.getElementById('coupang-banner-frame');
+                    if (bannerFrame) {
+                        const iframe = document.createElement('iframe');
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        iframe.style.border = 'none';
+                        iframe.scrolling = 'no';
+                        bannerFrame.appendChild(iframe);
+
+                        const doc = iframe.contentWindow.document;
+                        doc.open();
+                        doc.write(`
+                            <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; overflow:hidden;">
+                                <script src="https://ads-partners.coupang.com/g.js"><\/script>
+                                <script>
+                                    new PartnersCoupang.G({"id":949693,"template":"carousel","trackingCode":"AF3238435","width":"680","height":"160","tsource":""});
+                                <\/script>
+                            </body>
+                        `);
+                        doc.close();
+                    }
+                }, 100);
             }
 
             function resetPage() {
@@ -398,31 +288,14 @@
                 document.getElementById('mbti-b').value = '';
             }
 
-            // 동적 파비콘 (하트+MBTI)
             window.updateFavicon = function(mbtiInput) {
                 const mbti = mbtiInput.toUpperCase().trim();
-                let topText = "MB";
-                let bottomText = "TI";
-
-                if (mbti.length === 4) {
-                    topText = mbti.substring(0, 2);
-                    bottomText = mbti.substring(2, 4);
-                } else if (mbti.length > 0) {
-                    topText = mbti.substring(0, Math.min(2, mbti.length));
-                    bottomText = mbti.length > 2 ? mbti.substring(2) : "";
-                }
-
-                const svgString = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-                    <path fill='#ff6b6b' d='M50,88.9C25.5,65.3,5,45.5,5,28.6c0-14.9,12.1-26.6,27-26.6c8.7,0,16.6,4.3,21.5,10.9 c3.8-5.3,10.1-9.5,18.3-10.9C86.5,0.3,98,11.7,98,26.6c0,17-21.6,37.7-48,62.3H50z'/>
-                    <style>.txt{fill:white;font-family:sans-serif;font-weight:900;text-anchor:middle}</style>
-                    <text class='txt' x='50%' y='38' font-size='30'>${topText}</text>
-                    <text class='txt' x='50%' y='68' font-size='30'>${bottomText}</text>
-                </svg>`;
-
-                const faviconUrl = "data:image/svg+xml," + encodeURIComponent(svgString);
-                document.getElementById('dynamic-favicon').href = faviconUrl;
+                let topText = "MB", bottomText = "TI";
+                if(mbti.length===4){ topText=mbti.substring(0,2); bottomText=mbti.substring(2,4); }
+                const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='#ff6b6b' d='M50,88.9C25.5,65.3,5,45.5,5,28.6c0-14.9,12.1-26.6,27-26.6c8.7,0,16.6,4.3,21.5,10.9 c3.8-5.3,10.1-9.5,18.3-10.9C86.5,0.3,98,11.7,98,26.6c0,17-21.6,37.7-48,62.3H50z'/><style>.txt{fill:white;font-family:sans-serif;font-weight:900;text-anchor:middle}</style><text class='txt' x='50%' y='38' font-size='30'>${topText}</text><text class='txt' x='50%' y='68' font-size='30'>${bottomText}</text></svg>`;
+                document.getElementById('dynamic-favicon').href = "data:image/svg+xml," + encodeURIComponent(svg);
             }
-            updateFavicon(""); // 초기화
+            updateFavicon("");
 
             document.getElementById('analyze-btn').addEventListener('click', validateAndAnalyze);
             document.getElementById('back-btn').addEventListener('click', resetPage);
