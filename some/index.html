@@ -3,12 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aimbti.xyz/some">
-    <meta property="og:title" content="🔒 그 사람의 마음을 여는 열쇠 | MBTI 썸 공략 가이드">
-    <meta property="og:description" content="내 성향은 살리고 상대방 취향은 저격하는 200% 맞춤형 플러팅 전략! 카톡 말투부터 절대 금기어까지 시크릿 비법 공개 💘">
-    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💘</text></svg>">
     <title>썸남썸녀 공략 가이드 | 그 사람의 마음을 여는 열쇠</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -20,6 +14,12 @@
       gtag('js', new Date());
       gtag('config', 'G-33VJ9T8RW5');
     </script>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimbti.xyz/some">
+    <meta property="og:title" content="🔒 그 사람의 마음을 여는 열쇠 | MBTI 썸 공략 가이드">
+    <meta property="og:description" content="내 성향은 살리고 상대방 취향은 저격하는 200% 맞춤형 플러팅 전략! 카톡 말투부터 절대 금기어까지 시크릿 비법 공개 💘">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
@@ -35,34 +35,22 @@
         /* 버튼 스타일 */
         .coupang-btn-gradient { background: linear-gradient(to right, #e11f1f, #ff9000); }
         
-        /* =========================================
-           [수정] 시크릿 가이드 전용 애니메이션 추가
-        ========================================= */
-        /* 1. 자물쇠 둥실둥실 애니메이션 */
+        /* 애니메이션 */
         @keyframes float-lock {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         }
-        .animate-float-lock {
-            animation: float-lock 3s ease-in-out infinite;
-            display: inline-block; /* transform 적용을 위해 필요 */
-        }
+        .animate-float-lock { animation: float-lock 3s ease-in-out infinite; display: inline-block; }
 
-        /* 2. 버튼 강력한 발광(Pulse Glow) 애니메이션 */
         @keyframes pulse-glow-btn {
             0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
             50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); }
             100% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
         }
-        .animate-pulse-glow {
-            animation: pulse-glow-btn 1.5s infinite ease-in-out;
-        }
-        /* ========================================= */
-
+        .animate-pulse-glow { animation: pulse-glow-btn 1.5s infinite ease-in-out; }
+        
         .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ef4444 !important; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
-        .bounce-custom { animation: bounce-custom 2s infinite; }
-        @keyframes bounce-custom { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(0); } }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen">
@@ -97,7 +85,7 @@
                     </div>
                     
                     <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-6 rounded-2xl shadow-xl hover:shadow-2xl text-lg md:text-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group">
-                        <span>쿠팡 살짝 다녀와서 공략법 보기</span> <i class="fas fa-key group-hover:rotate-45 transition-transform"></i>
+                        <span>결과 보기</span> <i class="fas fa-key group-hover:rotate-45 transition-transform"></i>
                     </button>
                 </div>
             </div>
@@ -116,7 +104,6 @@
     </div>
 
     <datalist id="mbti-list"></datalist>
-
     <link id="dynamic-favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗝️</text></svg>">
 
     <script>
@@ -177,6 +164,40 @@
                 return { text, subText };
             }
 
+            // [NEW] MBTI 조합별 맞춤형 조언 생성기
+            function getAdviceContent(typeA, typeB) {
+                let conv = `서로 다른 <b>${typeA}</b>와 <b>${typeB}</b>가 만났네요. 비난보다는 '나' 화법을 사용하세요.`;
+                let date = `<b>${typeA}</b>와 <b>${typeB}</b>가 모두 만족할 수 있도록, 활동적인 데이트와 정적인 데이트를 5:5로 섞어보세요.`;
+                let taboo = `<b>${typeB}</b>를 <b>${typeA}</b>의 방식대로 바꾸려 하지 마세요. 있는 그대로 사랑해주세요.`;
+
+                // 1. T vs F
+                if (typeA.includes('T') && typeB.includes('F')) {
+                    conv = `<b class="text-blue-600">${typeA}(당신)</b>: 해결책부터 주지 말고 공감부터 해주세요.<br><b class="text-pink-500">${typeB}(상대)</b>: 상대의 직설적인 말을 비난으로 듣지 마세요.`;
+                    taboo = `<b>${typeA}</b>는 "그래서 결론이 뭐야?" 금지,<br><b>${typeB}</b>는 "나 안 사랑해?" 금지.`;
+                } else if (typeA.includes('F') && typeB.includes('T')) {
+                    conv = `<b class="text-pink-500">${typeA}(당신)</b>: 서운함을 논리적으로 설명하는 연습이 필요해요.<br><b class="text-blue-600">${typeB}(상대)</b>: 영혼 없는 리액션이라도 노력하고 있음을 알아주세요.`;
+                    taboo = `<b>${typeA}</b>는 징징거림 주의,<br><b>${typeB}</b>는 "그게 왜 기분 나빠?" 금지.`;
+                }
+
+                // 2. J vs P
+                if (typeA.includes('J') && typeB.includes('P')) {
+                    date = `계획적인 <b>${typeA}</b>가 큰 틀을 짜고, 유연한 <b>${typeB}</b>가 그 안에서 맛집을 고르는 '반반 데이트'를 추천해요.`;
+                    taboo = `<b>${typeA}</b>는 시간 닥달 금지, <b>${typeB}</b>는 약속 시간 늦기 금지.`;
+                } else if (typeA.includes('P') && typeB.includes('J')) {
+                    date = `<b>${typeB}</b>인 연인을 위해 최소한의 예약은 필수! <b>${typeA}</b>인 당신의 즉흥성은 '깜짝 선물'할 때만 발휘하세요.`;
+                    taboo = `<b>${typeB}</b>의 계획 변경에 토 달지 말기, <b>${typeA}</b>의 무계획 무시하지 말기.`;
+                }
+
+                // 3. E vs I
+                if (typeA.includes('E') && typeB.includes('I')) {
+                    date = `밖에서 에너지를 얻는 <b>${typeA}</b>와 달리, <b>${typeB}</b>는 집에서 쉬어야 충전이 됩니다. 야외 데이트 후에는 <b>${typeB}</b>에게 혼자만의 시간을 꼭 선물하세요.`;
+                } else if (typeA.includes('I') && typeB.includes('E')) {
+                    date = `에너지가 넘치는 <b>${typeB}</b>인 연인을 위해 가끔은 시끌벅적한 모임에 같이 가주세요. <b>${typeB}</b>는 당신과 함께 밖에서 추억을 쌓고 싶어 합니다.`;
+                }
+
+                return { conv, date, taboo };
+            }
+
             function validateAndAnalyze() {
                 const inputA = document.getElementById('mbti-a');
                 const inputB = document.getElementById('mbti-b');
@@ -188,37 +209,14 @@
                     return;
                 }
 
-                // [수정된 부분] 세션 기록 확인하기
-                // 'coupang_visited'라는 기록이 없으면(!null) 창을 열고 기록을 남김
-                if (!sessionStorage.getItem('coupang_visited')) {
-                    window.open('https://link.coupang.com/a/dcbQl7', '_blank');
-                    sessionStorage.setItem('coupang_visited', 'true'); // "나 갔다 왔어!" 도장 찍기
-                } 
-                // 기록이 있으면 window.open을 건너뛰고 바로 결과를 보여줌
-
+                // [수정] 바로 결과 보기
                 showResult(valA, valB);
             }
 
             function showResult(me, you) {
                 const target = targetAnalysis[you];
                 const strategy = getMyStrategy(me, you);
-
-                let secretContent = "";
-                if (you.includes("F")) {
-                    secretContent = `
-                        <div class="space-y-2 text-left text-sm text-slate-600">
-                            <p>💌 <b>추천 카톡:</b> "오늘 날씨 춥다 ㅠㅠ 옷 따뜻하게 입었어? 네 생각나서 카톡했어."</p>
-                            <p>🚫 <b>절대 금기어:</b> "그래서 결론이 뭐야?", "그건 네가 잘못했네."</p>
-                            <p>🎁 <b>치트키 선물:</b> 정성이 담긴 손편지나 그 사람이 지나가듯 말했던 작은 물건</p>
-                        </div>`;
-                } else {
-                    secretContent = `
-                        <div class="space-y-2 text-left text-sm text-slate-600">
-                            <p>💌 <b>추천 카톡:</b> "이 기사 봤어? 네가 좋아할 것 같아서 보냈어. 나중에 얘기하자."</p>
-                            <p>🚫 <b>절대 금기어:</b> "나 사랑해?", "왜 내 맘을 몰라줘?" (감정 강요)</p>
-                            <p>🎁 <b>치트키 선물:</b> 실용적인 전자기기나 그 사람의 업무 효율을 높여주는 아이템</p>
-                        </div>`;
-                }
+                const advice = getAdviceContent(me, you); // 맞춤 조언 생성
 
                 const resultHTML = `
                     <div class="max-w-4xl mx-auto space-y-10">
@@ -270,24 +268,38 @@
                                     <p class="text-slate-300 text-sm mb-8">성공률 200% 카톡 예시 & 필살기 멘트 확인하기</p>
                                     
                                     <button id="coupang-trigger-btn" class="w-full md:w-auto px-10 py-5 text-white font-bold rounded-full shadow-lg coupang-btn-gradient flex items-center justify-center gap-3 mx-auto text-lg animate-pulse-glow">
-                                        <span>쿠팡 아이쇼핑 10초만 하고 확인하기</span> <i class="fas fa-unlock-alt"></i>
+                                        <span>🔒 시크릿 가이드 확인하기</span> <i class="fas fa-unlock-alt"></i>
                                     </button>
                                 </div>
                             </div>
 
                             <div id="unlocked-content" class="hidden bg-white border-2 border-purple-500 rounded-3xl p-8 shadow-2xl relative">
                                 <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg">SECRET UNLOCKED</div>
-                                <h4 class="font-bold text-xl text-center text-slate-800 mb-6 mt-2">✨ ${you} 공략 실전 노트</h4>
-                                ${secretContent}
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                                    <div class="bg-blue-50 p-6 rounded-2xl text-center">
+                                        <h4 class="font-bold text-slate-800 mb-3">💬 대화의 기술</h4>
+                                        <p class="text-sm text-slate-600 break-keep leading-relaxed">${advice.conv}</p>
+                                    </div>
+                                    <div class="bg-pink-50 p-6 rounded-2xl text-center">
+                                        <h4 class="font-bold text-slate-800 mb-3">🎟️ 추천 데이트</h4>
+                                        <p class="text-sm text-slate-600 break-keep leading-relaxed">${advice.date}</p>
+                                    </div>
+                                    <div class="bg-yellow-50 p-6 rounded-2xl text-center">
+                                        <h4 class="font-bold text-slate-800 mb-3">⚠️ 절대 금기사항</h4>
+                                        <p class="text-sm text-slate-600 break-keep font-bold leading-relaxed">${advice.taboo}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mt-8 pb-12 text-center">
-                            <button onclick="window.open('https://link.coupang.com/a/dcbQl7', '_blank')" 
-                                class="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-lg rounded-full shadow-xl hover:scale-105 transition-transform bounce-custom flex items-center justify-center gap-2 mx-auto">
-                                <span>🎁 ${you}들이 환장하는 선물 보러가기</span>
-                                <i class="fas fa-gift"></i>
-                            </button>
+                        <div class="mt-12 pb-12">
+                            <h3 class="text-center font-bold text-lg text-slate-700 mb-4 animate-bounce">
+                                🛍️ <span class="text-purple-600">${me}</span> & <span class="text-pink-500">${you}</span> 취향저격 추천템
+                            </h3>
+                            <div class="flex justify-center w-full">
+                                <div id="coupang-banner-frame" style="width: 100%; max-width: 680px; height: 160px; overflow: hidden;"></div>
+                            </div>
                         </div>
 
                     </div>
@@ -298,22 +310,32 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // ... (showResult 함수 내부 위쪽 코드는 그대로 두세요) ...
-
-                // 2. 두 번째 버튼 로직 (수정됨)
-                document.getElementById('coupang-trigger-btn').onclick = function() {
-                    // 여기도 똑같이 체크! (위에서 한 번 갔다 왔으면 안 열림)
-                    if (!sessionStorage.getItem('coupang_visited')) {
-                        window.open('https://link.coupang.com/a/dcbQl7', '_blank');
-                        sessionStorage.setItem('coupang_visited', 'true');
-                    }
-
-                    // 잠금 해제 애니메이션
+                // 2. 두 번째 버튼 로직 (바로 열기)
+                document.getElementById('coupang-trigger-btn').addEventListener('click', () => {
                     document.getElementById('lock-screen').classList.add('hidden');
                     const unlocked = document.getElementById('unlocked-content');
                     unlocked.classList.remove('hidden');
                     unlocked.classList.add('fade-in');
-                };
+                });
+
+                // 쿠팡 배너 주입 (iframe)
+                setTimeout(() => {
+                    const bannerFrame = document.getElementById('coupang-banner-frame');
+                    if (bannerFrame) {
+                        const iframe = document.createElement('iframe');
+                        iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = 'none'; iframe.scrolling = 'no';
+                        bannerFrame.appendChild(iframe);
+                        const doc = iframe.contentWindow.document;
+                        doc.open();
+                        doc.write(`
+                            <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; overflow:hidden;">
+                                <script src="https://ads-partners.coupang.com/g.js"><\/script>
+                                <script> new PartnersCoupang.G({"id":949693,"template":"carousel","trackingCode":"AF3238435","width":"680","height":"160","tsource":""}); <\/script>
+                            </body>
+                        `);
+                        doc.close();
+                    }
+                }, 100);
             }
 
             function resetPage() {
