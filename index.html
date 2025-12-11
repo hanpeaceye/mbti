@@ -44,6 +44,20 @@
             0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
         }
+
+        /* 시크릿 가이드 애니메이션 */
+        @keyframes float-lock {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); text-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        }
+        .animate-float-lock { animation: float-lock 3s ease-in-out infinite; display: inline-block; }
+
+        @keyframes pulse-glow-btn {
+            0% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 30px rgba(255, 80, 80, 0.8), 0 0 15px rgba(255, 200, 0, 0.6); transform: scale(1.03); }
+            100% { box-shadow: 0 4px 15px rgba(225, 31, 31, 0.4); transform: scale(1); }
+        }
+        .animate-pulse-glow { animation: pulse-glow-btn 1.5s infinite ease-in-out; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen">
@@ -105,7 +119,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"];
             
-            // [데이터 업그레이드] 설명을 더 풍부하게 수정
+            // 1.5배 보강된 MBTI 데이터
             const mbtiTraits = {
                 "ENTP": [{ tag: "🎤 멈추지 않는 아이디어 뱅크", desc: "머릿속은 항상 새로운 사업과 모험 구상으로 가득 차 있어요. '지루한 것'이 죽기보다 싫은 재치 만점 매력쟁이!", strength: "혁신적인 창의력과 위트", weakness: "뒷심 부족과 잦은 싫증" }, { tag: "🤡 천재적인 악동", desc: "남들이 '예' 할 때 '아니오'라고 말하며 토론하기를 즐겨요. 엉뚱해 보이지만 문제 해결 능력은 타의 추종을 불허합니다.", strength: "비판적 사고와 해결능력", weakness: "눈치 없는 팩트 폭격" }],
                 "ISTJ": [{ tag: "📉 걸어 다니는 엑셀 파일", desc: "약속 시간 1분도 어기지 않는 철두철미함의 소유자. 데이트 코스부터 미래 계획까지 완벽하게 짜여 있는 든든한 애인입니다.", strength: "무한한 책임감과 성실함", weakness: "예상 밖 상황에 당황함" }, { tag: "🛡️ 흔들리지 않는 원칙주의자", desc: "빈말은 절대 못 하지만, 한번 뱉은 말은 하늘이 두 쪽 나도 지켜요. 결혼 상대로는 최고의 안정감을 줍니다.", strength: "깊은 신뢰감", weakness: "새로운 변화 거부" }],
@@ -115,7 +129,7 @@
                 "INTJ": [{ tag: "♟️ 차가운 도시의 전략가", desc: "표현은 서툴지만, 머릿속엔 이미 우리 미래 계획(노후 대비까지)이 다 세워져 있어요. 알면 알수록 진국인 사람!", strength: "깊은 통찰력과 비전", weakness: "감정 표현이 매우 서툼" }, { tag: "🦉 지적인 뇌섹남녀", desc: "배울 점이 정말 많은 사람이에요. 무논리, 감정 호소보다는 논리적이고 건설적인 대화를 나눌 때 섹시함을 느낍니다.", strength: "냉철한 문제 해결", weakness: "지나친 완벽주의 성향" }],
                 "INFP": [{ tag: "🧚 꿈꾸는 낭만가", desc: "자신만의 세계가 확고하고 예술적 감수성이 풍부해요. 현실 감각은 좀 떨어져도 낭만적인 사랑을 꿈꾸는 순수함이 있습니다.", strength: "깊은 이해심과 순수함", weakness: "유리멘탈과 회피 성향" }, { tag: "📚 속 깊은 문학소년/소녀", desc: "말하지 않아도 상대의 감정을 기가 막히게 캐치해요. 다만 혼자만의 시간이 꼭 필요한 내향적인 영혼입니다.", strength: "따뜻한 위로 능력", weakness: "현실적인 문제 해결 미흡" }],
                 "ESTJ": [{ tag: "👑 든든한 리더", desc: "호불호가 확실하고 리드하는 걸 좋아해요. 답답한 상황을 딱 정리해주는 사이다 같은 결단력이 매력 포인트!", strength: "강력한 추진력", weakness: "직설적 화법으로 상처 줌" }, { tag: "📝 현실적인 계획왕", desc: "데이트도 효율적으로! 징징거리는 것보다는 딱 떨어지는 해결책을 제시해주는 믿음직한 파트너입니다.", strength: "현실적인 생활력", weakness: "공감 능력 부족" }],
-                // ... (나머지 유형도 기본 패턴 유지하되 로직으로 보완)
+                // ... 나머지는 기본 트레이트 사용
             };
             
             const defaultTraits = {
@@ -148,7 +162,7 @@
                     desc = "머리부터 발끝까지 달라요! 처음엔 도저히 이해가 안 가지만, 내가 가지지 못한 능력을 가진 상대에게 미친 듯이 끌리게 됩니다."; 
                     score = 95; synergy = "서로의 약점을 완벽히 보완"; 
                 } else {
-                    if (typeA[1] !== typeB[1]) { // S vs N
+                    if (typeA[1] !== typeB[1]) {
                         title = "현실과 이상의 줄다리기";
                         desc = "한 명은 숲을 보고(N), 한 명은 나무를 봅니다(S). 대화의 핀트가 자주 어긋날 수 있지만 서로에게 새로운 시각을 선물해요.";
                         synergy = "시야의 확장"; conflict = "대화 주제의 불일치"; score -= 5;
@@ -157,15 +171,14 @@
                 return { title, desc, synergy, conflict, score };
             }
 
-            // [NEW] MBTI 조합별 맞춤형 조언 생성기 (1.5배 보강 핵심)
-            // [NEW] MBTI 조합별 맞춤형 조언 생성기 (실제 MBTI 반영 버전)
+            // [NEW] 실제 MBTI가 반영된 동적 조언 생성기
             function getAdviceContent(typeA, typeB) {
                 // 기본 멘트에도 MBTI 넣기
                 let conv = `서로 다른 <b>${typeA}</b>와 <b>${typeB}</b>가 만났네요. 비난보다는 '나' 화법을 사용하세요.`;
                 let date = `<b>${typeA}</b>와 <b>${typeB}</b>가 모두 만족할 수 있도록, 활동적인 데이트와 정적인 데이트를 5:5로 섞어보세요.`;
                 let taboo = `<b>${typeB}</b>를 <b>${typeA}</b>의 방식대로 바꾸려 하지 마세요. 있는 그대로 사랑해주세요.`;
 
-                // 1. T(사고) vs F(감정) 대화 갈등
+                // 1. T(사고) vs F(감정)
                 if (typeA.includes('T') && typeB.includes('F')) {
                     conv = `<b class="text-blue-600">${typeA}(당신)</b>: 해결책부터 주지 말고 공감부터 해주세요.<br><b class="text-pink-500">${typeB}(상대)</b>: 상대의 직설적인 말을 비난으로 듣지 마세요.`;
                     taboo = `<b>${typeA}</b>는 "그래서 결론이 뭐야?" 금지,<br><b>${typeB}</b>는 "나 안 사랑해?" 금지.`;
@@ -174,7 +187,7 @@
                     taboo = `<b>${typeA}</b>는 징징거림 주의,<br><b>${typeB}</b>는 "그게 왜 기분 나빠?" 금지.`;
                 }
 
-                // 2. J(계획) vs P(인식) 데이트 갈등
+                // 2. J(계획) vs P(인식)
                 if (typeA.includes('J') && typeB.includes('P')) {
                     date = `계획적인 <b>${typeA}</b>가 큰 틀을 짜고, 유연한 <b>${typeB}</b>가 그 안에서 맛집을 고르는 '반반 데이트'를 추천해요.`;
                     taboo = `<b>${typeA}</b>는 시간 닥달 금지, <b>${typeB}</b>는 약속 시간 늦기 금지.`;
@@ -183,7 +196,7 @@
                     taboo = `<b>${typeB}</b>의 계획 변경에 토 달지 말기, <b>${typeA}</b>의 무계획 무시하지 말기.`;
                 }
 
-                // 3. E(외향) vs I(내향) 에너지 갈등 (요청하신 부분!)
+                // 3. E(외향) vs I(내향)
                 if (typeA.includes('E') && typeB.includes('I')) {
                     date = `밖에서 에너지를 얻는 <b>${typeA}</b>와 달리, <b>${typeB}</b>는 집에서 쉬어야 충전이 됩니다. 야외 데이트 후에는 <b>${typeB}</b>에게 혼자만의 시간을 꼭 선물하세요.`;
                 } else if (typeA.includes('I') && typeB.includes('E')) {
@@ -192,6 +205,7 @@
 
                 return { conv, date, taboo };
             }
+
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
@@ -205,7 +219,7 @@
                 if (!validMbtiList.includes(valA)) { alert("나의 MBTI를 확인해주세요!"); inputA.focus(); return; }
                 if (!validMbtiList.includes(valB)) { alert("연인의 MBTI를 확인해주세요!"); inputB.focus(); return; }
                 
-                // [수정] 바로 분석 시작 (쿠팡 로직 제거)
+                // 바로 분석 시작
                 analyzeRelationship(valA, valB);
             }
 
@@ -213,7 +227,7 @@
                 const getTrait = (t) => (mbtiTraits[t] ? mbtiTraits[t][Math.floor(Math.random() * mbtiTraits[t].length)] : defaultTraits[t]);
                 let traitA = getTrait(mbtiA); let traitB = getTrait(mbtiB);
                 let pairKey = [mbtiA, mbtiB].sort().join("-");
-                let chemistry = generateDynamicChemistry(mbtiA, mbtiB); // 기본 로직 사용
+                let chemistry = generateDynamicChemistry(mbtiA, mbtiB);
 
                 // 맞춤형 조언 가져오기
                 const advice = getAdviceContent(mbtiA, mbtiB);
@@ -271,8 +285,13 @@
                             </div>
                         </div>
 
-                        <div class="mt-12 flex justify-center w-full">
-                            <div id="coupang-banner-frame" style="width: 100%; max-width: 680px; height: 160px; overflow: hidden;"></div>
+                        <div class="mt-12">
+                            <h3 class="text-center font-bold text-lg text-slate-700 mb-4 animate-bounce">
+                                🛍️ <span class="text-blue-600">${mbtiA}</span> & <span class="text-pink-500">${mbtiB}</span> 취향저격 추천템
+                            </h3>
+                            <div class="flex justify-center w-full">
+                                <div id="coupang-banner-frame" style="width: 100%; max-width: 680px; height: 160px; overflow: hidden;"></div>
+                            </div>
                         </div>
 
                     </div>
