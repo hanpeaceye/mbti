@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우정 여행 판독기 | 여행 가서 안 싸우는 법</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-33VJ9T8RW5');
+    </script>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimbti.xyz/travel">
+    <meta property="og:title" content="✈️ 우정 여행 판독기 | MBTI 여행 스타일 궁합">
+    <meta property="og:description" content="우리 여행 가서 안 싸울 수 있을까? 계획형 vs 즉흥형, 힐링 vs 액티비티! 여행 스타일 분석하고 절교 방지하자 🏖️">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2060/2060284.png">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #e0f2fe; } /* 하늘색 배경 */
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* 여행 느낌: 시원한 하늘색/민트 그라데이션 */
+        .magic-card { background: linear-gradient(135deg, #ffffff, #f0f9ff); border: 1px solid #bae6fd; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15); }
+        .vs-badge { background: linear-gradient(45deg, #0ea5e9, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .strategy-box { border-left-width: 4px; transition: transform 0.2s; }
+        .strategy-box:hover { transform: translateY(-2px); }
+        
+        .bounce-custom { animation: bounce 2s infinite; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen relative">
+
+    <div class="w-full max-w-5xl mx-auto px-4 py-10">
+
+        <div id="input-page" class="flex flex-col justify-center min-h-[85vh] fade-in">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-white border border-sky-200 text-sky-600 text-xs font-bold px-4 py-1.5 rounded-full mb-4 shadow-sm tracking-wide">Travel Mate Compatibility</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+                    우리 여행 가면,<br class="md:hidden">과연 <span class="text-sky-500">안 싸울까?</span> ✈️
+                </h1>
+                <p class="text-slate-500 text-base md:text-lg">여행 스타일부터 역할 분담까지<br>출발 전 필수로 확인해야 할 우정 보존 가이드</p>
+            </div>
+
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-sky-200/50 max-w-3xl mx-auto w-full border border-sky-50 magic-card">
+                <div class="flex flex-col gap-10">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div class="w-full group">
+                            <label class="block text-sm font-bold text-slate-500 mb-3 ml-2">나의 MBTI</label>
+                            <div class="relative">
+                                <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-sky-50/50 border-2 border-sky-100 rounded-2xl p-5 text-center text-3xl font-black uppercase text-slate-800 focus:border-sky-500 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder-sky-200 tracking-widest" placeholder="ESFP" maxlength="4">
+                            </div>
+                        </div>
+                        <span class="text-4xl font-black italic vs-badge">WITH</span>
+                        <div class="w-full group">
+                            <label class="block text-sm font-bold text-slate-500 mb-3 ml-2">친구 MBTI (여행 메이트)</label>
+                            <div class="relative">
+                                <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-teal-50/50 border-2 border-teal-100 rounded-2xl p-5 text-center text-3xl font-black uppercase text-slate-800 focus:border-teal-500 focus:ring-4 focus:ring-teal-100 outline-none transition placeholder-teal-200 tracking-widest" placeholder="ISTJ" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-6 rounded-2xl shadow-xl hover:shadow-2xl text-lg md:text-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group">
+                        <span>궁합 확인하고 출발!</span> <i class="fas fa-plane-departure group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-page" class="hidden fade-in pb-20">
+            <div class="max-w-4xl mx-auto mb-8 flex items-center justify-between">
+                <button id="back-btn" class="text-slate-400 hover:text-slate-800 font-bold flex items-center gap-2 transition-colors px-4 py-2 rounded-lg hover:bg-white/50">
+                    <i class="fas fa-arrow-left"></i> 다시하기
+                </button>
+                <span class="text-xs font-bold text-sky-600 bg-sky-100 px-3 py-1 rounded-full">TRAVEL REPORT</span>
+            </div>
+            <div id="result-content"></div>
+        </div>
+
+    </div>
+
+    <div class="fixed bottom-2 right-2 text-[10px] text-slate-400 opacity-60 font-mono pointer-events-none select-none z-50">
+        Ver 1.3 (Travel)
+    </div>
+
+    <datalist id="mbti-list"></datalist>
+    <link id="dynamic-favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
+            const dataList = document.getElementById('mbti-list');
+            validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
+
+            // 1. [친구 분석] 여행 스타일 데이터
+            const mbtiData = {
+                "ISTJ": [
+                    { type: "걸어 다니는 엑셀표", like: "분 단위 계획표, 예약 확인서 출력, 맛집 웨이팅 시간 계산", dislike: "지각, 계획 변경, 갑자기 '저기 가볼까?' 하는 것", tip: "제발 시간 약속만 지켜줘. 그리고 이 친구가 짠 계획에 토 달지 말고 '와 완벽하다'라고 칭찬하면 여행이 평화로움." },
+                    { type: "인간 내비게이션", like: "효율적인 동선, 검증된 맛집(별점 4.5 이상), 가성비", dislike: "길 헤매는 것, 바가지요금, 쓸데없는 기념품 쇼핑", tip: "길 찾기는 이 친구한테 맡기고 너는 옆에서 짐이나 들어줘. 지도 볼 때 말 걸면 예민해짐." }
+                ],
+                "ISFJ": [
+                    { type: "보부상 엄마/아빠", like: "비상약/물티슈/보조배터리 챙겨주기, 서로 인생샷 찍어주기", dislike: "위험한 행동, 싸움 구경, 너무 빡빡한 일정", tip: "네가 깜빡한 물건 이 친구 가방에 다 있다. 고마우면 커피는 네가 사. '힘들지 않아?'라고 자주 물어봐 줘." },
+                    { type: "평화지킴이", like: "조용한 휴양지, 호캉스, 소소한 기념품 가게 구경", dislike: "시끄러운 클럽, 호객 행위 심한 곳, 친구끼리 의견 충돌", tip: "뭐 먹을지 물어보면 '아무거나'라고 할 텐데 진짜 아무거나가 아님. 네가 리드해서 딱 2개 중에 고르라고 해." }
+                ],
+                "INFJ": [
+                    { type: "감성 충만 여행자", like: "노을 보기, 심오한 대화, 사람 없는 조용한 명소", dislike: "단체 패키지 여행, 시끄러운 술판, 얕은 수다", tip: "밤에 맥주 한 캔 하면서 '오늘 어땠어?'라고 물어봐 줘. 여행의 의미를 찾는 걸 좋아함." },
+                    { type: "배려왕 가이드", like: "현지 문화 체험, 박물관/미술관, 친구의 취향 맞춰주기", dislike: "무례한 관광객, 계획 없이 붕 뜨는 시간, 무질서", tip: "겉으론 웃고 있어도 속으로 지쳐있을 수 있음. 가끔 혼자만의 시간을 줘서 충전하게 해줘야 함." }
+                ],
+                "INTJ": [
+                    { type: "효율 추구 설계자", like: "동선 최적화, 지식 투어(역사/유래), 불필요한 이동 최소화", dislike: "멍청하게 줄 서서 시간 낭비하기, 감성 카페 웨이팅", tip: "이 친구랑 갈 땐 '그냥 예뻐서' 가는 곳은 하루 1곳으로 제한해. '여기가 왜 유명한지' 논리적으로 설득해야 움직임." },
+                    { type: "플랜 B의 제왕", like: "예약 필수, 깔끔한 숙소, 목적이 확실한 여행", dislike: "즉흥적인 변경, 질척거리는 동행, 징징거림", tip: "비가 오거나 가게 문이 닫혔을 때 당황하지 마. 이미 이 친구 머릿속엔 플랜 B, C가 다 있어." }
+                ],
+                "ISTP": [
+                    { type: "고독한 탐험가", like: "혼자 돌아다니기, 멍때리기, 계획 없음(그때그때 검색)", dislike: "강제적인 단체 행동, 아침 일찍 일어나기, 인증샷 셔틀", tip: "깨우지 마. 11시까지 자게 놔둬. 그리고 각자 놀다가 저녁에 만나서 밥 먹자고 하면 제일 좋아함." },
+                    { type: "생존 전문가", like: "액티비티, 현지인 맛집(허름해도 맛있는 곳), 편한 옷차림", dislike: "줄 서서 사진 찍기, 복잡한 격식, 쇼핑 강요", tip: "'여기 핫플이래!' 하면서 줄 서자고 하면 도망감. 그냥 걷다가 맛있어 보이는 데 들어가자." }
+                ],
+                "ISFP": [
+                    { type: "침대와 한 몸", like: "호텔 침대에서 뒹굴기, 룸서비스, 예쁜 수영장", dislike: "극기훈련급 일정, 땀 흘리는 등산, 재촉하기", tip: "일정표 짜지 마. 그냥 '오늘은 수영하고 맛있는 거 먹자'가 계획의 전부여야 함. 휴식이 곧 여행임." },
+                    { type: "감성 스냅 장인", like: "분위기 좋은 카페, 필름 카메라, 귀여운 소품샵", dislike: "촉박한 시간, 안 예쁜 식당, 결정을 강요하는 것", tip: "사진 찍느라 걸음이 느려도 화내지 마. 나중에 남는 건 이 친구가 찍어준 인생샷 뿐이다." }
+                ],
+                "INFP": [
+                    { type: "낭만 방랑자", like: "골목길 산책, 서점 투어, 현지 느낌 물씬 나는 곳", dislike: "빡빡한 랜드마크 찍기, 쇼핑몰 인파, 현실적인 잔소리", tip: "가끔 길을 잃어도 '모험이다!' 하고 좋아해 줘. 현실 감각은 떨어지지만 낭만은 최고임." },
+                    { type: "집순이/집돌이의 외출", like: "숙소에서 야식 먹으며 수다, 엽서 쓰기", dislike: "모르는 사람이랑 합석, 불친절한 직원, 갈등 상황", tip: "이 친구 멘탈은 쿠크다스야. 식당에서 주문 잘못 나와도 네가 대신 컴플레인 걸어줘야 함." }
+                ],
+                "INTP": [
+                    { type: "호기심 천국", like: "과학관/박물관, 특이한 건축물, 밤새 토론하기", dislike: "남들 다 하는 뻔한 관광, 인스타용 맛집 줄 서기", tip: "갑자기 엉뚱한 골목으로 새도 놀라지 마. 남들은 안 가는 이상한 데서 엄청난 걸 발견해내는 재주가 있음." },
+                    { type: "무계획이 계획", like: "발길 닿는 대로, 짐은 최소한으로(비닐봉지 덜렁)", dislike: "분 단위 스케줄, 옷차림 지적, 감정적인 하소연", tip: "맛집 안 찾아왔다고 뭐라 하지 마. '배고프면 편의점 가지 뭐'라는 마인드니까 네가 챙겨야 굶지 않음." }
+                ],
+                "ESTP": [
+                    { type: "스릴 즐기는 야생마", like: "스카이다이빙/서핑, 클럽/파티, 즉흥적인 만남", dislike: "호텔방에 박혀있기, 박물관 관람, 지루한 설명 듣기", tip: "체력이 미쳤음. 네가 지쳐 쓰러질 때쯤 '이제 2차 가야지?'라고 할 거임. 홍삼 챙겨 먹어라." },
+                    { type: "가성비 & 도박사", like: "현지 흥정, 내기하기, 걷기보다는 택시/렌트", dislike: "비효율적인 동선, 답답하게 구는 것, 결정 장애", tip: "메뉴 고를 때 고민하지 마. '이거 먹자!' 하고 바로 시키는 시원시원함을 보여줘야 함." }
+                ],
+                "ESFP": [
+                    { type: "이 구역의 파티피플", like: "새로운 친구 사귀기, 화려한 조명, 시끌벅적한 야시장", dislike: "조용한 절/사원, 혼자 있는 시간, 심각한 분위기", tip: "리액션이 여행의 전부야. 별거 아닌 거에도 '대박!', '미쳤다!' 외쳐주면 신나서 다 쏨." },
+                    { type: "욜로(YOLO)족", like: "지금 당장 즐거운 것, 충동구매, 맛있는 술", dislike: "아껴 쓰라고 잔소리하기, 미래 걱정, 피곤한 티 내기", tip: "이 친구랑 가면 통장 잔고는 포기해. 대신 평생 잊지 못할 에피소드는 확실히 보장함." }
+                ],
+                "ENFP": [
+                    { type: "인간 리트리버", like: "현지인이랑 친구 먹기, 우연히 발견한 축제, 텐션 업", dislike: "반복되는 일상, 숙소에서 잠만 자는 것, 통제당하는 기분", tip: "여권, 지갑, 핸드폰... 네가 다 챙겨야 해. 칠칠맞지만 밉지 않은 게 매력 포인트." },
+                    { type: "변덕쟁이 모험가", like: "갑자기 목적지 바꾸기, 새로운 도전, 긍정적인 마인드", dislike: "계획대로만 움직여야 하는 강박, 부정적인 말", tip: "'갑자기?'라는 말을 하지 마. '오 재밌겠는데?'라고 받아주면 그날 여행은 대성공임." }
+                ],
+                "ENTP": [
+                    { type: "토론광 트래블러", like: "현지 이슈에 대해 토론, 남들이 안 하는 특이한 체험", dislike: "뻔한 패키지 코스, 멍청한 가이드, 무조건적인 동의", tip: "이 친구가 뭔가 불평하기 시작하면 같이 욕해주지 말고 논리적으로 맞장구쳐줘. 지적 유희를 즐기는 거임." },
+                    { type: "즉흥의 끝판왕", like: "지도 없이 다니기, 꽂히면 바로 실행, 도전적인 음식", dislike: "징징거리면서 분위기 깨는 것, 통제, 권위적인 태도", tip: "길 좀 잃으면 어때? 이 친구랑 있으면 길 잃은 곳이 핫플이 되는 기적을 볼 수 있음." }
+                ],
+                "ESTJ": [
+                    { type: "총무 겸 가이드", like: "엑셀로 정리한 예산안, 10분 단위 일정표, 아침 7시 기상", dislike: "돈 계산 안 맞는 것, 약속 시간 늦는 것, 느긋함", tip: "그냥 총무랑 대장을 시켜줘. 그게 제일 편해. 너는 그냥 '충성!' 하고 따라다니면 됨." },
+                    { type: "꼰대(?) 리더", like: "확실한 리드, 검증된 코스, 깔끔한 일 처리", dislike: "우유부단함, 불결한 숙소, 게으름 피우는 것", tip: "피곤하다고 일정 빼자고 하지 마. '체력 관리 못 한 네 잘못'이라고 생각함. 영양제 필수." }
+                ],
+                "ESFJ": [
+                    { type: "다정 보스 가이드", like: "맛집 예약해오기, 친구 컨디션 체크, 단체 사진 주도", dislike: "개인플레이, 밥 맛없다고 투덜대기, 호의를 무시하는 것", tip: "이 친구가 챙겨줄 때 당연하게 생각하지 말고 '너 진짜 센스 쩐다'라고 칭찬해줘. 인정욕구가 여행 원동력임." },
+                    { type: "수다쟁이 코디네이터", like: "끊임없는 대화, 시밀러룩 맞춰 입기, 화기애애한 분위기", dislike: "어색한 침묵, 싸움, 나만 빼고 자기들끼리 노는 것", tip: "이동할 때 핸드폰만 보지 말고 대화를 해. 리액션 잘해주면 맛있는 거 사줌." }
+                ],
+                "ENFJ": [
+                    { type: "열정 가이드", like: "모두가 행복한 여행, 의미 있는 체험, 파이팅 넘치는 구호", dislike: "불평불만, 이기적인 행동, 여행 분위기 망치는 사람", tip: "이 친구는 '우리'가 중요해. 혼자 튀려고 하지 말고 팀워크를 보여줘. '우리 진짜 잘 맞는다'는 말이 최고임." },
+                    { type: "감성 리더", like: "저녁에 와인 한잔하며 속마음 얘기하기, 칭찬 감옥 가두기", dislike: "비판적인 태도, 차가운 반응, 예의 없는 행동", tip: "네가 힘들까 봐 눈치 보고 있을 수도 있어. 먼저 '나 너무 행복해'라고 말해주면 안심함." }
+                ],
+                "ENTJ": [
+                    { type: "정복자 스타일", like: "하루에 5개 도시 찍기, 최고의 효율, 럭셔리 & 성취감", dislike: "늘어지는 것, 징징대기, 멍청한 일 처리", tip: "이 친구랑 여행 가면 몸은 힘든데 남는 건 제일 많아. 군말 없이 따르면 5성급 호텔이 기다릴 수도." },
+                    { type: "카리스마 대장", like: "주도권 잡기, 완벽한 플랜 실행, 문제 발생 시 빠른 해결", dislike: "우유부단해서 시간 끄는 것, 비효율, 감정팔이", tip: "의견을 낼 거면 확실한 대안을 가져와. '그냥 별로'라고 하면 씨알도 안 먹힘." }
+                ]
+            };
+
+            // 2. [여행 스타일 분석] J vs P / E vs I
+            function getTravelHarmony(me, you) {
+                let text = ""; let subText = "";
+                
+                // J(계획) vs P(즉흥) 충돌 분석
+                if (me.includes('J') && you.includes('P')) {
+                    text = "🔥 <b>'계획표' vs '그때 가서 보자'</b><br>당신이 10분 단위로 짠 계획표를 친구는 '참고용'으로만 봅니다.<br>화를 내는 대신 <b>오전엔 계획대로, 오후엔 자유시간</b>으로 타협하세요.";
+                    subText = "친구를 통제하려다간 여행 첫날 싸웁니다.";
+                } else if (me.includes('P') && you.includes('J')) {
+                    text = "🎒 <b>'나만 믿어' vs '숨 막혀'</b><br>친구의 빡빡한 일정에 숨이 막힐 수 있습니다.<br>하지만 길 찾고 예약하는 건 친구가 다 하니 <b>군말 말고 따라다니세요.</b>";
+                    subText = "편하게 다니려면 잔소리는 감수해야 합니다.";
+                } else if (me.includes('J') && you.includes('J')) {
+                    text = "⚡ <b>완벽주의자들의 전쟁</b><br>둘 다 계획이 확실해서 오히려 <b>'내 방식'</b>이 맞다고 싸울 수 있습니다.<br>출발 전에 <b>'오전 당번 / 오후 당번'</b>을 나누는 게 평화의 지름길입니다.";
+                    subText = "서로의 계획을 존중하는 배려가 필요해요.";
+                } else {
+                    text = "🌀 <b>대환장 즉흥 파티</b><br>둘 다 계획이 없어서 <b>'뭐 먹지?'만 1시간 고민</b>하다 편의점 갈 수도 있습니다.<br>최소한 <b>숙소와 교통편</b>은 미리 예약하고 가세요. 국제미아 됩니다.";
+                    subText = "의외로 잊지 못할 에피소드는 제일 많이 생김!";
+                }
+                return { text, subText };
+            }
+
+            // 3. [공략 팁] Do & Don't -> Appeal & Beware
+            function getTravelTips(me, you) {
+                let appeal = "";
+                let beware = "";
+
+                // APPEAL: 친구를 행복하게 하는 법
+                if (you.includes('S')) {
+                    appeal = `📸 <b>인생샷과 맛집에 집중하라</b><br><br>
+                    ${you} 친구는 눈에 보이는 게 중요합니다. <b>"여기 사진 진짜 잘 나온대", "이거 현지인 찐맛집이래"</b><br>
+                    추상적인 감성보다 <b>확실한 시각적/미각적 즐거움</b>을 주세요.`;
+                } else { // N Target
+                    appeal = `✨ <b>여행의 '낭만'을 자극하라</b><br><br>
+                    ${you} 친구는 뻔한 관광지보다 <b>"우리만의 비밀 장소", "현지 느낌 물씬 나는 골목"</b>을 좋아합니다.<br>
+                    밤에 맥주 한잔하며 <b>심오한 인생 얘기</b>를 들어주면 감동합니다.`;
+                }
+
+                // BEWARE: 절대 하지 말아야 할 행동
+                if (you.includes('F')) {
+                    beware = `💔 <b>짜증 내거나 팩폭 금지</b><br><br>
+                    길을 헤매거나 음식이 맛없어도 <b>"아 진짜 짜증 나네"</b>라고 불평하지 마세요.<br>
+                    ${you} 친구는 당신의 기분을 자기 탓으로 돌리고 <b>하루 종일 눈치</b>를 봅니다.`;
+                } else { // T Target
+                    beware = `😡 <b>징징대기 & 비효율 금지</b><br><br>
+                    다리가 아프다고 <b>해결책 없이 징징</b>대지 마세요. 차라리 "택시 타자"고 제안하세요.<br>
+                    ${you} 친구에게 <b>가성비 떨어지는 동선</b>을 고집하면 전쟁 시작입니다.`;
+                }
+
+                return { appeal, beware };
+            }
+
+            // 4. [역할 분담] Roles
+            function getTravelRoles(targetMBTI) {
+                let role = "", good = "", bad = "";
+
+                if (targetMBTI.includes('J')) {
+                    role = "🗺️ <b>인간 구글맵 & 총무</b>";
+                    good = "잘한다 잘한다 해주면 신나서 더 완벽하게 준비함";
+                    bad = "계획표 보고 '숨 막힌다'고 비꼬기 (바로 짐 싸서 집에 감)";
+                } else {
+                    role = "🎉 <b>분위기 메이커 & 협상가</b>";
+                    good = "예상치 못한 변수 발생 시 '오히려 좋아!' 외쳐주기";
+                    bad = "아무 계획 없다고 무시하거나 닥달하기";
+                }
+                return { role, good, bad };
+            }
+
+            function validateAndAnalyze() {
+                const inputA = document.getElementById('mbti-a');
+                const inputB = document.getElementById('mbti-b');
+                const valA = inputA.value.toUpperCase().trim();
+                const valB = inputB.value.toUpperCase().trim();
+
+                if (!validMbtiList.includes(valA) || !validMbtiList.includes(valB)) {
+                    alert("정확한 MBTI 4글자를 입력해주세요!");
+                    return;
+                }
+                showResult(valA, valB);
+            }
+
+            function showResult(me, you) {
+                const targetDataArray = mbtiData[you];
+                let selectedIndex = Math.floor(Math.random() * targetDataArray.length);
+                
+                const target = targetDataArray[selectedIndex];
+                const harmony = getTravelHarmony(me, you);
+                const tips = getTravelTips(me, you);
+                const roles = getTravelRoles(you);
+
+                const resultHTML = `
+                    <div class="max-w-4xl mx-auto space-y-10">
+                        
+                        <div class="magic-card rounded-3xl p-8 text-center relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-400 to-teal-400"></div>
+                            <p class="text-xs font-bold text-slate-400 mb-2 tracking-widest bg-slate-100 inline-block px-3 py-1 rounded-full">TRAVEL STYLE ANALYSIS</p>
+                            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 mt-2">
+                                <span class="text-sky-600">${you}</span> 친구는<br>"${target.type}"
+                            </h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-left">
+                                <div class="bg-teal-50 p-5 rounded-2xl border border-teal-100">
+                                    <p class="font-bold text-teal-600 mb-2 flex items-center"><i class="fas fa-heart mr-2"></i>극호 (좋아하는 여행)</p>
+                                    <p class="text-slate-700 text-sm leading-relaxed word-keep">${target.like}</p>
+                                </div>
+                                <div class="bg-rose-50 p-5 rounded-2xl border border-rose-100">
+                                    <p class="font-bold text-rose-500 mb-2 flex items-center"><i class="fas fa-heart-broken mr-2"></i>극불호 (싫어하는 여행)</p>
+                                    <p class="text-slate-700 text-sm leading-relaxed word-keep">${target.dislike}</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 bg-slate-50 p-4 rounded-xl text-sm text-slate-600">
+                                <span class="font-bold text-sky-600">💡 컨트롤 팁:</span> ${target.tip}
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-3xl p-8 border-2 border-slate-800 shadow-xl relative">
+                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg w-max">
+                                <i class="fas fa-handshake mr-2"></i>${me} & ${you} 궁합
+                            </div>
+                            <div class="mt-6 text-center">
+                                <p class="text-lg font-bold text-slate-800 mb-4 leading-relaxed break-keep">${harmony.text}</p>
+                                <p class="text-sm text-slate-500 font-medium">"${harmony.subText}"</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <div class="bg-white border-2 border-sky-500 rounded-3xl p-8 shadow-2xl relative fade-in">
+                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-sky-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg">
+                                    <i class="fas fa-passport mr-2"></i>TRAVEL SURVIVAL KIT
+                                </div>
+                                
+                                <h4 class="font-bold text-2xl text-center text-slate-800 mb-8 mt-4">✨ 절교 방지 & 평화 유지 전략</h4>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                                    <div class="bg-sky-50 rounded-2xl p-6 strategy-box border-sky-400">
+                                        <h5 class="font-bold text-sky-700 text-lg mb-3 flex items-center"><i class="fas fa-smile-beam mr-2"></i>이러면 좋아죽음 (Good)</h5>
+                                        <p class="text-slate-700 text-sm leading-relaxed break-keep">${tips.appeal}</p>
+                                    </div>
+                                    <div class="bg-orange-50 rounded-2xl p-6 strategy-box border-orange-400">
+                                        <h5 class="font-bold text-orange-700 text-lg mb-3 flex items-center"><i class="fas fa-siren-on mr-2"></i>이러면 손절각 (Bad)</h5>
+                                        <p class="text-slate-700 text-sm leading-relaxed break-keep">${tips.beware}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-indigo-50 rounded-2xl p-6 border border-indigo-200">
+                                    <h5 class="font-bold text-indigo-800 text-lg mb-4 text-center"><i class="fas fa-user-tag mr-2"></i>${you} 친구의 추천 역할</h5>
+                                    <div class="space-y-4">
+                                        <div class="bg-white p-4 rounded-xl border border-indigo-100 text-center">
+                                            <p class="font-bold text-slate-800 mb-1">👑 Best Position</p>
+                                            <p class="text-lg text-indigo-600 font-black">${roles.role}</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                                                <p class="font-bold text-blue-600 mb-1">🙆‍♂️ 칭찬 포인트</p>
+                                                <p class="text-sm text-slate-600 leading-relaxed">${roles.good}</p>
+                                            </div>
+                                            <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                                                <p class="font-bold text-red-500 mb-1">🙅‍♀️ 금지 행동</p>
+                                                <p class="text-sm text-slate-600 leading-relaxed">${roles.bad}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
+                        <div class="mt-10 pb-20 text-center">
+                            <a href="https://link.coupang.com/a/ddddJ5" target="_blank" class="inline-flex items-center justify-center gap-2 w-full md:w-auto px-8 py-5 bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 text-white font-black text-lg md:text-xl rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 bounce-custom">
+                                <i class="fas fa-suitcase-rolling"></i>
+                                <span>🏖️ 여행 가기 전 필수 준비물 챙기기</span>
+                            </a>
+                        </div>
+                        <div class="mt-10 pb-20 text-center">
+</div>
+
+<div class="mt-4 pb-24 text-center"> <button onclick="shareLink()" class="inline-flex items-center justify-center gap-2 w-full md:w-auto px-8 py-4 bg-white text-slate-600 font-bold text-lg rounded-full shadow-md hover:bg-slate-50 transition-colors border border-slate-200">
+        <i class="fas fa-share-alt"></i>
+        <span>친구에게 공유하고 여행 스타일 맞추기</span>
+    </button>
+</div>
+
+                        <div class="mt-12 pb-12">
+                            <h3 class="text-center font-bold text-lg text-slate-700 mb-4 animate-bounce">
+                                🧳 <span class="text-sky-600">${you}</span> 친구랑 갈 때 챙겨야 할 것
+                            </h3>
+                            <div class="flex justify-center w-full">
+                                <div id="coupang-banner-frame" style="width: 100%; max-width: 680px; height: 160px; overflow: hidden;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+
+                document.getElementById('result-content').innerHTML = resultHTML;
+                document.getElementById('input-page').classList.add('hidden');
+                document.getElementById('result-page').classList.remove('hidden');
+                window.scrollTo(0, 0);
+
+                // 쿠팡 배너
+                setTimeout(() => {
+                    const bannerFrame = document.getElementById('coupang-banner-frame');
+                    if (bannerFrame) {
+                        const iframe = document.createElement('iframe');
+                        iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = 'none'; iframe.scrolling = 'no';
+                        bannerFrame.appendChild(iframe);
+                        const doc = iframe.contentWindow.document;
+                        doc.open();
+                        doc.write(`
+                            <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; overflow:hidden;">
+                                <script src="https://ads-partners.coupang.com/g.js"><\/script>
+                                <script> new PartnersCoupang.G({"id":949693,"template":"carousel","trackingCode":"AF3238435","width":"680","height":"160","tsource":""}); <\/script>
+                            </body>
+                        `);
+                        doc.close();
+                    }
+                }, 100);
+            }
+
+            function resetPage() {
+                document.getElementById('input-page').classList.remove('hidden');
+                document.getElementById('result-page').classList.add('hidden');
+                document.getElementById('mbti-a').value = '';
+                document.getElementById('mbti-b').value = '';
+            }
+
+            document.getElementById('analyze-btn').addEventListener('click', validateAndAnalyze);
+            document.getElementById('back-btn').addEventListener('click', resetPage);
+        });
+        
+        // 공유하기 기능
+            window.shareLink = function() {
+                const currentUrl = window.location.href;
+                if (navigator.share) {
+                    navigator.share({
+                        title: '우정 여행 판독기',
+                        text: '우리 여행 가서 안 싸울 수 있을까? 미리 확인해보자! ✈️',
+                        url: currentUrl,
+                    });
+                } else {
+                    const t = document.createElement("textarea");
+                    document.body.appendChild(t);
+                    t.value = currentUrl;
+                    t.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(t);
+                    alert('링크가 복사되었습니다! 여행 단톡방에 공유하세요.');
+                }
+            }
+    </script>
+</body>
+</html>
