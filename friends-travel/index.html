@@ -1,103 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우정 여행 판독기 | 여행 가서 안 싸우는 법</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-33VJ9T8RW5');
-    </script>
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aimbti.xyz/travel">
-    <meta property="og:title" content="✈️ 우정 여행 판독기 | MBTI 여행 스타일 궁합">
-    <meta property="og:description" content="우리 여행 가서 안 싸울 수 있을까? 여행 점수와 주의할 점 미리 확인하고 절교 방지하자 🏖️">
-    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2060/2060284.png">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
-        body { font-family: 'Pretendard', sans-serif; background-color: #e0f2fe; }
-        
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .magic-card { background: linear-gradient(135deg, #ffffff, #f0f9ff); border: 1px solid #bae6fd; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15); }
-        .vs-badge { background: linear-gradient(45deg, #0ea5e9, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .strategy-box { border-left-width: 4px; transition: transform 0.2s; }
-        .strategy-box:hover { transform: translateY(-2px); }
-        
-        .bounce-custom { animation: bounce 2s infinite; }
-        
-        /* 점수 게이지 애니메이션 */
-        .score-bar { transition: width 1.5s ease-out; }
-    </style>
-</head>
-<body class="text-slate-800 min-h-screen relative">
-
-    <div class="w-full max-w-5xl mx-auto px-4 py-8">
-
-        <div id="input-page" class="flex flex-col justify-center min-h-[85vh] fade-in">
-            <div class="text-center mb-10">
-                <span class="inline-block bg-white border border-sky-200 text-sky-600 text-xs font-bold px-4 py-1.5 rounded-full mb-4 shadow-sm tracking-wide">Travel Mate Compatibility</span>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
-                    우리 여행 가면,<br class="md:hidden">과연 <span class="text-sky-500">안 싸울까?</span> ✈️
-                </h1>
-                <p class="text-slate-500 text-base md:text-lg">여행 스타일부터 역할 분담까지<br>출발 전 필수로 확인해야 할 우정 보존 가이드</p>
-            </div>
-
-            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-sky-200/50 max-w-3xl mx-auto w-full border border-sky-50 magic-card">
-                <div class="flex flex-col gap-8">
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div class="w-full group">
-                            <label class="block text-sm font-bold text-slate-500 mb-2 ml-2">나의 MBTI</label>
-                            <div class="relative">
-                                <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-sky-50/50 border-2 border-sky-100 rounded-2xl p-4 text-center text-3xl font-black uppercase text-slate-800 focus:border-sky-500 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder-sky-200 tracking-widest" placeholder="ESFP" maxlength="4">
-                            </div>
-                        </div>
-                        <span class="text-4xl font-black italic vs-badge mt-4 md:mt-0">WITH</span>
-                        <div class="w-full group">
-                            <label class="block text-sm font-bold text-slate-500 mb-2 ml-2">친구 MBTI</label>
-                            <div class="relative">
-                                <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-teal-50/50 border-2 border-teal-100 rounded-2xl p-4 text-center text-3xl font-black uppercase text-slate-800 focus:border-teal-500 focus:ring-4 focus:ring-teal-100 outline-none transition placeholder-teal-200 tracking-widest" placeholder="ISTJ" maxlength="4">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-2xl shadow-xl hover:shadow-2xl text-lg md:text-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group">
-                        <span>궁합 확인하고 출발!</span> <i class="fas fa-plane-departure group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div id="result-page" class="hidden fade-in pb-10">
-            <div class="max-w-4xl mx-auto mb-6 flex items-center justify-between">
-                <button id="back-btn" class="text-slate-400 hover:text-slate-800 font-bold flex items-center gap-2 transition-colors px-3 py-2 rounded-lg hover:bg-white/50 text-sm">
-                    <i class="fas fa-arrow-left"></i> 다시하기
-                </button>
-                <span class="text-xs font-bold text-sky-600 bg-sky-100 px-3 py-1 rounded-full">TRAVEL REPORT</span>
-            </div>
-            <div id="result-content"></div>
-        </div>
-
-    </div>
-
-    <div class="fixed bottom-2 right-2 text-[10px] text-slate-400 opacity-60 font-mono pointer-events-none select-none z-50">
-        Ver 1.5
-    </div>
-
-    <datalist id="mbti-list"></datalist>
-    <link id="dynamic-favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
-
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
             const dataList = document.getElementById('mbti-list');
@@ -163,7 +64,7 @@
                 ],
                 "ENFJ": [
                     { type: "열정 가이드 & 멘토", like: "모두가 행복하고 만족하는 여행, 의미 있는 체험 활동, 파이팅 넘치는 구호 외치기", dislike: "불평불만 늘어놓기, 이기적인 단독 행동, 여행 분위기 망치는 사람", tip: "이 친구는 '우리'가 중요합니다. 혼자 튀려고 하지 말고 팀워크를 보여주세요. 저녁에 맥주 한잔하며 '우리 진짜 잘 맞는다, 행복해'라고 말해주면 끝입니다." },
-                    { type: "감성 리더", like: "저녁에 와인 한잔하며 속마음 얘기하기, 칭찬 감옥 가두기, 서로 챙겨주기", dislike: "비판적인 태도, 차가운 반응, 예의 없는 행동(식당 직원 등에게)", tip: "당신이 힘들까 봐 계속 눈치 보고 있을 수도 있습니다. 먼저 웃으면서 '나 너무 즐거워'라고 표현해줘야 안심하고 여행을 즐깁니다." }
+                    { type: "감성 리더", like: "저녁에 와인 한잔하며 속마음 얘기하기, 칭찬 감옥 가두기, 서로 챙겨주기", dislike: "비판적인 태도, 차가운 반응, 예의 없는 행동(식당 직원 등에게)", tip: "당신이 힘들까 봐 계속 눈치 보고 있을 수도 있습니다. 먼저 웃으면서 '나 너무 즐거워'라고 표현해줘야 안심하고 여행을 즐깁니다." },
                 ],
                 "ENTJ": [
                     { type: "정복자 스타일 리더", like: "하루에 5개 도시 찍기(도장 깨기), 최고의 효율과 가성비, 럭셔리 & 성취감", dislike: "늘어지는 것, 징징대기, 멍청하게 일 처리해서 시간 낭비하는 것", tip: "이 친구랑 여행 가면 몸은 극도로 힘든데, 남는 건 제일 많습니다. 군말 없이 따르면 5성급 호텔 업그레이드 같은 행운이 따를 수도 있습니다." },
@@ -171,21 +72,17 @@
                 ]
             };
 
-            // 2. [궁합 보강] 점수제 + 상세 코멘트
+            // 2. [궁합]
             function getTravelHarmony(me, you) {
                 let score = 50;
                 let title = ""; 
                 let desc = "";
                 let conflict = "";
-
-                // 점수 로직 (J/P 다르면 -20, T/F 다르면 -20, E/I 다르면 -10)
-                // 보완: 서로 다를 때 오히려 좋은 점도 있으니 조정
                 
                 const sameJP = (me.includes('J') === you.includes('J'));
                 const sameTF = (me.includes('T') === you.includes('T'));
                 const sameEI = (me.includes('E') === you.includes('E'));
 
-                // 케이스별 분석
                 if (me.includes('J') && you.includes('P')) {
                     score = 65;
                     title = "🔥 계획파 vs 즉흥파";
@@ -204,7 +101,6 @@
                     desc = "둘 다 계획이 없어서 '뭐 먹지?'만 1시간 고민하다 편의점 갈 수도 있습니다. 하지만 의외로 스트레스 없고 평생 남을 레전드 에피소드는 제일 많이 생깁니다!";
                 }
 
-                // T/F 갈등 포인트 추가
                 if (!sameTF) {
                     if (me.includes('T')) {
                         conflict = "⚠️ <b>[주의]</b> 당신의 무심한 한마디('별론데?', '비효율적인데?')에 F 성향 친구는 여행 내내 상처받고 꽁해 있을 수 있습니다. 입에 발린 말이라도 예쁘게 하세요.";
@@ -222,7 +118,7 @@
                 return { score, title, desc, conflict };
             }
 
-            // 3. [공략 팁]
+            // 3. [팁]
             function getTravelTips(me, you) {
                 let appeal = "";
                 let beware = "";
@@ -249,7 +145,7 @@
                 return { appeal, beware };
             }
 
-            // 4. [역할 분담]
+            // 4. [역할]
             function getTravelRoles(targetMBTI) {
                 let role = "", good = "", bad = "";
 
@@ -388,8 +284,8 @@
                         </div>
 
                         <div class="mt-6 pb-6">
-                             <div class="flex justify-center w-full">
-                                <div id="coupang-banner-frame" style="width: 100%; max-width: 680px; height: 160px; overflow: hidden; border-radius: 12px;"></div>
+                             <div class="flex justify-center w-full" style="overflow: hidden;">
+                                <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
                             </div>
                         </div>
 
@@ -401,30 +297,10 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // 게이지 애니메이션
                 setTimeout(() => {
                     const bar = document.querySelector('.score-bar');
                     if(bar) bar.style.width = harmony.score + '%';
                 }, 300);
-
-                // 쿠팡 배너 로드
-                setTimeout(() => {
-                    const bannerFrame = document.getElementById('coupang-banner-frame');
-                    if (bannerFrame) {
-                        const iframe = document.createElement('iframe');
-                        iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = 'none'; iframe.scrolling = 'no';
-                        bannerFrame.appendChild(iframe);
-                        const doc = iframe.contentWindow.document;
-                        doc.open();
-                        doc.write(`
-                            <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; overflow:hidden;">
-                                <script src="https://ads-partners.coupang.com/g.js"><\/script>
-                                <script> new PartnersCoupang.G({"id":949693,"template":"carousel","trackingCode":"AF3238435","width":"680","height":"160","tsource":""}); <\/script>
-                            </body>
-                        `);
-                        doc.close();
-                    }
-                }, 100);
             }
 
             function resetPage() {
@@ -457,5 +333,3 @@
             }
         }
     </script>
-</body>
-</html>
