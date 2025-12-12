@@ -1,4 +1,103 @@
-<script>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우정 여행 판독기 | 여행 가서 안 싸우는 법</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-33VJ9T8RW5');
+    </script>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimbti.xyz/travel">
+    <meta property="og:title" content="✈️ 우정 여행 판독기 | MBTI 여행 스타일 궁합">
+    <meta property="og:description" content="우리 여행 가서 안 싸울 수 있을까? 여행 점수와 주의할 점 미리 확인하고 절교 방지하자 🏖️">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2060/2060284.png">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #e0f2fe; }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .magic-card { background: linear-gradient(135deg, #ffffff, #f0f9ff); border: 1px solid #bae6fd; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15); }
+        .vs-badge { background: linear-gradient(45deg, #0ea5e9, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .strategy-box { border-left-width: 4px; transition: transform 0.2s; }
+        .strategy-box:hover { transform: translateY(-2px); }
+        
+        .bounce-custom { animation: bounce 2s infinite; }
+        
+        /* 점수 게이지 애니메이션 */
+        .score-bar { transition: width 1.5s ease-out; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen relative">
+
+    <div class="w-full max-w-5xl mx-auto px-4 py-8">
+
+        <div id="input-page" class="flex flex-col justify-center min-h-[85vh] fade-in">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-white border border-sky-200 text-sky-600 text-xs font-bold px-4 py-1.5 rounded-full mb-4 shadow-sm tracking-wide">Travel Mate Compatibility</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+                    우리 여행 가면,<br class="md:hidden">과연 <span class="text-sky-500">안 싸울까?</span> ✈️
+                </h1>
+                <p class="text-slate-500 text-base md:text-lg">여행 스타일부터 역할 분담까지<br>출발 전 필수로 확인해야 할 우정 보존 가이드</p>
+            </div>
+
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-sky-200/50 max-w-3xl mx-auto w-full border border-sky-50 magic-card">
+                <div class="flex flex-col gap-8">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="w-full group">
+                            <label class="block text-sm font-bold text-slate-500 mb-2 ml-2">나의 MBTI</label>
+                            <div class="relative">
+                                <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-sky-50/50 border-2 border-sky-100 rounded-2xl p-4 text-center text-3xl font-black uppercase text-slate-800 focus:border-sky-500 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder-sky-200 tracking-widest" placeholder="ESFP" maxlength="4">
+                            </div>
+                        </div>
+                        <span class="text-4xl font-black italic vs-badge mt-4 md:mt-0">WITH</span>
+                        <div class="w-full group">
+                            <label class="block text-sm font-bold text-slate-500 mb-2 ml-2">친구 MBTI</label>
+                            <div class="relative">
+                                <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-teal-50/50 border-2 border-teal-100 rounded-2xl p-4 text-center text-3xl font-black uppercase text-slate-800 focus:border-teal-500 focus:ring-4 focus:ring-teal-100 outline-none transition placeholder-teal-200 tracking-widest" placeholder="ISTJ" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-2xl shadow-xl hover:shadow-2xl text-lg md:text-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group">
+                        <span>궁합 확인하고 출발!</span> <i class="fas fa-plane-departure group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-page" class="hidden fade-in pb-10">
+            <div class="max-w-4xl mx-auto mb-6 flex items-center justify-between">
+                <button id="back-btn" class="text-slate-400 hover:text-slate-800 font-bold flex items-center gap-2 transition-colors px-3 py-2 rounded-lg hover:bg-white/50 text-sm">
+                    <i class="fas fa-arrow-left"></i> 다시하기
+                </button>
+                <span class="text-xs font-bold text-sky-600 bg-sky-100 px-3 py-1 rounded-full">TRAVEL REPORT</span>
+            </div>
+            <div id="result-content"></div>
+        </div>
+
+    </div>
+
+    <div class="fixed bottom-2 right-2 text-[10px] text-slate-400 opacity-60 font-mono pointer-events-none select-none z-50">
+        Ver 1.6
+    </div>
+
+    <datalist id="mbti-list"></datalist>
+    <link id="dynamic-favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
             const dataList = document.getElementById('mbti-list');
@@ -333,3 +432,5 @@
             }
         }
     </script>
+</body>
+</html>
