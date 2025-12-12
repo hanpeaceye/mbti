@@ -23,12 +23,11 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
-        body { font-family: 'Pretendard', sans-serif; background-color: #f1f5f9; } /* 배경색 살짝 오피스 느낌(블루그레이)으로 변경 */
+        body { font-family: 'Pretendard', sans-serif; background-color: #f1f5f9; } 
         
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 카드 색상: 보라/핑크 -> 네이비/블루 톤으로 변경하여 전문적인 느낌 */
         .magic-card { background: linear-gradient(135deg, #ffffff, #eff6ff); border: 1px solid #dbeafe; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1); }
         .vs-badge { background: linear-gradient(45deg, #3b82f6, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
@@ -97,7 +96,7 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. [상대방(상사) 분석] 상세 데이터 (16개 유형 * 2가지 버전)
+            // 1. [상대방(상사) 분석] 데이터 수정완료 (문법오류 해결)
             const mbtiData = {
                 "ISTJ": [
                     { type: "걸어 다니는 규정집", like: "기한 엄수, 오타 없는 보고서, 표준 양식 준수", dislike: "갑작스러운 일정 변경, 근거 없는 아이디어, 지각", tip: "변명하지 마세요. '죄송합니다. 언제까지 시정하겠습니다'라고 깔끔하게 보고하는 게 살길입니다." },
@@ -140,11 +139,11 @@
                     { type: "핵인싸 리더", like: "주목받는 성과, 화려한 프레젠테이션, 잦은 소통", dislike: "혼자 겉도는 행동, 비관적인 태도, 나를 무시하는 것", tip: "중간 보고를 자주 하세요. 업무적인 것뿐만 아니라 사내 이슈도 공유하면 좋아합니다." }
                 ],
                 "ENFP": [
-                    { type: "열정 만수르", like: "새로운 프로젝트 제안, "할 수 있다"는 긍정 에너지, 브레인스토밍", dislike: "반복적인 단순 업무, 디테일 지적질, 통제와 감시", tip: "상사의 아이디어가 좀 뜬구름 잡는 소리여도 일단 '재밌겠는데요?'라고 맞장구치세요. 실현은 나중에 고민하세요." },
+                    { type: "열정 만수르", like: "새로운 프로젝트 제안, '할 수 있다'는 긍정 에너지, 브레인스토밍", dislike: "반복적인 단순 업무, 디테일 지적질, 통제와 감시", tip: "상사의 아이디어가 좀 뜬구름 잡는 소리여도 일단 '재밌겠는데요?'라고 맞장구치세요. 실현은 나중에 고민하세요." },
                     { type: "인간 댕댕이 상사", like: "친근한 관계 유지, 칭찬과 인정, 자유로운 분위기", dislike: "엄격한 위계질서, 냉소적인 반응, 무관심", tip: "상사가 놓치는 세부 사항(일정, 서류)을 당신이 조용히 챙겨주면 최고의 파트너가 됩니다." }
                 ],
                 "ENTP": [
-                    { type: "혁신적인 발명가", like: "기존 방식을 뒤집는 아이디어, 논리적인 반박과 토론", dislike: "무조건적인 복종, "원래 그랬습니다"라는 답변, 지루함", tip: "상사의 말에 무조건 '네' 하기보다 '이런 관점도 있지 않을까요?'라고 건설적인 의견을 내세요." },
+                    { type: "혁신적인 발명가", like: "기존 방식을 뒤집는 아이디어, 논리적인 반박과 토론", dislike: "무조건적인 복종, '원래 그랬습니다'라는 답변, 지루함", tip: "상사의 말에 무조건 '네' 하기보다 '이런 관점도 있지 않을까요?'라고 건설적인 의견을 내세요." },
                     { type: "유쾌한 논쟁가", like: "스마트한 일 처리, 쿨한 피드백 수용, 도전적인 태도", dislike: "능력 없으면서 정치질하는 것, 꽉 막힌 사고방식", tip: "일이 막히면 솔직하게 말하고 같이 머리를 맞대세요. 문제 해결 과정을 즐기는 사람입니다." }
                 ],
                 "ESTJ": [
@@ -370,7 +369,7 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // 쿠팡 배너 (유지)
+                // 쿠팡 배너
                 setTimeout(() => {
                     const bannerFrame = document.getElementById('coupang-banner-frame');
                     if (bannerFrame) {
@@ -401,7 +400,7 @@
             document.getElementById('back-btn').addEventListener('click', resetPage);
         });
         
-        // 공유하기 기능 (텍스트 수정)
+        // 공유하기 기능
             window.shareLink = function() {
                 const currentUrl = window.location.href;
                 if (navigator.share) {
