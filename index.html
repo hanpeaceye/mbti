@@ -28,28 +28,39 @@
         
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
         .clean-card { background: #ffffff; border: 1px solid #fda4af; border-radius: 24px; box-shadow: 0 4px 20px rgba(225, 29, 72, 0.05); }
         .text-point { color: #e11d48; }
+        .bg-point { background-color: #e11d48; }
         .score-bar { transition: width 1.5s ease-out; }
+        
         .blur-content { filter: blur(10px); user-select: none; pointer-events: none; transition: filter 0.5s; }
         .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(4px); border-radius: 24px; transition: opacity 0.5s; }
+        
+        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(4px); border-radius: 24px; transition: opacity 0.5s; }
         .lock-overlay.hidden { opacity: 0; pointer-events: none; }
+
         .bounce-custom { animation: bounce 2s infinite; }
+        
+        .style-list { list-style: none; padding: 0; margin: 0; text-align: left; }
         .style-list li { position: relative; padding-left: 1rem; margin-bottom: 0.4rem; line-height: 1.5; font-size: 0.925rem; }
         .style-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 4px; height: 4px; border-radius: 50%; background-color: #e11d48; opacity: 0.7; }
+
+        .custom-list li { position: relative; padding-left: 1.2em; margin-bottom: 0.5em; }
+        .custom-list li::before { content: '💊'; position: absolute; left: 0; color: #fb7185; font-size: 0.8em; }
     </style>
 </head>
 <body class="min-h-screen relative pb-10">
 
     <div class="w-full max-w-3xl mx-auto px-4 py-8">
+
         <div id="input-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
             <div class="text-center mb-10">
-                <span class="inline-block bg-white border border-rose-200 text-rose-500 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Couple Clinic</span>
+                <span class="inline-block bg-white border border-rose-200 text-rose-500 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Couple Clinic Center</span>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
                     우리는 도대체,<br>왜 맨날 <span class="text-point">싸울까?</span> 🤬
                 </h1>
-                <p class="text-slate-500 text-sm md:text-base">MBTI로 분석하는 우리 커플 갈등 원인과<br>평화 유지를 위한 맞춤형 처방전</p>
+                <p class="text-slate-500 text-sm md:text-base">MBTI로 분석하는 우리 커플 갈등 원인과<br>오래가는 연애를 위한 맞춤형 처방전</p>
             </div>
 
             <div class="clean-card p-8 md:p-10 shadow-lg bg-white">
@@ -59,12 +70,13 @@
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">나의 MBTI</label>
                             <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
                         </div>
-                        <i class="fas fa-heart-broken text-rose-300 text-xl mt-2 md:mt-0"></i>
+                        <i class="fas fa-heart-broken text-rose-300 text-xl mt-2 md:mt-0 animate-pulse"></i>
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">연인의 MBTI</label>
                             <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
                         </div>
                     </div>
+                    
                     <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
                         <span>갈등 원인 분석하기</span> <i class="fas fa-stethoscope"></i>
                     </button>
@@ -77,20 +89,25 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">COUPLE VER</span>
+                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">VER 3.6 MAIN+</span>
             </div>
+
             <div id="result-content" class="space-y-6"></div>
 
             <div class="mt-12 pt-8 border-t border-rose-200/50">
                 <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 상황별 공략법</h3>
                 <div class="grid grid-cols-2 gap-3">
                     <a href="/some" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-                        <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-2 text-pink-500 group-hover:scale-110 transition-transform"><i class="fas fa-kiss-wink-heart"></i></div>
+                        <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-2 text-pink-500 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-kiss-wink-heart"></i>
+                        </div>
                         <p class="text-sm font-bold text-slate-700">썸남썸녀 공략</p>
                         <p class="text-[10px] text-slate-400">꼬시는 법이 궁금해?</p>
                     </a>
-                    <a href="/travel" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-                        <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-2 text-sky-500 group-hover:scale-110 transition-transform"><i class="fas fa-plane"></i></div>
+                    <a href="/friends-travel" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
+                        <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-2 text-sky-500 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-plane"></i>
+                        </div>
                         <p class="text-sm font-bold text-slate-700">우정 여행 판독기</p>
                         <p class="text-[10px] text-slate-400">여행 가서 안 싸우려면</p>
                     </a>
@@ -106,7 +123,13 @@
             <div class="mt-8 flex justify-center w-full overflow-hidden">
                 <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
             </div>
+
         </div>
+
+    </div>
+
+    <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">
+        Ver 3.6 Main+
     </div>
 
     <datalist id="mbti-list"></datalist>
@@ -117,60 +140,139 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. 연인(Maintenance) 데이터: "왜 싸울까?" & "어떻게 풀어줄까?" 위주
+            // 1. [데이터] 연인 싸움 분석 (구체적 상황 묘사 강화)
             const mbtiData = {
-                "ISTJ": { type: "책임감 강한 원칙주의자", fight: "당신의 잦은 지각, 계획 변경, 약속 불이행이 쌓이고 쌓여 폭발함. 감정 호소는 안 통함.", solution: "변명하지 말고 깔끔하게 사과하세요. 그리고 앞으로의 구체적인 개선 계획을 말해주면 풀립니다." },
-                "ISFJ": { type: "참고 참다 터지는 배려왕", fight: "서운한 게 있어도 말 안 하고 꾹 참다가, 당신의 무심한 한마디에 흑화함.", solution: "'요즘 서운한 거 없었어?'라고 먼저 물어봐 주고, 그동안의 헌신과 배려를 인정하고 고마워해주세요." },
-                "INFJ": { type: "속을 알 수 없는 철학자", fight: "당신의 비도덕적인 행동이나 가벼운 언행에 실망해서 마음의 문을 닫아버림 (손절 단계).", solution: "진지하게 대화를 요청하세요. 가벼운 사과 말고, 당신의 가치관과 반성을 진정성 있게 보여줘야 합니다." },
-                "INTJ": { type: "논리적인 팩트 폭격기", fight: "감정적으로 징징거리거나 비효율적인 고집을 부릴 때, 대화가 안 통한다고 느껴서 입을 닫음.", solution: "감정 빼고 논리적으로 접근하세요. '내가 잘못한 건 A고, 그래서 B가 화난 것 같아'라고 분석적으로 말하세요." },
-                "ISTP": { type: "귀찮은 건 딱 질색인 고양이", fight: "당신의 과도한 집착, 통제, 감정적인 드라마 찍기에 질려서 동굴로 들어감.", solution: "혼자만의 시간을 주세요. 연락하지 말고 놔두면 알아서 기어 나옵니다. 쿨하게 대처하는 게 답입니다." },
-                "ISFP": { type: "유리멘탈 평화주의자", fight: "당신의 강압적인 태도나 날카로운 말투에 상처받아 회피형으로 변함.", solution: "목소리 톤을 낮추고 부드럽게 다가가세요. 맛있는 거 먹으러 가자고 하거나 소소한 선물로 기분을 풀어주세요." },
-                "INFP": { type: "상처받은 어린양", fight: "당신의 무심한 팩트 폭격이나 공감 없는 태도에 마음이 산산조각 남.", solution: "무조건적인 공감이 필요합니다. '네 마음 몰라줘서 미안해, 많이 속상했지?'라고 안아주세요." },
-                "INTP": { type: "답답하면 화나는 분석가", fight: "논리적이지 않은 억지 주장을 하거나, 뻔한 잔소리를 반복할 때 질려버림.", solution: "감정에 호소하지 마세요. 잘못한 인과관계를 명확히 인정하고 쿨하게 넘어가야 합니다." },
-                "ESTP": { type: "돌직구 승부사", fight: "답답하게 꽁해 있거나 빙빙 돌려 말하는 태도 때문에 답답해서 화냄.", solution: "직설적으로 말하세요. '나 이것 때문에 화났어'라고 딱 말하고, 풀리면 뒤끝 없이 화해의 술 한잔하세요." },
-                "ESFP": { type: "관심이 고픈 연예인", fight: "자신을 소홀히 대하거나, 지루하고 우울한 이야기를 계속해서 텐션 떨어질 때.", solution: "서프라이즈 이벤트나 칭찬 폭격이 답입니다. 기분을 띄워주면 금방 잊고 웃습니다." },
-                "ENFP": { type: "삐지면 오래가는 댕댕이", fight: "나에게 무관심하거나, 사소한 걸로 통제하고 가르치려 들 때 시무룩해짐.", solution: "우쭈쭈 해주세요. 애정 표현을 퍼붓고, 함께 새로운 데이트를 하러 나가면 금세 꼬리를 흔듭니다." },
-                "ENTP": { type: "논쟁을 즐기는 파이터", fight: "무조건적으로 져주거나, 꽉 막힌 꼰대 마인드로 나올 때 흥미를 잃음.", solution: "싸움을 피하지 마세요. 논리적으로 티키타카 하다가 '그래 네 말이 일리 있네'라고 인정해주면 좋아합니다." },
-                "ESTJ": { type: "엄격한 관리자", fight: "약속을 어기거나, 게으르고 무능력한 모습을 보일 때 한심하게 쳐다봄.", solution: "감성팔이 금지. '앞으로 이렇게 고치겠다'는 확실한 행동 변화를 보여줘야 신뢰를 회복합니다." },
-                "ESFJ": { type: "서운함이 많은 헌신가", fight: "자신이 베푼 만큼 돌아오지 않거나, 고마움을 모를 때 섭섭함이 폭발함.", solution: "'너 없으면 안 돼', '네 덕분이야'라며 그 사람의 존재 가치를 마구마구 칭찬하고 인정해주세요." },
-                "ENFJ": { type: "정의로운 리더", fight: "이기적인 행동을 하거나, 비관적이고 부정적인 태도로 일관할 때 실망함.", solution: "당신이 더 나은 사람이 되고 싶다는 의지를 보여주세요. '너 덕분에 내가 배운다'는 말이 최고입니다." },
-                "ENTJ": { type: "냉철한 지배자", fight: "감정적으로 의존하려 하거나, 발전 없이 제자리에 머물러 있을 때 답답해함.", solution: "주눅 들지 말고 당당하게 대화하세요. 자신의 잘못을 쿨하게 인정하고 성숙한 모습을 보여주세요." }
+                "ISTJ": { 
+                    type: "약속은 법이다! 원칙주의자", 
+                    fight: "당신의 잦은 지각, 데이트 당일 계획 변경, 약속해놓고 까먹는 행동이 누적되어 폭발함. 감정에 호소해도 '그래서 왜 늦었는데?'라고 팩트로 팸.", 
+                    solution: "변명이나 감성팔이는 역효과입니다. '미안해. 늦은 이유는 A고, 다음부턴 10분 일찍 나올게'라고 구체적인 개선안을 제시해야 풀립니다.",
+                    tip: "기념일이나 약속을 캘린더에 박제하고 절대 잊지 마세요. 신뢰가 곧 사랑입니다."
+                },
+                "ISFJ": { 
+                    type: "참고 참다가 흑화하는 배려왕", 
+                    fight: "서운한 게 있어도 '괜찮아' 하고 꾹 참다가, 당신의 무심한 한마디('아 왜 또 그래?')에 과거 일까지 다 꺼내며 흑화함.", 
+                    solution: "'요즘 내가 소홀했지? 서운한 거 없었어?'라고 먼저 물어봐 주고, 그동안의 헌신과 배려를 구체적으로 언급하며 고마워해주세요.",
+                    tip: "평소에 '고마워', '사랑해' 표현을 아끼지 마세요. 그 말 한마디로 버티는 사람입니다."
+                },
+                "INFJ": { 
+                    type: "손절각 재는 도덕적 철학자", 
+                    fight: "당신의 비도덕적인 행동(거짓말, 무례함)이나 가벼운 언행에 깊이 실망하여, 싸우기보다 조용히 마음의 문을 닫고 이별을 준비함.", 
+                    solution: "가벼운 사과로는 안 됩니다. 진지하게 대화를 요청하고, 당신의 가치관과 반성을 진정성 있게(눈물 약간 섞어서) 보여줘야 합니다.",
+                    tip: "거짓말은 절대 금물입니다. 차라리 솔직하게 말하고 용서를 구하는 게 낫습니다."
+                },
+                "INTJ": { 
+                    type: "비효율을 못 참는 팩트 폭격기", 
+                    fight: "해결책 없이 감정적으로 징징거리거나, 비효율적인 고집을 부릴 때 '대화가 안 통한다'고 느껴서 입을 닫아버림.", 
+                    solution: "감정을 쏙 빼고 논리적으로 접근하세요. '내가 화난 포인트는 A고, 내가 원하는 건 B야'라고 육하원칙에 맞춰 말하면 바로 납득합니다.",
+                    tip: "징징거리지 말고 대안을 제시하세요. 뇌가 섹시한 연인을 가장 좋아합니다."
+                },
+                "ISTP": { 
+                    type: "귀찮은 건 딱 질색인 고양이", 
+                    fight: "당신의 과도한 집착('누구랑 있어?'), 통제, 감정적인 드라마 찍기('나 사랑해?')에 질려서 동굴로 들어가 버림.", 
+                    solution: "제발 연락하지 말고 혼자만의 시간을 주세요. 놔두면 알아서 기어 나옵니다. 그때 맛있는 거 먹자고 쿨하게 대처하세요.",
+                    tip: "그의 사생활을 존중해주세요. 방목형 연애가 가장 오래갑니다."
+                },
+                "ISFP": { 
+                    type: "상처받기 쉬운 유리멘탈", 
+                    fight: "당신의 강압적인 태도, 큰 목소리, 날카로운 비판에 마상(마음의 상처) 입고 입 꾹 닫고 회피형으로 변함.", 
+                    solution: "목소리 톤을 낮추고 부드럽게 다가가세요. '맛있는 거 먹으러 갈까?'라며 기분 전환을 시도하거나 소소한 선물로 풀어주세요.",
+                    tip: "갈등 상황 자체를 힘들어합니다. 싸우더라도 부드럽게 말해주세요."
+                },
+                "INFP": { 
+                    type: "쿠크다스 멘탈의 어린양", 
+                    fight: "당신의 무심한 팩트 폭격('그게 돈이 되냐?')이나 내 감정을 무시하는 태도에 마음이 산산조각 나고 혼자 울고 있음.", 
+                    solution: "논리는 필요 없습니다. 무조건적인 공감이 답입니다. '네 마음 몰라줘서 미안해, 많이 속상했지?'라고 안아주세요.",
+                    tip: "그의 편이 되어주세요. 세상이 다 등을 돌려도 당신만은 믿어줘야 합니다."
+                },
+                "INTP": { 
+                    type: "멍청한 건 못 참는 분석가", 
+                    fight: "논리적이지 않은 억지 주장을 하거나, 감정에 호소하며 했던 말을 또 하고 또 할 때 질려서 표정이 굳어짐.", 
+                    solution: "감정 호소 금지. 잘못한 인과관계를 명확히 인정하고('내가 A해서 미안'), 쿨하게 넘어가야 합니다. 뒤끝은 없습니다.",
+                    tip: "토론하려 들지 말고 그냥 '네 말이 맞다'고 해주세요. 그게 평화의 지름길입니다."
+                },
+                "ESTP": { 
+                    type: "답답한 건 못 참는 돌직구", 
+                    fight: "화났는데 말 안 하고 꽁해 있거나, 빙빙 돌려 말하는 수동공격적인 태도를 보이면 답답해서 화를 냄.", 
+                    solution: "직설적으로 말하세요. '나 이것 때문에 빡쳤어'라고 딱 말하고, 풀리면 뒤끝 없이 화해의 술 한잔하러 가세요.",
+                    tip: "함께 액티비티나 맛집 탐방을 하며 스트레스를 푸세요. 즐거우면 장땡입니다."
+                },
+                "ESFP": { 
+                    type: "관심이 생명수인 연예인", 
+                    fight: "자신을 소홀히 대하거나(연락 텀 길어짐), 만나서 지루하고 우울한 이야기만 계속해서 텐션 떨어질 때.", 
+                    solution: "서프라이즈 이벤트나 꽃다발이 직빵입니다. '오늘 너무 예쁘다'는 칭찬 폭격으로 기분을 띄워주면 금방 풀립니다.",
+                    tip: "함께 있을 때 핸드폰 보지 마세요. 오직 그 사람에게만 집중해주세요."
+                },
+                "ENFP": { 
+                    type: "삐지면 세상 무너지는 댕댕이", 
+                    fight: "나에게 무관심하거나, 사소한 걸로 통제하고 가르치려 들 때('그거 하지 마') 시무룩해지다가 욱함.", 
+                    solution: "우쭈쭈가 필요합니다. 애정 표현을 퍼붓고, 함께 맛있는 걸 먹으러 가거나 새로운 데이트를 하면 금세 꼬리를 흔듭니다.",
+                    tip: "리액션이 중요합니다. 그의 말에 귀 기울여주고 맞장구쳐주세요."
+                },
+                "ENTP": { 
+                    type: "논쟁을 즐기는 장난꾸러기", 
+                    fight: "무조건적으로 져주거나('알았어 내가 미안'), 꽉 막힌 꼰대 마인드('원래 그런 거야')로 나올 때 흥미를 잃음.", 
+                    solution: "싸움을 피하지 마세요. 논리적으로 티키타카 하다가 '그래 네 말이 일리 있네'라고 쿨하게 인정해주면 좋아합니다.",
+                    tip: "지루할 틈을 주지 마세요. 항상 새로운 주제로 대화하세요."
+                },
+                "ESTJ": { 
+                    type: "게으른 꼴 못 보는 관리자", 
+                    fight: "약속을 밥 먹듯이 어기거나, 자기계발 없이 게으르고 무능력한 모습을 보일 때 한심하게 쳐다봄.", 
+                    solution: "감성팔이 절대 금지. '앞으로 이렇게 고치겠다'는 확실한 행동 변화와 성과를 보여줘야 신뢰를 회복합니다.",
+                    tip: "데이트도 계획적으로 하세요. 시간을 효율적으로 쓰는 모습을 보여주세요."
+                },
+                "ESFJ": { 
+                    type: "준 만큼 받아야 하는 헌신가", 
+                    fight: "자신이 100을 줬는데 10밖에 안 돌아오거나, 고마움을 모르고 당연하게 여길 때 섭섭함이 폭발함.", 
+                    solution: "'너 없으면 난 아무것도 못 해', '네 덕분이야'라며 그 사람의 존재 가치를 마구마구 칭찬하고 인정해주세요.",
+                    tip: "그의 가족이나 친구까지 챙겨주세요. 당신을 평생의 반려자로 생각할 겁니다."
+                },
+                "ENFJ": { 
+                    type: "지구 평화 지킴이 리더", 
+                    fight: "이기적인 행동을 하거나, 매사에 비관적이고 부정적인 태도로 일관하여 김 빠지게 할 때 실망함.", 
+                    solution: "당신이 더 나은 사람이 되고 싶다는 의지를 보여주세요. '너 덕분에 내가 배운다'는 말에 마음이 녹아내립니다.",
+                    tip: "그의 꿈을 응원해주세요. 최고의 치어리더가 되어주세요."
+                },
+                "ENTJ": { 
+                    type: "성장 없인 못 사는 지배자", 
+                    fight: "감정적으로 의존하려 하거나, 발전 없이 제자리에 머물러 징징거릴 때 가차 없이 팩폭을 날림.", 
+                    solution: "주눅 들지 말고 당당하게 대화하세요. 자신의 잘못을 쿨하게 인정하고, 성숙하고 발전된 모습을 보여주세요.",
+                    tip: "자기 일에 열정적인 모습을 보여주세요. 능력 있는 파트너를 원합니다."
+                }
             };
 
-            // 2. 궁합 점수 및 갈등 분석 (J/P, T/F)
+            // 2. 궁합 점수 및 갈등 분석
             function getCoupleHarmony(me, you) {
-                let score = 60; // 연인용 기본 점수 높게 시작
+                let score = 60; // 연인용 기본 점수
                 let title = "", desc = "", conflict = "";
                 
                 const sameJP = (me.includes('J') === you.includes('J'));
                 const sameTF = (me.includes('T') === you.includes('T'));
 
-                // T vs F (싸움의 주원인: 공감 vs 해결)
+                // T vs F (싸움의 주원인)
                 if (!sameTF) {
                     score -= 20;
                     if (me.includes('T')) {
-                        conflict = "⚠️ <b>[갈등 1순위] 공감 vs 해결책</b><br>당신은 해결책을 주려 하지만, 연인(F)은 '내 편'을 원합니다. 맞는 말이라도 <b>'아프겠다, 속상했겠다'</b> 먼저 해주세요. 그게 해답입니다.";
+                        conflict = "⚠️ <b>[최대 위기] 공감 불능 vs 감정 과잉</b><br>당신은 해결책을 주려 하지만, 연인(F)은 '내 편'을 원합니다. 맞는 말이라도 <b>'아프겠다, 속상했겠다'</b> 먼저 해주세요. 입에 발린 말이라도 해야 평화가 옵니다.";
                     } else {
-                        conflict = "⚠️ <b>[갈등 1순위] 징징 vs 냉정</b><br>당신은 위로를 원하지만, 연인(T)은 자꾸 분석하려 듭니다. 그건 싸우자는 게 아니라 <b>가장 효율적으로 당신을 돕고 싶은 마음</b>입니다.";
+                        conflict = "⚠️ <b>[최대 위기] 징징이 vs 로봇</b><br>당신은 위로를 원하지만, 연인(T)은 자꾸 분석하려 듭니다. 그건 싸우자는 게 아니라 <b>가장 효율적으로 당신을 돕고 싶은 마음</b>이니, 해결책을 고맙게 받으세요.";
                     }
                 } else if (me.includes('T')) { // T+T
                     conflict = "🤖 <b>[평화] 쿨내 진동 커플</b><br>감정 소모 없이 팩트로 대화해서 편하네요. 하지만 서로에게 상처 주는 말을 아무렇지 않게 던질 수 있으니 <b>말 예쁘게 하기</b> 연습이 필요합니다.";
                     score += 10;
                 } else { // F+F
-                    conflict = "💖 <b>[평화] 감성 과다 커플</b><br>서로 공감해주느라 시간 가는 줄 모릅니다. 하지만 둘 다 감정이 격해지면 <b>이성적인 판단을 못 해서</b> 일이 커질 수 있습니다.";
+                    conflict = "💖 <b>[평화] 감성 과다 커플</b><br>서로 공감해주느라 시간 가는 줄 모릅니다. 하지만 둘 다 감정이 격해지면 <b>이성적인 판단을 못 해서</b> 사소한 일이 눈덩이처럼 커질 수 있습니다.";
                     score += 10;
                 }
 
                 // J vs P (생활 패턴 갈등)
                 if (!sameJP) {
                     if (me.includes('J')) {
-                        conflict += "<br><br>⚠️ <b>[갈등 2순위] 계획 vs 융통성</b><br>당신의 완벽한 계획을 연인(P)이 늦장 부리며 망칠 수 있습니다. <b>상대를 통제하려 들지 말고</b> 30분의 여유를 두세요.";
+                        conflict += "<br><br>⚠️ <b>[생활 갈등] 계획 vs 융통성</b><br>당신의 완벽한 계획을 연인(P)이 늦장 부리며 망칠 수 있습니다. <b>상대를 통제하려 들지 말고</b> 30분의 여유를 두세요. 포기하면 편합니다.";
                     } else {
-                        conflict += "<br><br>⚠️ <b>[갈등 2순위] 잔소리 vs 자유</b><br>연인(J)의 잔소리가 숨 막히죠? 하지만 그 덕분에 데이트가 굴러갑니다. <b>약속 시간만이라도</b> 칼같이 지켜주세요.";
+                        conflict += "<br><br>⚠️ <b>[생활 갈등] 잔소리 vs 자유</b><br>연인(J)의 잔소리가 숨 막히죠? 하지만 그 덕분에 데이트가 굴러갑니다. <b>약속 시간만이라도</b> 칼같이 지켜주세요. 그것만 해도 칭찬받습니다.";
                     }
                 }
 
-                // 점수 보정 및 텍스트
                 score = Math.min(100, Math.max(10, score));
                 if (score >= 80) { title = "🔥 우린 천생연분!"; desc = "싸워도 금방 화해하는 환상의 짝꿍입니다."; }
                 else if (score >= 60) { title = "💑 노력형 잉꼬 커플"; desc = "서로 다름을 인정하면 더 깊어질 수 있어요."; }
@@ -179,22 +281,29 @@
                 return { score, title, desc, conflict };
             }
 
-            // 3. 시크릿 가이드 (연인 유지/보수용)
+            // 3. [PREMIUM] 관계 유지 매뉴얼 (내용 3배 증량)
             const secretData = {
-                // T/F에 따른 대화법
-                "T": { appeal: "🧠 <b>결론부터 말하기:</b> 서론이 길면 지루해합니다. 원하는 걸 명확히 말하세요.", beware: "😭 <b>이유 없는 징징거림:</b> 해결책 없는 감정 쓰레기통 취급은 절대 금물." },
-                "F": { appeal: "🥰 <b>비언어적 표현:</b> 눈 맞춤, 스킨십, 고개 끄덕임이 백 마디 말보다 강합니다.", beware: "❄️ <b>차가운 비판:</b> '너 생각해서 하는 말인데'라며 상처 주지 마세요." },
-                // J/P에 따른 행동법
-                "J": { role: "📅 신뢰 지키기", good: "약속 시간 엄수 & 일정 공유", bad: "당일 취소 & 무계획적인 태도" },
-                "P": { role: "🎉 구속하지 않기", good: "돌발 상황 즐겨주기", bad: "하나부터 열까지 통제하려 들기" }
+                "T": { 
+                    talk: "<li><b>두괄식 대화:</b> '나 오늘 힘들었어'라고 서론부터 말하지 말고, 'A 때문에 짜증 나. 위로해줘'라고 원하는 걸 명확히 말하세요.</li><li><b>논리적 설득:</b> 감정에 호소하기보다 '이걸 하면 우리 관계에 이런 이득이 있어'라고 이익을 제시하세요.</li>",
+                    crisis: "<li><b>시간 갖기:</b> 화가 났을 때 바로 풀려고 하지 마세요. T는 감정을 정리할 시간이 필요합니다. '생각 정리되면 연락해'라고 쿨하게 두세요.</li><li><b>잘못 인정:</b> 변명하지 말고 인과관계에 맞춰 깔끔하게 사과하세요.</li>" 
+                },
+                "F": { 
+                    talk: "<li><b>리액션 필수:</b> 영혼 없어도 좋습니다. 눈을 맞추고 고개를 끄덕이며 '진짜? 대박' 추임새를 넣으세요.</li><li><b>비언어적 표현:</b> 백 마디 말보다 한 번의 포옹이나 머리 쓰다듬기가 효과적입니다.</li>",
+                    crisis: "<li><b>무조건 사과:</b> 잘잘못을 따지기 전에 '속상하게 해서 미안해'라고 감정을 어루만져 주세요. 논리는 나중 문제입니다.</li><li><b>진심 담기:</b> 편지나 장문의 카톡으로 진심을 전하세요.</li>" 
+                },
+                "J": { 
+                    role: "📅 신뢰의 수호자", 
+                    rule: "1. 약속 시간 5분 전 도착 (신뢰)<br>2. 일정 변경 시 미리 공유<br>3. '뭐 하지?' 금지 (대안 가져오기)" 
+                },
+                "P": { 
+                    role: "🎉 유연함의 미학", 
+                    rule: "1. 돌발 상황 즐기기 (화내지 말기)<br>2. 상대를 통제하려 들지 않기<br>3. 가끔은 계획 없이 떠나보기" 
+                }
             };
 
-            // 리스트 변환기
             const formatList = (str) => {
                 if (!str) return "";
-                return `<ul class="style-list space-y-2">` +
-                    str.split(',').map(item => `<li>${item.trim()}</li>`).join('') +
-                    `</ul>`;
+                return `<ul class="style-list space-y-2">` + str.split(',').map(item => `<li>${item.trim()}</li>`).join('') + `</ul>`;
             };
 
             function validateAndAnalyze() {
@@ -222,9 +331,9 @@
                 const tfKey = you.includes('T') ? 'T' : 'F';
                 const jpKey = you.includes('J') ? 'J' : 'P';
                 
-                const secretAppeal = secretData[tfKey].appeal;
-                const secretBeware = secretData[tfKey].beware;
-                const secretRole = secretData[jpKey];
+                const secretTalk = secretData[tfKey].talk;
+                const secretCrisis = secretData[tfKey].crisis;
+                const secretRule = secretData[jpKey];
 
                 const isUnlocked = localStorage.getItem('couple_secret_unlocked') === 'true';
                 const overlayClass = isUnlocked ? 'hidden' : '';
@@ -245,6 +354,9 @@
                                 <p class="text-slate-600 text-sm leading-relaxed word-keep break-keep">${tData.solution}</p>
                             </div>
                         </div>
+                        <div class="mt-5 text-xs text-slate-400 word-keep break-keep leading-relaxed bg-white border border-slate-100 p-3 rounded-lg">
+                            <span class="font-bold">💡 평화 Tip:</span> ${tData.tip}
+                        </div>
                     </div>
 
                     <div class="clean-card p-6 md:p-8 text-center bg-white">
@@ -260,11 +372,15 @@
                         </div>
                     </div>
 
-                    <div class="clean-card relative overflow-hidden bg-white" style="min-height: 350px;">
+                    <div class="clean-card relative overflow-hidden bg-white" style="min-height: 450px;">
                         <div class="lock-overlay p-6 text-center ${overlayClass}">
                             <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-white text-3xl mb-4 shadow-xl"><i class="fas fa-lock"></i></div>
                             <h3 class="font-bold text-slate-800 text-xl mb-2">🔒 시크릿 처방전 잠금</h3>
-                            <p class="text-slate-500 text-sm mb-8">오래가는 커플이 되기 위한<br><span class="font-bold text-rose-500">대화법과 행동 수칙</span>을 확인하세요!</p>
+                            <p class="text-slate-500 text-sm mb-8 leading-relaxed">
+                                오래가는 커플이 되기 위한<br>
+                                <span class="font-bold text-rose-500">대화법</span>과 <span class="font-bold text-rose-500">위기 탈출 비법</span>을<br>
+                                지금 바로 확인하세요!
+                            </p>
                             <button onclick="unlockSecret()" class="w-full max-w-sm bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bounce-custom text-lg">🚀 쿠팡 보고 무료 잠금해제</button>
                         </div>
                         <div class="blur-content p-6 md:p-8 h-full bg-white ${blurClass}">
@@ -274,16 +390,22 @@
                             </div>
                             <div class="space-y-6">
                                 <div class="bg-rose-50 p-5 rounded-2xl border border-rose-100 shadow-sm">
-                                    <h5 class="font-bold text-rose-600 text-sm mb-3 flex items-center"><i class="fas fa-comment-dots mr-2"></i>맞춤 대화법</h5>
-                                    <ul class="custom-list text-slate-700 text-sm leading-relaxed space-y-2">
-                                        <li>${secretAppeal}</li>
-                                        <li>${secretBeware}</li>
-                                    </ul>
+                                    <h5 class="font-bold text-rose-600 text-sm mb-3 flex items-center"><i class="fas fa-comment-dots mr-2"></i>그 사람에게 통하는 대화법</h5>
+                                    <ul class="custom-list text-slate-700 text-sm leading-relaxed space-y-2">${secretTalk}</ul>
                                 </div>
-                                <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center">
-                                    <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Action Plan</p>
-                                    <div class="text-sm text-slate-600 font-bold mb-2">🙆‍♂️ ${secretRole.good}</div>
-                                    <div class="text-sm text-rose-500 font-bold">🙅‍♀️ ${secretRole.bad}</div>
+                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
+                                    <h5 class="font-bold text-slate-600 text-sm mb-3 flex items-center"><i class="fas fa-exclamation-circle mr-2"></i>싸웠을 때 위기 탈출법</h5>
+                                    <ul class="custom-list text-slate-700 text-sm leading-relaxed space-y-2">${secretCrisis}</ul>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 text-center flex flex-col justify-center">
+                                        <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Best Role</p>
+                                        <p class="text-lg font-black text-indigo-600 break-keep">${secretRule.role}</p>
+                                    </div>
+                                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-center">
+                                        <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">평화 유지 3계명</p>
+                                        <div class="text-sm font-bold text-slate-700 leading-loose">${secretRule.rule}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
