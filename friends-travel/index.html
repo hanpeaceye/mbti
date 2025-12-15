@@ -42,12 +42,17 @@
         .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
         
         /* 잠금 오버레이 */
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(3px); border-radius: 24px; transition: opacity 0.5s; }
+        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(4px); border-radius: 24px; transition: opacity 0.5s; }
         .lock-overlay.hidden { opacity: 0; pointer-events: none; }
 
         .bounce-custom { animation: bounce 2s infinite; }
         
-        /* 리스트 스타일 */
+        /* 스타일 분석 리스트 스타일 */
+        .style-list { list-style: none; padding: 0; margin: 0; text-align: left; }
+        .style-list li { position: relative; padding-left: 1rem; margin-bottom: 0.4rem; line-height: 1.5; font-size: 0.925rem; }
+        .style-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 4px; height: 4px; border-radius: 50%; background-color: currentColor; opacity: 0.7; }
+
+        /* 시크릿 가이드 리스트 스타일 */
         .custom-list li { position: relative; padding-left: 1.2em; margin-bottom: 0.5em; }
         .custom-list li::before { content: '•'; position: absolute; left: 0; color: #cbd5e1; font-weight: bold; }
     </style>
@@ -91,12 +96,12 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-sky-500 bg-sky-50 px-2 py-1 rounded">VER 2.3</span>
+                <span class="text-[10px] font-bold text-sky-500 bg-sky-50 px-2 py-1 rounded">VER 2.6</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
 
-            <div class="mt-16 pt-10 border-t border-slate-200">
+            <div class="mt-12 pt-8 border-t border-slate-200">
                 <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
                 <div class="grid grid-cols-2 gap-3">
                     <a href="https://aimbti.xyz/some" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
@@ -106,7 +111,7 @@
                         <p class="text-sm font-bold text-slate-700">썸남썸녀 공략</p>
                         <p class="text-[10px] text-slate-400">플러팅 필승법</p>
                     </a>
-                    <a href="https://aimbti.xyz/work" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
+                    <a href="https://aimbti.xyz/biz" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
                         <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition-transform">
                             <i class="fas fa-briefcase"></i>
                         </div>
@@ -114,6 +119,12 @@
                         <p class="text-[10px] text-slate-400">사회생활 치트키</p>
                     </a>
                 </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button onclick="shareLink()" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-slate-50 transition-all text-sm group">
+                    <i class="fas fa-share-alt group-hover:text-sky-500 transition-colors"></i> 친구에게 결과 공유하기
+                </button>
             </div>
             
             <div class="mt-8 flex justify-center w-full overflow-hidden">
@@ -125,7 +136,7 @@
     </div>
 
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">
-        Ver 2.3 Style+
+        Ver 2.6
     </div>
 
     <datalist id="mbti-list"></datalist>
@@ -136,7 +147,7 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. 여행 스타일 데이터 (분량 2배 증량 & 디테일 강화)
+            // 1. 여행 스타일 데이터 (Ver 2.3 내용 유지)
             const mbtiData = {
                 "ISTJ": [{ 
                     type: "분 단위 계획표를 숭배하는 인간 엑셀", 
@@ -378,16 +389,30 @@
 
             window.unlockSecret = function() {
                 window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                localStorage.setItem('travel_secret_unlocked', 'true');
+                
                 const overlay = document.querySelector('.lock-overlay');
                 const content = document.querySelector('.blur-content');
-                overlay.classList.add('hidden');
-                content.classList.add('unlocked');
+                if(overlay) overlay.classList.add('hidden');
+                if(content) content.classList.add('unlocked');
             }
+
+            // 문자열을 리스트로 변환
+            const formatList = (str) => {
+                if (!str) return "";
+                return `<ul class="style-list space-y-2">` +
+                    str.split(',').map(item => `<li>${item.trim()}</li>`).join('') +
+                    `</ul>`;
+            };
 
             function showResult(me, you) {
                 const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];
                 const harmony = getTravelHarmony(me, you);
                 const secret = getSecretContent(you);
+
+                const isUnlocked = localStorage.getItem('travel_secret_unlocked') === 'true';
+                const overlayClass = isUnlocked ? 'hidden' : '';
+                const blurClass = isUnlocked ? 'unlocked' : '';
 
                 const resultHTML = `
                     <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden">
@@ -396,18 +421,18 @@
                         </h2>
                         <p class="text-sm text-slate-500 mb-6 font-medium">여행 스타일 분석</p>
                         
-                        <div class="space-y-3 text-left">
-                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-sky-500">
-                                <p class="font-bold text-sky-600 text-sm mb-1">👍 극호 (Like)</p>
-                                <p class="text-slate-600 text-sm leading-relaxed word-keep break-keep">${tData.like}</p>
+                        <div class="space-y-4 text-left">
+                            <div class="bg-slate-50 p-5 rounded-xl border-l-4 border-sky-500">
+                                <p class="font-bold text-sky-600 text-sm mb-3">👍 극호 (Like)</p>
+                                <div class="text-slate-600 text-sm">${formatList(tData.like)}</div>
                             </div>
-                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-500">
-                                <p class="font-bold text-rose-500 text-sm mb-1">👎 극불호 (Dislike)</p>
-                                <p class="text-slate-600 text-sm leading-relaxed word-keep break-keep">${tData.dislike}</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border-l-4 border-rose-500">
+                                <p class="font-bold text-rose-500 text-sm mb-3">👎 극불호 (Dislike)</p>
+                                <div class="text-slate-600 text-sm">${formatList(tData.dislike)}</div>
                             </div>
                         </div>
-                        <div class="mt-4 text-xs text-slate-400 word-keep break-keep leading-relaxed">
-                            💡 Tip: ${tData.tip}
+                        <div class="mt-5 text-xs text-slate-400 word-keep break-keep leading-relaxed bg-white border border-slate-100 p-3 rounded-lg">
+                            <span class="font-bold">💡 Tip:</span> ${tData.tip}
                         </div>
                     </div>
 
@@ -429,7 +454,7 @@
 
                     <div class="clean-card relative overflow-hidden" style="min-height: 450px;">
                         
-                        <div class="lock-overlay p-6 text-center">
+                        <div class="lock-overlay p-6 text-center ${overlayClass}">
                             <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-white text-3xl mb-4 shadow-xl">
                                 <i class="fas fa-lock"></i>
                             </div>
@@ -445,7 +470,7 @@
                             </button>
                         </div>
 
-                        <div class="blur-content p-6 md:p-8 h-full bg-white">
+                        <div class="blur-content p-6 md:p-8 h-full bg-white ${blurClass}">
                             <div class="flex items-center justify-center gap-2 mb-8">
                                 <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">PREMIUM</span>
                                 <h4 class="font-bold text-slate-800 text-lg">절교 방지 상세 매뉴얼</h4>
@@ -506,6 +531,25 @@
                 document.getElementById('mbti-b').value = '';
             });
         });
+        
+        window.shareLink = function() {
+            const currentUrl = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: '우정 여행 판독기',
+                    text: '우리 여행 가서 안 싸울 수 있을까? 여행 점수 확인해보기 ✈️',
+                    url: currentUrl,
+                });
+            } else {
+                const t = document.createElement("textarea");
+                document.body.appendChild(t);
+                t.value = currentUrl;
+                t.select();
+                document.execCommand('copy');
+                document.body.removeChild(t);
+                alert('링크가 복사되었습니다! 친구에게 공유하세요.');
+            }
+        }
     </script>
 </body>
 </html>
