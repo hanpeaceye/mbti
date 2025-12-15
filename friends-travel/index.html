@@ -18,84 +18,113 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimbti.xyz/travel">
     <meta property="og:title" content="✈️ 우정 여행 판독기 | MBTI 여행 스타일 궁합">
-    <meta property="og:description" content="우리 여행 가서 안 싸울 수 있을까? 여행 점수와 주의할 점 미리 확인하고 절교 방지하자 🏖️">
+    <meta property="og:description" content="우리 여행 가서 안 싸울 수 있을까? 여행 점수 확인하고 시크릿 공략법 잠금해제 하세요! 🏖️">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2060/2060284.png">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
-        body { font-family: 'Pretendard', sans-serif; background-color: #e0f2fe; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #334155; }
         
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .magic-card { background: linear-gradient(135deg, #ffffff, #f0f9ff); border: 1px solid #bae6fd; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15); }
-        .vs-badge { background: linear-gradient(45deg, #0ea5e9, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* 깔끔한 화이트톤 카드 디자인 */
+        .clean-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
         
-        .strategy-box { border-left-width: 4px; transition: transform 0.2s; }
-        .strategy-box:hover { transform: translateY(-2px); }
+        /* 포인트 컬러 (스카이블루) */
+        .text-point { color: #0ea5e9; }
+        .bg-point { background-color: #0ea5e9; }
         
-        .bounce-custom { animation: bounce 2s infinite; }
-        
-        /* 점수 게이지 애니메이션 */
         .score-bar { transition: width 1.5s ease-out; }
+        
+        /* 시크릿 가이드 블러 효과 */
+        .blur-content { filter: blur(8px); user-select: none; pointer-events: none; transition: filter 0.5s; }
+        .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
+        
+        /* 잠금 오버레이 */
+        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(2px); border-radius: 24px; transition: opacity 0.5s; }
+        .lock-overlay.hidden { opacity: 0; pointer-events: none; }
+
+        .bounce-custom { animation: bounce 2s infinite; }
     </style>
 </head>
-<body class="text-slate-800 min-h-screen relative">
+<body class="min-h-screen relative pb-10">
 
-    <div class="w-full max-w-5xl mx-auto px-4 py-8">
+    <div class="w-full max-w-3xl mx-auto px-4 py-8">
 
-        <div id="input-page" class="flex flex-col justify-center min-h-[85vh] fade-in">
+        <div id="input-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
             <div class="text-center mb-10">
-                <span class="inline-block bg-white border border-sky-200 text-sky-600 text-xs font-bold px-4 py-1.5 rounded-full mb-4 shadow-sm tracking-wide">Travel Mate Compatibility</span>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
-                    우리 여행 가면,<br class="md:hidden">과연 <span class="text-sky-500">안 싸울까?</span> ✈️
+                <span class="inline-block bg-sky-50 text-sky-600 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Travel Mate Test</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
+                    우리는 <span class="text-point">환상의 짝꿍</span>일까?<br>아니면 <span class="text-rose-500">파국</span>일까? ✈️
                 </h1>
-                <p class="text-slate-500 text-base md:text-lg">여행 스타일부터 역할 분담까지<br>출발 전 필수로 확인해야 할 우정 보존 가이드</p>
+                <p class="text-slate-500 text-sm md:text-base">MBTI로 분석하는 여행 스타일 & 절교 방지 가이드</p>
             </div>
 
-            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-sky-200/50 max-w-3xl mx-auto w-full border border-sky-50 magic-card">
-                <div class="flex flex-col gap-8">
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div class="w-full group">
-                            <label class="block text-sm font-bold text-slate-500 mb-2 ml-2">나의 MBTI</label>
-                            <div class="relative">
-                                <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-sky-50/50 border-2 border-sky-100 rounded-2xl p-4 text-center text-3xl font-black uppercase text-slate-800 focus:border-sky-500 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder-sky-200 tracking-widest" placeholder="ESFP" maxlength="4">
-                            </div>
+            <div class="clean-card p-8 md:p-10 shadow-lg">
+                <div class="flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">나의 MBTI</label>
+                            <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 outline-none transition placeholder-slate-300 tracking-widest" placeholder="ESFP" maxlength="4">
                         </div>
-                        <span class="text-4xl font-black italic vs-badge mt-4 md:mt-0">WITH</span>
-                        <div class="w-full group">
-                            <label class="block text-sm font-bold text-slate-500 mb-2 ml-2">친구 MBTI</label>
-                            <div class="relative">
-                                <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-teal-50/50 border-2 border-teal-100 rounded-2xl p-4 text-center text-3xl font-black uppercase text-slate-800 focus:border-teal-500 focus:ring-4 focus:ring-teal-100 outline-none transition placeholder-teal-200 tracking-widest" placeholder="ISTJ" maxlength="4">
-                            </div>
+                        <i class="fas fa-times text-slate-300 text-xl"></i>
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">친구 MBTI</label>
+                            <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 outline-none transition placeholder-slate-300 tracking-widest" placeholder="ISTJ" maxlength="4">
                         </div>
                     </div>
                     
-                    <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-2xl shadow-xl hover:shadow-2xl text-lg md:text-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group">
-                        <span>궁합 확인하고 출발!</span> <i class="fas fa-plane-departure group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                    <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
+                        <span>궁합 분석하기</span> <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="result-page" class="hidden fade-in pb-10">
-            <div class="max-w-4xl mx-auto mb-6 flex items-center justify-between">
-                <button id="back-btn" class="text-slate-400 hover:text-slate-800 font-bold flex items-center gap-2 transition-colors px-3 py-2 rounded-lg hover:bg-white/50 text-sm">
-                    <i class="fas fa-arrow-left"></i> 다시하기
+        <div id="result-page" class="hidden fade-in">
+            <div class="flex items-center justify-between mb-6">
+                <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
+                    <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-xs font-bold text-sky-600 bg-sky-100 px-3 py-1 rounded-full">TRAVEL REPORT</span>
+                <span class="text-[10px] font-bold text-sky-500 bg-sky-50 px-2 py-1 rounded">VER 2.0</span>
             </div>
-            <div id="result-content"></div>
+
+            <div id="result-content" class="space-y-6"></div>
+
+            <div class="mt-16 pt-10 border-t border-slate-200">
+                <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="#" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
+                        <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-2 text-pink-500 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <p class="text-sm font-bold text-slate-700">썸남썸녀 공략</p>
+                        <p class="text-[10px] text-slate-400">플러팅 필승법</p>
+                    </a>
+                    <a href="#" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
+                        <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <p class="text-sm font-bold text-slate-700">직장상사 공략</p>
+                        <p class="text-[10px] text-slate-400">사회생활 치트키</p>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-center w-full overflow-hidden">
+                <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+            </div>
+
         </div>
 
     </div>
 
-    <div class="fixed bottom-2 right-2 text-[10px] text-slate-400 opacity-60 font-mono pointer-events-none select-none z-50">
-        Ver 1.6
+    <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">
+        Ver 2.0 Clean
     </div>
 
     <datalist id="mbti-list"></datalist>
-    <link id="dynamic-favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -103,173 +132,69 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. [데이터] 스타일 분석
+            // 데이터 (Ver 1.6과 동일, 디자인 적용을 위해 구조만 활용)
             const mbtiData = {
-                "ISTJ": [
-                    { type: "걸어 다니는 엑셀표", like: "오차 없는 분 단위 일정표, 바우처 인쇄물, 예상 경비 10원 단위 계산", dislike: "당일 아침에 '그냥 딴 데 갈까?' 시전하기, 약속 시간 5분 이상 늦기, 검증되지 않은 식당 가기", tip: "이 친구는 여행을 '즐기러' 가는 게 아니라 '수행하러' 갑니다. 계획대로 착착 진행될 때 희열을 느끼니, 제발 늦잠 자지 말고 군말 없이 따라주세요. '너 계획 진짜 완벽하다' 한마디면 밥도 사줍니다." },
-                    { type: "인간 내비게이션 & 총무", like: "최적의 동선 효율, 가성비와 가심비가 완벽한 맛집(별점 4.5+), 깔끔한 정산", dislike: "길거리에서 시간 낭비하며 헤매기, 쓸데없는 바가지요금, 줄 서서 기다리는 인스타 감성 카페", tip: "길 찾기는 이 친구에게 전적으로 맡기세요. 옆에서 '어? 저쪽 아니야?'라고 훈수 두는 순간 싸움 납니다. 당신은 조용히 짐을 들어주거나 간식을 챙겨주는 게 낫습니다." }
-                ],
-                "ISFJ": [
-                    { type: "걸어 다니는 구급상자", like: "친구들 인생샷 500장 찍어주기, 상비약/물티슈/보조배터리 챙기기, 서로 배려하는 대화", dislike: "위험하고 무모한 액티비티, 큰 소리로 싸우거나 갈등 조장하기, 너무 빡빡해서 체력 방전되는 일정", tip: "당신이 '아 맞다, 그거 안 가져왔다' 하면 이 친구 가방에서 다 나옵니다. 겉으론 웃고 있어도 속으론 지쳐있을 수 있으니 수시로 '힘들지 않아? 좀 쉴까?'라고 물어봐 주는 센스가 필수입니다." },
-                    { type: "평화지킴이 힐링러", like: "조용하고 깨끗한 호캉스, 아기자기한 소품샵 투어, 맛있는 디저트 먹으며 수다 떨기", dislike: "시끄럽고 정신없는 클럽/시장통, 호객 행위가 심한 곳, 친구들끼리 의견 갈려서 분위기 싸해지는 것", tip: "식사 메뉴 물어보면 '난 다 좋아'라고 할 텐데, 진짜 다 좋은 게 아닙니다. 당신이 센스 있게 맛집 2개를 골라서 'A랑 B 중에 어디 갈까?'라고 선택지를 좁혀주세요." }
-                ],
-                "INFJ": [
-                    { type: "감성 충만 여행자", like: "노을 보며 멍때리기, 밤새 나누는 깊은 대화(인생, 가치관), 사람 없는 조용한 명소", dislike: "깃발 꽂고 다니는 단체 패키지 스타일, 시끄러운 술판, 의미 없는 가벼운 농담 따먹기", tip: "관광지 도장 깨기보다는 '여행의 의미'를 중요시합니다. 밤에 숙소에서 맥주 한 캔 하면서 '오늘 여행 어땠어?'라고 진지하게 물어봐 주면 감동해서 눈물 흘릴 수도 있습니다." },
-                    { type: "배려왕 속 깊은 가이드", like: "현지 문화와 역사가 담긴 장소, 박물관/미술관, 친구의 취향을 세심하게 맞춰주기", dislike: "예의 없는 관광객들, 계획 없이 붕 뜨는 시간, 무질서하고 더러운 환경", tip: "자신의 취향보다 동행인의 기분을 먼저 살피느라 에너지를 많이 씁니다. 여행 중간에 1~2시간 정도는 각자 자유시간을 주거나 혼자만의 시간을 가질 수 있게 배려해주세요." }
-                ],
-                "INTJ": [
-                    { type: "효율 추구 설계자", like: "완벽한 동선 최적화, 지적 호기심을 채워주는 투어(역사/유래), 불필요한 이동 최소화", dislike: "멍청하게 줄 서서 1시간 기다리기, 단지 '예뻐서' 가는 비효율적인 핫플, 감성팔이", tip: "이 친구를 설득하려면 논리가 필요합니다. '여기 예쁘대'가 아니라 '여기가 세계문화유산인데 동선상 지금 가는 게 최적이야'라고 말해야 움직입니다. 징징거리는 건 절대 금물." },
-                    { type: "플랜 B의 제왕", like: "사전 예약 필수, 깔끔하고 기능적인 숙소, 목적이 뚜렷한 테마 여행", dislike: "즉흥적인 일정 변경, 질척거리는 동행, 약속 시간 안 지키는 사람", tip: "비가 오거나 가게 문이 닫혀도 당황하지 마세요. 이 친구 머릿속엔 이미 플랜 B, C, D까지 다 있습니다. 당신은 그저 믿고 따르면 됩니다. 토 달지 마세요." }
-                ],
-                "ISTP": [
-                    { type: "고독한 탐험가", like: "혼자 돌아다니는 자유시간, 멍때리기, 계획 없이 발길 닿는 대로 가기(구글맵 의존 X)", dislike: "강제적인 단체 행동(다 같이 점프샷 찍기 등), 아침 일찍 일어나는 것, 인증샷 셔틀 시키기", tip: "아침에 깨우지 마세요. 11시까지 자게 놔두고 혼자 산책 다녀오세요. 그리고 '각자 놀다가 저녁에 맛있는 거 먹자'고 하면 세상에서 제일 쿨하고 좋은 친구가 됩니다." },
-                    { type: "생존 전문가 & 미식가", like: "스릴 넘치는 액티비티, 현지인들만 가는 허름한 찐맛집, 편안한 트레이닝복 차림", dislike: "SNS 보여주기식 핫플 줄 서기, 복잡한 격식이나 드레스코드, 쇼핑 강요", tip: "'여기 인스타 핫플이래!' 하면서 1시간 줄 서자고 하면 도망갑니다. 그냥 길 걷다가 냄새 좋은 식당에 쓱 들어가는 걸 훨씬 좋아합니다." }
-                ],
-                "ISFP": [
-                    { type: "침대와 물아일체", like: "호텔 침대에서 뒹굴기, 룸서비스 시켜 먹기, 예쁜 수영장에서 인생샷 건지기", dislike: "극기훈련급 빡빡한 일정, 땀 뻘뻘 흘리는 등산, 빨리빨리 재촉하는 것", tip: "이 친구에게 일정표 들이밀지 마세요. '오늘은 수영하고 맛있는 거 먹고 푹 쉬자'가 최고의 계획입니다. 휴식이 곧 여행이라고 생각하는 유형입니다." },
-                    { type: "감성 스냅 장인", like: "분위기 깡패 카페, 필름 카메라 감성, 아기자기한 소품샵 구경하기", dislike: "촉박한 시간, 인테리어 구린 식당, 결정을 강요하는 메뉴 선정", tip: "길 가다 예쁜 꽃만 봐도 멈춰서 사진 찍느라 걸음이 느립니다. 화내지 말고 기다려주세요. 여행 끝나고 나면 이 친구가 찍어준 인생샷만이 남습니다." }
-                ],
-                "INFP": [
-                    { type: "낭만 방랑자", like: "정처 없이 골목길 산책하기, 서점/문구점 투어, 현지 느낌 물씬 나는 낯선 장소", dislike: "사람 미어터지는 랜드마크 찍기, 쇼핑몰 인파, 현실적인 잔소리(돈, 시간)", tip: "가끔 길을 잃거나 엉뚱한 곳으로 가도 '이것도 모험이다!' 하고 맞장구쳐주세요. 현실 감각은 좀 떨어질지 몰라도, 여행의 낭만을 즐기는 데는 최고의 파트너입니다." },
-                    { type: "집순이/집돌이의 외출", like: "숙소에서 야식 먹으며 밤새 수다 떨기, 서로에게 엽서 써주기, 몽글몽글한 분위기", dislike: "모르는 사람이랑 합석하기, 불친절한 직원, 큰 소리 오가는 갈등 상황", tip: "이 친구 멘탈은 쿠크다스입니다. 식당에서 주문 잘못 나오거나 불친절해도 말 못 하고 끙끙댈 수 있으니, 당신이 대신 나서서 해결해줘야 합니다." }
-                ],
-                "INTP": [
-                    { type: "호기심 천국 너드", like: "과학관/박물관/역사 유적지, 특이한 건축물 탐방, 밤새 엉뚱한 주제로 토론하기", dislike: "남들 다 하는 뻔한 관광 코스, 인스타용 맛집 줄 서기, 의미 없는 스몰토크", tip: "갑자기 엉뚱한 골목으로 새거나 이상한 간판에 꽂혀도 놀라지 마세요. 남들은 절대 안 가는 기괴한 곳에서 엄청난 무언가를 발견해내는 재주가 있습니다." },
-                    { type: "무계획이 최고의 계획", like: "발길 닿는 대로 걷기, 짐은 최소한으로(비닐봉지 덜렁), 현지 마트 구경", dislike: "분 단위 스케줄 표, 옷차림 지적질, 감정적인 하소연 들어주기", tip: "맛집 안 찾아왔다고 뭐라 하지 마세요. '배고프면 편의점 가지 뭐'라는 마인드입니다. 당신이 밥때를 챙기지 않으면 굶고 돌아다닐 수도 있습니다." }
-                ],
-                "ESTP": [
-                    { type: "스릴 즐기는 야생마", like: "스카이다이빙/서핑/번지점프, 클럽이나 파티 가기, 즉흥적으로 현지 친구 사귀기", dislike: "호텔방에만 박혀있기, 박물관 관람하며 설명 듣기, 지루하고 정적인 분위기", tip: "체력이 미쳤습니다. 당신이 지쳐 쓰러질 때쯤 '이제 2차 가야지? 밤새워야지!'라고 할 겁니다. 여행 전 홍삼이나 비타민을 꼭 챙겨 드세요." },
-                    { type: "가성비 & 도박사", like: "시장통에서 흥정하기, 내기해서 밥값 몰아주기, 걷기보다는 택시/렌트카", dislike: "비효율적인 동선으로 뱅뱅 돌기, 답답하게 우물쭈물하는 것, 결정 장애", tip: "메뉴 고를 때 고민하지 마세요. '이거 먹자! 저거 하자!' 하고 바로 지르는 시원시원함을 보여줘야 합니다. 고민할 시간에 일단 저지르는 스타일입니다." }
-                ],
-                "ESFP": [
-                    { type: "이 구역의 파티피플", like: "새로운 사람들과 어울리기, 화려한 조명과 음악, 시끌벅적한 야시장 투어", dislike: "조용한 절/사원 명상, 혼자 있는 시간, 심각하고 우울한 이야기", tip: "리액션이 여행의 전부입니다. 별거 아닌 거에도 '대박!', '미쳤다!', '너무 예쁘다!' 외쳐주면 신나서 본인이 밥이고 술이고 다 쏩니다." },
-                    { type: "욜로(YOLO)족", like: "지금 당장 즐겁고 맛있는 것, 충동구매(기념품), 분위기 좋은 라운지 바", dislike: "돈 아껴 쓰라고 잔소리하기, 미래 걱정, 피곤하다고 쳐져 있는 것", tip: "이 친구랑 여행 가면 통장 잔고는 포기하세요. 대신 평생 술안주로 씹을 수 있는 레전드 에피소드는 확실히 만들어줍니다." }
-                ],
-                "ENFP": [
-                    { type: "인간 리트리버", like: "현지인이랑 말 트고 친구 먹기, 우연히 발견한 지역 축제 참여, 텐션 업", dislike: "반복되는 지루한 일상, 숙소에서 잠만 자는 것, 이거 하지 마라 저거 하지 마라 통제하는 것", tip: "여권, 지갑, 핸드폰... 당신이 다 챙겨야 합니다. 칠칠맞게 흘리고 다니지만, 특유의 애교와 긍정 에너지로 밉지 않게 만드는 능력이 있습니다." },
-                    { type: "변덕쟁이 모험가", like: "갑자기 목적지 바꾸기('저기 가보자!'), 새로운 도전, 무한 긍정 마인드", dislike: "계획대로만 움직여야 하는 강박 관념, 부정적인 말투, 비판", tip: "'갑자기?'라는 말을 하지 마세요. '오 재밌겠는데?'라고 받아주면 그날 여행은 대성공입니다. 계획은 어그러지라고 있는 거라고 생각하세요." }
-                ],
-                "ENTP": [
-                    { type: "토론광 트래블러", like: "현지 사회 이슈에 대해 토론하기, 남들이 안 하는 특이한 체험, 도전적인 음식 먹어보기", dislike: "뻔하디뻔한 패키지 코스, 멍청하고 답답한 가이드, 무조건적인 동의와 칭찬", tip: "이 친구가 뭔가 불평하거나 딴지를 걸기 시작하면, 같이 욕해주지 말고 논리적으로 토론해주세요. 싸우는 게 아니라 지적 유희를 즐기는 중입니다." },
-                    { type: "즉흥의 끝판왕", like: "지도 없이 무작정 걷기, 꽂히면 바로 실행, 현지인도 모르는 이상한 곳 가기", dislike: "징징거리면서 분위기 깨는 것, 통제하려고 드는 것, 권위적인 태도", tip: "길 좀 잃으면 어때요? 이 친구랑 있으면 길 잃은 그곳이 최고의 핫플이 되는 기적을 볼 수 있습니다. 다만, 집에 돌아오는 비행기는 놓치지 않게 주의하세요." }
-                ],
-                "ESTJ": [
-                    { type: "총무 겸 독재자 가이드", like: "엑셀로 완벽 정리한 예산안, 10분 단위 일정표, 아침 7시 기상 및 조식 필참", dislike: "돈 계산 안 맞는 것(10원이라도), 약속 시간 늦는 것, 느긋하게 밍기적거리는 것", tip: "그냥 이 친구를 총무랑 대장 시켜주세요. 그게 제일 편합니다. 당신은 그저 '충성! 준비 완료!' 하고 따라다니면 됩니다. 토 달면 피곤해집니다." },
-                    { type: "효율 끝판왕 리더", like: "확실한 리드와 통솔, 검증된 코스와 맛집, 깔끔하고 신속한 일 처리", dislike: "우유부단해서 메뉴 못 고르는 것, 위생 불량 숙소, 게으름 피우는 것", tip: "피곤하다고 일정 하나만 빼자고 하지 마세요. '체력 관리 못 한 네 잘못'이라고 생각합니다. 여행 전 체력을 기르거나 영양제를 챙기세요." }
-                ],
-                "ESFJ": [
-                    { type: "다정 보스 케어 담당", like: "맛집 미리 예약해오기, 친구들 컨디션 수시로 체크, 단체 사진 주도적으로 찍기", dislike: "개인플레이하며 이탈하는 것, 밥 맛없다고 투덜대기, 나의 호의를 무시하는 태도", tip: "이 친구가 챙겨줄 때 당연하게 생각하지 말고 '와 너 진짜 센스 쩐다, 고마워'라고 폭풍 칭찬해주세요. 그 인정욕구가 여행을 이끌어가는 원동력입니다." },
-                    { type: "수다쟁이 코디네이터", like: "끊임없는 대화와 웃음, 시밀러룩 맞춰 입기, 모두가 화기애애한 분위기", dislike: "어색한 침묵, 친구끼리 싸우는 것, 나만 빼고 자기들끼리 노는 소외감", tip: "이동할 때 핸드폰만 보지 말고 대화를 나누세요. 리액션 잘해주고 맞장구쳐주면, 기분 좋아서 맛있는 디저트라도 하나 더 사줍니다." }
-                ],
-                "ENFJ": [
-                    { type: "열정 가이드 & 멘토", like: "모두가 행복하고 만족하는 여행, 의미 있는 체험 활동, 파이팅 넘치는 구호 외치기", dislike: "불평불만 늘어놓기, 이기적인 단독 행동, 여행 분위기 망치는 사람", tip: "이 친구는 '우리'가 중요합니다. 혼자 튀려고 하지 말고 팀워크를 보여주세요. 저녁에 맥주 한잔하며 '우리 진짜 잘 맞는다, 행복해'라고 말해주면 끝입니다." },
-                    { type: "감성 리더", like: "저녁에 와인 한잔하며 속마음 얘기하기, 칭찬 감옥 가두기, 서로 챙겨주기", dislike: "비판적인 태도, 차가운 반응, 예의 없는 행동(식당 직원 등에게)", tip: "당신이 힘들까 봐 계속 눈치 보고 있을 수도 있습니다. 먼저 웃으면서 '나 너무 즐거워'라고 표현해줘야 안심하고 여행을 즐깁니다." },
-                ],
-                "ENTJ": [
-                    { type: "정복자 스타일 리더", like: "하루에 5개 도시 찍기(도장 깨기), 최고의 효율과 가성비, 럭셔리 & 성취감", dislike: "늘어지는 것, 징징대기, 멍청하게 일 처리해서 시간 낭비하는 것", tip: "이 친구랑 여행 가면 몸은 극도로 힘든데, 남는 건 제일 많습니다. 군말 없이 따르면 5성급 호텔 업그레이드 같은 행운이 따를 수도 있습니다." },
-                    { type: "카리스마 대장", like: "주도권 잡고 지휘하기, 완벽한 플랜 실행, 문제 발생 시 빠르고 냉철한 해결", dislike: "우유부단해서 시간 끄는 것, 비효율적인 동선, 감정팔이", tip: "의견을 낼 거면 확실한 대안을 가져가세요. '그냥 별로인데?'라고 하면 씨알도 안 먹힘. 'B안이 동선상 30분 절약돼'라고 말해야 합니다." }
-                ]
+                "ISTJ": [{ type: "걸어 다니는 엑셀표", like: "오차 없는 분 단위 일정표, 바우처 인쇄물, 예상 경비 10원 단위 계산", dislike: "당일 아침에 '그냥 딴 데 갈까?' 시전하기, 약속 시간 5분 이상 늦기", tip: "이 친구는 여행을 '즐기러' 가는 게 아니라 '수행하러' 갑니다. 계획대로 착착 진행될 때 희열을 느끼니 제발 늦지 마세요." }],
+                "ISFJ": [{ type: "걸어 다니는 구급상자", like: "친구들 인생샷 500장 찍어주기, 상비약/물티슈 챙기기, 배려", dislike: "위험하고 무모한 액티비티, 갈등 조장하기, 무리한 일정", tip: "당신이 '아 맞다' 하면 이 친구 가방에서 다 나옵니다. 겉으론 웃어도 지쳐있을 수 있으니 먼저 챙겨주세요." }],
+                "INFJ": [{ type: "감성 충만 여행자", like: "노을 보며 멍때리기, 밤새 나누는 깊은 대화, 사람 없는 명소", dislike: "시끄러운 술판, 의미 없는 가벼운 농담, 깃발 부대 관광", tip: "관광지 도장 깨기보다 '의미'가 중요합니다. 밤에 맥주 한 캔 하며 진지한 대화를 나눠보세요." }],
+                "INTJ": [{ type: "효율 추구 설계자", like: "완벽한 동선 최적화, 지적 호기심 투어, 이동 최소화", dislike: "멍청하게 줄 서서 1시간 기다리기, 비효율적인 핫플", tip: "'예뻐서' 가는 건 안 통합니다. '동선상 최적'이라는 논리로 설득해야 움직입니다." }],
+                "ISTP": [{ type: "고독한 탐험가", like: "혼자 돌아다니는 자유시간, 멍때리기, 계획 없음", dislike: "강제적인 단체 행동, 아침 일찍 기상, 인증샷 셔틀", tip: "아침에 깨우지 마세요. 각자 놀다가 저녁에 맛있는 거 먹을 때 만나는 걸 제일 좋아합니다." }],
+                "ISFP": [{ type: "침대와 물아일체", like: "호텔 침대 뒹굴기, 룸서비스, 예쁜 수영장", dislike: "극기훈련급 일정, 땀 흘리는 등산, 재촉하기", tip: "일정표 들이밀지 마세요. '오늘은 수영하고 푹 쉬자'가 최고의 계획입니다." }],
+                "INFP": [{ type: "낭만 방랑자", like: "골목길 산책, 서점 투어, 현지 느낌 장소", dislike: "사람 많은 랜드마크, 현실적인 잔소리(돈/시간)", tip: "길을 잃어도 '모험이다!' 해주세요. 현실 감각은 없어도 낭만은 최고입니다." }],
+                "INTP": [{ type: "호기심 천국", like: "박물관/유적지, 특이한 건축물, 엉뚱한 토론", dislike: "뻔한 관광 코스, 인스타 맛집 줄 서기", tip: "이상한 간판에 꽂혀도 놀라지 마세요. 남들은 안 가는 기괴한 곳을 찾아냅니다." }],
+                "ESTP": [{ type: "스릴 즐기는 야생마", like: "액티비티, 클럽/파티, 즉흥적 만남", dislike: "호텔방에 박혀있기, 박물관 관람, 지루함", tip: "체력이 미쳤습니다. 당신이 지칠 때쯤 2차 가자고 할 테니 영양제 챙기세요." }],
+                "ESFP": [{ type: "이 구역의 파티피플", like: "새로운 사람, 화려한 조명/음악, 야시장", dislike: "조용한 명상, 혼자 있는 시간, 심각한 얘기", tip: "리액션이 전부입니다. '대박!' 외쳐주면 신나서 본인이 다 쏩니다." }],
+                "ENFP": [{ type: "인간 리트리버", like: "현지인과 친구 먹기, 축제 참여, 텐션 업", dislike: "지루한 일상, 숙소에서 잠만 자기, 통제", tip: "여권, 지갑, 핸드폰... 당신이 다 챙겨야 합니다. 칠칠맞지만 미워할 수 없는 매력이 있죠." }],
+                "ENTP": [{ type: "토론광 트래블러", like: "사회 이슈 토론, 특이한 체험, 도전적 음식", dislike: "뻔한 패키지, 답답한 가이드, 무조건적 동의", tip: "불평하면 같이 욕하지 말고 논리적으로 토론하세요. 싸우는 게 아니라 즐기는 겁니다." }],
+                "ESTJ": [{ type: "총무 겸 독재자", like: "엑셀 예산안, 10분 단위 일정, 아침 7시 기상", dislike: "돈 계산 안 맞는 것, 지각, 밍기적거림", tip: "그냥 총무랑 대장 시켜주세요. '충성!' 하고 따르면 세상 편하게 여행합니다." }],
+                "ESFJ": [{ type: "다정 보스 가이드", like: "맛집 예약, 컨디션 체크, 단체 사진", dislike: "개인플레이, 밥 맛없다고 투덜대기, 무시", tip: "챙겨줄 때 '센스 쩐다'고 칭찬해주세요. 그 맛에 여행 계획 짭니다." }],
+                "ENFJ": [{ type: "열정 멘토", like: "모두가 행복한 여행, 의미 있는 체험, 파이팅", dislike: "불평불만, 이기적 행동, 분위기 망치기", tip: "혼자 튀지 말고 '우리'를 강조하세요. '우리 진짜 잘 맞는다'는 말이 최고입니다." }],
+                "ENTJ": [{ type: "정복자 리더", like: "도장 깨기(하루 5곳), 효율/가성비, 성취감", dislike: "늘어지는 것, 징징대기, 시간 낭비", tip: "몸은 힘들어도 남는 건 제일 많습니다. 군말 없이 따르면 5성급 호텔이 기다릴 수도." }]
             };
 
-            // 2. [궁합]
             function getTravelHarmony(me, you) {
-                let score = 50;
-                let title = ""; 
-                let desc = "";
-                let conflict = "";
-                
+                let score = 50, title = "", desc = "", conflict = "";
                 const sameJP = (me.includes('J') === you.includes('J'));
                 const sameTF = (me.includes('T') === you.includes('T'));
-                const sameEI = (me.includes('E') === you.includes('E'));
 
                 if (me.includes('J') && you.includes('P')) {
-                    score = 65;
-                    title = "🔥 계획파 vs 즉흥파";
-                    desc = "당신의 10분 단위 계획표를 친구는 '참고용'으로만 봅니다. 친구를 통제하려다간 첫날부터 싸웁니다. 오전엔 계획대로, 오후엔 자유시간으로 타협하세요.";
+                    score = 60; title = "🔥 계획파 vs 즉흥파"; desc = "당신의 계획표를 친구는 '참고용'으로만 봅니다. 오전엔 계획대로, 오후엔 자유로 타협하세요.";
                 } else if (me.includes('P') && you.includes('J')) {
-                    score = 70;
-                    title = "🎒 나만 믿어 vs 숨 막혀";
-                    desc = "친구의 빡빡한 일정에 숨이 턱턱 막히지만, 예약과 길 찾기는 친구가 다 해줍니다. 몸이 편하려면 잔소리는 감수하고 군말 없이 따르세요.";
+                    score = 70; title = "🎒 짐꾼 vs 대장님"; desc = "숨 막혀도 길 찾기와 예약은 친구가 다 합니다. 편하게 다니려면 잔소리는 감수하세요.";
                 } else if (me.includes('J') && you.includes('J')) {
-                    score = 80;
-                    title = "⚡ 완벽주의자들의 자존심 대결";
-                    desc = "둘 다 계획이 확실해서 오히려 '내 동선'이 맞다고 싸울 수 있습니다. 출발 전에 '오전 당번 / 오후 당번'을 명확히 나누는 게 평화의 지름길입니다.";
-                } else { // P + P
-                    score = 85;
-                    title = "🌀 대환장 무계획 파티";
-                    desc = "둘 다 계획이 없어서 '뭐 먹지?'만 1시간 고민하다 편의점 갈 수도 있습니다. 하지만 의외로 스트레스 없고 평생 남을 레전드 에피소드는 제일 많이 생깁니다!";
+                    score = 80; title = "⚡ 자존심 강한 두 리더"; desc = "서로의 계획이 맞다고 싸울 수 있습니다. 오전/오후 당번을 나누세요.";
+                } else {
+                    score = 90; title = "🌀 대환장 무계획 콤비"; desc = "뭐 먹을지 1시간 고민하다 편의점 가겠지만, 평생 남을 에피소드는 제일 많습니다!";
                 }
 
                 if (!sameTF) {
-                    if (me.includes('T')) {
-                        conflict = "⚠️ <b>[주의]</b> 당신의 무심한 한마디('별론데?', '비효율적인데?')에 F 성향 친구는 여행 내내 상처받고 꽁해 있을 수 있습니다. 입에 발린 말이라도 예쁘게 하세요.";
-                        score -= 10;
-                    } else {
-                        conflict = "⚠️ <b>[주의]</b> T 성향 친구에게 감정적으로 공감을 바라지 마세요. '다리 아파ㅠ'라고 하면 '택시 타'라고 답할 겁니다. 해결책을 주는 게 그들만의 사랑 표현입니다.";
-                        score -= 10;
-                    }
+                    if (me.includes('T')) { conflict = "⚠️ <b>[주의]</b> 당신의 무심한 말투에 친구는 여행 내내 상처받을 수 있습니다. 영혼 없어도 리액션 해주세요."; score -= 10; }
+                    else { conflict = "⚠️ <b>[주의]</b> 친구에게 위로를 바라지 마세요. '다리 아파' 하면 '택시 타'라고 답할 겁니다. 그게 사랑입니다."; score -= 10; }
                 } else {
-                    if (me.includes('F')) conflict = "💖 <b>[좋음]</b> 둘 다 감성이 풍부해서 낙엽만 굴러가도 꺄르르 웃겠네요. 서로 사진 찍어주고 칭찬 감옥에 가두느라 시간 가는 줄 모를 겁니다.";
-                    else conflict = "🤖 <b>[좋음]</b> 감정 소모 없는 쿨한 여행! 불만 있으면 바로 말하고 뒤끝 없이 해결하니 세상 편안합니다. 효율 최강 조합입니다.";
-                    score += 10;
+                    if (me.includes('F')) { conflict = "💖 <b>[좋음]</b> 감성 코드가 잘 맞아서 낙엽만 굴러가도 웃음꽃이 피겠네요."; score += 10; }
+                    else { conflict = "🤖 <b>[좋음]</b> 불만 있으면 바로 말하고 뒤끝 없이 해결하니 세상 쿨하고 편안합니다."; score += 10; }
                 }
-
                 return { score, title, desc, conflict };
             }
 
-            // 3. [팁]
-            function getTravelTips(me, you) {
-                let appeal = "";
-                let beware = "";
+            function getSecretContent(you) {
+                // 시크릿 콘텐츠 (팁 & 역할)
+                let appeal="", beware="", role="", good="", bad="";
+                
+                // Tips
+                if (you.includes('S')) appeal = "📸 <b>확실한 인증샷과 맛집</b> (눈에 보이는 게 중요)";
+                else appeal = "✨ <b>낭만과 감성 자극</b> (현지 느낌, 심오한 대화)";
+                
+                if (you.includes('F')) beware = "💔 <b>짜증 내거나 팩폭 금지</b> (하루 종일 눈치 봄)";
+                else beware = "😡 <b>징징대기 & 비효율 금지</b> (해결책 없이 감정 호소 X)";
 
-                if (you.includes('S')) {
-                    appeal = `📸 <b>확실한 시각적 즐거움</b><br>
-                    ${you} 친구는 눈에 보이는 게 중요합니다. <b>"여기 사진 진짜 잘 나온대", "이거 현지인 찐맛집이래"</b><br>
-                    추상적인 감성보다 <b>확실한 인증샷과 맛집</b>을 제공하세요.`;
-                } else { 
-                    appeal = `✨ <b>여행의 '낭만' 자극</b><br>
-                    ${you} 친구는 뻔한 관광지보다 <b>"우리만의 비밀 장소", "현지 느낌 물씬 나는 골목"</b>을 좋아합니다.<br>
-                    밤에 맥주 한잔하며 <b>심오한 인생 얘기</b>를 들어주면 감동합니다.`;
-                }
+                // Roles
+                if (you.includes('T') && you.includes('J')) { role="🫡 총무 & 인간 구글맵"; good="군말 없이 따르기"; bad="계획표 비꼬기"; }
+                else if (you.includes('F') && you.includes('J')) { role="💊 엄마/아빠 & 포토그래퍼"; good="먼저 짐 들어주기"; bad="호의 무시하기"; }
+                else if (you.includes('E') && you.includes('P')) { role="🎉 오락부장 & 협상가"; good="텐션 맞춰 놀기"; bad="진지충 모드"; }
+                else { role="🔍 맛집 탐지견 & 짐꾼"; good="재촉하지 않기"; bad="억지 텐션 강요"; }
 
-                if (you.includes('F')) {
-                    beware = `💔 <b>짜증 내거나 팩폭 금지</b><br>
-                    길을 헤매거나 음식이 맛없어도 <b>"아 진짜 짜증 나네"</b>라고 불평하지 마세요.<br>
-                    ${you} 친구는 당신의 기분을 자기 탓으로 돌리고 <b>하루 종일 눈치</b>를 봅니다.`;
-                } else { 
-                    beware = `😡 <b>징징대기 & 비효율 금지</b><br>
-                    다리가 아프다고 <b>해결책 없이 징징</b>대지 마세요. 차라리 "택시 타자"고 제안하세요.<br>
-                    ${you} 친구에게 <b>가성비 떨어지는 동선</b>을 고집하면 전쟁 시작입니다.`;
-                }
-                return { appeal, beware };
-            }
-
-            // 4. [역할]
-            function getTravelRoles(targetMBTI) {
-                let role = "", good = "", bad = "";
-
-                if (targetMBTI.includes('T') && targetMBTI.includes('J')) {
-                    role = "🫡 <b>총무 & 인간 구글맵 (대장님)</b>";
-                    good = "군말 없이 따르기, '너 덕분에 편하다' 칭찬하기";
-                    bad = "계획표 보고 '숨 막힌다'고 비꼬기, 늦장 부리기";
-                } 
-                else if (targetMBTI.includes('F') && targetMBTI.includes('J')) {
-                    role = "💊 <b>엄마/아빠 & 포토그래퍼</b>";
-                    good = "챙겨줄 때마다 '고마워' 표현하기, 먼저 짐 들어주기";
-                    bad = "호의를 당연하게 여기기, 개인플레이 하기";
-                }
-                else if (targetMBTI.includes('E') && targetMBTI.includes('P')) {
-                    role = "🎉 <b>오락부장 & 협상가</b>";
-                    good = "텐션 맞춰서 같이 놀기, '오히려 좋아!' 외쳐주기";
-                    bad = "진지충 모드로 분위기 깨기, 통제하려고 들기";
-                }
-                else { // I + P
-                    role = "🔍 <b>맛집 탐지견 & 짐꾼</b>";
-                    good = "혼자만의 시간 존중해주기, 조용히 챙겨주기";
-                    bad = "억지로 텐션 올리라고 강요하기, 재촉하기";
-                }
-
-                return { role, good, bad };
+                return { appeal, beware, role, good, bad };
             }
 
             function validateAndAnalyze() {
@@ -277,117 +202,106 @@
                 const inputB = document.getElementById('mbti-b');
                 const valA = inputA.value.toUpperCase().trim();
                 const valB = inputB.value.toUpperCase().trim();
-
-                if (!validMbtiList.includes(valA) || !validMbtiList.includes(valB)) {
-                    alert("정확한 MBTI 4글자를 입력해주세요!");
-                    return;
-                }
+                if (!validMbtiList.includes(valA) || !validMbtiList.includes(valB)) { alert("정확한 MBTI 4글자를 입력해주세요!"); return; }
                 showResult(valA, valB);
             }
 
+            window.unlockSecret = function() {
+                // 쿠팡 링크 열기
+                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                
+                // 잠금 해제 UI 처리
+                const overlay = document.querySelector('.lock-overlay');
+                const content = document.querySelector('.blur-content');
+                
+                overlay.classList.add('hidden');
+                content.classList.add('unlocked');
+            }
+
             function showResult(me, you) {
-                const targetDataArray = mbtiData[you];
-                let selectedIndex = Math.floor(Math.random() * targetDataArray.length);
-                const target = targetDataArray[selectedIndex];
+                // 데이터 랜덤 선택
+                const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];
                 const harmony = getTravelHarmony(me, you);
-                const tips = getTravelTips(me, you);
-                const roles = getTravelRoles(you);
+                const secret = getSecretContent(you);
 
                 const resultHTML = `
-                    <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden">
+                        <h2 class="text-2xl font-extrabold text-slate-800 mb-2">
+                            <span class="text-point">${you}</span> 친구는<br>"${tData.type}"
+                        </h2>
+                        <p class="text-sm text-slate-500 mb-6 font-medium">여행 스타일 분석</p>
                         
-                        <div class="magic-card rounded-3xl p-6 md:p-8 text-center relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-400 to-teal-400"></div>
-                            <p class="text-xs font-bold text-slate-400 mb-2 tracking-widest bg-slate-100 inline-block px-3 py-1 rounded-full">TRAVEL STYLE</p>
-                            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4 mt-1">
-                                <span class="text-sky-600">${you}</span> 친구는<br>"${target.type}"
-                            </h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 text-left">
-                                <div class="bg-teal-50 p-4 rounded-xl border border-teal-100">
-                                    <p class="font-bold text-teal-600 mb-1 flex items-center text-sm"><i class="fas fa-heart mr-2"></i>극호 (좋아하는 여행)</p>
-                                    <p class="text-slate-700 text-sm leading-snug break-keep">${target.like}</p>
-                                </div>
-                                <div class="bg-rose-50 p-4 rounded-xl border border-rose-100">
-                                    <p class="font-bold text-rose-500 mb-1 flex items-center text-sm"><i class="fas fa-heart-broken mr-2"></i>극불호 (싫어하는 여행)</p>
-                                    <p class="text-slate-700 text-sm leading-snug break-keep">${target.dislike}</p>
-                                </div>
+                        <div class="space-y-3 text-left">
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-sky-500">
+                                <p class="font-bold text-sky-600 text-sm mb-1">👍 극호 (Like)</p>
+                                <p class="text-slate-600 text-sm leading-relaxed">${tData.like}</p>
                             </div>
-                            <div class="mt-4 bg-slate-50 p-3 rounded-lg text-sm text-slate-600 leading-relaxed break-keep">
-                                <span class="font-bold text-sky-600">💡 컨트롤 팁:</span> ${target.tip}
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-500">
+                                <p class="font-bold text-rose-500 text-sm mb-1">👎 극불호 (Dislike)</p>
+                                <p class="text-slate-600 text-sm leading-relaxed">${tData.dislike}</p>
                             </div>
                         </div>
+                        <div class="mt-4 text-xs text-slate-400">
+                            💡 Tip: ${tData.tip}
+                        </div>
+                    </div>
 
-                        <div class="bg-white rounded-3xl p-6 md:p-8 border-2 border-slate-800 shadow-xl relative">
-                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-5 py-1.5 rounded-full font-bold text-sm shadow-lg w-max">
-                                <i class="fas fa-handshake mr-2"></i>${me} & ${you} 궁합 분석
-                            </div>
-                            <div class="mt-4 text-center">
-                                <h3 class="text-4xl font-black text-indigo-500 mb-2">${harmony.score}점</h3>
-                                <div class="w-full bg-slate-100 rounded-full h-2.5 mb-6 max-w-xs mx-auto overflow-hidden">
-                                    <div class="bg-indigo-500 h-2.5 rounded-full score-bar" style="width: 0%"></div>
-                                </div>
-                                <p class="text-lg font-bold text-slate-800 mb-2 leading-tight break-keep">${harmony.title}</p>
-                                <p class="text-sm text-slate-500 mb-4 leading-relaxed break-keep">${harmony.desc}</p>
-                                <div class="bg-red-50 p-3 rounded-xl text-sm text-red-600 border border-red-100 text-left">
-                                    ${harmony.conflict}
-                                </div>
-                            </div>
+                    <div class="clean-card p-6 md:p-8 text-center">
+                        <h3 class="font-bold text-slate-400 text-xs tracking-widest mb-2">COMPATIBILITY SCORE</h3>
+                        <div class="text-5xl font-black text-slate-800 mb-2">${harmony.score}<span class="text-2xl text-slate-300">/100</span></div>
+                        
+                        <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden">
+                            <div class="bg-gradient-to-r from-sky-400 to-indigo-500 h-3 rounded-full score-bar" style="width: 0%"></div>
                         </div>
 
-                        <div class="bg-white border-2 border-sky-500 rounded-3xl p-6 md:p-8 shadow-2xl relative fade-in">
-                            <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-sky-500 text-white px-5 py-1.5 rounded-full font-bold text-sm shadow-lg">
-                                <i class="fas fa-passport mr-2"></i>TRAVEL STRATEGY
+                        <h4 class="text-lg font-bold text-slate-800 mb-1">${harmony.title}</h4>
+                        <p class="text-sm text-slate-500 mb-4 leading-relaxed word-keep">${harmony.desc}</p>
+                        
+                        <div class="bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 text-left text-sm text-slate-600 leading-snug">
+                            ${harmony.conflict}
+                        </div>
+                    </div>
+
+                    <div class="clean-card relative overflow-hidden" style="min-height: 300px;">
+                        
+                        <div class="lock-overlay p-6 text-center">
+                            <div class="w-14 h-14 bg-slate-800 rounded-full flex items-center justify-center text-white text-2xl mb-4 shadow-xl">
+                                <i class="fas fa-lock"></i>
                             </div>
+                            <h3 class="font-bold text-slate-800 text-lg mb-2">🔒 시크릿 공략법 잠금</h3>
+                            <p class="text-slate-500 text-sm mb-6">친구를 다루는 치트키와 역할 분담표는<br>쿠팡 방문 후 무료로 확인할 수 있어요.</p>
                             
-                            <h4 class="font-bold text-xl text-center text-slate-800 mb-6 mt-2">✨ 절교 방지 가이드</h4>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                                <div class="bg-sky-50 rounded-xl p-4 strategy-box border-sky-400">
-                                    <h5 class="font-bold text-sky-700 text-sm mb-2 flex items-center"><i class="fas fa-smile-beam mr-2"></i>이러면 좋아죽음 (Good)</h5>
-                                    <p class="text-slate-700 text-sm leading-snug break-keep">${tips.appeal}</p>
-                                </div>
-                                <div class="bg-orange-50 rounded-xl p-4 strategy-box border-orange-400">
-                                    <h5 class="font-bold text-orange-700 text-sm mb-2 flex items-center"><i class="fas fa-siren-on mr-2"></i>이러면 손절각 (Bad)</h5>
-                                    <p class="text-slate-700 text-sm leading-snug break-keep">${tips.beware}</p>
-                                </div>
-                            </div>
-
-                            <div class="bg-indigo-50 rounded-xl p-4 border border-indigo-200">
-                                <h5 class="font-bold text-indigo-800 text-base mb-3 text-center"><i class="fas fa-user-tag mr-2"></i>${you} 친구의 추천 역할</h5>
-                                <div class="space-y-3">
-                                    <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center">
-                                        <p class="text-base text-indigo-600 font-black">${roles.role}</p>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2 text-xs">
-                                        <div class="bg-blue-50 p-2 rounded-lg text-center text-slate-600 break-keep">
-                                            <span class="font-bold text-blue-600 block mb-1">👍 칭찬법</span> ${roles.good}
-                                        </div>
-                                        <div class="bg-red-50 p-2 rounded-lg text-center text-slate-600 break-keep">
-                                            <span class="font-bold text-red-500 block mb-1">👎 금지</span> ${roles.bad}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col gap-3 mt-4">
-                            <a href="https://link.coupang.com/a/ddddJ5" target="_blank" class="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 text-white font-black text-lg rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all bounce-custom">
-                                <i class="fas fa-suitcase-rolling"></i>
-                                <span>🏖️ 여행 필수템 최저가 보기</span>
-                            </a>
-                            
-                            <button onclick="shareLink()" class="flex items-center justify-center gap-2 w-full py-4 bg-white text-slate-600 font-bold text-lg rounded-2xl shadow-md hover:bg-slate-50 transition-colors border border-slate-200">
-                                <i class="fas fa-share-alt"></i>
-                                <span>결과 공유하고 여행 스타일 맞추기</span>
+                            <button onclick="unlockSecret()" class="w-full bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bounce-custom">
+                                🚀 쿠팡 보고 무료 잠금해제
                             </button>
                         </div>
 
-                        <div class="mt-6 pb-6">
-                             <div class="flex justify-center w-full" style="overflow: hidden;">
-                                <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+                        <div class="blur-content p-6 md:p-8 h-full bg-slate-50">
+                            <div class="flex items-center justify-center gap-2 mb-6">
+                                <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">PREMIUM</span>
+                                <h4 class="font-bold text-slate-800">절교 방지 가이드</h4>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-4 mb-6">
+                                <div class="bg-white p-4 rounded-xl border border-sky-100 shadow-sm">
+                                    <p class="font-bold text-sky-600 text-sm mb-1">😍 공략 치트키</p>
+                                    <p class="text-slate-600 text-sm">${secret.appeal}</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-rose-100 shadow-sm">
+                                    <p class="font-bold text-rose-500 text-sm mb-1">🤬 지뢰 밟기 (절대 금지)</p>
+                                    <p class="text-slate-600 text-sm">${secret.beware}</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-5 rounded-xl border border-indigo-100 shadow-sm text-center">
+                                <p class="text-xs font-bold text-slate-400 mb-2">RECOMMENDED ROLE</p>
+                                <p class="text-xl font-black text-indigo-600 mb-4">${secret.role}</p>
+                                <div class="flex gap-2 text-xs justify-center">
+                                    <span class="bg-blue-50 text-blue-600 px-2 py-1 rounded">🙆‍♂️ ${secret.good}</span>
+                                    <span class="bg-red-50 text-red-500 px-2 py-1 rounded">🙅‍♀️ ${secret.bad}</span>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 `;
 
@@ -396,41 +310,22 @@
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
 
+                // 애니메이션 트리거
                 setTimeout(() => {
                     const bar = document.querySelector('.score-bar');
                     if(bar) bar.style.width = harmony.score + '%';
                 }, 300);
             }
 
-            function resetPage() {
+            // 초기화
+            document.getElementById('analyze-btn').addEventListener('click', validateAndAnalyze);
+            document.getElementById('back-btn').addEventListener('click', () => {
                 document.getElementById('input-page').classList.remove('hidden');
                 document.getElementById('result-page').classList.add('hidden');
                 document.getElementById('mbti-a').value = '';
                 document.getElementById('mbti-b').value = '';
-            }
-
-            document.getElementById('analyze-btn').addEventListener('click', validateAndAnalyze);
-            document.getElementById('back-btn').addEventListener('click', resetPage);
+            });
         });
-        
-        window.shareLink = function() {
-            const currentUrl = window.location.href;
-            if (navigator.share) {
-                navigator.share({
-                    title: '우정 여행 판독기',
-                    text: '우리 여행 가서 안 싸울 수 있을까? 여행 점수 확인해보기 ✈️',
-                    url: currentUrl,
-                });
-            } else {
-                const t = document.createElement("textarea");
-                document.body.appendChild(t);
-                t.value = currentUrl;
-                t.select();
-                document.execCommand('copy');
-                document.body.removeChild(t);
-                alert('링크가 복사되었습니다! 친구에게 공유하세요.');
-            }
-        }
     </script>
 </body>
 </html>
