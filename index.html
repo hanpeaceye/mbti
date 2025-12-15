@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
     <meta name="google-adsense-account" content="ca-pub-6540004747918466">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>썸남썸녀 공략 가이드 | 그 사람의 마음을 여는 열쇠</title>
+    <title>연애 능력치 테스트 | 그 사람의 마음을 여는 열쇠</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
@@ -18,8 +18,8 @@
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimbti.xyz">
-    <meta property="og:title" content="💘 썸남썸녀 MBTI 공략 가이드">
-    <meta property="og:description" content="그 사람에게 어떻게 다가갈까? 플러팅 필승 전략과 카톡 말투까지 완벽 분석! 💌">
+    <meta property="og:title" content="💘 MBTI 연애 능력치 테스트">
+    <meta property="og:description" content="우리 커플의 궁합 점수는? 싸우는 이유와 해결책, 그리고 그 사람을 공략하는 시크릿 비법까지! 💌">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
     
     <style>
@@ -29,14 +29,16 @@
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .clean-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
+        /* 카드 디자인 */
+        .clean-card { background: #ffffff; border: 1px solid #fda4af; border-radius: 24px; box-shadow: 0 4px 20px rgba(225, 29, 72, 0.05); }
         
-        /* 포인트 컬러 (로즈/핑크) */
+        /* 포인트 컬러 (로즈) */
         .text-point { color: #e11d48; }
         .bg-point { background-color: #e11d48; }
         
         .score-bar { transition: width 1.5s ease-out; }
         
+        /* 시크릿 가이드 */
         .blur-content { filter: blur(10px); user-select: none; pointer-events: none; transition: filter 0.5s; }
         .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
         
@@ -45,12 +47,13 @@
 
         .bounce-custom { animation: bounce 2s infinite; }
         
+        /* 리스트 스타일 */
         .style-list { list-style: none; padding: 0; margin: 0; text-align: left; }
         .style-list li { position: relative; padding-left: 1rem; margin-bottom: 0.4rem; line-height: 1.5; font-size: 0.925rem; }
         .style-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 4px; height: 4px; border-radius: 50%; background-color: currentColor; opacity: 0.7; }
 
         .custom-list li { position: relative; padding-left: 1.2em; margin-bottom: 0.5em; }
-        .custom-list li::before { content: '♥'; position: absolute; left: 0; color: #fda4af; font-size: 0.8em; }
+        .custom-list li::before { content: '♥'; position: absolute; left: 0; color: #fb7185; font-size: 0.8em; }
     </style>
 </head>
 <body class="min-h-screen relative pb-10">
@@ -59,29 +62,29 @@
 
         <div id="input-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
             <div class="text-center mb-10">
-                <span class="inline-block bg-rose-50 text-rose-600 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Love Strategy Guide</span>
+                <span class="inline-block bg-white border border-rose-200 text-rose-500 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Love Compatibility Test</span>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
-                    그 사람,<br class="md:hidden">어떻게 <span class="text-point">꼬셔야</span> 할까? 💘
+                    그 사람과 나는,<br class="md:hidden">천생연분일까? <span class="text-point">상극</span>일까? 💘
                 </h1>
-                <p class="text-slate-500 text-sm md:text-base">내 성향은 살리고 상대방 취향은 저격하는<br>200% 맞춤형 플러팅 전략</p>
+                <p class="text-slate-500 text-sm md:text-base">내 성향은 살리고 상대방 취향은 저격하는<br>200% 맞춤형 연애 공략 가이드</p>
             </div>
 
-            <div class="clean-card p-8 md:p-10 shadow-lg">
+            <div class="clean-card p-8 md:p-10 shadow-lg bg-white">
                 <div class="flex flex-col gap-6">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">나의 MBTI</label>
-                            <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-slate-300 tracking-widest" placeholder="ENFP" maxlength="4">
+                            <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
                         </div>
-                        <i class="fas fa-heart text-rose-300 text-xl animate-pulse"></i>
+                        <i class="fas fa-heart text-rose-400 text-2xl animate-pulse mt-2 md:mt-0"></i>
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">상대방 MBTI</label>
-                            <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-slate-300 tracking-widest" placeholder="INTJ" maxlength="4">
+                            <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
                         </div>
                     </div>
                     
                     <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
-                        <span>공략법 확인하기</span> <i class="fas fa-key"></i>
+                        <span>궁합 확인하기</span> <i class="fas fa-key"></i>
                     </button>
                 </div>
             </div>
@@ -92,22 +95,22 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-rose-500 bg-rose-50 px-2 py-1 rounded">VER 3.0</span>
+                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">PURE MAIN 3.3</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
 
-            <div class="mt-12 pt-8 border-t border-slate-200">
+            <div class="mt-12 pt-8 border-t border-rose-200/50">
                 <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
                 <div class="grid grid-cols-2 gap-3">
-                    <a href="https://aimbti.xyz/travel" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
+                    <a href="/travel" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
                         <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-2 text-sky-500 group-hover:scale-110 transition-transform">
                             <i class="fas fa-plane"></i>
                         </div>
                         <p class="text-sm font-bold text-slate-700">우정 여행 판독기</p>
                         <p class="text-[10px] text-slate-400">절교 방지 가이드</p>
                     </a>
-                    <a href="https://aimbti.xyz/biz" class="clean-card p-4 text-center hover:shadow-md transition-shadow group">
+                    <a href="/biz" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
                         <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition-transform">
                             <i class="fas fa-briefcase"></i>
                         </div>
@@ -118,7 +121,7 @@
             </div>
 
             <div class="mt-6 text-center">
-                <button onclick="shareLink()" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-slate-50 transition-all text-sm group">
+                <button onclick="shareLink()" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-rose-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-rose-50 transition-all text-sm group">
                     <i class="fas fa-share-alt group-hover:text-rose-500 transition-colors"></i> 친구에게 결과 공유하기
                 </button>
             </div>
@@ -132,7 +135,7 @@
     </div>
 
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">
-        Ver 3.0 Main
+        Ver 3.3 Main
     </div>
 
     <datalist id="mbti-list"></datalist>
@@ -143,7 +146,7 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. 연애/썸 데이터 (리스트 형태로 강화)
+            // 1. 연애/썸 데이터
             const mbtiData = {
                 "ISTJ": [{ type: "신중한 계획가형", like: "오차 없는 시간 약속 준수, 깔끔하고 단정한 외모와 옷차림, 예측 가능한 데이트 일정, 예의 바른 태도", dislike: "갑작스러운 번개 만남 강요, 시끄럽고 무질서한 장소, 허세 부리는 말투, 약속 시간 늦는 것", tip: "애매하게 '언제 밥 한번 먹자'는 말은 독입니다. '이번 주 토요일 6시에 강남역 3번 출구'처럼 구체적으로 제안하세요." }],
                 "ISFJ": [{ type: "섬세한 배려왕형", like: "지나가듯 했던 사소한 말 기억해주기, 식당 직원에게 친절한 모습, 안정적이고 차분한 데이트, 진심 담긴 편지", dislike: "강한 자기주장으로 몰아붙이는 것, 무례하고 거친 언행, 갈등 상황 조장, 연락 두절", tip: "급발진은 절대 금물입니다. 당신이 안전하고 따뜻한 사람이라는 확신이 들 때까지 천천히 스며들어야 합니다." }],
@@ -155,7 +158,7 @@
                 "INTP": [{ type: "호기심 많은 괴짜형", like: "나의 마이너한 관심사를 흥미롭게 들어주는 것, 지적인 자극, 멍 때리는 시간 존중, 엉뚱한 유머", dislike: "뻔한 스몰토크(날씨, 밥), 논리 없는 감정적 주장, 사생활 꼬치꼬치 캐묻는 것", tip: "그 사람이 꽂혀있는 주제에 대해 질문하세요. 신나서 떠들기 시작하면 이미 반은 넘어온 겁니다." }],
                 "ESTP": [{ type: "화끈한 직진러형", like: "스릴 넘치는 액티비티, 돌려 말하지 않는 직설적인 호감 표현, 맛집 탐방, 센스 있는 유머", dislike: "답답하게 뜸 들이는 것, 빙빙 돌려 말하기, 지나치게 진지하고 무거운 분위기, 구속", tip: "고민할 시간에 일단 지르세요! '지금 나와, 드라이브 가자' 같은 박력 있는 제안이 먹힙니다." }],
                 "ESFP": [{ type: "주인공 본능 연예인형", like: "나에게 쏟아지는 관심과 칭찬, 서프라이즈 이벤트, 무한 리액션, 핫플레이스 데이트", dislike: "침묵과 정적, 나를 투명 인간 취급하는 것, 지루한 설교나 잔소리, 집에만 있는 것", tip: "텐션을 올리세요! '너랑 있으니까 진짜 재밌다', '오늘 옷 너무 예쁘다' 칭찬 폭격이 필요합니다." }],
-                "ENFP": [{ type: "사랑둥이 댕댕이형", like: "우쭈쭈 해주기, 나의 엉뚱한 말에도 맞장구쳐주는 태도, 끊임없는 애정 표현, 새로운 경험", dislike: "무관심이나 차가운 반응, 엄격한 규칙이나 규율 강요, 반복되는 지루한 일상", tip: "사소한 변화도 알아봐 주고 칭찬해주세요. 당신의 관심이 곧 사랑의 척도라고 생각합니다." }],
+                "ENFP": [{ type: "사랑둥이 댕댕이형", like: "우쭈쭈 해주기, 나의 엉뚱한 말에도 맞장구쳐주는 태도, 끊임없는 애정 표현, 새로운 경험", dislike: "무관심, 차가운 반응, 엄격한 규칙이나 규율 강요", tip: "사소한 변화도 알아봐 주고 칭찬해주세요. 당신의 관심이 곧 사랑의 척도라고 생각합니다." }],
                 "ENTP": [{ type: "매력적인 논쟁가형", like: "말싸움(토론)을 즐겁게 받아주는 티키타카, 새로운 아이디어, 나를 인정하고 치켜세워 주는 것", dislike: "권위적으로 찍어 누르려는 태도, 무조건적인 복종 강요, 뻔하고 지루한 칭찬", tip: "논쟁을 피하지 말고 즐기세요. 지적으로 대등한 상대라고 느낄 때 강렬한 끌림을 느낍니다." }],
                 "ESTJ": [{ type: "확실한 리더형", like: "자신의 일에 몰입하는 능력 있는 모습, 확실한 호불호 표현, 체계적이고 효율적인 데이트, 시간 엄수", dislike: "우유부단하게 결정 못 하는 모습, 약속 어기는 것, 게으르고 무능력한 태도, 징징거림", tip: "감정보다는 이성에 호소하세요. 당신이 배울 점이 있고 미래를 함께 그릴 수 있는 사람임을 어필하세요." }],
                 "ESFJ": [{ type: "다정한 인싸형", like: "고맙다는 표현 자주 하기, 내 사람들을 챙겨주는 세심함, 빠른 답장과 활발한 리액션", dislike: "차가운 반응이나 읽씹, 내가 베푼 호의를 무시하는 것, 예의 없는 행동, 비판", tip: "그 사람이 베푸는 친절에 크게 감동하고 표현하세요. '너 같은 사람 처음이야'라는 말이 특효약입니다." }],
@@ -163,42 +166,66 @@
                 "ENTJ": [{ type: "카리스마 대장형", like: "도전적이고 야망 있는 모습, 직설적이고 솔직한 화법, 일 잘하는 프로페셔널함, 자기계발", dislike: "감성팔이하며 의존하려는 모습, 무능력하고 게으른 태도, 시간 낭비하는 무의미한 대화", tip: "주눅 들지 말고 당당하게 대하세요. 자신의 일에 몰입하고 성취해내는 멋진 모습을 보여줄 때 반합니다." }]
             };
 
-            // 2. 궁합 점수 로직 (연애 버전)
+            // 2. 궁합 점수 로직
             function getLoveHarmony(me, you) {
                 let score = 50;
-                let title = "", desc = "";
+                let title = "", desc = "", conflict = "";
                 
-                // 단순화된 로직 (실제로는 더 복잡할 수 있음)
-                const sameEI = (me.includes('E') === you.includes('E'));
                 const sameSN = (me.includes('S') === you.includes('S'));
                 const sameTF = (me.includes('T') === you.includes('T'));
                 const sameJP = (me.includes('J') === you.includes('J'));
 
-                // 점수 계산 (S/N이 같으면 큰 점수, T/F 다르면 보완 등)
                 if(sameSN) score += 20; else score -= 10;
                 if(sameJP) score += 10; else score -= 5;
-                if(!sameTF) score += 15; // 서로 보완
+                if(!sameTF) score += 15; 
                 
-                // 텍스트 매핑
-                if (score >= 80) { title = "🔥 천생연분! 불타오르는 커플"; desc = "만나자마자 스파크가 튀겠네요. 대화도 잘 통하고 가치관도 비슷해서 급속도로 가까워질 수 있습니다."; }
-                else if (score >= 60) { title = "💖 찰떡궁합! 서로 보완하는 사이"; desc = "서로 다른 점이 매력으로 다가옵니다. 조금만 맞춰가면 누구보다 예쁜 사랑을 할 수 있어요."; }
-                else if (score >= 40) { title = "⚡ 짜릿한 썸! 노력이 필요해요"; desc = "끌림은 있지만 부딪히는 부분도 꽤 있겠네요. 서로의 차이를 인정하고 이해하려는 노력이 필수입니다."; }
-                else { title = "🌪 위태로운 관계! 전쟁 같은 사랑"; desc = "만나면 싸우거나 오해가 쌓일 수 있어요. 하지만 원래 상극에게 더 강하게 끌리는 법이죠."; }
+                score = Math.min(100, Math.max(10, score));
 
-                return { score: Math.min(100, Math.max(0, score)), title, desc };
+                if (score >= 80) { 
+                    title = "🔥 천생연분! 불타오르는 커플"; 
+                    desc = "만나자마자 스파크가 튀겠네요. 대화도 잘 통하고 가치관도 비슷해서 급속도로 가까워질 수 있습니다. 결혼까지 생각할지도 몰라요!"; 
+                } else if (score >= 60) { 
+                    title = "💖 찰떡궁합! 서로 보완하는 사이"; 
+                    desc = "서로 다른 점이 매력으로 다가옵니다. 조금만 맞춰가면 누구보다 예쁜 사랑을 할 수 있어요."; 
+                } else if (score >= 40) { 
+                    title = "⚡ 짜릿한 썸! 노력이 필요해요"; 
+                    desc = "강렬한 끌림은 있지만 부딪히는 부분도 꽤 있겠네요. 서로의 차이를 인정하고 이해하려는 노력이 필수입니다."; 
+                } else { 
+                    title = "🌪 위태로운 관계! 전쟁 같은 사랑"; 
+                    desc = "만나면 싸우거나 오해가 쌓일 수 있어요. 하지만 원래 상극에게 더 미친 듯이 끌리는 법이죠. 스릴을 즐긴다면 도전하세요!"; 
+                }
+
+                // 싸우는 이유 (갈등 분석)
+                if (!sameTF) {
+                    if (me.includes('T')) {
+                        conflict = "⚠️ <b>[싸움 포인트]</b><br>당신의 무심한 해결책 제시에 상대방(F)은 '내 맘도 몰라주고!'라며 서운해할 수 있어요. 영혼 없어도 좋으니 공감부터 해주세요.";
+                    } else {
+                        conflict = "⚠️ <b>[싸움 포인트]</b><br>상대방(T)에게 감정적인 위로를 바라지 마세요. '힘들어'라고 하면 '약 먹어'라고 답할 겁니다. 그게 그 사람 나름의 사랑 표현입니다.";
+                    }
+                } else if (!sameJP) {
+                    if (me.includes('J')) {
+                        conflict = "⚠️ <b>[싸움 포인트]</b><br>당신의 완벽한 데이트 계획을 상대방(P)이 늦잠 자서 망칠 수 있습니다. 상대방을 통제하려 들면 싸움 납니다. 여유를 가지세요.";
+                    } else {
+                        conflict = "⚠️ <b>[싸움 포인트]</b><br>상대방(J)의 빡빡한 스케줄에 숨이 막힐 수 있습니다. 하지만 예약과 길 찾기는 다 해주니 군말 말고 따르는 게 평화의 길입니다.";
+                    }
+                } else {
+                    conflict = "✨ <b>[평화 포인트]</b><br>성향이 비슷해서 큰 갈등은 없겠네요! 다만, 둘 다 결정을 미루거나(P+P) 둘 다 고집을 피우면(J+J) 곤란할 수 있습니다.";
+                }
+
+                return { score, title, desc, conflict };
             }
 
-            // 3. 시크릿 가이드 데이터 (연애 버전)
+            // 3. 시크릿 가이드 데이터 (연애)
             const secretData = {
-                "S": { appeal: "👀 <b>시각적 자극 & 구체적 칭찬:</b> '오늘 예쁘다'보다 '오늘 입은 셔츠 색깔 진짜 잘 어울린다'가 먹힙니다. 깔끔한 외모는 기본입니다.", beware: "☁️ <b>뜬구름 잡는 소리:</b> '만약에 좀비가 나타나면...' 같은 망상은 자제하세요. 현실적인 주제로 대화하세요." },
-                "N": { appeal: "✨ <b>상상력 자극 & 깊은 대화:</b> '너는 인생에서 뭐가 제일 중요해?' 같은 심오한 질문을 좋아합니다. 독특한 취향을 어필하세요.", beware: "🤖 <b>너무 현실적인 태도:</b> 상대방의 꿈이나 상상을 '그건 돈이 안 되잖아'라고 짓밟지 마세요." },
-                "T": { appeal: "🧠 <b>논리적이고 똑부러지는 모습:</b> 고민 상담할 때 감정에 호소하기보다 '그래서 이렇게 해결하려고 해'라고 주관을 보여주세요.", beware: "😭 <b>이유 없는 징징거림:</b> 해결책 없이 감정만 쏟아내면 지쳐서 도망갑니다." },
-                "F": { appeal: "🥰 <b>무한 공감 & 리액션:</b> 눈을 맞추고 고개를 끄덕여주세요. 사소한 변화를 알아봐 주는 것이 킬링 포인트입니다.", beware: "❄️ <b>차가운 팩트 폭격:</b> 맞는 말이라도 아프게 하면 마음의 문을 닫습니다. 쿠션어를 사용하세요." },
+                "S": { appeal: "👀 <b>시각적 자극 & 구체적 칭찬:</b> '오늘 예쁘다'보다 '오늘 입은 셔츠 색깔 진짜 잘 어울린다'가 먹힙니다. 깔끔한 외모는 기본입니다.", beware: "☁️ <b>뜬구름 잡는 소리:</b> '만약에 좀비가 나타나면...' 같은 망상은 자제하세요. 현실적이고 실용적인 주제로 대화하세요." },
+                "N": { appeal: "✨ <b>상상력 자극 & 깊은 대화:</b> '너는 인생에서 뭐가 제일 중요해?' 같은 심오한 질문을 좋아합니다. 독특한 취향을 어필하세요.", beware: "🤖 <b>너무 현실적인 태도:</b> 상대방의 꿈이나 상상을 '그건 돈이 안 되잖아', '현실적으로 불가능해'라고 짓밟지 마세요." },
+                "T": { appeal: "🧠 <b>논리적이고 똑부러지는 모습:</b> 고민 상담할 때 감정에 호소하기보다 '그래서 이렇게 해결하려고 해'라고 주관을 보여주세요.", beware: "😭 <b>이유 없는 징징거림:</b> 해결책 없이 감정만 쏟아내면 지쳐서 도망갑니다. 징징거리는 건 절대 금물입니다." },
+                "F": { appeal: "🥰 <b>무한 공감 & 리액션:</b> 눈을 맞추고 고개를 끄덕여주세요. '정말? 힘들었겠다'라는 말 한마디가 그 사람의 마음을 엽니다.", beware: "❄️ <b>차가운 팩트 폭격:</b> 맞는 말이라도 아프게 하면 마음의 문을 닫습니다. 비판할 때는 반드시 쿠션어를 사용하세요." },
                 "J": { role: "📅 계획적인 데이트 리더", good: "약속 시간 10분 전 도착", bad: "당일 약속 취소/변경" },
                 "P": { role: "🎉 유연한 분위기 메이커", good: "돌발 상황 즐기기", bad: "통제하고 가르치려 들기" }
             };
 
-            // 문자열을 리스트로 변환
+            // 문자열 리스트 변환
             const formatList = (str) => {
                 if (!str) return "";
                 return `<ul class="style-list space-y-2">` +
@@ -215,7 +242,7 @@
                 showResult(valA, valB);
             }
 
-            // [Persistence] 연애용 시크릿 해제 (키 다름)
+            // [Persistence] 연애용 시크릿 해제
             window.unlockSecret = function() {
                 window.open('https://link.coupang.com/a/ddddJ5', '_blank');
                 localStorage.setItem('love_secret_unlocked', 'true');
@@ -230,21 +257,20 @@
                 const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];
                 const harmony = getLoveHarmony(me, you);
                 
-                // 시크릿 데이터 조합 (SN + TF + JP)
                 const snKey = you.includes('S') ? 'S' : 'N';
                 const tfKey = you.includes('T') ? 'T' : 'F';
                 const jpKey = you.includes('J') ? 'J' : 'P';
                 
                 const secretAppeal = secretData[snKey].appeal + "<br>" + secretData[tfKey].appeal;
                 const secretBeware = secretData[snKey].beware + "<br>" + secretData[tfKey].beware;
-                const secretRole = secretData[jpKey]; // JP로 스타일 결정
+                const secretRole = secretData[jpKey];
 
                 const isUnlocked = localStorage.getItem('love_secret_unlocked') === 'true';
                 const overlayClass = isUnlocked ? 'hidden' : '';
                 const blurClass = isUnlocked ? 'unlocked' : '';
 
                 const resultHTML = `
-                    <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden">
+                    <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden bg-white">
                         <h2 class="text-2xl font-extrabold text-slate-800 mb-2">
                             <span class="text-point">${you}</span> 그 사람은<br>"${tData.type}"
                         </h2>
@@ -265,7 +291,7 @@
                         </div>
                     </div>
 
-                    <div class="clean-card p-6 md:p-8 text-center">
+                    <div class="clean-card p-6 md:p-8 text-center bg-white">
                         <h3 class="font-bold text-slate-400 text-xs tracking-widest mb-2">LOVE SCORE</h3>
                         <div class="text-5xl font-black text-rose-500 mb-2">${harmony.score}<span class="text-2xl text-slate-300">/100</span></div>
                         
@@ -274,10 +300,14 @@
                         </div>
 
                         <h4 class="text-lg font-bold text-slate-800 mb-1">${harmony.title}</h4>
-                        <p class="text-sm text-slate-500 mb-2 leading-relaxed word-keep break-keep">${harmony.desc}</p>
+                        <p class="text-sm text-slate-500 mb-4 leading-relaxed word-keep break-keep">${harmony.desc}</p>
+                        
+                        <div class="bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 text-left text-sm text-slate-600 leading-snug word-keep break-keep">
+                            ${harmony.conflict}
+                        </div>
                     </div>
 
-                    <div class="clean-card relative overflow-hidden" style="min-height: 450px;">
+                    <div class="clean-card relative overflow-hidden bg-white" style="min-height: 450px;">
                         
                         <div class="lock-overlay p-6 text-center ${overlayClass}">
                             <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-white text-3xl mb-4 shadow-xl">
