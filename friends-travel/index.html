@@ -91,6 +91,66 @@
                     </button>
                 </div>
             </div>
+           <div class="mt-10 w-full max-w-3xl">
+                
+                <div class="text-center mb-6 relative">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-slate-200"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <span class="bg-slate-50 px-4 text-xs font-bold text-slate-400 tracking-widest uppercase">BONUS</span>
+                    </div>
+                    <h3 class="mt-4 text-slate-800 font-bold text-sm animate-bounce">
+                        🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 테스트 하러 가기
+                    </h3>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 md:gap-4">
+                    <button onclick="goTest('/')" class="bg-white border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                        <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-heart-broken"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">왜 싸우는지 분석</p>
+                    </button>
+
+                    <button onclick="goTest('/some')" class="bg-white border border-pink-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                        <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center text-pink-500 mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-kiss-wink-heart"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-700 text-sm">썸남썸녀 공략</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">플러팅 필승 전략</p>
+                    </button>
+
+                    <button onclick="goTest('/friends-travel')" class="bg-white border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                        <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-500 mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-700 text-sm">우정 여행 판독기</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">절교 방지 가이드</p>
+                    </button>
+
+                    <button onclick="goTest('/biz')" class="bg-white border border-indigo-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                        <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500 mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-700 text-sm">직장상사 공략</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">사회생활 치트키</p>
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                function goTest(targetUrl) {
+                    // 1. 새 탭에서 쿠팡 열기 (아이쇼핑)
+                    window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                    
+                    // 2. 현재 탭은 해당 테스트 페이지로 이동 (약간의 딜레이 후 자연스럽게)
+                    setTimeout(() => {
+                        location.href = targetUrl;
+                    }, 100);
+                }
+            </script>
         </div>
 
         <div id="result-page" class="hidden fade-in">
