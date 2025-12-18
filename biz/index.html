@@ -38,13 +38,6 @@
         
         .score-bar { transition: width 1.5s ease-out; }
         
-        /* 시크릿 가이드 */
-        .blur-content { filter: blur(10px); user-select: none; pointer-events: none; transition: filter 0.5s; }
-        .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
-        
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(4px); border-radius: 24px; transition: opacity 0.5s; }
-        .lock-overlay.hidden { opacity: 0; pointer-events: none; }
-
         .bounce-custom { animation: bounce 2s infinite; }
         
         /* 리스트 스타일 */
@@ -88,6 +81,7 @@
                     </button>
                 </div>
             </div>
+            
             <div class="mt-10 w-full max-w-3xl">
                 
                 <div class="text-center mb-6 relative">
@@ -139,10 +133,7 @@
 
             <script>
                 function goTest(targetUrl) {
-                    // 1. 새 탭에서 쿠팡 열기 (아이쇼핑)
                     window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                    
-                    // 2. 현재 탭은 해당 테스트 페이지로 이동 (약간의 딜레이 후 자연스럽게)
                     setTimeout(() => {
                         location.href = targetUrl;
                     }, 100);
@@ -155,7 +146,7 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-indigo-500 bg-indigo-100 px-2 py-1 rounded">VER 3.5 BIZ</span>
+                <span class="text-[10px] font-bold text-indigo-500 bg-indigo-100 px-2 py-1 rounded">VER 3.6 BIZ</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
@@ -180,10 +171,10 @@
                 </div>
             </div>
 
-        <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
+            <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
                 
                 <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-slate-50 transition-all text-sm group">
-                    <i class="fas fa-share-alt group-hover:text-rose-500 transition-colors"></i> 동기 단톡방에 공유하기
+                    <i class="fas fa-share-alt group-hover:text-indigo-500 transition-colors"></i> 동기 단톡방에 공유하기
                 </button>
 
                 <a href="https://link.coupang.com/a/ddddJ5" target="_blank" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 border border-orange-400 rounded-full shadow-sm text-white font-bold hover:opacity-90 transition-all text-sm animate-bounce">
@@ -201,7 +192,7 @@
     </div>
 
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-400 opacity-50 font-mono pointer-events-none select-none z-50">
-        Ver 3.5 Biz
+        Ver 3.6 Biz NoLock
     </div>
 
     <datalist id="mbti-list"></datalist>
@@ -296,32 +287,17 @@
                 showResult(valA, valB);
             }
 
-            // [Persistence] 직장용 시크릿 해제 (키 다름: work_secret_unlocked)
-            window.unlockSecret = function() {
-                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                localStorage.setItem('work_secret_unlocked', 'true');
-                
-                const overlay = document.querySelector('.lock-overlay');
-                const content = document.querySelector('.blur-content');
-                if(overlay) overlay.classList.add('hidden');
-                if(content) content.classList.add('unlocked');
-            }
-
             function showResult(me, you) {
                 const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];
                 const harmony = getWorkHarmony(me, you);
                 
                 const snKey = you.includes('S') ? 'S' : 'N';
                 const tfKey = you.includes('T') ? 'T' : 'F';
-                const jpKey = you.includes('J') ? 'J' : 'P'; // J상사는 계획성, P상사는 유연성 원함
+                const jpKey = you.includes('J') ? 'J' : 'P';
                 
                 const secretAppeal = secretData[snKey].appeal + "<br>" + secretData[tfKey].appeal;
                 const secretBeware = secretData[snKey].beware + "<br>" + secretData[tfKey].beware;
-                const secretRole = secretData[jpKey]; // 상사 성향에 맞춘 역할 추천
-
-                const isUnlocked = localStorage.getItem('work_secret_unlocked') === 'true';
-                const overlayClass = isUnlocked ? 'hidden' : '';
-                const blurClass = isUnlocked ? 'unlocked' : '';
+                const secretRole = secretData[jpKey];
 
                 const resultHTML = `
                     <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden bg-white">
@@ -363,23 +339,7 @@
 
                     <div class="clean-card relative overflow-hidden bg-white" style="min-height: 450px;">
                         
-                        <div class="lock-overlay p-6 text-center ${overlayClass}">
-                            <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-white text-3xl mb-4 shadow-xl">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-800 text-xl mb-2">🔒 시크릿 공략법 잠금</h3>
-                            <p class="text-slate-500 text-sm mb-8 leading-relaxed">
-                                고과 S등급을 부르는 <span class="font-bold text-indigo-500">보고 필승법</span>과<br>
-                                절대 밟으면 안 되는 <span class="font-bold text-slate-600">지뢰 리스트</span>를<br>
-                                지금 바로 확인하세요!
-                            </p>
-                            
-                            <button onclick="unlockSecret()" class="w-full max-w-sm bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bounce-custom text-lg">
-                                🚀 쿠팡 보고 무료 잠금해제
-                            </button>
-                        </div>
-
-                        <div class="blur-content p-6 md:p-8 h-full bg-white ${blurClass}">
+                        <div class="p-6 md:p-8 h-full bg-white">
                             <div class="flex items-center justify-center gap-2 mb-8">
                                 <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">PREMIUM</span>
                                 <h4 class="font-bold text-slate-800 text-lg">상사 맞춤 공략집</h4>
