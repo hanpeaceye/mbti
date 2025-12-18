@@ -38,13 +38,6 @@
         
         .score-bar { transition: width 1.5s ease-out; }
         
-        /* 시크릿 가이드 */
-        .blur-content { filter: blur(10px); user-select: none; pointer-events: none; transition: filter 0.5s; }
-        .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
-        
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(4px); border-radius: 24px; transition: opacity 0.5s; }
-        .lock-overlay.hidden { opacity: 0; pointer-events: none; }
-
         .bounce-custom { animation: bounce 2s infinite; }
         
         /* 리스트 스타일 */
@@ -88,6 +81,7 @@
                     </button>
                 </div>
             </div>
+            
             <div class="mt-10 w-full max-w-3xl">
                 
                 <div class="text-center mb-6 relative">
@@ -119,7 +113,7 @@
                         <p class="text-[10px] text-slate-400 mt-1">플러팅 필승 전략</p>
                     </button>
 
-                    <button onclick="goTest('/frineds-travel')" class="bg-white border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                    <button onclick="goTest('/friends-travel')" class="bg-white border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
                         <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-500 mb-2 group-hover:scale-110 transition-transform">
                             <i class="fas fa-plane"></i>
                         </div>
@@ -139,10 +133,7 @@
 
             <script>
                 function goTest(targetUrl) {
-                    // 1. 새 탭에서 쿠팡 열기 (아이쇼핑)
                     window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                    
-                    // 2. 현재 탭은 해당 테스트 페이지로 이동 (약간의 딜레이 후 자연스럽게)
                     setTimeout(() => {
                         location.href = targetUrl;
                     }, 100);
@@ -155,7 +146,7 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">SOME VER</span>
+                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">VER 3.4 SOME</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
@@ -163,12 +154,12 @@
             <div class="mt-12 pt-8 border-t border-rose-200/50">
                 <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
                 <div class="grid grid-cols-2 gap-3">
-                    <a href="/friends-travel/" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-                        <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-2 text-sky-500 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-plane"></i>
+                    <a href="/" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
+                        <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-2 text-rose-500 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-heart-broken"></i>
                         </div>
-                        <p class="text-sm font-bold text-slate-700">우정 여행 판독기</p>
-                        <p class="text-[10px] text-slate-400">절교 방지 가이드</p>
+                        <p class="text-sm font-bold text-slate-700">커플 싸움 판독기</p>
+                        <p class="text-[10px] text-slate-400">우리가 싸우는 이유</p>
                     </a>
                     <a href="/biz" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
                         <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition-transform">
@@ -180,9 +171,9 @@
                 </div>
             </div>
 
-         <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
+            <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
                 
-                <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-slate-50 transition-all text-sm group">
+                <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-rose-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-rose-50 transition-all text-sm group">
                     <i class="fas fa-share-alt group-hover:text-rose-500 transition-colors"></i> 친구에게 결과 공유하기
                 </button>
 
@@ -201,7 +192,7 @@
     </div>
 
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">
-        Ver 3.4 Some
+        Ver 3.4 Some NoLock
     </div>
 
     <datalist id="mbti-list"></datalist>
@@ -232,11 +223,9 @@
                 "ENTJ": [{ type: "카리스마 대장형", like: "도전적이고 야망 있는 모습, 직설적이고 솔직한 화법, 일 잘하는 프로페셔널함, 자기계발", dislike: "감성팔이하며 의존하려는 모습, 무능력하고 게으른 태도, 시간 낭비하는 무의미한 대화", tip: "주눅 들지 말고 당당하게 대하세요. 자신의 일에 몰입하고 성취해내는 멋진 모습을 보여줄 때 반합니다." }]
             };
 
-            // 2. 궁합 점수 로직 (연애)
-            function getLoveHarmony(me, you) {
-                let score = 50;
-                let title = "", desc = "", conflict = "";
-                
+            // 2. 궁합 점수 (썸)
+            function getSomeHarmony(me, you) {
+                let score = 50; 
                 const sameSN = (me.includes('S') === you.includes('S'));
                 const sameTF = (me.includes('T') === you.includes('T'));
                 const sameJP = (me.includes('J') === you.includes('J'));
@@ -244,58 +233,36 @@
                 if(sameSN) score += 20; else score -= 10;
                 if(sameJP) score += 10; else score -= 5;
                 if(!sameTF) score += 15; 
-                
                 score = Math.min(100, Math.max(10, score));
 
-                if (score >= 80) { 
-                    title = "🔥 천생연분! 불타오르는 커플"; 
-                    desc = "만나자마자 스파크가 튀겠네요. 대화도 잘 통하고 가치관도 비슷해서 급속도로 가까워질 수 있습니다. 결혼까지 생각할지도 몰라요!"; 
-                } else if (score >= 60) { 
-                    title = "💖 찰떡궁합! 서로 보완하는 사이"; 
-                    desc = "서로 다른 점이 매력으로 다가옵니다. 조금만 맞춰가면 누구보다 예쁜 사랑을 할 수 있어요."; 
-                } else if (score >= 40) { 
-                    title = "⚡ 짜릿한 썸! 노력이 필요해요"; 
-                    desc = "강렬한 끌림은 있지만 부딪히는 부분도 꽤 있겠네요. 서로의 차이를 인정하고 이해하려는 노력이 필수입니다."; 
-                } else { 
-                    title = "🌪 위태로운 관계! 전쟁 같은 사랑"; 
-                    desc = "만나면 싸우거나 오해가 쌓일 수 있어요. 하지만 원래 상극에게 더 미친 듯이 끌리는 법이죠. 스릴을 즐긴다면 도전하세요!"; 
-                }
+                let title, desc, conflict;
+                if (score >= 80) { title = "🔥 썸 단계 생략 가능!"; desc = "만나자마자 스파크가 튑니다. 오늘부터 1일 해도 될 정도예요."; }
+                else if (score >= 60) { title = "💖 그린라이트 켜짐"; desc = "서로 호감이 생길 확률이 매우 높습니다. 조금만 용기 내세요."; }
+                else if (score >= 40) { title = "⚡ 노력하면 썸 가능"; desc = "매력을 느끼지만 접근 방식에 주의가 필요합니다."; }
+                else { title = "🌪 공략 난이도 최상"; desc = "취향이 완전히 다릅니다. 하지만 원래 나쁜 남자/여자에게 끌리는 법이죠."; }
 
                 if (!sameTF) {
-                    if (me.includes('T')) {
-                        conflict = "⚠️ <b>[주의]</b> 당신의 무심한 해결책 제시에 상대방(F)은 '내 맘도 몰라주고!'라며 서운해할 수 있어요. 영혼 없어도 좋으니 공감부터 해주세요.";
-                    } else {
-                        conflict = "⚠️ <b>[주의]</b> 상대방(T)에게 감정적인 위로를 바라지 마세요. '힘들어'라고 하면 '약 먹어'라고 답할 겁니다. 그게 그 사람 나름의 사랑 표현입니다.";
-                    }
-                } else if (!sameJP) {
-                    if (me.includes('J')) {
-                        conflict = "⚠️ <b>[주의]</b> 당신의 완벽한 데이트 계획을 상대방(P)이 늦잠 자서 망칠 수 있습니다. 상대방을 통제하려 들면 싸움 납니다. 여유를 가지세요.";
-                    } else {
-                        conflict = "⚠️ <b>[주의]</b> 상대방(J)의 빡빡한 스케줄에 숨이 막힐 수 있습니다. 하지만 예약과 길 찾기는 다 해주니 군말 말고 따르는 게 평화의 길입니다.";
-                    }
+                    if (me.includes('T')) conflict = "⚠️ <b>[접근 주의]</b> 논리적인 해결책 제시는 잠시 넣어두세요. 상대방(F)은 <b>공감과 리액션</b>을 원합니다.";
+                    else conflict = "⚠️ <b>[접근 주의]</b> 감정적인 호소는 부담스러울 수 있어요. 상대방(T)에게는 <b>깔끔하고 명확하게</b> 용건을 말하는 게 좋습니다.";
                 } else {
-                    conflict = "✨ <b>[평화]</b> 성향이 비슷해서 큰 갈등은 없겠네요! 다만, 둘 다 결정을 미루거나(P+P) 둘 다 고집을 피우면(J+J) 곤란할 수 있습니다.";
+                    conflict = "✨ <b>[어필 포인트]</b> 대화 코드가 잘 맞아서 금방 친해질 수 있어요! 공통 관심사만 찾으면 게임 끝입니다.";
                 }
-
                 return { score, title, desc, conflict };
             }
 
-            // 3. 시크릿 가이드 데이터
+            // 3. 시크릿 가이드 (썸/플러팅)
             const secretData = {
-                "S": { appeal: "👀 <b>시각적 자극 & 구체적 칭찬:</b> '오늘 예쁘다'보다 '오늘 입은 셔츠 색깔 진짜 잘 어울린다'가 먹힙니다. 깔끔한 외모와 좋은 향기는 기본입니다.", beware: "☁️ <b>뜬구름 잡는 소리:</b> '만약에 좀비가 나타나면...' 같은 망상은 자제하세요. 현실적이고 실용적인 주제로 대화하세요." },
-                "N": { appeal: "✨ <b>상상력 자극 & 깊은 대화:</b> '너는 인생에서 뭐가 제일 중요해?' 같은 심오한 질문을 좋아합니다. 당신의 독특한 취향과 꿈을 어필하세요.", beware: "🤖 <b>너무 현실적인 태도:</b> 상대방의 꿈이나 상상을 '그건 돈이 안 되잖아', '현실적으로 불가능해'라고 짓밟지 마세요." },
-                "T": { appeal: "🧠 <b>논리적이고 똑부러지는 모습:</b> 고민 상담할 때 감정에 호소하기보다 '그래서 이렇게 해결하려고 해'라고 주관을 보여주세요. 뇌가 섹시한 사람을 좋아합니다.", beware: "😭 <b>이유 없는 징징거림:</b> 해결책 없이 감정만 쏟아내면 지쳐서 도망갑니다. 징징거리는 건 절대 금물입니다." },
-                "F": { appeal: "🥰 <b>무한 공감 & 리액션:</b> 눈을 맞추고 고개를 끄덕여주세요. '정말? 힘들었겠다'라는 말 한마디가 그 사람의 마음을 엽니다.", beware: "❄️ <b>차가운 팩트 폭격:</b> 맞는 말이라도 아프게 하면 마음의 문을 닫습니다. 비판할 때는 반드시 쿠션어를 사용하세요." },
-                "J": { role: "📅 계획적인 데이트 리더", good: "약속 시간 10분 전 도착", bad: "당일 약속 취소/변경" },
-                "P": { role: "🎉 유연한 분위기 메이커", good: "돌발 상황 즐기기", bad: "통제하고 가르치려 들기" }
+                "S": { appeal: "👀 <b>시각적 자극:</b> 오늘 입은 옷, 바뀐 헤어스타일을 구체적으로 칭찬하세요. 깔끔한 외모는 필수!", beware: "☁️ <b>뜬구름 잡기:</b> 비현실적인 망상보다는 '지금 맛있는 거', '오늘 날씨' 이야기를 하세요." },
+                "N": { appeal: "✨ <b>상상력 자극:</b> '만약에 우리가...' 같은 질문을 던지세요. 독특한 취향을 어필하면 흥미를 느낍니다.", beware: "🤖 <b>현실주의:</b> 상대의 꿈을 '돈이 안 되잖아'라고 평가하는 순간 끝입니다." },
+                "T": { appeal: "🧠 <b>지적인 매력:</b> 멍청한 모습은 절대 금물. 자기 일 잘하고 똑부러지는 모습을 보여주세요.", beware: "😭 <b>감정 과잉:</b> 아직 사귀지도 않는데 징징거리거나 서운해하면 도망갑니다." },
+                "F": { appeal: "🥰 <b>다정한 공감:</b> 눈을 맞추고 웃어주세요. 사소한 배려와 매너에 심장이 반응합니다.", beware: "❄️ <b>차가운 말투:</b> 장난이라도 팩폭을 날리면 상처받고 마음을 닫습니다." },
+                "J": { role: "📅 계획적 접근", good: "약속 시간 엄수", bad: "당일 약속 취소" },
+                "P": { role: "🎉 유연한 접근", good: "즉흥적인 제안", bad: "통제하려 들기" }
             };
 
-            // 문자열 리스트 변환
             const formatList = (str) => {
                 if (!str) return "";
-                return `<ul class="style-list space-y-2">` +
-                    str.split(',').map(item => `<li>${item.trim()}</li>`).join('') +
-                    `</ul>`;
+                return `<ul class="style-list space-y-2">` + str.split(',').map(item => `<li>${item.trim()}</li>`).join('') + `</ul>`;
             };
 
             function validateAndAnalyze() {
@@ -307,20 +274,9 @@
                 showResult(valA, valB);
             }
 
-            // [Persistence] 연애용 시크릿 해제
-            window.unlockSecret = function() {
-                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                localStorage.setItem('love_secret_unlocked', 'true');
-                
-                const overlay = document.querySelector('.lock-overlay');
-                const content = document.querySelector('.blur-content');
-                if(overlay) overlay.classList.add('hidden');
-                if(content) content.classList.add('unlocked');
-            }
-
             function showResult(me, you) {
                 const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];
-                const harmony = getLoveHarmony(me, you);
+                const harmony = getSomeHarmony(me, you);
                 
                 const snKey = you.includes('S') ? 'S' : 'N';
                 const tfKey = you.includes('T') ? 'T' : 'F';
@@ -330,24 +286,18 @@
                 const secretBeware = secretData[snKey].beware + "<br>" + secretData[tfKey].beware;
                 const secretRole = secretData[jpKey];
 
-                const isUnlocked = localStorage.getItem('love_secret_unlocked') === 'true';
-                const overlayClass = isUnlocked ? 'hidden' : '';
-                const blurClass = isUnlocked ? 'unlocked' : '';
-
                 const resultHTML = `
-                    <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden bg-white">
+                    <div class="clean-card p-6 md:p-8 text-center bg-white">
                         <h2 class="text-2xl font-extrabold text-slate-800 mb-2">
                             <span class="text-point">${you}</span> 그 사람은<br>"${tData.type}"
                         </h2>
-                        <p class="text-sm text-slate-500 mb-6 font-medium">연애 성향 분석</p>
-                        
-                        <div class="space-y-4 text-left">
+                        <div class="space-y-4 text-left mt-6">
                             <div class="bg-rose-50 p-5 rounded-xl border-l-4 border-rose-400">
-                                <p class="font-bold text-rose-600 text-sm mb-3">😍 좋아하는 행동 (Like)</p>
+                                <p class="font-bold text-rose-600 text-sm mb-3">😍 호감 포인트 (Like)</p>
                                 <div class="text-slate-600 text-sm">${formatList(tData.like)}</div>
                             </div>
                             <div class="bg-slate-50 p-5 rounded-xl border-l-4 border-slate-400">
-                                <p class="font-bold text-slate-600 text-sm mb-3">😱 싫어하는 행동 (Dislike)</p>
+                                <p class="font-bold text-slate-600 text-sm mb-3">😱 정떨어지는 행동 (Dislike)</p>
                                 <div class="text-slate-600 text-sm">${formatList(tData.dislike)}</div>
                             </div>
                         </div>
@@ -357,16 +307,13 @@
                     </div>
 
                     <div class="clean-card p-6 md:p-8 text-center bg-white">
-                        <h3 class="font-bold text-slate-400 text-xs tracking-widest mb-2">LOVE SCORE</h3>
+                        <h3 class="font-bold text-slate-400 text-xs tracking-widest mb-2">FLIRTING SCORE</h3>
                         <div class="text-5xl font-black text-rose-500 mb-2">${harmony.score}<span class="text-2xl text-slate-300">/100</span></div>
-                        
                         <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden">
                             <div class="bg-gradient-to-r from-rose-300 to-rose-600 h-3 rounded-full score-bar" style="width: 0%"></div>
                         </div>
-
                         <h4 class="text-lg font-bold text-slate-800 mb-1">${harmony.title}</h4>
                         <p class="text-sm text-slate-500 mb-4 leading-relaxed word-keep break-keep">${harmony.desc}</p>
-                        
                         <div class="bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 text-left text-sm text-slate-600 leading-snug word-keep break-keep">
                             ${harmony.conflict}
                         </div>
@@ -374,50 +321,23 @@
 
                     <div class="clean-card relative overflow-hidden bg-white" style="min-height: 450px;">
                         
-                        <div class="lock-overlay p-6 text-center ${overlayClass}">
-                            <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-white text-3xl mb-4 shadow-xl">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-800 text-xl mb-2">🔒 시크릿 공략법 잠금</h3>
-                            <p class="text-slate-500 text-sm mb-8 leading-relaxed">
-                                상대방의 심장을 저격하는 <span class="font-bold text-rose-500">필승 플러팅</span>과<br>
-                                절대 해서는 안 될 <span class="font-bold text-slate-600">금기 사항</span>을<br>
-                                지금 바로 확인하세요!
-                            </p>
-                            
-                            <button onclick="unlockSecret()" class="w-full max-w-sm bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bounce-custom text-lg">
-                                🚀 쿠팡 보고 무료 잠금해제
-                            </button>
-                        </div>
-
-                        <div class="blur-content p-6 md:p-8 h-full bg-white ${blurClass}">
+                        <div class="p-6 md:p-8 h-full bg-white">
                             <div class="flex items-center justify-center gap-2 mb-8">
                                 <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">PREMIUM</span>
-                                <h4 class="font-bold text-slate-800 text-lg">상대방 맞춤 공략집</h4>
+                                <h4 class="font-bold text-slate-800 text-lg">맞춤 플러팅 가이드</h4>
                             </div>
-
                             <div class="space-y-6">
                                 <div class="bg-rose-50 p-5 rounded-2xl border border-rose-100 shadow-sm">
-                                    <h5 class="font-bold text-rose-600 text-sm mb-3 flex items-center">
-                                        <i class="fas fa-heart mr-2"></i>심쿵 포인트 (Appeal)
-                                    </h5>
-                                    <ul class="custom-list text-slate-700 text-sm leading-relaxed space-y-2">
-                                        ${formatList(secretAppeal)}
-                                    </ul>
+                                    <h5 class="font-bold text-rose-600 text-sm mb-3 flex items-center"><i class="fas fa-heart mr-2"></i>심쿵 포인트 (Appeal)</h5>
+                                    <ul class="custom-list text-slate-700 text-sm leading-relaxed space-y-2">${formatList(secretAppeal)}</ul>
                                 </div>
-
                                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                    <h5 class="font-bold text-slate-600 text-sm mb-3 flex items-center">
-                                        <i class="fas fa-ban mr-2"></i>절대 금지 (Beware)
-                                    </h5>
-                                    <ul class="style-list text-slate-700 text-sm leading-relaxed space-y-2">
-                                        ${formatList(secretBeware)}
-                                    </ul>
+                                    <h5 class="font-bold text-slate-600 text-sm mb-3 flex items-center"><i class="fas fa-ban mr-2"></i>절대 금지 (Beware)</h5>
+                                    <ul class="style-list text-slate-700 text-sm leading-relaxed space-y-2">${formatList(secretBeware)}</ul>
                                 </div>
-                                
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 text-center flex flex-col justify-center">
-                                        <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Dating Style</p>
+                                        <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Approaching Style</p>
                                         <p class="text-lg font-black text-indigo-600 break-keep">${secretRole.role}</p>
                                     </div>
                                     <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center">
@@ -434,11 +354,7 @@
                 document.getElementById('input-page').classList.add('hidden');
                 document.getElementById('result-page').classList.remove('hidden');
                 window.scrollTo(0, 0);
-
-                setTimeout(() => {
-                    const bar = document.querySelector('.score-bar');
-                    if(bar) bar.style.width = harmony.score + '%';
-                }, 300);
+                setTimeout(() => { const bar = document.querySelector('.score-bar'); if(bar) bar.style.width = harmony.score + '%'; }, 300);
             }
 
             document.getElementById('analyze-btn').addEventListener('click', validateAndAnalyze);
@@ -453,19 +369,9 @@
         window.shareLink = function() {
             const currentUrl = window.location.href;
             if (navigator.share) {
-                navigator.share({
-                    title: '썸남썸녀 MBTI 공략법',
-                    text: '그 사람 마음을 얻는 치트키 발견! 너도 한번 해봐 😎',
-                    url: currentUrl,
-                });
+                navigator.share({ title: '썸남썸녀 공략 가이드', text: '그 사람 마음을 얻는 치트키 발견! 너도 한번 해봐 😎', url: currentUrl });
             } else {
-                const t = document.createElement("textarea");
-                document.body.appendChild(t);
-                t.value = currentUrl;
-                t.select();
-                document.execCommand('copy');
-                document.body.removeChild(t);
-                alert('링크가 복사되었습니다! 친구에게 공유하세요.');
+                const t = document.createElement("textarea"); document.body.appendChild(t); t.value = currentUrl; t.select(); document.execCommand('copy'); document.body.removeChild(t); alert('링크 복사 완료!');
             }
         }
     </script>
