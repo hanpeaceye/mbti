@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-   
+    <meta name="google-adsense-account" content="ca-pub-6540004747918466">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content="ca-pub-6540004747918466">
     <title>우정 여행 판독기 | 여행 가서 안 싸우는 법</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -39,14 +38,6 @@
         
         .score-bar { transition: width 1.5s ease-out; }
         
-        /* 시크릿 가이드 블러 효과 */
-        .blur-content { filter: blur(10px); user-select: none; pointer-events: none; transition: filter 0.5s; }
-        .blur-content.unlocked { filter: blur(0); user-select: auto; pointer-events: auto; }
-        
-        /* 잠금 오버레이 */
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(4px); border-radius: 24px; transition: opacity 0.5s; }
-        .lock-overlay.hidden { opacity: 0; pointer-events: none; }
-
         .bounce-custom { animation: bounce 2s infinite; }
         
         /* 스타일 분석 리스트 스타일 */
@@ -158,7 +149,7 @@
                 <button id="back-btn" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-sky-500 bg-sky-50 px-2 py-1 rounded">VER 2.6</span>
+                <span class="text-[10px] font-bold text-sky-500 bg-sky-50 px-2 py-1 rounded">VER 2.7</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
@@ -183,7 +174,7 @@
                 </div>
             </div>
 
-<div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
+            <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
                 
                 <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-slate-50 transition-all text-sm group">
                     <i class="fas fa-share-alt group-hover:text-rose-500 transition-colors"></i> 친구에게 결과 공유하기
@@ -204,7 +195,7 @@
     </div>
 
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">
-        Ver 2.6
+        Ver 2.7 NoLock
     </div>
 
     <datalist id="mbti-list"></datalist>
@@ -215,7 +206,7 @@
             const dataList = document.getElementById('mbti-list');
             validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
 
-            // 1. 여행 스타일 데이터 (Ver 2.3 내용 유지)
+            // 1. 여행 스타일 데이터
             const mbtiData = {
                 "ISTJ": [{ 
                     type: "분 단위 계획표를 숭배하는 인간 엑셀", 
@@ -455,16 +446,6 @@
                 showResult(valA, valB);
             }
 
-            window.unlockSecret = function() {
-                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                localStorage.setItem('travel_secret_unlocked', 'true');
-                
-                const overlay = document.querySelector('.lock-overlay');
-                const content = document.querySelector('.blur-content');
-                if(overlay) overlay.classList.add('hidden');
-                if(content) content.classList.add('unlocked');
-            }
-
             // 문자열을 리스트로 변환
             const formatList = (str) => {
                 if (!str) return "";
@@ -477,10 +458,6 @@
                 const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];
                 const harmony = getTravelHarmony(me, you);
                 const secret = getSecretContent(you);
-
-                const isUnlocked = localStorage.getItem('travel_secret_unlocked') === 'true';
-                const overlayClass = isUnlocked ? 'hidden' : '';
-                const blurClass = isUnlocked ? 'unlocked' : '';
 
                 const resultHTML = `
                     <div class="clean-card p-6 md:p-8 text-center relative overflow-hidden">
@@ -522,23 +499,7 @@
 
                     <div class="clean-card relative overflow-hidden" style="min-height: 450px;">
                         
-                        <div class="lock-overlay p-6 text-center ${overlayClass}">
-                            <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-white text-3xl mb-4 shadow-xl">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-800 text-xl mb-2">🔒 시크릿 공략법 잠금</h3>
-                            <p class="text-slate-500 text-sm mb-8 leading-relaxed">
-                                친구를 조종하는 <span class="font-bold text-indigo-500">치트키</span>와<br>
-                                절대 건드리면 안 되는 <span class="font-bold text-rose-500">발작 버튼</span>을<br>
-                                지금 바로 확인하세요!
-                            </p>
-                            
-                            <button onclick="unlockSecret()" class="w-full max-w-sm bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bounce-custom text-lg">
-                                🚀 쿠팡 보고 무료 잠금해제
-                            </button>
-                        </div>
-
-                        <div class="blur-content p-6 md:p-8 h-full bg-white ${blurClass}">
+                        <div class="p-6 md:p-8 h-full bg-white">
                             <div class="flex items-center justify-center gap-2 mb-8">
                                 <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">PREMIUM</span>
                                 <h4 class="font-bold text-slate-800 text-lg">절교 방지 상세 매뉴얼</h4>
