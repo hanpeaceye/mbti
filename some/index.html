@@ -114,7 +114,7 @@
                 <button onclick="resetPage()" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">VER 3.9 FIX</span>
+                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">VER 4.0 MESSENGER+</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
@@ -150,7 +150,7 @@
         </div>
     </div>
 
-    <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">Ver 3.9 Fix</div>
+    <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">Ver 4.0 Messenger+</div>
     <datalist id="mbti-list"></datalist>
 
     <script>
@@ -218,6 +218,100 @@
                 "P": { role: "🎉 유연한 접근", good: "즉흥적인 제안 & 돌발 상황 즐기기", bad: "하나부터 열까지 통제하려 들기" }
             };
 
+            // 나의 MBTI 기준 상대방에게 조심해야 할 점
+            function getMyCautionPoints(myMbti, theirMbti) {
+                const mySN = myMbti.includes('S') ? 'S' : 'N';
+                const myTF = myMbti.includes('T') ? 'T' : 'F';
+                const myJP = myMbti.includes('J') ? 'J' : 'P';
+                const theirSN = theirMbti.includes('S') ? 'S' : 'N';
+                const theirTF = theirMbti.includes('T') ? 'T' : 'F';
+                const theirJP = theirMbti.includes('J') ? 'J' : 'P';
+                
+                let cautions = [];
+                
+                // S vs N 충돌
+                if (mySN === 'S' && theirSN === 'N') {
+                    cautions.push("⚠️ <b>당신은 현실적(S)인데 상대는 상상력(N)을 좋아해요.</b> '만약에...' 같은 가정 질문에 답답해하지 말고, 함께 상상의 나래를 펼쳐보세요.");
+                } else if (mySN === 'N' && theirSN === 'S') {
+                    cautions.push("⚠️ <b>당신은 추상적(N)인데 상대는 구체적(S)을 원해요.</b> '뭐 먹을래?' 같은 질문에 '아무거나'라고 하지 말고, '파스타 어때?'처럼 구체적으로 제안하세요.");
+                }
+                
+                // T vs F 충돌
+                if (myTF === 'T' && theirTF === 'F') {
+                    cautions.push("🚨 <b>최대 주의!</b> 당신은 해결책(T)을 주려 하지만, 상대는 <b>공감(F)</b>을 원합니다. '이렇게 해봐'보다 '힘들었겠다, 속상했겠다'를 먼저 말하세요.");
+                } else if (myTF === 'F' && theirTF === 'T') {
+                    cautions.push("🚨 <b>최대 주의!</b> 당신은 위로(F)를 원하지만, 상대는 <b>해결책(T)</b>을 원합니다. 감정 호소보다 '이렇게 해결하려고 해'라고 말하세요.");
+                }
+                
+                // J vs P 충돌
+                if (myJP === 'J' && theirJP === 'P') {
+                    cautions.push("⚠️ <b>당신은 계획(J)을 좋아하지만 상대는 유연함(P)을 원해요.</b> 약속을 너무 구체적으로 잡지 말고, 30분 정도 여유를 두세요.");
+                } else if (myJP === 'P' && theirJP === 'J') {
+                    cautions.push("⚠️ <b>당신은 즉흥적(P)이지만 상대는 계획(J)을 원해요.</b> '지금 나와' 같은 번개는 금물! 최소 하루 전에 약속을 잡으세요.");
+                }
+                
+                return cautions.length > 0 ? cautions.join('<br><br>') : "✨ 당신과 상대방의 성향이 잘 맞아요! 자연스럽게 대화하면 됩니다.";
+            }
+
+            // 메신저 주의사항
+            function getMessengerTips(myMbti, theirMbti) {
+                const theirTF = theirMbti.includes('T') ? 'T' : 'F';
+                const theirJP = theirMbti.includes('J') ? 'J' : 'P';
+                
+                let tips = [];
+                
+                if (theirTF === 'T') {
+                    tips.push("💬 <b>용건만 간결하게:</b> '안녕~ 오늘 뭐해? 밥 먹었어? 어제 잠은 잘 잤어?' 같은 연속 질문은 부담스러워요. '오늘 저녁 시간 되나요?'처럼 한 번에 용건을 말하세요.");
+                    tips.push("💬 <b>이모티콘 절제:</b> 과도한 이모티콘(😍💕💖💝)은 '감정 과다'로 느껴질 수 있어요. 적당히 사용하세요.");
+                } else {
+                    tips.push("💬 <b>리액션 필수:</b> 'ㅋㅋ', '대박', '진짜?' 같은 반응을 자주 넣어주세요. 읽씹하면 '무관심'으로 오해받아요.");
+                    tips.push("💬 <b>이모티콘 활용:</b> 😊💕 같은 이모티콘으로 따뜻함을 전달하세요. 텍스트만으로는 감정 전달이 어려워요.");
+                }
+                
+                if (theirJP === 'J') {
+                    tips.push("💬 <b>약속은 구체적으로:</b> '언제 한번 만나자'는 인사치레예요. '이번 주 토요일 6시 강남역 어때요?'처럼 구체적으로 제안하세요.");
+                    tips.push("💬 <b>답장 타이밍:</b> 너무 빠르게 답장하면 부담스러울 수 있어요. 1-2시간 간격이 적당합니다.");
+                } else {
+                    tips.push("💬 <b>즉흥 제안 OK:</b> '지금 나와' 같은 번개 제안도 괜찮아요! 유연하게 대응하는 모습이 매력적입니다.");
+                    tips.push("💬 <b>답장 속도:</b> 빠른 답장이 좋아요. 읽씹하면 '관심 없나?'라고 생각할 수 있어요.");
+                }
+                
+                return tips.join('<br><br>');
+            }
+
+            // 전화 주의사항
+            function getCallTips(myMbti, theirMbti) {
+                const theirTF = theirMbti.includes('T') ? 'T' : 'F';
+                const theirJP = theirMbti.includes('J') ? 'J' : 'P';
+                const theirEI = theirMbti.includes('E') ? 'E' : 'I';
+                
+                let tips = [];
+                
+                if (theirEI === 'I') {
+                    tips.push("📞 <b>전화 전 카톡으로 사전 공지:</b> 내향형(I)은 갑작스러운 전화를 부담스러워해요. '지금 통화 괜찮아요?'라고 먼저 물어보세요.");
+                    tips.push("📞 <b>짧고 굵게:</b> 장시간 통화는 피로해요. 10-15분 정도로 핵심만 말하고 마무리하세요.");
+                } else {
+                    tips.push("📞 <b>전화로 대화 OK:</b> 외향형(E)은 전화 대화를 즐겨요. 긴 대화도 문제없습니다.");
+                    tips.push("📞 <b>즉흥 통화 가능:</b> 갑자기 전화해도 괜찮아요. 오히려 '생각났다'는 느낌이 좋습니다.");
+                }
+                
+                if (theirTF === 'T') {
+                    tips.push("📞 <b>용건부터 말하기:</b> '어떻게 지내?' 같은 인사보다 '이거 물어볼 게 있어서'처럼 용건을 먼저 말하세요.");
+                    tips.push("📞 <b>감정 표현 절제:</b> '너무 보고 싶어서 전화했어' 같은 감정 표현은 부담스러울 수 있어요.");
+                } else {
+                    tips.push("📞 <b>따뜻한 인사 먼저:</b> '어떻게 지내? 요즘 잘 지내?' 같은 안부 인사를 먼저 하세요.");
+                    tips.push("📞 <b>감정 표현 OK:</b> '너무 보고 싶어서 전화했어' 같은 솔직한 표현이 좋아요.");
+                }
+                
+                if (theirJP === 'J') {
+                    tips.push("📞 <b>시간 약속:</b> '30분 후에 통화할까요?'처럼 시간을 정해서 통화하는 게 좋아요.");
+                } else {
+                    tips.push("📞 <b>즉흥 통화:</b> '지금 통화 괜찮아요?'라고 바로 물어봐도 OK입니다.");
+                }
+                
+                return tips.join('<br><br>');
+            }
+
             const formatList = (str) => {
                 if (!str) return "";
                 return `<ul class="style-list space-y-2">` + str.split(',').map(item => `<li>${item.trim()}</li>`).join('') + `</ul>`;
@@ -256,6 +350,11 @@
             const secretAppeal = secretData[snKey].appeal + "<br><br>" + secretData[tfKey].appeal;
             const secretBeware = secretData[snKey].beware + "<br><br>" + secretData[tfKey].beware;
             const secretRole = secretData[jpKey];
+            
+            // 나의 MBTI 기준 주의사항
+            const myCaution = getMyCautionPoints(valA, valB);
+            const messengerTips = getMessengerTips(valA, valB);
+            const callTips = getCallTips(valA, valB);
 
             const resultHTML = `
                 <div class="clean-card p-6 md:p-8 text-center bg-white">
@@ -304,6 +403,18 @@
                             <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
                                 <h5 class="font-bold text-slate-600 text-sm mb-3 flex items-center"><i class="fas fa-ban mr-2"></i>절대 금지 (Beware)</h5>
                                 <div class="text-slate-700 text-sm leading-relaxed">${secretBeware}</div>
+                            </div>
+                            <div class="bg-red-50 p-5 rounded-2xl border-l-4 border-red-500 shadow-sm">
+                                <h5 class="font-bold text-red-600 text-sm mb-3 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i>🚨 내가 조심해야 할 점 (${valA} 기준)</h5>
+                                <div class="text-slate-700 text-sm leading-relaxed">${myCaution}</div>
+                            </div>
+                            <div class="bg-blue-50 p-5 rounded-2xl border border-blue-200 shadow-sm">
+                                <h5 class="font-bold text-blue-600 text-sm mb-3 flex items-center"><i class="fas fa-comment-dots mr-2"></i>💬 카톡/메신저 주의사항</h5>
+                                <div class="text-slate-700 text-sm leading-relaxed">${messengerTips}</div>
+                            </div>
+                            <div class="bg-purple-50 p-5 rounded-2xl border border-purple-200 shadow-sm">
+                                <h5 class="font-bold text-purple-600 text-sm mb-3 flex items-center"><i class="fas fa-phone mr-2"></i>📞 전화 주의사항</h5>
+                                <div class="text-slate-700 text-sm leading-relaxed">${callTips}</div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 text-center flex flex-col justify-center">
