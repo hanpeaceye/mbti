@@ -18,8 +18,8 @@
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimbti.xyz/2026bible">
-    <meta property="og:title" content="📖 MBTI 성경 구절 | 재미로 보는 나에게 맞는 하나님의 말씀">
-    <meta property="og:description" content="재미로 보는 MBTI별 맞춤형 성경 구절. 좋아하는 구절과 안 좋아하는 구절을 확인해보세요!">
+    <meta property="og:title" content="📖 MBTI 성경 구절 | 재미로 보는 말씀 뽑기">
+    <meta property="og:description" content="남녀 성향까지 완벽 분석! 나에게 딱 맞는 2026년 말씀 구절은?">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
     
     <style>
@@ -33,10 +33,13 @@
         .text-point { color: #667eea; }
         .bg-point { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         
-        .verse-card { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-left: 4px solid #667eea; }
-        .verse-card-like { border-left-color: #10b981; }
-        .verse-card-dislike { border-left-color: #ef4444; }
-        .verse-number { color: #667eea; font-weight: 800; }
+        .verse-card { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-left: 4px solid #667eea; transition: transform 0.2s; }
+        .verse-card:hover { transform: translateY(-2px); }
+        .verse-card-like { border-left-color: #10b981; background: #ecfdf5; }
+        .verse-card-dislike { border-left-color: #ef4444; background: #fef2f2; }
+        
+        .verse-number { font-weight: 900; opacity: 0.5; }
+        .bounce-custom { animation: bounce 2s infinite; }
     </style>
 </head>
 <body class="min-h-screen relative pb-10">
@@ -50,14 +53,16 @@
                 <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4 leading-tight">
                     나에게 맞는<br><span class="text-yellow-300">하나님의 말씀</span> 📖
                 </h2>
-                <p class="text-white/95 text-base md:text-lg font-medium">송구영신예배때 뽑고싶은 말씀 구절과<br>안뽑고 싶은 말씀구절 알아보기</p>
+                <p class="text-white/90 text-base md:text-lg font-medium bg-black/20 inline-block px-4 py-2 rounded-full">
+                    성별과 MBTI로 알아보는 내 영혼의 구절
+                </p>
             </div>
 
             <div class="clean-card p-8 md:p-10 shadow-lg bg-white">
                 <div class="flex flex-col gap-6">
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">직업</label>
-                        <select id="job" class="w-full bg-indigo-50/50 border border-indigo-200 rounded-xl p-4 text-center text-base font-bold text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition">
+                        <select id="job" class="w-full bg-indigo-50/50 border border-indigo-200 rounded-xl p-4 text-center text-base font-bold text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition cursor-pointer">
                             <option value="">선택하세요</option>
                             <option value="student">학생</option>
                             <option value="worker">직장인</option>
@@ -90,7 +95,7 @@
                     </div>
                     
                     <button id="find-btn" onclick="findVerses()" class="w-full bg-point hover:opacity-90 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
-                        <span>재미로 확인하기(사탄아님)</span> <i class="fas fa-search"></i>
+                        <span>결과 확인하기</span> <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
@@ -101,7 +106,7 @@
                 <button onclick="resetPage()" class="text-white hover:text-yellow-300 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-white bg-white/20 px-2 py-1 rounded">VER 2.0</span>
+                <span class="text-[10px] font-bold text-white bg-white/20 px-2 py-1 rounded">VER 3.0 Gender+</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
@@ -130,208 +135,367 @@
 
         function selectGender(gender) {
             selectedGender = gender;
-            document.getElementById('gender-male').classList.remove('bg-indigo-500', 'text-white', 'border-indigo-500');
-            document.getElementById('gender-male').classList.add('bg-slate-100', 'text-slate-600', 'border-slate-200');
-            document.getElementById('gender-female').classList.remove('bg-indigo-500', 'text-white', 'border-indigo-500');
-            document.getElementById('gender-female').classList.add('bg-slate-100', 'text-slate-600', 'border-slate-200');
+            document.getElementById('gender-male').className = 'flex-1 bg-slate-100 border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-600 transition-all hover:bg-indigo-50 hover:border-indigo-300';
+            document.getElementById('gender-female').className = 'flex-1 bg-slate-100 border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-600 transition-all hover:bg-indigo-50 hover:border-indigo-300';
             
-            document.getElementById('gender-' + gender).classList.remove('bg-slate-100', 'text-slate-600', 'border-slate-200');
-            document.getElementById('gender-' + gender).classList.add('bg-indigo-500', 'text-white', 'border-indigo-500');
+            const activeClass = 'flex-1 bg-indigo-500 border-2 border-indigo-500 rounded-xl p-4 text-center font-bold text-white transition-all shadow-lg transform scale-105';
+            document.getElementById('gender-' + gender).className = activeClass;
         }
 
-        // 성경 구절 데이터 - 좋아하는 구절과 안 좋아하는 구절
+        // [데이터] MBTI + 성별 복합 데이터 (Ver 3.0)
+        // male: 책임, 리더십, 강인함, 비전 / female: 관계, 내면, 사랑, 지혜
         const bibleData = {
             "ISTJ": {
-                "like": [
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "질서를 중시하는 당신, 하나님도 질서를 좋아하신다는 말씀이 마음에 들 것입니다." },
-                    { text: "너는 여호와를 인정하라 그리하면 네 길을 지시하시리라", reference: "잠언 3:6", fullText: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 네 길에서 그를 인정하라 그리하면 <b>네 길을 지시하시리라</b>", explanation: "계획과 체계를 좋아하는 당신, 하나님의 인도하심을 받는 것이 안정감을 줍니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "체계적인 교육을 중시하는 당신, 하나님을 경외하는 것이 모든 지식의 시작이라는 말씀이 공감됩니다." }
-                ],
-                "dislike": [
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "계획을 세우는 것을 좋아하는 당신, '가만히 있어'라는 말씀은 답답하게 느껴질 수 있습니다." },
-                    { text: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", reference: "잠언 3:5", fullText: "너는 마음을 다하여 여호와를 신뢰하고 <b>네 명철을 의지하지 말라</b>", explanation: "자신의 계획과 명철을 중시하는 당신, '명철을 의지하지 말라'는 말씀이 도전적으로 느껴질 수 있습니다." },
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "체계적이고 신중한 당신, 감정적으로 '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "네가 죽도록 충성하라 그리하면 내가 생명의 관을 네게 주리라", reference: "요한계시록 2:10", explanation: "책임감이 강한 당신에게 '충성'에 대한 보상은 최고의 명예입니다." },
+                        { text: "사람이 마음으로 자기의 길을 계획할지라도 그의 걸음을 인도하시는 이는 여호와시니라", reference: "잠언 16:9", explanation: "가장의 무게를 견디며 계획하는 당신에게 하나님의 인도는 큰 힘이 됩니다." }
+                    ],
+                    "dislike": [
+                        { text: "너는 내일 일을 자랑하지 말라", reference: "잠언 27:1", explanation: "철저히 대비하는 당신에게 예측 불가능한 상황은 스트레스입니다." },
+                        { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", explanation: "가장으로서 무거운 책임감 속에 억지로 웃어야 하는 건 힘듭니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "그 입을 열어 지혜를 베풀며 그의 혀로 인애의 법을 말하며", reference: "잠언 31:26", explanation: "가정과 일터에서 현숙하게 질서를 잡는 당신을 위한 말씀입니다." },
+                        { text: "모든 일을 적절하게 하고 정돈되게 하라", reference: "고린도전서 14:40", explanation: "꼼꼼하게 살림과 업무를 처리하는 당신에게 위로가 됩니다." }
+                    ],
+                    "dislike": [
+                        { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", explanation: "챙겨야 할 게 산더미인데 가만히 있으라니요, 마음이 조급해집니다." },
+                        { text: "내일 일을 위하여 염려하지 말라", reference: "마태복음 6:34", explanation: "현실적인 살림꾼인 당신에게 대책 없는 삶은 불안합니다." }
+                    ]
+                }
             },
             "ISFJ": {
-                "like": [
-                    { text: "여호와께서 네 앞에서 행하시며 너와 함께 하사 너를 떠나지 아니하시며 버리지 아니하시리니", reference: "신명기 31:8", fullText: "<b>여호와께서 네 앞에서 행하시며 너와 함께 하사</b> 너를 떠나지 아니하시며 버리지 아니하시리니 너는 두려워하지도 말며 놀라지도 말지니라", explanation: "항상 타인을 위해 헌신하는 당신, 하나님이 당신을 버리지 않으신다는 말씀이 큰 위로가 됩니다." },
-                    { text: "서로 사랑하기를 형제처럼 하며 서로 존경하기를 먼저하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 <b>존경하기를 서로 먼저</b> 하며", explanation: "배려심 많은 당신, 서로를 사랑하고 존경하는 말씀이 마음에 듭니다." },
-                    { text: "너희는 서로 돌아보아 사랑과 선행을 격려하며", reference: "히브리서 10:24", fullText: "서로 돌아보아 <b>사랑과 선행을 격려</b>하며", explanation: "타인을 돌보는 당신, 서로를 격려하는 말씀이 공감됩니다." }
-                ],
-                "dislike": [
-                    { text: "너는 두려워하지도 말며 놀라지도 말지니라", reference: "신명기 31:8", fullText: "여호와께서 네 앞에서 행하시며 너와 함께 하사 너를 떠나지 아니하시며 버리지 아니하시리니 <b>너는 두려워하지도 말며 놀라지도 말지니라</b>", explanation: "상처받기 쉬운 당신, '두려워하지 말라'는 말씀 자체가 부담스러울 수 있습니다." },
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "타인을 위해 항상 움직이는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "내가 너를 위하여 세운 계획을 내가 아나니", reference: "예레미야 29:11", fullText: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 너희에게 미래와 희망을 주는 것이니라 <b>너희가 내게 부르짖고 와서 기도하면 내가 너희에게 들을 것이요</b>", explanation: "자신의 계획보다 타인을 먼저 생각하는 당신, 하나님의 계획이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "사람이 친구를 위하여 자기 목숨을 버리면 이보다 더 큰 사랑이 없나니", reference: "요한복음 15:13", explanation: "묵묵히 가족과 동료를 지키는 당신의 희생정신을 알아주는 말씀입니다." },
+                        { text: "선한 일을 하다가 낙심하지 말지니", reference: "갈라디아서 6:9", explanation: "티 내지 않고 헌신하는 당신에게 하나님이 보내는 응원입니다." }
+                    ],
+                    "dislike": [
+                        { text: "내가 세상에 화평을 주러 온 줄로 생각하지 말라", reference: "마태복음 10:34", explanation: "평화주의자인 당신에게 갈등과 싸움은 가장 피하고 싶은 상황입니다." },
+                        { text: "너는 그들을 두려워하지 말라", reference: "신명기 3:22", explanation: "조심성 많은 당신에게 무작정 돌진하라는 명령은 부담스럽습니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "오직 온유하고 안정한 심령의 썩지 아니할 것으로 하라", reference: "베드로전서 3:4", explanation: "따뜻하고 섬세한 당신의 내면이 하나님 보시기에 값진 것입니다." },
+                        { text: "서로 인자하게 하며 불쌍히 여기며 서로 용서하기를", reference: "에베소서 4:32", explanation: "관계와 조화를 중요시하는 당신의 마음을 대변합니다." }
+                    ],
+                    "dislike": [
+                        { text: "자기를 부인하고 자기 십자가를 지고 나를 따를 것이니라", reference: "마태복음 16:24", explanation: "이미 남을 위해 충분히 참고 사는 당신에게 더 큰 희생 요구는 버겁습니다." },
+                        { text: "너는 말씀을 전파하라 때를 얻든지 못 얻든지", reference: "디모데후서 4:2", explanation: "나서는 것을 어려워하는 당신에게 전도 압박은 부담이 됩니다." }
+                    ]
+                }
             },
             "INFJ": {
-                "like": [
-                    { text: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 너희에게 미래와 희망을 주는 것이니라", reference: "예레미야 29:11", fullText: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 <b>너희에게 미래와 희망을 주는 것</b>이니라", explanation: "이상과 현실 사이에서 고민하는 당신, 하나님이 희망의 계획을 가지고 계신다는 말씀이 큰 위로가 됩니다." },
-                    { text: "우리가 알거니와 하나님을 사랑하는 자에게는 모든 것이 합력하여 선을 이루느니라", reference: "로마서 8:28", fullText: "우리가 알거니와 <b>하나님을 사랑하는 자</b> 곧 그 뜻대로 부르심을 입은 자들에게는 <b>모든 것이 합력하여 선을 이루느니라</b>", explanation: "완벽주의로 인한 좌절이 있는 당신, 하나님이 모든 것을 선으로 바꾸신다는 말씀이 희망을 줍니다." },
-                    { text: "너는 마음을 다하여 여호와를 신뢰하고", reference: "잠언 3:5", fullText: "<b>너는 마음을 다하여 여호와를 신뢰하고</b> 네 명철을 의지하지 말라", explanation: "깊이 생각하는 당신, 하나님을 신뢰하라는 말씀이 평안을 줍니다." }
-                ],
-                "dislike": [
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "깊이 생각하고 우울감이 있는 당신, '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "이상과 현실의 괴리로 고민하는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "완벽주의로 인한 스트레스가 있는 당신, '정돈되고 품위 있게'라는 말씀이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "사람은 외모를 보거니와 나 여호와는 중심을 보느니라", reference: "사무엘상 16:7", explanation: "겉치레보다 본질과 신념을 중요시하는 당신에게 큰 울림을 줍니다." },
+                        { text: "너희에게 미래와 희망을 주는 것이니라", reference: "예레미야 29:11", explanation: "이상적인 미래를 그리는 당신에게 확신을 주는 말씀입니다." }
+                    ],
+                    "dislike": [
+                        { text: "내일 일은 내일이 염려할 것이요", reference: "마태복음 6:34", explanation: "깊은 통찰력으로 미래를 대비하는 당신에게 '오늘만 살라'는 말은 어렵습니다." },
+                        { text: "보이는 것은 잠깐이요", reference: "고린도후서 4:18", explanation: "현실 감각을 잡으려 노력 중인데 다시 이상 세계로 가라니 혼란스럽습니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "우리가 알거니와 하나님을 사랑하는 자에게는 모든 것이 합력하여 선을 이루느니라", reference: "로마서 8:28", explanation: "섬세한 감수성으로 힘들어하는 당신에게, 결국 다 잘 될 거라는 위로입니다." },
+                        { text: "무릇 지킬만한 것보다 더욱 네 마음을 지키라", reference: "잠언 4:23", explanation: "타인의 감정에 예민한 당신, 자신의 마음부터 챙기라는 따뜻한 조언입니다." }
+                    ],
+                    "dislike": [
+                        { text: "눈은 눈으로, 이는 이로", reference: "신명기 19:21", explanation: "자비와 이해심이 깊은 당신에게 냉정한 심판의 말은 마음이 아픕니다." },
+                        { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", explanation: "생각이 많고 우울감이 있는 당신에게 억지 웃음 강요는 부담입니다." }
+                    ]
+                }
             },
             "INTJ": {
-                "like": [
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "지식과 계획을 중시하는 당신, 하나님을 경외하는 것이 모든 지식의 시작이라는 말씀이 논리적으로 공감됩니다." },
-                    { text: "너는 여호와를 인정하라 그리하면 네 길을 지시하시리라", reference: "잠언 3:6", fullText: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 네 길에서 그를 인정하라 그리하면 <b>네 길을 지시하시리라</b>", explanation: "전략적 사고를 하는 당신, 하나님의 인도하심을 받는 것이 효율적으로 느껴집니다." },
-                    { text: "진리를 알지니 진리가 너희를 자유롭게 하리라", reference: "요한복음 8:32", fullText: "진리를 알지니 <b>진리가 너희를 자유롭게 하리라</b>", explanation: "논리적 분석을 중시하는 당신, 진리가 자유를 가져다준다는 말씀이 공감됩니다." }
-                ],
-                "dislike": [
-                    { text: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", reference: "잠언 3:5", fullText: "너는 마음을 다하여 여호와를 신뢰하고 <b>네 명철을 의지하지 말라</b>", explanation: "자신의 지혜와 계획에 의존하는 당신, '명철을 의지하지 말라'는 말씀이 도전적으로 느껴집니다." },
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "논리적이고 감정 표현이 서툰 당신, '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "독립적이고 전략적인 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "너의 행사를 여호와께 맡기라 그리하면 네가 경영하는 것이 이루어지리라", reference: "잠언 16:3", explanation: "큰 야망과 계획을 가진 당신, 하나님이 최고의 경영 파트너가 되십니다." },
+                        { text: "진리를 알지니 진리가 너희를 자유롭게 하리라", reference: "요한복음 8:32", explanation: "논리적 모순을 싫어하는 당신에게 명쾌한 진리는 해방감을 줍니다." }
+                    ],
+                    "dislike": [
+                        { text: "믿음은 바라는 것들의 실상이요 보이지 않는 것들의 증거니", reference: "히브리서 11:1", explanation: "증거와 데이터를 중시하는 당신에게 '무조건 믿어라'는 어렵습니다." },
+                        { text: "어린 아이들과 같이 되지 아니하면", reference: "마태복음 18:3", explanation: "성숙하고 통찰력 있는 당신에게 유치해지라는 말처럼 들립니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "지혜를 얻은 자와 명철을 얻은 자는 복이 있나니", reference: "잠언 3:13", explanation: "지적인 여성인 당신에게 지혜는 보석보다 귀한 가치입니다." },
+                        { text: "능력과 존귀로 옷을 삼고 후일을 웃으며", reference: "잠언 31:25", explanation: "독립적이고 능력 있는 당신을 묘사하는 멋진 말씀입니다." }
+                    ],
+                    "dislike": [
+                        { text: "여자는 교회에서 잠잠하라", reference: "고린도전서 14:34", explanation: "논리적으로 할 말은 해야 하는 당신에게 침묵 강요는 답답합니다." },
+                        { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", explanation: "감정 표현보다 문제 해결이 우선인 당신에게 감정 노동을 시키는 것 같습니다." }
+                    ]
+                }
             },
             "ISTP": {
-                "like": [
-                    { text: "태초에 하나님이 천지를 창조하시니라", reference: "창세기 1:1", fullText: "<b>태초에 하나님이 천지를 창조하시니라</b>", explanation: "실용적이고 창의적인 당신, 하나님이 창조하신 세상이라는 말씀이 간결하고 명확해서 좋습니다." },
-                    { text: "여호와께서 네 앞에서 행하시며 너와 함께 하사", reference: "신명기 31:8", fullText: "<b>여호와께서 네 앞에서 행하시며 너와 함께 하사</b> 너를 떠나지 아니하시며 버리지 아니하시리니 너는 두려워하지도 말며 놀라지도 말지니라", explanation: "독립적인 당신, 하나님이 함께 하신다는 말씀이 간단명료해서 마음에 듭니다." },
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "혼자만의 시간을 좋아하는 당신, '가만히 있어'라는 말씀이 편안하게 느껴집니다." }
-                ],
-                "dislike": [
-                    { text: "서로 사랑하기를 형제처럼 하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 존경하기를 서로 먼저 하며 <b>서로 사랑하기를 형제처럼</b> 하며", explanation: "독립적이고 관계에 부담을 느끼는 당신, '서로 사랑하기'라는 말씀이 부담스러울 수 있습니다." },
-                    { text: "항상 기뻐하라 쉬지 말고 기도하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라 쉬지 말고 기도하라</b> 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "즉각적 만족을 추구하는 당신, '쉬지 말고 기도하라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "너희는 서로 돌아보아 사랑과 선행을 격려하며", reference: "히브리서 10:24", fullText: "<b>서로 돌아보아 사랑과 선행을 격려</b>하며", explanation: "혼자만의 시간을 중시하는 당신, '서로 돌아보아'라는 말씀이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "일하기 싫어하거든 먹지도 말게 하라", reference: "데살로니가후서 3:10", explanation: "효율과 실용성을 추구하는 당신에게 딱 맞는 사이다 명언입니다." },
+                        { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", explanation: "귀찮은 건 딱 질색인 당신에게 '가만히 있으라'는 건 축복입니다." }
+                    ],
+                    "dislike": [
+                        { text: "서로 사랑하기를 형제처럼 하며", reference: "로마서 12:10", explanation: "오글거리는 브로맨스나 과도한 친목질은 피곤합니다." },
+                        { text: "쉬지 말고 기도하라", reference: "데살로니가전서 5:17", explanation: "효율을 따지는 당신에게 24시간 기도라니, 비효율적입니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "말과 혀로만 사랑하지 말고 행함과 진실함으로 하자", reference: "요한일서 3:18", explanation: "말만 번지르르한 건 싫어하는 쿨한 당신에게 맞는 말씀입니다." },
+                        { text: "조용히 자기 일을 하고 너희 손으로 일하기를 힘쓰라", reference: "데살로니가전서 4:11", explanation: "독립적인 당신, 남 신경 안 쓰고 내 일만 잘하면 된다는 말이 편합니다." }
+                    ],
+                    "dislike": [
+                        { text: "너희가 짐을 서로 지라", reference: "갈라디아서 6:2", explanation: "내 짐도 무거운데 남의 짐까지? 개인주의 성향인 당신에겐 부담입니다." },
+                        { text: "서로 문안하라", reference: "로마서 16:16", explanation: "형식적인 인사치레나 친목 도모는 딱 질색입니다." }
+                    ]
+                }
             },
             "ISFP": {
-                "like": [
-                    { text: "하나님이 그 지으신 모든 것을 보시니 보시기에 심히 좋았더라", reference: "창세기 1:31", fullText: "하나님이 그 지으신 모든 것을 보시니 <b>보시기에 심히 좋았더라</b> 저녁이 되고 아침이 되니 이는 여섯째 날이니라", explanation: "아름다움을 사랑하는 당신, 하나님이 지으신 모든 것이 아름답다는 말씀이 마음에 듭니다." },
-                    { text: "항상 기뻐하라 범사에 감사하라", reference: "데살로니가전서 5:16-18", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 <b>범사에 감사하라</b> 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "예술적 감성이 있는 당신, 기쁨과 감사에 대한 말씀이 공감됩니다." },
-                    { text: "너는 두려워하지도 말며 놀라지도 말지니라", reference: "신명기 31:8", fullText: "여호와께서 네 앞에서 행하시며 너와 함께 하사 너를 떠나지 아니하시며 버리지 아니하시리니 <b>너는 두려워하지도 말며 놀라지도 말지니라</b>", explanation: "상처받기 쉬운 당신, 하나님이 함께 하시니 두려워하지 말라는 말씀이 위로가 됩니다." }
-                ],
-                "dislike": [
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "자유로운 영혼인 당신, '정돈되고 품위 있게'라는 말씀이 구속적으로 느껴질 수 있습니다." },
-                    { text: "너는 여호와를 인정하라 그리하면 네 길을 지시하시리라", reference: "잠언 3:6", fullText: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 네 길에서 그를 인정하라 그리하면 <b>네 길을 지시하시리라</b>", explanation: "즉흥적이고 자유로운 당신, '길을 지시하시리라'는 말씀이 통제적으로 느껴질 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "감성적이고 직관적인 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "온유한 자는 복이 있나니 그들이 땅을 기업으로 받을 것임이요", reference: "마태복음 5:5", explanation: "싸움을 싫어하는 평화주의자 당신에게 온유함이 승리한다는 약속입니다." },
+                        { text: "하나님이 그 지으신 모든 것을 보시니 보시기에 심히 좋았더라", reference: "창세기 1:31", explanation: "감각적인 당신, 세상의 아름다움을 즐기는 것이 죄가 아님을 말해줍니다." }
+                    ],
+                    "dislike": [
+                        { text: "너는 말씀을 전파하라 때를 얻든지 못 얻든지 항상 힘쓰라", reference: "디모데후서 4:2", explanation: "조용히 살고 싶은 당신에게 나가서 외치라는 명령은 너무 큰 압박입니다." },
+                        { text: "오직 공의를 물 같이, 정의를 하수 같이 흐르게 할지로다", reference: "아모스 5:24", explanation: "강한 투쟁과 갈등 상황은 당신을 움츠러들게 합니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "너의 하나님 여호와가 너의 가운데에 계시니... 그가 너로 말미암아 기쁨을 이기지 못하시며", reference: "스바냐 3:17", explanation: "사랑받고 싶은 당신, 존재만으로도 기쁨이 된다는 말씀에 녹아내립니다." },
+                        { text: "사랑은 오래 참고 사랑은 온유하며", reference: "고린도전서 13:4", explanation: "사랑과 감성을 중요시하는 당신에게 가장 아름다운 시입니다." }
+                    ],
+                    "dislike": [
+                        { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", explanation: "자유로운 영혼인 당신에게 '정돈'과 '규칙'은 답답함 그 자체입니다." },
+                        { text: "철이 철을 날카롭게 하는 것 같이", reference: "잠언 27:17", explanation: "부딪히며 성장하라는 말은 유리멘탈인 당신에게 상처가 될 수 있습니다." }
+                    ]
+                }
             },
             "INFP": {
-                "like": [
-                    { text: "우리가 알거니와 하나님을 사랑하는 자에게는 모든 것이 합력하여 선을 이루느니라", reference: "로마서 8:28", fullText: "우리가 알거니와 <b>하나님을 사랑하는 자</b> 곧 그 뜻대로 부르심을 입은 자들에게는 <b>모든 것이 합력하여 선을 이루느니라</b>", explanation: "이상과 현실 사이에서 고민하는 당신, 하나님이 모든 것을 선으로 바꾸신다는 말씀이 큰 위로가 됩니다." },
-                    { text: "내가 너를 위하여 세운 계획을 내가 아나니 재앙이 아니라 곧 평안이요 너에게 미래와 희망을 주려 함이라", reference: "예레미야 29:11", fullText: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 <b>너희에게 미래와 희망을 주는 것</b>이니라", explanation: "미래를 걱정하는 당신, 하나님이 희망의 계획을 가지고 계신다는 말씀이 희망을 줍니다." },
-                    { text: "너는 두려워하지도 말며 놀라지도 말지니라", reference: "신명기 31:8", fullText: "여호와께서 네 앞에서 행하시며 너와 함께 하사 너를 떠나지 아니하시며 버리지 아니하시리니 <b>너는 두려워하지도 말며 놀라지도 말지니라</b>", explanation: "상처받기 쉬운 당신, 하나님이 함께 하시니 두려워하지 말라는 말씀이 위로가 됩니다." }
-                ],
-                "dislike": [
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "자유로운 영혼인 당신, '정돈되고 품위 있게'라는 말씀이 구속적으로 느껴질 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "감성적이고 이상주의적인 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." },
-                    { text: "너는 여호와를 인정하라 그리하면 네 길을 지시하시리라", reference: "잠언 3:6", fullText: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 네 길에서 그를 인정하라 그리하면 <b>네 길을 지시하시리라</b>", explanation: "자유로운 영혼인 당신, '길을 지시하시리라'는 말씀이 통제적으로 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "나의 은혜가 네게 족하도다 이는 내 능력이 약한 데서 온전하여짐이라", reference: "고린도후서 12:9", explanation: "완벽하지 않아도 괜찮다는 말씀이 당신의 내면 깊은 곳을 위로합니다." },
+                        { text: "무릇 지킬만한 것보다 더욱 네 마음을 지키라", reference: "잠언 4:23", explanation: "자신의 신념과 가치관을 소중히 여기는 당신에게 힘이 됩니다." }
+                    ],
+                    "dislike": [
+                        { text: "게으른 자여 개미에게 가서 그가 하는 것을 보고 지혜를 얻으라", reference: "잠언 6:6", explanation: "나만의 속도로 살고 싶은 당신에게 '게으르다'는 지적은 뼈아픕니다." },
+                        { text: "믿음은 바라는 것들의 실상이요", reference: "히브리서 11:1", explanation: "상상 속에 사는 당신에게 자꾸 현실(실상)을 보라는 말은 피곤합니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "너는 내 사랑하는 딸이라 내가 너를 기뻐하노라", reference: "마가복음 1:11 (응용)", explanation: "감수성이 풍부한 당신, 하나님의 사랑 고백에 눈물이 날지도 모릅니다." },
+                        { text: "수고하고 무거운 짐 진 자들아 다 내게로 오라", reference: "마태복음 11:28", explanation: "혼자 속앓이하는 당신에게 주님의 품은 가장 따뜻한 안식처입니다." }
+                    ],
+                    "dislike": [
+                        { text: "내일 일을 위하여 염려하지 말라", reference: "마태복음 6:34", explanation: "걱정이 많은 당신에게 걱정하지 말라는 말은 오히려 더 걱정하게 만듭니다." },
+                        { text: "철이 철을 날카롭게 하는 것 같이", reference: "잠언 27:17", explanation: "비판과 충돌을 피하고 싶은 당신에게 너무 거친 성장 방식입니다." }
+                    ]
+                }
             },
             "INTP": {
-                "like": [
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "지식을 추구하는 당신, 하나님을 경외하는 것이 모든 지식의 근본이라는 말씀이 논리적으로 공감됩니다." },
-                    { text: "진리를 알지니 진리가 너희를 자유롭게 하리라", reference: "요한복음 8:32", fullText: "<b>진리를 알지니 진리가 너희를 자유롭게 하리라</b>", explanation: "논리적 사고를 중시하는 당신, 진리가 자유를 가져다준다는 말씀이 공감됩니다." },
-                    { text: "너는 여호와를 인정하라 그리하면 네 길을 지시하시리라", reference: "잠언 3:6", fullText: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 네 길에서 그를 인정하라 그리하면 <b>네 길을 지시하시리라</b>", explanation: "논리적 분석을 중시하는 당신, 하나님의 인도하심을 받는 것이 효율적으로 느껴집니다." }
-                ],
-                "dislike": [
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "논리적이고 감정 표현이 서툰 당신, '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "서로 사랑하기를 형제처럼 하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 존경하기를 서로 먼저 하며 <b>서로 사랑하기를 형제처럼</b> 하며", explanation: "객관적이고 논리적인 당신, 감정적인 '사랑하기'라는 말씀이 부담스러울 수 있습니다." },
-                    { text: "너는 두려워하지도 말며 놀라지도 말지니라", reference: "신명기 31:8", fullText: "여호와께서 네 앞에서 행하시며 너와 함께 하사 너를 떠나지 아니하시며 버리지 아니하시리니 <b>너는 두려워하지도 말며 놀라지도 말지니라</b>", explanation: "논리적 분석을 중시하는 당신, 감정적인 '두려워하지 말라'는 말씀이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "망령되고 허탄한 신화를 버리고 경건에 이르도록 네 자신을 연단하라", reference: "디모데전서 4:7", explanation: "비논리적인 맹신을 싫어하는 당신에게 이성적인 신앙을 권합니다." },
+                        { text: "범사에 헤아려 좋은 것을 취하고", reference: "데살로니가전서 5:21", explanation: "분석하고 검증하기 좋아하는 당신의 성향을 완벽하게 지지합니다." }
+                    ],
+                    "dislike": [
+                        { text: "믿습니다 나의 믿음 없는 것을 도와 주소서", reference: "마가복음 9:24", explanation: "논리적 납득 없이 무조건 '믿습니다' 외치는 건 당신 스타일이 아닙니다." },
+                        { text: "감사함으로 그 문에 들어가며 찬송함으로", reference: "시편 100:4", explanation: "감정을 억지로 끌어올리는 찬양 시간은 뻘쭘할 수 있습니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "지혜를 얻은 자와 명철을 얻은 자는 복이 있나니", reference: "잠언 3:13", explanation: "지적인 욕구가 강한 당신에게 지혜는 최고의 선물입니다." },
+                        { text: "진리를 알지니 진리가 너희를 자유롭게 하리라", reference: "요한복음 8:32", explanation: "감정에 휘둘리지 않고 진리를 쫓는 당신에게 자유를 줍니다." }
+                    ],
+                    "dislike": [
+                        { text: "서로 문안하라 거룩하게 입맞춤으로", reference: "로마서 16:16", explanation: "불필요한 스킨십이나 인사는 어색하고 피하고 싶습니다." },
+                        { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", explanation: "무표정이 편한 당신에게 항상 웃으라는 건 고역입니다." }
+                    ]
+                }
             },
             "ESTP": {
-                "like": [
-                    { text: "내가 네게 명령한 것이 아니냐 강하고 담대하라", reference: "여호수아 1:9", fullText: "내가 네게 명령한 것이 아니냐 <b>강하고 담대하라</b> 두려워하지 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라", explanation: "모험 정신이 있는 당신, '강하고 담대하라'는 말씀이 마음에 듭니다." },
-                    { text: "여호와께서 네 앞에서 행하시며 너와 함께 하사", reference: "신명기 31:8", fullText: "<b>여호와께서 네 앞에서 행하시며 너와 함께 하사</b> 너를 떠나지 아니하시며 버리지 아니하시리니 너는 두려워하지도 말며 놀라지도 말지니라", explanation: "활동적인 당신, 하나님이 함께 하신다는 말씀이 확신을 줍니다." },
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "즉각적 만족을 추구하는 당신, '항상 기뻐하라'는 말씀이 공감됩니다." }
-                ],
-                "dislike": [
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "항상 움직이는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", reference: "잠언 3:5", fullText: "너는 마음을 다하여 여호와를 신뢰하고 <b>네 명철을 의지하지 말라</b>", explanation: "즉각적 행동을 중시하는 당신, '명철을 의지하지 말라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "즉각적 만족을 추구하는 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "내게 능력 주시는 자 안에서 내가 모든 것을 할 수 있느니라", reference: "빌립보서 4:13", explanation: "도전과 모험을 즐기는 당신에게 무한한 자신감을 불어넣습니다." },
+                        { text: "강하고 담대하라 두려워하지 말며 놀라지 말라", reference: "여호수아 1:9", explanation: "승부욕 있는 당신에게 딱 맞는 파이팅 넘치는 말씀입니다." }
+                    ],
+                    "dislike": [
+                        { text: "오직 여호와를 앙망하는 자는 새 힘을 얻으리니", reference: "이사야 40:31", explanation: "기다리고 묵상하는 지루한 시간은 활동적인 당신에게 고문입니다." },
+                        { text: "너희는 묵상하고 잠잠할지어다", reference: "시편 4:4", explanation: "몸이 근질거리는 당신에게 '가만히 생각만 하라'니요!" }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "보라 지금은 은혜 받을 만한 때요 보라 지금은 구원의 날이로다", reference: "고린도후서 6:2", explanation: "현재(Now)를 즐기는 당신에게 '지금 바로'라는 말은 짜릿합니다." },
+                        { text: "행함이 없는 믿음은 그 자체가 죽은 것이라", reference: "야고보서 2:17", explanation: "말보다 행동으로 보여주는 걸크러쉬 당신에게 딱입니다." }
+                    ],
+                    "dislike": [
+                        { text: "내일 일을 위하여 염려하지 말라", reference: "마태복음 6:34", explanation: "대책 없이 살라는 말처럼 들려 현실적인 당신에겐 무책임해 보입니다." },
+                        { text: "여자는 일절 순종함으로 조용히 배우라", reference: "디모데전서 2:11", explanation: "할 말은 해야 하고 활동적인 당신에게 억압적으로 느껴집니다." }
+                    ]
+                }
             },
             "ESFP": {
-                "like": [
-                    { text: "항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라", reference: "데살로니가전서 5:16-18", fullText: "<b>항상 기뻐하라</b> <b>쉬지 말고 기도하라</b> <b>범사에 감사하라</b> 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "기쁨을 사랑하는 당신, 하나님의 뜻이 기쁨과 감사에 있다는 말씀이 마음에 듭니다." },
-                    { text: "하나님이 그 지으신 모든 것을 보시니 보시기에 심히 좋았더라", reference: "창세기 1:31", fullText: "하나님이 그 지으신 모든 것을 보시니 <b>보시기에 심히 좋았더라</b> 저녁이 되고 아침이 되니 이는 여섯째 날이니라", explanation: "즐거움을 추구하는 당신, 하나님이 지으신 모든 것이 아름답다는 말씀이 공감됩니다." },
-                    { text: "서로 사랑하기를 형제처럼 하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 존경하기를 서로 먼저 하며 <b>서로 사랑하기를 형제처럼</b> 하며", explanation: "사교적인 당신, 서로를 사랑하는 말씀이 마음에 듭니다." }
-                ],
-                "dislike": [
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "활기찬 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "즉각적 만족을 추구하는 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." },
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "즉흥적이고 자유로운 당신, '정돈되고 품위 있게'라는 말씀이 구속적으로 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "이 날은 여호와께서 정하신 것이라 이 날에 우리가 즐거워하고 기뻐하리로다", reference: "시편 118:24", explanation: "오늘을 즐기는 쾌남인 당신에게 매일이 축제라는 말씀입니다." },
+                        { text: "마음의 즐거움은 양약이라도 심령의 근심은 뼈를 마르게 하느니라", reference: "잠언 17:22", explanation: "스트레스 받지 않고 즐겁게 사는 게 최고라는 당신의 철학입니다." }
+                    ],
+                    "dislike": [
+                        { text: "지혜로운 자의 마음은 초상집에 있으되", reference: "전도서 7:4", explanation: "신나는 게 좋은데 초상집이라니, 분위기 다운되는 말씀은 싫습니다." },
+                        { text: "골방에 들어가 문을 닫고 은밀한 중에 기도하라", reference: "마태복음 6:6", explanation: "사람들과 어울려야 에너지가 나는데 혼자 있으라니요!" }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "근심이 사람의 마음에 있으면 그것으로 번뇌하게 되나 선한 말은 그것을 즐겁게 하느니라", reference: "잠언 12:25", explanation: "밝은 에너지로 주변을 즐겁게 하는 당신에게 딱 맞는 말씀입니다." },
+                        { text: "즐거워하는 자들과 함께 즐거워하고 우는 자들과 함께 울라", reference: "로마서 12:15", explanation: "공감 요정인 당신, 친구들과 함께하는 모든 순간이 소중합니다." }
+                    ],
+                    "dislike": [
+                        { text: "근신하라 깨어라", reference: "베드로전서 5:8", explanation: "항상 긴장하고 진지하라는 말은 당신의 자유로움을 억압합니다." },
+                        { text: "여호와 앞에서 잠잠하고 참고 기다리라", reference: "시편 37:7", explanation: "당장 하고 싶은 게 많은데 참고 기다리는 건 너무 지루합니다." }
+                    ]
+                }
             },
             "ENFP": {
-                "like": [
-                    { text: "내가 너를 위하여 세운 계획을 내가 아나니 재앙이 아니라 곧 평안이요 너에게 미래와 희망을 주려 함이라", reference: "예레미야 29:11", fullText: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 <b>너희에게 미래와 희망을 주는 것</b>이니라", explanation: "새로운 꿈을 추구하는 당신, 하나님이 희망의 계획을 가지고 계신다는 말씀이 큰 희망을 줍니다." },
-                    { text: "항상 기뻐하라 범사에 감사하라", reference: "데살로니가전서 5:16-18", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 <b>범사에 감사하라</b> 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "기쁨을 사랑하는 당신, 하나님의 뜻이 기쁨과 감사에 있다는 말씀이 마음에 듭니다." },
-                    { text: "우리가 알거니와 하나님을 사랑하는 자에게는 모든 것이 합력하여 선을 이루느니라", reference: "로마서 8:28", fullText: "우리가 알거니와 <b>하나님을 사랑하는 자</b> 곧 그 뜻대로 부르심을 입은 자들에게는 <b>모든 것이 합력하여 선을 이루느니라</b>", explanation: "불안감이 있는 당신, 하나님이 모든 것을 선으로 바꾸신다는 말씀이 위로가 됩니다." }
-                ],
-                "dislike": [
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "즉흥적이고 자유로운 당신, '정돈되고 품위 있게'라는 말씀이 구속적으로 느껴질 수 있습니다." },
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "항상 새로운 것을 추구하는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "열정적이고 창의적인 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "보라 내가 새 일을 행하리니 이제 나타낼 것이라", reference: "이사야 43:19", explanation: "새로운 도전과 모험을 즐기는 당신에게 가슴 뛰는 비전입니다." },
+                        { text: "진리를 알지니 진리가 너희를 자유롭게 하리라", reference: "요한복음 8:32", explanation: "자유로운 영혼인 당신에게 진정한 자유를 약속합니다." }
+                    ],
+                    "dislike": [
+                        { text: "옛 길 곧 선한 길이 어디인지 알아보고 그리로 가라", reference: "예레미야 6:16", explanation: "남들이 다 간 옛날 방식대로 하라니, 창의적인 당신에겐 지루합니다." },
+                        { text: "모든 것을 적절하게 하고 정돈되게 하라", reference: "고린도전서 14:40", explanation: "반복적인 디테일과 정리는 당신을 숨 막히게 합니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라", reference: "데살로니가전서 5:16-18", explanation: "감수성이 풍부하고 긍정적인 당신에게 딱 맞는 행복 레시피입니다." },
+                        { text: "무슨 말을 하든지 말에나 일에나 다 주 예수의 이름으로 하고", reference: "골로새서 3:17", explanation: "의미 부여하기 좋아하는 당신, 모든 일에 의미를 담고 싶어 합니다." }
+                    ],
+                    "dislike": [
+                        { text: "인내를 온전히 이루라", reference: "야고보서 1:4", explanation: "금방 싫증을 느끼는 당신에게 '인내'는 가장 어려운 과제입니다." },
+                        { text: "너는 가만히 있어", reference: "시편 46:10", explanation: "하고 싶은 말이 많은데 가만히 있으라니, 입이 근질거립니다." }
+                    ]
+                }
             },
             "ENTP": {
-                "like": [
-                    { text: "진리를 알지니 진리가 너희를 자유롭게 하리라", reference: "요한복음 8:32", fullText: "<b>진리를 알지니 진리가 너희를 자유롭게 하리라</b>", explanation: "진리를 추구하는 당신, 하나님의 진리가 자유를 가져다준다는 말씀이 공감됩니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "혁신적 사고를 중시하는 당신, 하나님을 경외하는 것이 모든 지식의 근본이라는 말씀이 논리적으로 공감됩니다." },
-                    { text: "너는 여호와를 인정하라 그리하면 네 길을 지시하시리라", reference: "잠언 3:6", fullText: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 네 길에서 그를 인정하라 그리하면 <b>네 길을 지시하시리라</b>", explanation: "논리적 분석을 중시하는 당신, 하나님의 인도하심을 받는 것이 효율적으로 느껴집니다." }
-                ],
-                "dislike": [
-                    { text: "서로 사랑하기를 형제처럼 하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 존경하기를 서로 먼저 하며 <b>서로 사랑하기를 형제처럼</b> 하며", explanation: "논쟁을 즐기는 당신, 감정적인 '사랑하기'라는 말씀이 부담스러울 수 있습니다." },
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "논리적이고 객관적인 당신, '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "너는 두려워하지도 말며 놀라지도 말지니라", reference: "신명기 31:8", fullText: "여호와께서 네 앞에서 행하시며 너와 함께 하사 너를 떠나지 아니하시며 버리지 아니하시리니 <b>너는 두려워하지도 말며 놀라지도 말지니라</b>", explanation: "논리적 분석을 중시하는 당신, 감정적인 '두려워하지 말라'는 말씀이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "시험을 받지 아니하면 내가 그를 알 수 없었노라", reference: "창세기 22:12", explanation: "도전을 통해 자신을 증명하고 성장하는 것을 즐기는 당신입니다." },
+                        { text: "철이 철을 날카롭게 하는 것 같이 사람이 그 친구의 얼굴을 빛나게 하느니라", reference: "잠언 27:17", explanation: "토론과 논쟁을 통해 발전한다고 믿는 당신의 철학입니다." }
+                    ],
+                    "dislike": [
+                        { text: "순종이 제사보다 낫고 듣는 것이 수양의 기름보다 나으니", reference: "사무엘상 15:22", explanation: "납득이 안 되면 움직이지 않는 당신에게 무조건적 순종은 어렵습니다." },
+                        { text: "입을 지키는 자는 자기의 생명을 보전하나", reference: "잠언 13:3", explanation: "말하기 좋아하고 논쟁을 즐기는 당신에게 입을 다물라는 건 고문입니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "너희가 짐을 서로 지라 그리하여 그리스도의 법을 성취하라", reference: "갈라디아서 6:2", explanation: "기존의 틀을 깨고 새로운 방식으로 문제를 해결하는 것이 흥미롭습니다." },
+                        { text: "지혜 있는 자는 강하고 지식 있는 자는 힘을 더하나니", reference: "잠언 24:5", explanation: "지적이고 스마트한 당신에게 지식은 곧 힘입니다." }
+                    ],
+                    "dislike": [
+                        { text: "옛 사람과 그 행위를 벗어버리고", reference: "골로새서 3:9", explanation: "변화는 좋지만, 누군가 나를 통제하고 바꾸려 하는 건 싫습니다." },
+                        { text: "여자는 일절 순종함으로 조용히 배우라", reference: "디모데전서 2:11", explanation: "할 말은 해야 하는 당신에게 조용히 순종하라는 말은 반발심을 부릅니다." }
+                    ]
+                }
             },
             "ESTJ": {
-                "like": [
-                    { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", fullText: "그러나 모든 것을 적절하게 하고 <b>정돈되게</b> 하라", explanation: "질서를 중시하는 당신, 하나님도 질서를 좋아하신다는 말씀이 마음에 듭니다." },
-                    { text: "내가 네게 명령한 것이 아니냐 강하고 담대하라", reference: "여호수아 1:9", fullText: "내가 네게 명령한 것이 아니냐 <b>강하고 담대하라</b> 두려워하지 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라", explanation: "리더십이 있는 당신, '강하고 담대하라'는 말씀이 마음에 듭니다." },
-                    { text: "오직 여호와를 경외하며 그 길로 행하라", reference: "시편 128:1", fullText: "<b>여호와를 경외하며 그 길로 행하는 자</b>마다 복이 있도다", explanation: "목표 지향적인 당신, 하나님을 경외하는 것이 진정한 성공의 길이라는 말씀이 공감됩니다." }
-                ],
-                "dislike": [
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "항상 움직이고 계획하는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "체계적이고 논리적인 당신, 감정적으로 '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." },
-                    { text: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", reference: "잠언 3:5", fullText: "너는 마음을 다하여 여호와를 신뢰하고 <b>네 명철을 의지하지 말라</b>", explanation: "자신의 계획과 명철을 중시하는 당신, '명철을 의지하지 말라'는 말씀이 도전적으로 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "부지런한 자의 경영은 풍부함에 이를 것이나", reference: "잠언 21:5", explanation: "성실함과 효율, 성과를 중시하는 당신에게 최고의 칭찬입니다." },
+                        { text: "내가 네게 명령한 것이 아니냐 강하고 담대하라", reference: "여호수아 1:9", explanation: "조직을 이끄는 리더인 당신에게 강한 확신을 줍니다." }
+                    ],
+                    "dislike": [
+                        { text: "사람이 마음으로 자기의 길을 계획할지라도", reference: "잠언 16:9", explanation: "내가 철저하게 짠 계획이 틀어질 수도 있다는 사실은 인정하기 싫습니다." },
+                        { text: "나중 된 자로서 먼저 되고 먼저 된 자로서 나중 되리라", reference: "마태복음 20:16", explanation: "서열과 성과를 중시하는 당신에게 이 말씀은 불공정해 보입니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "그 집안 일을 보살피고 게을리 얻은 양식을 먹지 아니하며", reference: "잠언 31:27", explanation: "가정과 일터 모두 완벽하게 관리하는 슈퍼우먼인 당신을 위한 말씀입니다." },
+                        { text: "모든 일을 정돈되고 품위 있게 하라", reference: "고린도전서 14:40", explanation: "체계적이고 깔끔한 당신의 일 처리를 지지합니다." }
+                    ],
+                    "dislike": [
+                        { text: "긍휼을 행하지 아니하는 자에게는 긍휼 없는 심판이 있으리라", reference: "야고보서 2:13", explanation: "원칙대로 처리하는 게 정의라고 믿는 당신에게 '봐주라'는 말은 어렵습니다." },
+                        { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", explanation: "해야 할 일이 산더미인데 감정적으로 기뻐하라는 건 비효율적입니다." }
+                    ]
+                }
             },
             "ESFJ": {
-                "like": [
-                    { text: "서로 사랑하기를 형제처럼 하며 서로 존경하기를 먼저하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 <b>존경하기를 서로 먼저</b> 하며", explanation: "배려심 많은 당신, 서로를 사랑하고 존경하는 말씀이 마음에 듭니다." },
-                    { text: "항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라", reference: "데살로니가전서 5:16-18", fullText: "<b>항상 기뻐하라</b> <b>쉬지 말고 기도하라</b> <b>범사에 감사하라</b> 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "타인을 위해 희생하는 당신, 하나님께 감사하며 기뻐하라는 말씀이 공감됩니다." },
-                    { text: "너희는 서로 돌아보아 사랑과 선행을 격려하며", reference: "히브리서 10:24", fullText: "<b>서로 돌아보아 사랑과 선행을 격려</b>하며", explanation: "타인을 돌보는 당신, 서로를 격려하는 말씀이 마음에 듭니다." }
-                ],
-                "dislike": [
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "타인을 위해 항상 움직이는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "내가 너를 위하여 세운 계획을 내가 아나니", reference: "예레미야 29:11", fullText: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 너희에게 미래와 희망을 주는 것이니라 <b>너희가 내게 부르짖고 와서 기도하면 내가 너희에게 들을 것이요</b>", explanation: "타인의 인정에 의존하는 당신, 하나님의 계획이 부담스러울 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "감성적이고 배려심 많은 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "대접을 받고자 하는 대로 너희도 남을 대접하라", reference: "마태복음 7:12", explanation: "의리 있고 사람 챙기기 좋아하는 당신에게 황금률과 같은 말씀입니다." },
+                        { text: "형제 사랑하기를 계속하고 손 대접하기를 잊지 말라", reference: "히브리서 13:1-2", explanation: "주변 사람들에게 밥 사주고 챙겨주는 게 낙인 당신에게 딱입니다." }
+                    ],
+                    "dislike": [
+                        { text: "아비나 어미를 나보다 더 사랑하는 자는 내게 합당하지 아니하고", reference: "마태복음 10:37", explanation: "가족과 의리를 최우선으로 여기는 당신에게 큰 갈등을 줍니다." },
+                        { text: "홀로 한적한 곳에 가사 거기서 기도하시더니", reference: "마가복음 1:35", explanation: "사람들과 함께 으쌰으쌰 해야 하는데 혼자 있으라니 외롭습니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "즐거워하는 자들과 함께 즐거워하고 우는 자들과 함께 울라", reference: "로마서 12:15", explanation: "공감 능력이 뛰어나고 정이 많은 당신에게 찰떡인 말씀입니다." },
+                        { text: "서로 사랑하기를 형제처럼 하며 서로 존경하기를 먼저하며", reference: "로마서 12:10", explanation: "따뜻한 관계와 조화를 꿈꾸는 당신이 가장 바라는 세상입니다." }
+                    ],
+                    "dislike": [
+                        { text: "사람에게 보이려고 그들 앞에서 너희 의를 행하지 않도록 주의하라", reference: "마태복음 6:1", explanation: "칭찬과 인정을 받으면 더 잘하는 당신에게 '몰래 하라'는 건 섭섭합니다." },
+                        { text: "너는 가만히 있어", reference: "시편 46:10", explanation: "도와줄 게 눈에 보이는데 가만히 있으라니, 몸이 근질거립니다." }
+                    ]
+                }
             },
             "ENFJ": {
-                "like": [
-                    { text: "내가 네게 명령한 것이 아니냐 강하고 담대하라 두려워하지 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라", reference: "여호수아 1:9", fullText: "내가 네게 명령한 것이 아니냐 <b>강하고 담대하라</b> 두려워하지 말며 놀라지 말라 네가 어디로 가든지 <b>네 하나님 여호와가 너와 함께 하느니라</b>", explanation: "타인을 인도하는 당신, 하나님이 함께 하시니 담대하라는 격려의 말씀이 큰 힘이 됩니다." },
-                    { text: "너희는 서로 돌아보아 사랑과 선행을 격려하며", reference: "히브리서 10:24", fullText: "<b>서로 돌아보아 사랑과 선행을 격려</b>하며", explanation: "타인을 격려하는 당신, 서로를 격려하는 말씀이 마음에 듭니다." },
-                    { text: "서로 사랑하기를 형제처럼 하며", reference: "로마서 12:10", fullText: "형제를 사랑하여 서로 우애하고 존경하기를 서로 먼저 하며 <b>서로 사랑하기를 형제처럼</b> 하며", explanation: "영향력이 있는 당신, 서로를 사랑하는 말씀이 마음에 듭니다." }
-                ],
-                "dislike": [
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "타인을 인도하고 영감을 주는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "내가 너를 위하여 세운 계획을 내가 아나니", reference: "예레미야 29:11", fullText: "여호와의 말씀이니라 너희를 향한 나의 생각은 재앙이 아니요 평안이니 곧 너희에게 미래와 희망을 주는 것이니라 <b>너희가 내게 부르짖고 와서 기도하면 내가 너희에게 들을 것이요</b>", explanation: "타인의 인정에 의존하는 당신, 하나님의 계획이 부담스러울 수 있습니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "감성적이고 영향력 있는 당신, '지식의 근본'이라는 말씀이 딱딱하게 느껴질 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "너희는 세상의 빛이라 산 위에 있는 동네가 숨겨지지 못할 것이요", reference: "마태복음 5:14", explanation: "사람들을 이끌고 영향력을 주고 싶은 당신의 리더십을 지지합니다." },
+                        { text: "내 계명은 곧 내가 너희를 사랑한 것 같이 너희도 서로 사랑하라", reference: "요한복음 15:12", explanation: "사랑으로 조직을 이끄는 당신의 이상적인 리더상입니다." }
+                    ],
+                    "dislike": [
+                        { text: "만일 누구든지 주를 사랑하지 아니하면 저주를 받을지어다", reference: "고린도전서 16:22", explanation: "모두를 품고 가고 싶은 당신에게 배타적이고 강한 말은 불편합니다." },
+                        { text: "너는 구제할 때에 오른손이 하는 것을 왼손이 모르게 하여", reference: "마태복음 6:3", explanation: "나의 선한 행동이 다른 사람들에게 동기부여가 되길 바라는데 숨기라니요." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "서로 돌아보아 사랑과 선행을 격려하며", reference: "히브리서 10:24", explanation: "주변 사람들을 챙기고 성장시키는 당신에게 가장 적합한 모토입니다." },
+                        { text: "지혜로운 여인은 자기 집을 세우되", reference: "잠언 14:1", explanation: "가정과 공동체를 지혜롭게 세워가는 당신을 칭찬하는 말씀입니다." }
+                    ],
+                    "dislike": [
+                        { text: "세상과 벗된 것이 하나님과 원수 됨을 알지 못하느냐", reference: "야고보서 4:4", explanation: "사람들을 좋아하고 잘 어울리는 당신에게 세상과 담쌓으라는 건 힘듭니다." },
+                        { text: "너는 가만히 있어", reference: "시편 46:10", explanation: "나서서 해결해주고 도와주고 싶은데 방관하라는 건 고문입니다." }
+                    ]
+                }
             },
             "ENTJ": {
-                "like": [
-                    { text: "오직 여호와를 경외하며 그 길로 행하라", reference: "시편 128:1", fullText: "<b>여호와를 경외하며 그 길로 행하는 자</b>마다 복이 있도다", explanation: "목표 지향적인 당신, 하나님을 경외하는 것이 진정한 성공의 길이라는 말씀이 공감됩니다." },
-                    { text: "내가 네게 명령한 것이 아니냐 강하고 담대하라", reference: "여호수아 1:9", fullText: "내가 네게 명령한 것이 아니냐 <b>강하고 담대하라</b> 두려워하지 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라", explanation: "야망이 있는 당신, '강하고 담대하라'는 말씀이 마음에 듭니다." },
-                    { text: "여호와를 경외하는 것이 지식의 근본이거늘", reference: "잠언 1:7", fullText: "<b>여호와를 경외하는 것이 지식의 근본이거늘</b> 미련한 자는 지혜와 훈계를 멸시하느니라", explanation: "전략적 사고를 하는 당신, 하나님을 경외하는 것이 모든 지식의 근본이라는 말씀이 논리적으로 공감됩니다." }
-                ],
-                "dislike": [
-                    { text: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", reference: "잠언 3:5", fullText: "너는 마음을 다하여 여호와를 신뢰하고 <b>네 명철을 의지하지 말라</b>", explanation: "자신의 계획과 명철에 의존하는 당신, '명철을 의지하지 말라'는 말씀이 도전적으로 느껴질 수 있습니다." },
-                    { text: "너는 가만히 있어 내가 하나님 됨을 알지어다", reference: "시편 46:10", fullText: "<b>너는 가만히 있어 내가 하나님 됨을 알지어다</b> 내가 뭇 나라 가운데서 높임을 받으리라 내가 땅 가운데서 높임을 받으리로다", explanation: "항상 움직이고 계획하는 당신, '가만히 있어'라는 말씀이 답답하게 느껴질 수 있습니다." },
-                    { text: "항상 기뻐하라", reference: "데살로니가전서 5:16", fullText: "<b>항상 기뻐하라</b> 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라", explanation: "체계적이고 논리적인 당신, 감정적으로 '항상 기뻐하라'는 말씀이 부담스러울 수 있습니다." }
-                ]
+                "male": {
+                    "like": [
+                        { text: "이 산지를 내게 주소서", reference: "여호수아 14:12", explanation: "도전적이고 정복욕 있는 당신의 야망을 가장 잘 표현한 말씀입니다." },
+                        { text: "네 시작은 미약하였으나 네 나중은 심히 창대하리라", reference: "욥기 8:7", explanation: "성공과 성장을 목표로 달리는 당신에게 비전을 제시합니다." }
+                    ],
+                    "dislike": [
+                        { text: "심령이 가난한 자는 복이 있나니", reference: "마태복음 5:3", explanation: "자신감 넘치고 유능한 당신에게 '가난한 마음'은 패배자처럼 느껴질 수 있습니다." },
+                        { text: "너희 중의 가장 작은 자가 큰 자니라", reference: "누가복음 9:48", explanation: "리더가 되어야 직성이 풀리는 당신에게 '작은 자'가 되라는 건 납득하기 힘듭니다." }
+                    ]
+                },
+                "female": {
+                    "like": [
+                        { text: "푯대를 향하여 그리스도 예수 안에서... 부름의 상을 위하여 달려가노라", reference: "빌립보서 3:14", explanation: "목표 지향적인 당신의 추진력을 완벽하게 지지하는 말씀입니다." },
+                        { text: "그는 허리를 힘있게 동이며 자기의 팔을 강하게 하며", reference: "잠언 31:17", explanation: "나약함보다 강인함과 능력을 추구하는 당신을 묘사하는 말씀입니다." }
+                    ],
+                    "dislike": [
+                        { text: "내일 일을 너희가 알지 못하는도다 너희 생명이 무엇이냐... 안개니라", reference: "야고보서 4:14", explanation: "장기적인 플랜을 짜고 실행하는 당신에게 '인생무상'은 김 빠지는 소리입니다." },
+                        { text: "여자는 교회에서 잠잠하라", reference: "고린도전서 14:34", explanation: "리더십 있고 할 말은 해야 하는 당신에게 침묵 강요는 불가능합니다." }
+                    ]
+                }
             }
         };
 
@@ -345,89 +509,74 @@
             }
 
             if (!validMbtiList.includes(mbti)) {
-                alert("정확한 MBTI 4글자를 입력해주세요!");
+                alert("정확한 MBTI 4글자를 입력해주세요! (예: ENFP)");
                 return;
             }
 
-            const data = bibleData[mbti];
-            if (!data) {
-                alert("해당 MBTI에 대한 데이터를 찾을 수 없습니다.");
+            const mbtiSpecificData = bibleData[mbti];
+            if (!mbtiSpecificData) {
+                alert("데이터 로딩 중 오류가 발생했습니다.");
                 return;
             }
 
-            showResult(mbti, job, selectedGender, data.like, data.dislike);
+            // 성별에 따른 데이터 선택
+            const genderData = mbtiSpecificData[selectedGender];
+
+            showResult(mbti, job, selectedGender, genderData.like, genderData.dislike);
         }
 
         function showResult(mbti, job, gender, likeVerses, dislikeVerses) {
             const jobText = {
-                "student": "학생",
-                "worker": "직장인",
-                "business": "사업가/자영업",
-                "teacher": "교사/강사",
-                "medical": "의료진",
-                "pastor": "목회자/전도사",
-                "housewife": "주부",
-                "retired": "은퇴",
-                "other": "기타"
+                "student": "학생", "worker": "직장인", "business": "사업가/자영업", "teacher": "교사/강사", "medical": "의료진",
+                "pastor": "목회자/전도사", "housewife": "주부", "retired": "은퇴", "other": "기타"
             };
+            const genderText = { "male": "남성", "female": "여성" };
 
-            const genderText = {
-                "male": "남성",
-                "female": "여성"
-            };
-
-            let likeHTML = likeVerses.map((verse, index) => {
-                const displayText = verse.fullText || verse.text;
-                return `
-                <div class="verse-card verse-card-like p-6 rounded-2xl shadow-sm mb-4">
-                    <div class="flex items-start gap-4">
-                        <div class="verse-number text-3xl font-black flex-shrink-0" style="color: #10b981;">${index + 1}</div>
+            let likeHTML = likeVerses.map((verse, index) => `
+                <div class="verse-card verse-card-like p-5 rounded-2xl shadow-sm mb-3">
+                    <div class="flex items-start gap-3">
+                        <div class="verse-number text-2xl font-black flex-shrink-0 text-emerald-500">${index + 1}</div>
                         <div class="flex-1">
-                            <p class="text-lg font-bold text-slate-800 mb-2 leading-relaxed">${displayText}</p>
-                            <p class="text-sm font-bold text-green-600 mb-3">${verse.reference}</p>
-                            <p class="text-sm text-slate-600 leading-relaxed">${verse.explanation}</p>
+                            <p class="text-lg font-bold text-slate-800 mb-2 leading-snug word-keep break-keep">"${verse.text}"</p>
+                            <p class="text-xs font-bold text-emerald-600 mb-2">${verse.reference}</p>
+                            <p class="text-sm text-slate-500 leading-relaxed bg-white/50 p-2 rounded-lg">💡 ${verse.explanation}</p>
                         </div>
                     </div>
                 </div>
-            `;
-            }).join('');
+            `).join('');
 
-            let dislikeHTML = dislikeVerses.map((verse, index) => {
-                const displayText = verse.fullText || verse.text;
-                return `
-                <div class="verse-card verse-card-dislike p-6 rounded-2xl shadow-sm mb-4">
-                    <div class="flex items-start gap-4">
-                        <div class="verse-number text-3xl font-black flex-shrink-0" style="color: #ef4444;">${index + 1}</div>
+            let dislikeHTML = dislikeVerses.map((verse, index) => `
+                <div class="verse-card verse-card-dislike p-5 rounded-2xl shadow-sm mb-3">
+                    <div class="flex items-start gap-3">
+                        <div class="verse-number text-2xl font-black flex-shrink-0 text-rose-500">${index + 1}</div>
                         <div class="flex-1">
-                            <p class="text-lg font-bold text-slate-800 mb-2 leading-relaxed">${displayText}</p>
-                            <p class="text-sm font-bold text-red-600 mb-3">${verse.reference}</p>
-                            <p class="text-sm text-slate-600 leading-relaxed">${verse.explanation}</p>
+                            <p class="text-lg font-bold text-slate-800 mb-2 leading-snug word-keep break-keep">"${verse.text}"</p>
+                            <p class="text-xs font-bold text-rose-500 mb-2">${verse.reference}</p>
+                            <p class="text-sm text-slate-500 leading-relaxed bg-white/50 p-2 rounded-lg">🤔 ${verse.explanation}</p>
                         </div>
                     </div>
                 </div>
-            `;
-            }).join('');
+            `).join('');
 
             const resultHTML = `
-                <div class="clean-card p-6 md:p-8 bg-white mb-6">
-                    <div class="text-center mb-6">
-                        <h2 class="text-2xl font-extrabold text-slate-800 mb-2">
-                            <span class="text-point">${mbti}</span> ${genderText[gender]} · ${jobText[job]}
-                        </h2>
-                        <p class="text-slate-500 text-sm">송구영신예배때 뽑고싶은 말씀 구절과<br>안뽑고 싶은 말씀구절 알아보기</p>
-                    </div>
+                <div class="clean-card p-6 md:p-8 bg-white mb-6 text-center">
+                    <span class="inline-block bg-indigo-50 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full mb-3">ANALYSIS RESULT</span>
+                    <h2 class="text-2xl font-extrabold text-slate-800 mb-2">
+                        <span class="text-point">${mbti}</span> ${genderText[gender]} · ${jobText[job]}
+                    </h2>
+                    <p class="text-slate-500 text-sm word-keep">나에게 맞는 말씀 처방전</p>
                 </div>
 
                 <div class="clean-card p-6 md:p-8 bg-white mb-6">
-                    <h3 class="text-lg font-bold text-green-600 mb-4 flex items-center gap-2">
-                        <i class="fas fa-heart text-green-600"></i> 송구영신예배때 뽑고싶은 말씀 구절
+                    <h3 class="text-lg font-bold text-emerald-600 mb-4 flex items-center gap-2">
+                        <i class="fas fa-check-circle"></i> 뽑으면 맘에 들어할만한
                     </h3>
                     ${likeHTML}
                 </div>
 
                 <div class="clean-card p-6 md:p-8 bg-white">
-                    <h3 class="text-lg font-bold text-red-600 mb-4 flex items-center gap-2">
-                        <i class="fas fa-heart-broken text-red-600"></i> 송구영신예배때 안뽑고 싶은 말씀 구절
+                    <h3 class="text-lg font-bold text-rose-500 mb-4 flex items-center gap-2">
+                        <i class="fas fa-sync-alt"></i> 넣고 다시 뽑고싶을만한
                     </h3>
                     ${dislikeHTML}
                 </div>
@@ -445,10 +594,8 @@
             document.getElementById('job').value = '';
             document.getElementById('mbti').value = '';
             selectedGender = '';
-            document.getElementById('gender-male').classList.remove('bg-indigo-500', 'text-white', 'border-indigo-500');
-            document.getElementById('gender-male').classList.add('bg-slate-100', 'text-slate-600', 'border-slate-200');
-            document.getElementById('gender-female').classList.remove('bg-indigo-500', 'text-white', 'border-indigo-500');
-            document.getElementById('gender-female').classList.add('bg-slate-100', 'text-slate-600', 'border-slate-200');
+            document.getElementById('gender-male').className = 'flex-1 bg-slate-100 border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-600 transition-all hover:bg-indigo-50 hover:border-indigo-300';
+            document.getElementById('gender-female').className = 'flex-1 bg-slate-100 border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-600 transition-all hover:bg-indigo-50 hover:border-indigo-300';
             window.scrollTo(0, 0);
         }
 
