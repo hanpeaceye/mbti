@@ -79,9 +79,14 @@
                     </div>
                     
                     <div>
-                        <button id="find-btn" onclick="findVerses()" class="w-full bg-point hover:opacity-90 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
-                            <span>결과 확인하기</span> <i class="fas fa-search"></i>
-                        </button>
+                        <div class="flex flex-col gap-3 mt-4">
+                            <button onclick="findVerses(false)" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                                <span>내용 확인</span> <i class="fas fa-search"></i>
+                            </button>
+                            <button onclick="findVerses(true)" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                                <span>쿠팡 다녀와서 더 자세한 내용 확인하기</span> <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
                         <p class="text-center text-xs text-white/70 mt-2">(그냥 재미로 보세요~ 사탄 아니에요~)</p>
                     </div>
                 </div>
@@ -486,7 +491,7 @@
             }
         };
 
-        function findVerses() {
+        function findVerses(openCoupang = false) {
             const mbti = document.getElementById('mbti').value.toUpperCase().trim();
 
             if (!selectedGender || !mbti) {
@@ -499,13 +504,12 @@
                 return;
             }
 
-            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-
-            const mbtiSpecificData = bibleData[mbti];
-            if (!mbtiSpecificData) {
-                alert("데이터 로딩 중 오류가 발생했습니다.");
-                return;
-            }
+            function showResult() {
+                const mbtiSpecificData = bibleData[mbti];
+                if (!mbtiSpecificData) {
+                    alert("데이터 로딩 중 오류가 발생했습니다.");
+                    return;
+                }
 
             // 성별에 따른 데이터 선택
             const genderData = mbtiSpecificData[selectedGender];
@@ -566,10 +570,18 @@
                 </div>
             `;
 
-            document.getElementById('result-content').innerHTML = resultHTML;
-            document.getElementById('input-page').classList.add('hidden');
-            document.getElementById('result-page').classList.remove('hidden');
-            window.scrollTo(0, 0);
+                document.getElementById('result-content').innerHTML = resultHTML;
+                document.getElementById('input-page').classList.add('hidden');
+                document.getElementById('result-page').classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+
+            if (openCoupang) {
+                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                setTimeout(() => { showResult(); }, 100);
+            } else {
+                showResult();
+            }
         }
 
         function resetPage() {

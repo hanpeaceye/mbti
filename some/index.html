@@ -65,9 +65,14 @@
                         </div>
                     </div>
                     
-                    <button onclick="startAnalysis()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
-                        <span>공략법 확인하기</span> <i class="fas fa-key"></i>
-                    </button>
+                    <div class="flex flex-col gap-3 mt-4">
+                        <button onclick="startAnalysis(false)" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>내용 확인</span> <i class="fas fa-key"></i>
+                        </button>
+                        <button onclick="startAnalysis(true)" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>쿠팡 다녀와서 더 자세한 내용 확인하기</span> <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -183,7 +188,7 @@
             window.scrollTo(0, 0);
         }
 
-        function startAnalysis() {
+        function startAnalysis(openCoupang = false) {
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
             const inputA = document.getElementById('mbti-a');
             const inputB = document.getElementById('mbti-b');
@@ -195,9 +200,7 @@
                 return;
             }
             
-            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-            
-            setTimeout(() => {
+            function showAnalysisResult() {
             // 데이터 정의 (함수 내부로 이동하여 스코프 문제 방지)
             const mbtiData = {
                 "ISTJ": { type: "신중한 계획가형", like: "시간 약속 준수, 단정한 외모와 옷차림, 예측 가능한 데이트 일정(영화-밥-카페), 예의 바른 태도", dislike: "당일 아침 번개 만남, 시끄러운 클럽이나 헌팅포차, 허세 부리며 없는 말 지어내기, 약속 지각", tip: "'언제 밥 한번 먹자'는 말은 이들에게 인사치레입니다. '이번 주 토요일 6시에 강남역 3번 출구 파스타집 어때요?'라고 구체적으로 제안해야 움직입니다." },
@@ -456,7 +459,14 @@
                 const bar = document.querySelector('.score-bar'); 
                 if(bar) bar.style.width = score + '%'; 
             }, 300);
-            }, 100);
+            }
+            
+            if (openCoupang) {
+                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                setTimeout(() => { showAnalysisResult(); }, 100);
+            } else {
+                showAnalysisResult();
+            }
         }
 
         // 초기화

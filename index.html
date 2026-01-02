@@ -77,9 +77,14 @@
                         </div>
                     </div>
                     
-                    <button id="analyze-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-5 rounded-xl shadow-lg text-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
-                        <span>갈등 원인 분석하기</span> <i class="fas fa-stethoscope"></i>
-                    </button>
+                    <div class="flex flex-col gap-3 mt-4">
+                        <button onclick="showResultDirect()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>내용 확인</span> <i class="fas fa-stethoscope"></i>
+                        </button>
+                        <button onclick="showResultWithCoupang()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>쿠팡 다녀와서 더 자세한 내용 확인하기</span> <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -414,14 +419,26 @@
                 return cautions.length > 0 ? cautions.join('<br><br>') : "✨ 당신과 연인의 성향이 잘 맞아요! 자연스럽게 대화하고 서로를 존중하면 됩니다.";
             }
 
-            function validateAndAnalyze() {
+            function validateAndShowResult(openCoupang = false) {
                 const inputA = document.getElementById('mbti-a');
                 const inputB = document.getElementById('mbti-b');
                 const valA = inputA.value.toUpperCase().trim();
                 const valB = inputB.value.toUpperCase().trim();
                 if (!validMbtiList.includes(valA) || !validMbtiList.includes(valB)) { alert("정확한 MBTI 4글자를 입력해주세요!"); return; }
-                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                setTimeout(() => { showResult(valA, valB); }, 100);
+                if (openCoupang) {
+                    window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                    setTimeout(() => { showResult(valA, valB); }, 100);
+                } else {
+                    showResult(valA, valB);
+                }
+            }
+
+            function showResultDirect() {
+                validateAndShowResult(false);
+            }
+
+            function showResultWithCoupang() {
+                validateAndShowResult(true);
             }
 
             window.unlockSecret = function() {
@@ -529,7 +546,6 @@
                 setTimeout(() => { const bar = document.querySelector('.score-bar'); if(bar) bar.style.width = harmony.score + '%'; }, 300);
             }
 
-            document.getElementById('analyze-btn').addEventListener('click', validateAndAnalyze);
             document.getElementById('back-btn').addEventListener('click', () => {
                 document.getElementById('input-page').classList.remove('hidden');
                 document.getElementById('result-page').classList.add('hidden');
