@@ -236,7 +236,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
             const dataList = document.getElementById('mbti-list');
-            validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
+            if (dataList) {
+                dataList.innerHTML = ''; // 기존 옵션 제거
+                validMbtiList.forEach(t => { 
+                    let opt = document.createElement('option'); 
+                    opt.value = t; 
+                    dataList.appendChild(opt); 
+                });
+            }
 
             // 1. [데이터] 연인 싸움 분석 (구체적 상황 묘사 강화)
             const mbtiData = {

@@ -233,7 +233,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
             const dataList = document.getElementById('mbti-list');
-            validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
+            if (dataList) {
+                dataList.innerHTML = ''; // 기존 옵션 제거
+                validMbtiList.forEach(t => { 
+                    let opt = document.createElement('option'); 
+                    opt.value = t; 
+                    dataList.appendChild(opt); 
+                });
+            }
 
             // 1. 여행 스타일 데이터
             const mbtiData = {

@@ -143,9 +143,26 @@
     </div>
 
     <script>
-        const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
-        const dataList = document.getElementById('mbti-list');
-        validMbtiList.forEach(t => { let opt = document.createElement('option'); opt.value = t; dataList.appendChild(opt); });
+        // 초기화 - datalist 채우기
+        function initMbtiList() {
+            const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
+            const dataList = document.getElementById('mbti-list');
+            if (dataList) {
+                dataList.innerHTML = ''; // 기존 옵션 제거
+                validMbtiList.forEach(t => { 
+                    let opt = document.createElement('option'); 
+                    opt.value = t; 
+                    dataList.appendChild(opt); 
+                });
+            }
+        }
+        
+        // DOM 로드 후 초기화
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMbtiList);
+        } else {
+            initMbtiList();
+        }
 
         let selectedGender = '';
 
