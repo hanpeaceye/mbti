@@ -97,12 +97,12 @@
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">나의 MBTI</label>
-                            <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
+                            <input id="mbti-a" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
                         </div>
                         <i class="fas fa-heart-broken text-rose-300 text-xl mt-2 md:mt-0 animate-pulse"></i>
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">연인의 MBTI</label>
-                            <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
+                            <input id="mbti-b" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
                         </div>
                     </div>
                     
@@ -230,20 +230,9 @@
         Ver 3.7 Caution+
     </div>
 
-    <datalist id="mbti-list"></datalist>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
-            const dataList = document.getElementById('mbti-list');
-            if (dataList) {
-                dataList.innerHTML = ''; // 기존 옵션 제거
-                validMbtiList.forEach(t => { 
-                    let opt = document.createElement('option'); 
-                    opt.value = t; 
-                    dataList.appendChild(opt); 
-                });
-            }
 
             // 1. [데이터] 연인 싸움 분석 (구체적 상황 묘사 강화)
             const mbtiData = {

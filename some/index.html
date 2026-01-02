@@ -80,12 +80,12 @@
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">나의 MBTI</label>
-                            <input id="mbti-a" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
+                            <input id="mbti-a" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
                         </div>
                         <i class="fas fa-heart text-rose-400 text-2xl animate-pulse mt-2 md:mt-0"></i>
                         <div class="w-full">
                             <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">상대방 MBTI</label>
-                            <input id="mbti-b" list="mbti-list" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
+                            <input id="mbti-b" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
                         </div>
                     </div>
                     
@@ -186,8 +186,6 @@
     </footer>
 
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">Ver 4.0 Messenger+</div>
-    <datalist id="mbti-list"></datalist>
-
     <script>
         // 전역 함수 정의
         function goTest(targetUrl) {
@@ -493,26 +491,6 @@
             }
         }
 
-        // 초기화 - datalist 채우기
-        function initMbtiList() {
-            const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
-            const dataList = document.getElementById('mbti-list');
-            if (dataList) {
-                dataList.innerHTML = ''; // 기존 옵션 제거
-                validMbtiList.forEach(t => { 
-                    let opt = document.createElement('option'); 
-                    opt.value = t; 
-                    dataList.appendChild(opt); 
-                });
-            }
-        }
-        
-        // DOM 로드 후 초기화
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMbtiList);
-        } else {
-            initMbtiList();
-        }
     </script>
 </body>
 </html>
