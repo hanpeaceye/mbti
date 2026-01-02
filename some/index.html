@@ -195,6 +195,9 @@
                 return;
             }
             
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            
+            setTimeout(() => {
             // 데이터 정의 (함수 내부로 이동하여 스코프 문제 방지)
             const mbtiData = {
                 "ISTJ": { type: "신중한 계획가형", like: "시간 약속 준수, 단정한 외모와 옷차림, 예측 가능한 데이트 일정(영화-밥-카페), 예의 바른 태도", dislike: "당일 아침 번개 만남, 시끄러운 클럽이나 헌팅포차, 허세 부리며 없는 말 지어내기, 약속 지각", tip: "'언제 밥 한번 먹자'는 말은 이들에게 인사치레입니다. '이번 주 토요일 6시에 강남역 3번 출구 파스타집 어때요?'라고 구체적으로 제안해야 움직입니다." },
@@ -453,6 +456,7 @@
                 const bar = document.querySelector('.score-bar'); 
                 if(bar) bar.style.width = score + '%'; 
             }, 300);
+            }, 100);
         }
 
         // 초기화

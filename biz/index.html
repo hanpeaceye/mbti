@@ -284,7 +284,8 @@
                 const valA = inputA.value.toUpperCase().trim();
                 const valB = inputB.value.toUpperCase().trim();
                 if (!validMbtiList.includes(valA) || !validMbtiList.includes(valB)) { alert("정확한 MBTI 4글자를 입력해주세요!"); return; }
-                showResult(valA, valB);
+                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                setTimeout(() => { showResult(valA, valB); }, 100);
             }
 
             function showResult(me, you) {
