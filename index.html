@@ -462,13 +462,13 @@
                 }
             }
 
-            function showResultDirect() {
+            window.showResultDirect = function() {
                 validateAndShowResult(false);
-            }
+            };
 
-            function showResultWithCoupang() {
+            window.showResultWithCoupang = function() {
                 validateAndShowResult(true);
-            }
+            };
 
             window.unlockSecret = function() {
                 window.open('https://link.coupang.com/a/ddddJ5', '_blank');

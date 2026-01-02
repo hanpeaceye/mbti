@@ -321,13 +321,13 @@
                 }
             }
 
-            function showResultDirect() {
+            window.showResultDirect = function() {
                 validateAndShowResult(false);
-            }
+            };
 
-            function showResultWithCoupang() {
+            window.showResultWithCoupang = function() {
                 validateAndShowResult(true);
-            }
+            };
 
             function showResult(me, you) {
                 const tData = mbtiData[you][Math.floor(Math.random() * mbtiData[you].length)];

@@ -480,13 +480,13 @@
                 }
             }
 
-            function showResultDirect() {
+            window.showResultDirect = function() {
                 validateAndShowResult(false);
-            }
+            };
 
-            function showResultWithCoupang() {
+            window.showResultWithCoupang = function() {
                 validateAndShowResult(true);
-            }
+            };
 
             // 문자열을 리스트로 변환
             const formatList = (str) => {

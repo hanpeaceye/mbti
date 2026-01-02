@@ -528,17 +528,25 @@
                 return;
             }
 
-            function showResult() {
+            function displayResult() {
                 const mbtiSpecificData = bibleData[mbti];
                 if (!mbtiSpecificData) {
                     alert("데이터 로딩 중 오류가 발생했습니다.");
                     return;
                 }
 
-            // 성별에 따른 데이터 선택
-            const genderData = mbtiSpecificData[selectedGender];
+                // 성별에 따른 데이터 선택
+                const genderData = mbtiSpecificData[selectedGender];
 
-            showResult(mbti, selectedGender, genderData.like, genderData.dislike);
+                showResult(mbti, selectedGender, genderData.like, genderData.dislike);
+            }
+
+            if (openCoupang) {
+                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                setTimeout(() => { displayResult(); }, 100);
+            } else {
+                displayResult();
+            }
         }
 
         function showResult(mbti, gender, likeVerses, dislikeVerses) {
@@ -594,18 +602,10 @@
                 </div>
             `;
 
-                document.getElementById('result-content').innerHTML = resultHTML;
-                document.getElementById('input-page').classList.add('hidden');
-                document.getElementById('result-page').classList.remove('hidden');
-                window.scrollTo(0, 0);
-            }
-
-            if (openCoupang) {
-                window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                setTimeout(() => { showResult(); }, 100);
-            } else {
-                showResult();
-            }
+            document.getElementById('result-content').innerHTML = resultHTML;
+            document.getElementById('input-page').classList.add('hidden');
+            document.getElementById('result-page').classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
 
         function resetPage() {
