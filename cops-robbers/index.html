@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-6540004747918466">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="경찰과 도둑 게임 개인별 맞춤 전략 가이드. 년생, 달리기 속도, 체력, MBTI를 분석하여 최적의 플레이 전략을 추천합니다.">
+    <link rel="canonical" href="https://aimbti.xyz/cops-robbers">
+    <title>경도 게임 전략 추천 | 나만의 맞춤 전술 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-33VJ9T8RW5');
+    </script>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimbti.xyz/cops-robbers">
+    <meta property="og:title" content="🚔 경도 게임 전략 추천 | 나만의 맞춤 전술">
+    <meta property="og:description" content="당근마켓·인스타 유행! 경찰과 도둑 게임에서 승리하는 나만의 전략을 확인하세요.">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="경도 게임 전략 추천">
+    <meta name="twitter:description" content="개인별 맞춤 경도 게임 전략 가이드">
+    <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #334155; }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .clean-card { background: #ffffff; border-radius: 24px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
+        .text-point { color: #667eea; }
+        .bg-point { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        
+        .option-btn { transition: all 0.3s ease; }
+        .option-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+        .option-btn.selected { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: #667eea; }
+        
+        .strategy-card { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-left: 4px solid #667eea; }
+    </style>
+</head>
+<body class="min-h-screen relative pb-10 pt-8">
+
+    <div class="w-full max-w-3xl mx-auto px-4 py-8">
+        <div id="input-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-white border border-purple-200 text-purple-600 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Cops & Robbers Strategy</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight drop-shadow-lg">
+                    경도 게임<br><span class="text-yellow-300">승리 전략</span> 추천 🚔
+                </h1>
+                <p class="text-white/90 text-sm md:text-base drop-shadow">당근마켓·인스타 유행!<br>나만의 맞춤형 전술을 확인하세요</p>
+            </div>
+
+            <div class="clean-card p-8 md:p-10 shadow-xl">
+                <form id="strategy-form" class="flex flex-col gap-6">
+                    <!-- 년생 입력 -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">1. 출생년도</label>
+                        <input type="number" id="birth-year" min="1980" max="2010" placeholder="예: 1995" 
+                               class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-bold text-slate-800 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition">
+                        <p class="text-xs text-slate-400 mt-2 text-center">체력 수준 계산에 반영됩니다</p>
+                    </div>
+
+                    <!-- 달리기 속도 -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">2. 달리기 속도</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" onclick="selectOption('speed', 'high', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-bolt text-yellow-500 text-2xl mb-2"></i><br>상
+                            </button>
+                            <button type="button" onclick="selectOption('speed', 'mid', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-walking text-blue-500 text-2xl mb-2"></i><br>중
+                            </button>
+                            <button type="button" onclick="selectOption('speed', 'low', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-snail text-gray-500 text-2xl mb-2"></i><br>하
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 체력 -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">3. 체력</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" onclick="selectOption('stamina', 'high', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-fire text-red-500 text-2xl mb-2"></i><br>상
+                            </button>
+                            <button type="button" onclick="selectOption('stamina', 'mid', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-battery-half text-orange-500 text-2xl mb-2"></i><br>중
+                            </button>
+                            <button type="button" onclick="selectOption('stamina', 'low', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-battery-empty text-gray-400 text-2xl mb-2"></i><br>하
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- MBTI -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">4. MBTI (E/I만 참고)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" onclick="selectOption('mbti', 'E', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-users text-blue-500 text-2xl mb-2"></i><br>외향형 (E)
+                            </button>
+                            <button type="button" onclick="selectOption('mbti', 'I', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
+                                <i class="fas fa-user text-purple-500 text-2xl mb-2"></i><br>내향형 (I)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3 mt-4">
+                        <button type="button" onclick="showResultDirect()" class="w-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>전략 확인하기</span> <i class="fas fa-search"></i>
+                        </button>
+                        <button type="button" onclick="showResultWithCoupang()" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>쿠팡 다녀와서 더 자세한 전략 보기</span> <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="result-page" class="hidden fade-in">
+            <div class="flex items-center justify-between mb-6">
+                <button id="back-btn" class="text-white hover:text-yellow-200 font-medium text-sm flex items-center gap-2 transition-colors drop-shadow">
+                    <i class="fas fa-chevron-left"></i> 다시하기
+                </button>
+                <span class="text-[10px] font-bold text-yellow-300 bg-white/20 px-2 py-1 rounded">STRATEGY GUIDE</span>
+            </div>
+
+            <div id="result-content" class="space-y-6"></div>
+
+            <div class="mt-12 pt-8 border-t border-white/20">
+                <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
+                    <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/90 border border-white rounded-full shadow-sm text-slate-700 font-bold hover:bg-white transition-all text-sm">
+                        <i class="fas fa-share-alt"></i> 친구에게 공유하기
+                    </button>
+                    <a href="https://link.coupang.com/a/ddddJ5" target="_blank" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 border border-orange-400 rounded-full shadow-sm text-white font-bold hover:opacity-90 transition-all text-sm animate-bounce">
+                        <i class="fas fa-shopping-cart"></i> 쿠팡 쇼핑하러 가기
+                    </a>
+                </div>
+                
+                <div class="mt-8 flex justify-center w-full overflow-hidden">
+                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedOptions = {
+            birthYear: null,
+            speed: null,
+            stamina: null,
+            mbti: null
+        };
+
+        function selectOption(type, value, element) {
+            // 같은 타입의 다른 버튼들 선택 해제
+            const buttons = element.parentElement.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            
+            // 선택한 버튼 활성화
+            element.classList.add('selected');
+            selectedOptions[type] = value;
+        }
+
+        // 년생 입력 처리
+        document.getElementById('birth-year').addEventListener('input', function(e) {
+            selectedOptions.birthYear = parseInt(e.target.value);
+        });
+
+        function calculateStaminaLevel(birthYear, staminaInput) {
+            if (!birthYear) return staminaInput;
+            
+            const currentYear = new Date().getFullYear();
+            const age = currentYear - birthYear;
+            
+            // 나이에 따른 체력 보정
+            let staminaAdjustment = staminaInput;
+            
+            if (age >= 35) {
+                // 35세 이상: 체력 1단계 하향
+                if (staminaInput === 'high') staminaAdjustment = 'mid';
+                else if (staminaInput === 'mid') staminaAdjustment = 'low';
+            } else if (age >= 30) {
+                // 30-34세: 체력 약간 하향 (중->중, 상->중)
+                if (staminaInput === 'high') staminaAdjustment = 'mid';
+            } else if (age <= 25) {
+                // 25세 이하: 체력 약간 상향
+                if (staminaInput === 'mid') staminaAdjustment = 'high';
+            }
+            
+            return staminaAdjustment;
+        }
+
+        function generateStrategy(birthYear, speed, stamina, mbti) {
+            const adjustedStamina = calculateStaminaLevel(birthYear, stamina);
+            
+            // 전략 생성 로직
+            let role = ''; // 경찰 or 도둑 추천
+            let strategy = '';
+            let tips = [];
+            let playStyle = '';
+            let equipment = [];
+            
+            // 1. 역할 추천 (속도 + 체력 기반)
+            const speedScore = speed === 'high' ? 3 : speed === 'mid' ? 2 : 1;
+            const staminaScore = adjustedStamina === 'high' ? 3 : adjustedStamina === 'mid' ? 2 : 1;
+            const totalScore = speedScore + staminaScore;
+            
+            if (totalScore >= 5) {
+                role = '도둑';
+                playStyle = '공격적 도주형';
+            } else if (totalScore >= 3) {
+                role = '경찰';
+                playStyle = '균형 추격형';
+            } else {
+                role = '경찰';
+                playStyle = '전략 수비형';
+            }
+            
+            // 2. MBTI 기반 전략 조정
+            if (mbti === 'E') {
+                // 외향형: 팀워크, 소통 강조
+                if (role === '경찰') {
+                    strategy = '무전기 활용이 핵심입니다. 팀원들과 실시간으로 정보를 공유하며 포위망을 좁혀가세요. 목소리가 크고 명확하게 지시를 내리면 팀의 리더 역할을 할 수 있습니다.';
+                    tips.push('무전기로 "1번 게이트 도둑 발견, 2번 게이트로 차단!" 같은 명확한 지시를 내리세요');
+                    tips.push('팀원들과 함께 움직이며 소통을 유지하면 승률이 높아집니다');
+                } else {
+                    strategy = '혼자 도망치지 말고 팀원들과 연락을 유지하세요. 경찰의 위치를 공유하고 함께 작전을 짜면 생존률이 높아집니다.';
+                    tips.push('도둑 팀원들과 위치를 공유하며 협력하세요');
+                    tips.push('경찰이 포위할 때는 팀원들과 함께 탈출 경로를 만들어야 합니다');
+                }
+                equipment.push('무전기 앱 필수');
+            } else {
+                // 내향형: 혼자서도 잘하는 전략
+                if (role === '경찰') {
+                    strategy = '조용히 은밀하게 움직이며 도둑의 예상 경로를 미리 차단하세요. 큰 소리로 소통하기보다는 혼자서도 효과적으로 작전을 수행할 수 있습니다.';
+                    tips.push('혼자 조용히 이동하며 도둑의 이동 패턴을 관찰하세요');
+                    tips.push('시끄러운 무전기보다는 조용한 관찰과 예측이 더 효과적입니다');
+                } else {
+                    strategy = '혼자서도 잘 도망칠 수 있습니다. 조용히 이동하며 경찰의 시야에서 벗어나는 것이 핵심입니다. 시끄러운 팀원들과 떨어져서 움직이세요.';
+                    tips.push('혼자 조용히 이동하며 경찰의 시야를 피하세요');
+                    tips.push('은밀한 장소에 숨어서 시간을 벌 수 있습니다');
+                }
+                equipment.push('조용한 이동이 가능한 가벼운 복장');
+            }
+            
+            // 3. 속도 기반 전술
+            if (speed === 'high') {
+                if (role === '도둑') {
+                    strategy += ' 빠른 발을 활용해 경찰과 직접적인 추격전을 피하고, 한 번에 멀리 도망치세요.';
+                    tips.push('직선 거리를 활용한 빠른 도주가 유리합니다');
+                } else {
+                    strategy += ' 빠른 속도로 도둑을 직접 추격할 수 있습니다. 하지만 혼자서 달리지 말고 팀원과 협력하세요.';
+                    tips.push('직접 추격보다는 도둑의 예상 경로를 차단하는 것이 효율적입니다');
+                }
+            } else if (speed === 'low') {
+                if (role === '도둑') {
+                    strategy += ' 속도가 느리므로 미리 경찰의 위치를 파악하고 우회 경로를 택하세요.';
+                    tips.push('직접적인 추격전은 피하고, 미리 숨을 장소를 파악하세요');
+                    tips.push('감옥 근처에 숨어서 팀원을 구출하는 역할이 적합합니다');
+                } else {
+                    strategy += ' 속도가 느리므로 전략적 배치가 중요합니다. 감옥 근처나 중요한 교차로를 지키는 역할이 적합합니다.';
+                    tips.push('감옥 수비나 특정 구역 지키기가 효과적입니다');
+                }
+            }
+            
+            // 4. 체력 기반 전술
+            if (adjustedStamina === 'high') {
+                strategy += ' 체력이 좋으니 장시간 게임에도 지치지 않습니다. 지속적인 이동과 추격이 가능합니다.';
+                tips.push('체력을 활용한 지속적인 압박이 가능합니다');
+            } else if (adjustedStamina === 'low') {
+                strategy += ' 체력이 부족하니 짧고 강렬한 움직임을 하세요. 장시간 달리기는 피하고 전략적으로 움직이세요.';
+                tips.push('짧은 거리 이동과 숨기 전략이 효과적입니다');
+                tips.push('체력 회복을 위해 중간중간 숨을 곳을 활용하세요');
+            }
+            
+            // 5. 역할별 추가 전략
+            if (role === '경찰') {
+                tips.push('도둑의 예상 이동 경로를 미리 차단하는 것이 핵심입니다');
+                tips.push('팀원들과 함께 포위망을 만들어 도둑을 가두세요');
+                equipment.push('무전기 앱 (Zello 등)');
+                equipment.push('형광 조끼 (팀 식별용)');
+            } else {
+                tips.push('경찰의 시야에서 벗어나는 것이 최우선입니다');
+                tips.push('감옥에 갇힌 팀원을 구출하는 것도 승리의 열쇠입니다');
+                equipment.push('가벼운 복장');
+                equipment.push('위치 공유 앱 (도둑 팀원들과)');
+            }
+            
+            return {
+                role,
+                playStyle,
+                strategy,
+                tips,
+                equipment,
+                totalScore,
+                adjustedStamina
+            };
+        }
+
+        function showResultDirect() {
+            if (!selectedOptions.birthYear || !selectedOptions.speed || !selectedOptions.stamina || !selectedOptions.mbti) {
+                alert('모든 항목을 입력해주세요!');
+                return;
+            }
+            
+            const result = generateStrategy(
+                selectedOptions.birthYear,
+                selectedOptions.speed,
+                selectedOptions.stamina,
+                selectedOptions.mbti
+            );
+            
+            displayResult(result, false);
+        }
+
+        function showResultWithCoupang() {
+            if (!selectedOptions.birthYear || !selectedOptions.speed || !selectedOptions.stamina || !selectedOptions.mbti) {
+                alert('모든 항목을 입력해주세요!');
+                return;
+            }
+            
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => {
+                const result = generateStrategy(
+                    selectedOptions.birthYear,
+                    selectedOptions.speed,
+                    selectedOptions.stamina,
+                    selectedOptions.mbti
+                );
+                displayResult(result, true);
+            }, 100);
+        }
+
+        function displayResult(result, withCoupang) {
+            const resultHTML = `
+                <div class="clean-card p-6 md:p-8 text-center">
+                    <div class="mb-6">
+                        <span class="inline-block bg-purple-100 text-purple-600 text-xs font-bold px-3 py-1 rounded-full mb-3">추천 역할</span>
+                        <h2 class="text-4xl font-black text-slate-800 mb-2">
+                            <span class="text-point">${result.role}</span> 팀
+                        </h2>
+                        <p class="text-slate-500 font-bold">${result.playStyle}</p>
+                    </div>
+                    
+                    <div class="w-full bg-slate-100 rounded-full h-4 mb-6 overflow-hidden">
+                        <div class="bg-point h-4 rounded-full transition-all duration-1000" style="width: ${(result.totalScore / 6) * 100}%"></div>
+                    </div>
+                </div>
+
+                <div class="clean-card p-6 md:p-8">
+                    <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-yellow-500"></i> 맞춤 전략
+                    </h3>
+                    <div class="strategy-card p-5 rounded-xl mb-4">
+                        <p class="text-slate-700 leading-relaxed text-sm">${result.strategy}</p>
+                    </div>
+                </div>
+
+                <div class="clean-card p-6 md:p-8">
+                    <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-trophy text-orange-500"></i> 승리 팁
+                    </h3>
+                    <ul class="space-y-3 text-left">
+                        ${result.tips.map(tip => `
+                            <li class="flex items-start gap-3">
+                                <span class="text-purple-500 mt-1"><i class="fas fa-check-circle"></i></span>
+                                <span class="text-slate-700 text-sm leading-relaxed">${tip}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <div class="clean-card p-6 md:p-8">
+                    <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-shopping-bag text-blue-500"></i> 추천 준비물
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        ${result.equipment.map(item => `
+                            <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-200">
+                                <p class="text-slate-700 font-bold text-sm">${item}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                ${withCoupang ? `
+                <div class="clean-card p-6 md:p-8 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300">
+                    <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
+                        <i class="fas fa-star text-yellow-500"></i> 프리미엄 전략
+                    </h3>
+                    <p class="text-slate-600 text-sm mb-4">쿠팡에서 쇼핑하신 분들을 위한 추가 전략입니다!</p>
+                    <div class="bg-white p-4 rounded-xl">
+                        <p class="text-slate-700 text-sm leading-relaxed">
+                            ${result.role === '경찰' ? 
+                                '• 도둑의 심리 상태를 파악하세요. 도망칠 때 보통 숨이 차서 방심하는 순간이 있습니다.<br>• 팀원들과 신호 체계를 미리 정해두면 더 효율적입니다.<br>• 감옥 근처에 함정을 설치하는 것도 좋은 전략입니다.' :
+                                '• 경찰의 패턴을 관찰하세요. 같은 경로를 반복하는 경우가 많습니다.<br>• 감옥 근처에 미리 숨어서 팀원 구출 타이밍을 노리세요.<br>• 경찰이 한 명만 있을 때는 역습도 가능합니다.'
+                            }
+                        </p>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+            
+            document.getElementById('result-content').innerHTML = resultHTML;
+            document.getElementById('input-page').classList.add('hidden');
+            document.getElementById('result-page').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        document.getElementById('back-btn').addEventListener('click', () => {
+            document.getElementById('input-page').classList.remove('hidden');
+            document.getElementById('result-page').classList.add('hidden');
+            // 입력값 초기화
+            selectedOptions = { birthYear: null, speed: null, stamina: null, mbti: null };
+            document.getElementById('birth-year').value = '';
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+        });
+
+        window.shareLink = function() {
+            const currentUrl = window.location.href;
+            if (navigator.share) {
+                navigator.share({ 
+                    title: '경도 게임 전략 추천', 
+                    text: '나만의 맞춤 경도 게임 전략을 확인했어요! 🚔', 
+                    url: currentUrl 
+                });
+            } else {
+                const t = document.createElement("textarea"); 
+                document.body.appendChild(t); 
+                t.value = currentUrl; 
+                t.select(); 
+                document.execCommand('copy'); 
+                document.body.removeChild(t); 
+                alert('링크 복사 완료!');
+            }
+        }
+    </script>
+</body>
+</html>
