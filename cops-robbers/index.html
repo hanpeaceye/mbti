@@ -61,17 +61,9 @@
 
             <div class="clean-card p-8 md:p-10 shadow-xl">
                 <form id="strategy-form" class="flex flex-col gap-6">
-                    <!-- 년생 입력 -->
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-3">1. 출생년도</label>
-                        <input type="number" id="birth-year" min="1980" max="2010" placeholder="예: 1995" 
-                               class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-bold text-slate-800 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition">
-                        <p class="text-xs text-slate-400 mt-2 text-center">체력 수준 계산에 반영됩니다</p>
-                    </div>
-
                     <!-- 달리기 속도 -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-3">2. 달리기 속도</label>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">1. 달리기 속도</label>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="selectOption('speed', 'high', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
                                 <i class="fas fa-bolt text-yellow-500 text-2xl mb-2"></i><br>상
@@ -87,7 +79,7 @@
 
                     <!-- 체력 -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-3">3. 체력</label>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">2. 체력</label>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="selectOption('stamina', 'high', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
                                 <i class="fas fa-fire text-red-500 text-2xl mb-2"></i><br>상
@@ -103,7 +95,7 @@
 
                     <!-- MBTI -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-3">4. MBTI (E/I만 참고)</label>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">3. MBTI (E/I만 참고)</label>
                         <div class="grid grid-cols-2 gap-3">
                             <button type="button" onclick="selectOption('mbti', 'E', this)" class="option-btn bg-white border-2 border-slate-200 rounded-xl p-4 text-center font-bold text-slate-700">
                                 <i class="fas fa-users text-blue-500 text-2xl mb-2"></i><br>외향형 (E)
@@ -149,13 +141,68 @@
                 <div class="mt-8 flex justify-center w-full overflow-hidden">
                     <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
                 </div>
+
+                <!-- 쿠팡 아이쇼핑 후 다른 서비스 둘러보기 -->
+                <div class="mt-10 w-full max-w-3xl mx-auto">
+                    <div class="text-center mb-6 relative">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-white/30"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span>
+                        </div>
+                        <h3 class="mt-4 text-white font-bold text-sm animate-bounce drop-shadow">
+                            🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 서비스도 둘러보기
+                        </h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <button onclick="goTest('/')" class="bg-white/95 border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-heart-broken"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">왜 싸우는지 분석</p>
+                        </button>
+
+                        <button onclick="goTest('/some')" class="bg-white/95 border border-pink-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center text-pink-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-kiss-wink-heart"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">썸남썸녀 공략</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">플러팅 필승 전략</p>
+                        </button>
+
+                        <button onclick="goTest('/friends-travel')" class="bg-white/95 border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">우정 여행 판독기</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">절교 방지 가이드</p>
+                        </button>
+
+                        <button onclick="goTest('/biz')" class="bg-white/95 border border-indigo-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">직장상사 공략</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">사회생활 치트키</p>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        function goTest(targetUrl) {
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => {
+                location.href = targetUrl;
+            }, 100);
+        }
+
         let selectedOptions = {
-            birthYear: null,
             speed: null,
             stamina: null,
             mbti: null
@@ -171,37 +218,7 @@
             selectedOptions[type] = value;
         }
 
-        // 년생 입력 처리
-        document.getElementById('birth-year').addEventListener('input', function(e) {
-            selectedOptions.birthYear = parseInt(e.target.value);
-        });
-
-        function calculateStaminaLevel(birthYear, staminaInput) {
-            if (!birthYear) return staminaInput;
-            
-            const currentYear = new Date().getFullYear();
-            const age = currentYear - birthYear;
-            
-            // 나이에 따른 체력 보정
-            let staminaAdjustment = staminaInput;
-            
-            if (age >= 35) {
-                // 35세 이상: 체력 1단계 하향
-                if (staminaInput === 'high') staminaAdjustment = 'mid';
-                else if (staminaInput === 'mid') staminaAdjustment = 'low';
-            } else if (age >= 30) {
-                // 30-34세: 체력 약간 하향 (중->중, 상->중)
-                if (staminaInput === 'high') staminaAdjustment = 'mid';
-            } else if (age <= 25) {
-                // 25세 이하: 체력 약간 상향
-                if (staminaInput === 'mid') staminaAdjustment = 'high';
-            }
-            
-            return staminaAdjustment;
-        }
-
-        function generateStrategy(birthYear, speed, stamina, mbti) {
-            const adjustedStamina = calculateStaminaLevel(birthYear, stamina);
+        function generateStrategy(speed, stamina, mbti) {
             
             // 전략 생성 로직
             let role = ''; // 경찰 or 도둑 추천
@@ -212,7 +229,7 @@
             
             // 1. 역할 추천 (속도 + 체력 기반)
             const speedScore = speed === 'high' ? 3 : speed === 'mid' ? 2 : 1;
-            const staminaScore = adjustedStamina === 'high' ? 3 : adjustedStamina === 'mid' ? 2 : 1;
+            const staminaScore = stamina === 'high' ? 3 : stamina === 'mid' ? 2 : 1;
             const totalScore = speedScore + staminaScore;
             
             if (totalScore >= 5) {
@@ -273,10 +290,10 @@
             }
             
             // 4. 체력 기반 전술
-            if (adjustedStamina === 'high') {
+            if (stamina === 'high') {
                 strategy += ' 체력이 좋으니 장시간 게임에도 지치지 않습니다. 지속적인 이동과 추격이 가능합니다.';
                 tips.push('체력을 활용한 지속적인 압박이 가능합니다');
-            } else if (adjustedStamina === 'low') {
+            } else if (stamina === 'low') {
                 strategy += ' 체력이 부족하니 짧고 강렬한 움직임을 하세요. 장시간 달리기는 피하고 전략적으로 움직이세요.';
                 tips.push('짧은 거리 이동과 숨기 전략이 효과적입니다');
                 tips.push('체력 회복을 위해 중간중간 숨을 곳을 활용하세요');
@@ -299,19 +316,17 @@
                 strategy,
                 tips,
                 equipment,
-                totalScore,
-                adjustedStamina
+                totalScore
             };
         }
 
         function showResultDirect() {
-            if (!selectedOptions.birthYear || !selectedOptions.speed || !selectedOptions.stamina || !selectedOptions.mbti) {
+            if (!selectedOptions.speed || !selectedOptions.stamina || !selectedOptions.mbti) {
                 alert('모든 항목을 입력해주세요!');
                 return;
             }
             
             const result = generateStrategy(
-                selectedOptions.birthYear,
                 selectedOptions.speed,
                 selectedOptions.stamina,
                 selectedOptions.mbti
@@ -321,7 +336,7 @@
         }
 
         function showResultWithCoupang() {
-            if (!selectedOptions.birthYear || !selectedOptions.speed || !selectedOptions.stamina || !selectedOptions.mbti) {
+            if (!selectedOptions.speed || !selectedOptions.stamina || !selectedOptions.mbti) {
                 alert('모든 항목을 입력해주세요!');
                 return;
             }
@@ -329,7 +344,6 @@
             window.open('https://link.coupang.com/a/ddddJ5', '_blank');
             setTimeout(() => {
                 const result = generateStrategy(
-                    selectedOptions.birthYear,
                     selectedOptions.speed,
                     selectedOptions.stamina,
                     selectedOptions.mbti
@@ -426,8 +440,7 @@
             document.getElementById('input-page').classList.remove('hidden');
             document.getElementById('result-page').classList.add('hidden');
             // 입력값 초기화
-            selectedOptions = { birthYear: null, speed: null, stamina: null, mbti: null };
-            document.getElementById('birth-year').value = '';
+            selectedOptions = { speed: null, stamina: null, mbti: null };
             document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
         });
 
