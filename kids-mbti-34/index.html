@@ -99,10 +99,10 @@
 
     <div id="result-page" class="hidden fade-in">
       <div class="flex items-center justify-between mb-6">
-        <button onclick="resetPage()" class="text-white hover:text-yellow-300 font-medium text-sm flex items-center gap-2 transition-colors">
+        <button onclick="resetPage()" class="text-slate-800 hover:text-slate-900 font-medium text-sm flex items-center gap-2 transition-colors">
           <i class="fas fa-chevron-left"></i> 다시하기
         </button>
-        <span class="text-[10px] font-bold text-white bg-white/20 px-2 py-1 rounded">VER 1.0 (미취학)</span>
+        <span class="text-[10px] font-bold text-slate-700 bg-white/80 px-2 py-1 rounded border border-amber-200">VER 1.0 (미취학)</span>
       </div>
 
       <div id="result-content" class="space-y-6"></div>
@@ -159,7 +159,7 @@
       // 메인: 상상 역할놀이(N), 서브: 장난감 반복 놀이(S) - 서로 다른 관점에서 SN 검증
       { id: "SN1", axis: "SN", isMain: true,  reverse: true,
         text: "역할놀이에서 포켓몬, 공룡, 동물, 외계인 같은 상상 속 캐릭터가 자주 등장하는 편이다.",
-        hint: "예: “나는 피카츄야”, “나는 공룡이야”, “우주에서 온 외계인이야”라고 설정하고 논다" },
+        hint: "예: “나는 피카츄야”, “나는 공룡이야”, “우주에서 온 외계인이야”라고 설정하고 논다 (반대의 경우 어린이집 선생님, 의사선생님 등의 역할놀이를 위주로 한다)" },
       { id: "SN2", axis: "SN", isMain: false, reverse: false,
         text: "블록, 자동차, 퍼즐 같은 장난감으로 놀 때, 한 번 마음에 든 놀이 방식(패턴)을 여러 번 반복하는 편이다.",
         hint: "예: 같은 길로만 자동차를 굴리기, 같은 모양으로만 블록 쌓기, 같은 퍼즐만 여러 번 맞추기" },
@@ -188,13 +188,20 @@
       root.innerHTML = "";
 
       QUESTIONS.forEach((q, idx) => {
-        const options = LIKERT.map((o, i) => {
+        const scale = LIKERT.slice().reverse(); // 왼쪽: 아니다, 오른쪽: 그렇다
+        const options = scale.map((o, i) => {
           const oid = `${q.id}_${i}`;
+          const sizeClass =
+            (i === 0 || i === scale.length - 1)
+              ? "w-7 h-7 md:w-8 md:h-8"
+              : (i === 1 || i === scale.length - 2)
+              ? "w-6 h-6 md:w-7 md:h-7"
+              : "w-5 h-5 md:w-6 md:h-6";
           return `
             <div class="flex items-center justify-center">
               <label class="cursor-pointer inline-flex items-center justify-center select-none" title="${o.label}" aria-label="${o.label}">
                 <input id="${oid}" type="radio" name="${q.id}" value="${o.value}" class="sr-only peer" />
-                <span class="relative grid place-items-center w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-slate-300 bg-white transition-all
+                <span class="relative grid place-items-center ${sizeClass} rounded-full border-2 border-slate-300 bg-white transition-all
                              peer-hover:border-amber-400 peer-hover:bg-amber-50
                              peer-checked:border-amber-500 peer-checked:bg-amber-400
                              peer-focus:ring-2 peer-focus:ring-amber-200">
@@ -213,11 +220,11 @@
             <div class="mt-1 text-base font-extrabold text-slate-800 leading-snug">${q.text}</div>
             <div class="text-xs text-slate-500 mt-1">${q.hint}</div>
             <div class="mt-4 flex items-center gap-3">
-              <div class="text-[11px] font-black text-slate-700 whitespace-nowrap">매우 그렇다 ⭕️</div>
+              <div class="text-[11px] font-black text-slate-700 whitespace-nowrap">매우 아니다 ❌</div>
               <div class="flex-1 grid grid-cols-6 gap-2 md:gap-3">
                 ${options}
               </div>
-              <div class="text-[11px] font-black text-slate-700 whitespace-nowrap">매우 아니다 ❌</div>
+              <div class="text-[11px] font-black text-slate-700 whitespace-nowrap">매우 그렇다 ⭕️</div>
             </div>
           </div>
         `);
@@ -304,22 +311,22 @@
       const typeTips = [type[0], type[1], type[2], type[3]].map(ch => `<li class="text-sm text-slate-700 leading-relaxed"><b>${ch}</b>: ${tips[ch] || ''}</li>`).join("");
 
       const typeDescriptions = {
-        "ESTJ": "규칙과 순서를 좋아하고, 계획대로 하는 것을 편안해해요. 친구들과 놀 때도 '이렇게 하자'고 제안하는 리더 역할을 자주 맡아요.",
-        "ESTP": "즉흥적이고 활동적인 놀이를 좋아해요. 새로운 장난감이나 놀이터에 가면 바로 뛰어들어 탐험하는 편이에요.",
-        "ESFJ": "다른 아이들의 기분을 잘 살피고, 함께 놀 때 모두가 즐거운지 확인하는 편이에요. 배려심이 많아 친구들이 좋아해요.",
-        "ESFP": "즐거운 분위기를 만들고, 웃고 떠드는 것을 좋아해요. 새로운 친구를 만나면 금방 친해지며 함께 놀고 싶어 해요.",
-        "ENTJ": "목표를 세우고 그걸 이루려고 노력해요. 놀이에서도 '이렇게 하면 더 재밌을 거야'라고 계획을 세우는 편이에요.",
-        "ENTP": "상상력이 풍부하고 '만약에~' 같은 질문을 자주 해요. 장난감을 새로운 용도로 바꿔서 놀거나 창의적인 놀이를 좋아해요.",
-        "ENFJ": "친구들이 행복한지 신경 쓰고, 모두가 함께 즐겁게 놀 수 있도록 도와주는 편이에요. 배려심이 깊어요.",
-        "ENFP": "활발하고 에너지가 넘쳐요. 새로운 놀이나 친구를 만나는 것을 좋아하며, 감정 표현이 풍부하고 즐거운 분위기를 만들어요.",
-        "ISTJ": "익숙한 놀이와 규칙을 좋아해요. 같은 장난감을 반복해서 놀거나, 일상 루틴이 바뀌면 불편해하는 편이에요.",
-        "ISTP": "혼자서 조용히 관찰하고 탐구하는 것을 좋아해요. 장난감을 분해하거나 작동 원리를 알아보는 데 관심이 많아요.",
-        "ISFJ": "조용하지만 친구들을 잘 챙기고 배려하는 편이에요. 익숙한 환경에서 편안해하며, 규칙과 약속을 잘 지켜요.",
-        "ISFP": "부드럽고 예술적인 놀이를 좋아해요. 그림 그리기나 음악 듣기 같은 활동을 즐기며, 강요받는 것을 싫어해요.",
-        "INTJ": "혼자서 깊이 생각하고 관찰하는 것을 좋아해요. 복잡한 퍼즐이나 전략 게임 같은 놀이에 집중력이 뛰어나요.",
-        "INTP": "호기심이 많고 '왜?'라는 질문을 자주 해요. 장난감의 원리나 새로운 아이디어에 관심이 많으며, 혼자 탐구하는 것을 좋아해요.",
-        "INFJ": "친구들의 마음을 잘 이해하고, 깊이 있는 관계를 원해요. 상상력이 풍부하며, 혼자만의 시간도 필요로 해요.",
-        "INFP": "상상력이 풍부하고 감성적이에요. 역할놀이나 이야기 만들기를 좋아하며, 자신만의 세계에 빠져있는 시간을 즐겨요."
+        "ESTJ": "규칙과 순서를 좋아하고, 계획대로 하는 것을 편안해해요. 친구들과 놀 때도 '이렇게 하자'고 제안하는 리더 역할을 자주 맡아요. 어른들이 알려준 방법을 잘 기억하고, 약속을 지키는 편이에요.",
+        "ESTP": "즉흥적이고 활동적인 놀이를 좋아해요. 새로운 장난감이나 놀이터에 가면 바로 뛰어들어 탐험하는 편이에요. 몸으로 부딪히며 배우는 걸 좋아해서, 가만히 앉아 있기보다는 계속 움직이고 싶어 해요.",
+        "ESFJ": "다른 아이들의 기분을 잘 살피고, 함께 놀 때 모두가 즐거운지 확인하는 편이에요. 배려심이 많아 친구들이 좋아해요. 칭찬을 들으면 더 힘이 나고, 혼나는 상황은 많이 부담스러워해요.",
+        "ESFP": "즐거운 분위기를 만들고, 웃고 떠드는 것을 좋아해요. 새로운 친구를 만나면 금방 친해지며 함께 놀고 싶어 해요. 음악·춤·장난 같은 흥 많은 놀이에 특히 잘 반응해요.",
+        "ENTJ": "목표를 세우고 그걸 이루려고 노력해요. 놀이에서도 '이렇게 하면 더 재밌을 거야'라고 계획을 세우는 편이에요. 스스로 뭔가를 해내는 걸 좋아하고, 남을 이끄는 역할에도 익숙해요.",
+        "ENTP": "상상력이 풍부하고 '만약에~' 같은 질문을 자주 해요. 장난감을 새로운 용도로 바꿔서 놀거나 창의적인 놀이를 좋아해요. 규칙을 그대로 따르기보다는, 더 재미있는 방법을 찾는 편이에요.",
+        "ENFJ": "친구들이 행복한지 신경 쓰고, 모두가 함께 즐겁게 놀 수 있도록 도와주는 편이에요. 배려심이 깊어요. 칭찬과 응원에 민감해서, '너 덕분이야' 같은 말을 들으면 더 힘을 내요.",
+        "ENFP": "활발하고 에너지가 넘쳐요. 새로운 놀이나 친구를 만나는 것을 좋아하며, 감정 표현이 풍부하고 즐거운 분위기를 만들어요. 관심 받는 걸 좋아하고, 싫어하는 티도 솔직하게 드러내는 편이에요.",
+        "ISTJ": "익숙한 놀이와 규칙을 좋아해요. 같은 장난감을 반복해서 놀거나, 일상 루틴이 바뀌면 불편해하는 편이에요. 약속과 규칙을 중요하게 생각하고, 정해진 대로 할 때 안정감을 느껴요.",
+        "ISTP": "혼자서 조용히 관찰하고 탐구하는 것을 좋아해요. 장난감을 분해하거나 작동 원리를 알아보는 데 관심이 많아요. 말로 설명하기보다는, 직접 만져보고 해보면서 배우는 편이에요.",
+        "ISFJ": "조용하지만 친구들을 잘 챙기고 배려하는 편이에요. 익숙한 환경에서 편안해하며, 규칙과 약속을 잘 지켜요. 새로운 변화보다는, 익숙한 사람·장소와 함께 있을 때 마음이 놓여요.",
+        "ISFP": "부드럽고 예술적인 놀이를 좋아해요. 그림 그리기나 음악 듣기 같은 활동을 즐기며, 강요받는 것을 싫어해요. 혼자만의 시간을 소중히 여기고, 자기만의 속도로 움직이는 편이에요.",
+        "INTJ": "혼자서 깊이 생각하고 관찰하는 것을 좋아해요. 복잡한 퍼즐이나 전략 게임 같은 놀이에 집중력이 뛰어나요. 한 번 마음먹은 건 끝까지 해내려고 하고, 머릿속으로 계획을 많이 세우는 편이에요.",
+        "INTP": "호기심이 많고 '왜?'라는 질문을 자주 해요. 장난감의 원리나 새로운 아이디어에 관심이 많으며, 혼자 탐구하는 것을 좋아해요. 세세한 것보다 큰 그림과 아이디어에 더 흥미를 느껴요.",
+        "INFJ": "친구들의 마음을 잘 이해하고, 깊이 있는 관계를 원해요. 상상력이 풍부하며, 혼자만의 시간도 필요로 해요. 조용해 보여도 속으로는 여러 가지를 깊게 느끼고 생각하는 편이에요.",
+        "INFP": "상상력이 풍부하고 감성적이에요. 역할놀이나 이야기 만들기를 좋아하며, 자신만의 세계에 빠져있는 시간을 즐겨요. 상처를 잘 받지만, 그만큼 다른 사람에게도 따뜻하고 다정한 편이에요."
       };
 
       const typeDescription = typeDescriptions[type] || "우리 아이만의 특별한 성향을 가지고 있어요. 각 지표별 결과를 참고해주세요.";
