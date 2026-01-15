@@ -45,14 +45,14 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
-    body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #93c5fd 0%, #c4b5fd 100%); color: #334155; min-height: 100vh; }
+    body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #fde68a 0%, #fdba74 100%); color: #334155; min-height: 100vh; }
     .fade-in { animation: fadeIn 0.8s ease-out forwards; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-    .clean-card { background: #fff; border: 1px solid #e0e7ff; border-radius: 22px; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.12); }
-    .bg-point { background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%); }
-    .text-point { color: #6366f1; }
+    .clean-card { background: #fff; border: 1px solid #fde68a; border-radius: 22px; box-shadow: 0 8px 28px rgba(245, 158, 11, 0.18); }
+    .bg-point { background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); }
+    .text-point { color: #f59e0b; }
     .chip { border: 1px solid #e2e8f0; background: #f8fafc; }
-    .chip-checked { border-color: #6366f1; background: #eef2ff; color: #3730a3; }
+    .chip-checked { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
   </style>
 </head>
 
@@ -71,7 +71,7 @@
 
       <div class="clean-card p-6 md:p-8">
         <div class="mb-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-600 leading-relaxed">
-          <p class="font-bold text-slate-700"><i class="fas fa-sparkles mr-2 text-indigo-500"></i>진단이 아니라 “참고용”이에요</p>
+          <p class="font-bold text-slate-700"><i class="fas fa-sparkles mr-2 text-amber-500"></i>진단이 아니라 “참고용”이에요</p>
           <p class="mt-1 text-xs text-slate-500">컨디션/환경에 따라 결과가 달라질 수 있어요. 부담 없이 봐주세요.</p>
         </div>
 
@@ -83,7 +83,7 @@
               <button onclick="runTest(false)" class="w-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
                 <span>결과 보기</span> <i class="fas fa-clipboard-check"></i>
               </button>
-              <button onclick="runTest(true)" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+              <button onclick="runTest(true)" class="w-full bg-point hover:opacity-95 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
                 <span>쿠팡 다녀와서 더 자세한 내용 보기</span> <i class="fas fa-shopping-cart"></i>
               </button>
             </div>
@@ -104,8 +104,8 @@
       <div id="result-content" class="space-y-6"></div>
 
       <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
-        <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-indigo-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-indigo-50 transition-all text-sm group">
-          <i class="fas fa-share-alt group-hover:text-indigo-600 transition-colors"></i> 결과 공유하기
+        <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-amber-200 rounded-full shadow-sm text-slate-700 font-bold hover:bg-amber-50 transition-all text-sm group">
+          <i class="fas fa-share-alt group-hover:text-amber-600 transition-colors"></i> 결과 공유하기
         </button>
         <a href="https://link.coupang.com/a/ddddJ5" target="_blank" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 border border-orange-400 rounded-full shadow-sm text-white font-bold hover:opacity-90 transition-all text-sm">
           <i class="fas fa-shopping-cart"></i> 아 맞다 나 쿠팡에 살거있다!
@@ -184,9 +184,14 @@
           const oid = `${q.id}_${i}`;
           return `
             <div class="flex items-center justify-center">
-              <label class="cursor-pointer inline-flex items-center justify-center" title="${o.label}" aria-label="${o.label}">
+              <label class="cursor-pointer inline-flex items-center justify-center select-none" title="${o.label}" aria-label="${o.label}">
                 <input id="${oid}" type="radio" name="${q.id}" value="${o.value}" class="sr-only peer" />
-                <span class="block w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-slate-300 bg-white transition-all peer-checked:bg-indigo-600 peer-checked:border-indigo-600 peer-focus:ring-2 peer-focus:ring-indigo-200"></span>
+                <span class="relative grid place-items-center w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-slate-300 bg-white transition-all
+                             peer-hover:border-amber-400 peer-hover:bg-amber-50
+                             peer-checked:border-amber-500 peer-checked:bg-amber-400
+                             peer-focus:ring-2 peer-focus:ring-amber-200">
+                  <i class="fas fa-check text-white text-[12px] md:text-[13px] opacity-0 transition-opacity peer-checked:opacity-100"></i>
+                </span>
               </label>
             </div>
           `;
@@ -200,11 +205,11 @@
             <div class="mt-1 text-base font-extrabold text-slate-800 leading-snug">${q.text}</div>
             <div class="text-xs text-slate-500 mt-1">${q.hint}</div>
             <div class="mt-4 flex items-center gap-3">
-              <div class="text-[11px] font-black text-slate-600 whitespace-nowrap">매우 그렇다 ⭕️</div>
+              <div class="text-[11px] font-black text-slate-700 whitespace-nowrap">매우 그렇다 ⭕️</div>
               <div class="flex-1 grid grid-cols-6 gap-2 md:gap-3">
                 ${options}
               </div>
-              <div class="text-[11px] font-black text-slate-600 whitespace-nowrap">매우 아니다 ❌</div>
+              <div class="text-[11px] font-black text-slate-700 whitespace-nowrap">매우 아니다 ❌</div>
             </div>
           </div>
         `);
