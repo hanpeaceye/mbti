@@ -257,27 +257,26 @@
     function renderResult(result) {
       const type = result.EI.letter + result.SN.letter + result.TF.letter + result.JP.letter;
 
+      const axisTitle = {
+        EI: "에너지",
+        SN: "놀이 스타일",
+        TF: "갈등 풀기",
+        JP: "리듬/전환"
+      };
+
       const axisCards = ["EI","SN","TF","JP"].map(k => {
         const r = result[k];
         const picked = friendlyLabel(k, r.letter);
         const other = friendlyLabel(k, r.letter === r.left ? r.right : r.left);
 
-        const strength = Math.abs(r.total);
-        const strengthText = strength >= 5 ? "꽤 뚜렷" : strength >= 3 ? "보통" : "아슬아슬(상황 영향)";
-        const tieText = (r.total === 0) ? " (동점 → 메인으로 결정)" : "";
-
         return `
           <div class="p-5 rounded-2xl bg-white border border-slate-200">
             <div class="flex items-center justify-between">
-              <div class="font-black text-slate-800">${k}</div>
-              <div class="text-xs font-black text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-1 rounded-full">${strengthText}${tieText}</div>
+              <div class="font-black text-slate-800">${axisTitle[k] || ""}</div>
             </div>
             <div class="mt-2 text-lg font-extrabold text-slate-900">
               <span class="text-point">${picked}</span>
               <span class="text-slate-400 text-sm font-bold"> vs ${other}</span>
-            </div>
-            <div class="mt-2 text-xs text-slate-500 leading-relaxed">
-              메인 점수: ${r.mainScore > 0 ? '+' : ''}${r.mainScore} · 서브 점수: ${r.subScore > 0 ? '+' : ''}${r.subScore} · 합계: ${r.total > 0 ? '+' : ''}${r.total}
             </div>
           </div>
         `;
@@ -302,9 +301,6 @@
           <h2 class="text-2xl md:text-3xl font-black text-slate-900 leading-tight">
             우리 아이 성향 힌트: <span class="text-point">${type}</span>
           </h2>
-          <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-            진단이 아니라 <b>“요즘 경향”</b> 참고용이에요. 아이는 자라면서/환경에 따라 많이 바뀔 수 있어요.
-          </p>
         </div>
 
         <div class="clean-card p-6 md:p-8">
@@ -319,9 +315,6 @@
           <ul class="list-disc pl-5 space-y-2">
             ${typeTips}
           </ul>
-          <div class="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed">
-            <b>동점 처리:</b> 각 지표는 메인+서브 합으로 결정하고, 합이 0이면 <b>메인 질문 답</b>으로 결정했어요.
-          </div>
         </div>
       `;
     }
