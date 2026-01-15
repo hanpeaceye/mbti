@@ -299,12 +299,38 @@
 
       const typeTips = [type[0], type[1], type[2], type[3]].map(ch => `<li class="text-sm text-slate-700 leading-relaxed"><b>${ch}</b>: ${tips[ch] || ''}</li>`).join("");
 
+      const typeDescriptions = {
+        "ESTJ": "규칙과 순서를 좋아하고, 계획대로 하는 것을 편안해해요. 친구들과 놀 때도 '이렇게 하자'고 제안하는 리더 역할을 자주 맡아요.",
+        "ESTP": "즉흥적이고 활동적인 놀이를 좋아해요. 새로운 장난감이나 놀이터에 가면 바로 뛰어들어 탐험하는 편이에요.",
+        "ESFJ": "다른 아이들의 기분을 잘 살피고, 함께 놀 때 모두가 즐거운지 확인하는 편이에요. 배려심이 많아 친구들이 좋아해요.",
+        "ESFP": "즐거운 분위기를 만들고, 웃고 떠드는 것을 좋아해요. 새로운 친구를 만나면 금방 친해지며 함께 놀고 싶어 해요.",
+        "ENTJ": "목표를 세우고 그걸 이루려고 노력해요. 놀이에서도 '이렇게 하면 더 재밌을 거야'라고 계획을 세우는 편이에요.",
+        "ENTP": "상상력이 풍부하고 '만약에~' 같은 질문을 자주 해요. 장난감을 새로운 용도로 바꿔서 놀거나 창의적인 놀이를 좋아해요.",
+        "ENFJ": "친구들이 행복한지 신경 쓰고, 모두가 함께 즐겁게 놀 수 있도록 도와주는 편이에요. 배려심이 깊어요.",
+        "ENFP": "활발하고 에너지가 넘쳐요. 새로운 놀이나 친구를 만나는 것을 좋아하며, 감정 표현이 풍부하고 즐거운 분위기를 만들어요.",
+        "ISTJ": "익숙한 놀이와 규칙을 좋아해요. 같은 장난감을 반복해서 놀거나, 일상 루틴이 바뀌면 불편해하는 편이에요.",
+        "ISTP": "혼자서 조용히 관찰하고 탐구하는 것을 좋아해요. 장난감을 분해하거나 작동 원리를 알아보는 데 관심이 많아요.",
+        "ISFJ": "조용하지만 친구들을 잘 챙기고 배려하는 편이에요. 익숙한 환경에서 편안해하며, 규칙과 약속을 잘 지켜요.",
+        "ISFP": "부드럽고 예술적인 놀이를 좋아해요. 그림 그리기나 음악 듣기 같은 활동을 즐기며, 강요받는 것을 싫어해요.",
+        "INTJ": "혼자서 깊이 생각하고 관찰하는 것을 좋아해요. 복잡한 퍼즐이나 전략 게임 같은 놀이에 집중력이 뛰어나요.",
+        "INTP": "호기심이 많고 '왜?'라는 질문을 자주 해요. 장난감의 원리나 새로운 아이디어에 관심이 많으며, 혼자 탐구하는 것을 좋아해요.",
+        "INFJ": "친구들의 마음을 잘 이해하고, 깊이 있는 관계를 원해요. 상상력이 풍부하며, 혼자만의 시간도 필요로 해요.",
+        "INFP": "상상력이 풍부하고 감성적이에요. 역할놀이나 이야기 만들기를 좋아하며, 자신만의 세계에 빠져있는 시간을 즐겨요."
+      };
+
+      const typeDescription = typeDescriptions[type] || "우리 아이만의 특별한 성향을 가지고 있어요. 각 지표별 결과를 참고해주세요.";
+
       document.getElementById("result-content").innerHTML = `
         <div class="clean-card p-6 md:p-8 text-center">
           <div class="text-xs font-black text-white bg-point inline-flex px-3 py-1 rounded-full mb-3">RESULT</div>
           <h2 class="text-2xl md:text-3xl font-black text-slate-900 leading-tight">
             우리 아이 성향 힌트: <span class="text-point">${type}</span>
           </h2>
+        </div>
+
+        <div class="clean-card p-6 md:p-8">
+          <h3 class="font-black text-slate-900 mb-3"><i class="fas fa-star mr-2 text-amber-500"></i>${type} 유형 특징</h3>
+          <p class="text-slate-700 leading-relaxed text-sm">${typeDescription}</p>
         </div>
 
         <div class="clean-card p-6 md:p-8">
