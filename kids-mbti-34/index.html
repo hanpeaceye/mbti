@@ -85,7 +85,7 @@
                 <span>결과 보기</span>
               </button>
               <button onclick="runTest(true)" class="w-full bg-point hover:opacity-95 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
-                <span class="text-xs opacity-70">쿠팡 다녀와서</span> <span class="text-lg">더 자세한 내용 보기</span> <i class="fas fa-arrow-right"></i>
+                <span class="text-xs opacity-70">쿠팡 다녀와서</span> <span class="text-lg">결과 보기</span> <i class="fas fa-arrow-right"></i>
               </button>
               <p class="text-center text-[11px] text-slate-700/80 leading-relaxed">
                 진단이 아니라 참고용이에요. 컨디션/환경에 따라 결과가 달라질 수 있어요. 부담 없이 봐주세요.
@@ -147,12 +147,13 @@
     // reverse: true이면 "그렇다"가 right(오른쪽) 성향으로 점수 반영됨 (예: SN-서브는 N쪽이라 reverse)
     const QUESTIONS = [
       // E/I
+      // 메인: 또래에게 먼저 다가가는지(E), 서브: 사람 많은 곳 뒤의 에너지 상태(I/E) - 서로 다른 관점에서 EI 검증
       { id: "EI1", axis: "EI", isMain: true,  reverse: false,
         text: "처음 가는 놀이터에서, 아이가 먼저 다른 아이에게 다가가 같이 놀자고 시도하는 편이다.",
         hint: "예: 장난감을 보여주거나 말을 건다" },
       { id: "EI2", axis: "EI", isMain: false, reverse: false,
-        text: "처음 보는 어른을 만나면, 아이가 말/표정/몸짓으로 먼저 반응하는 편이다.",
-        hint: "예: 인사하거나 질문하는 편" },
+        text: "사람 많은 곳(놀이터/모임)을 다녀온 날, 집에 와서도 말과 행동이 더 활발해지는 편이다.",
+        hint: "반대로 집에 오면 조용해지고 혼자 놀고 싶어 하면 I 쪽 경향일 수 있어요" },
 
       // S/N
       // 메인: 상상 역할놀이(N), 서브: 장난감 반복 놀이(S) - 서로 다른 관점에서 SN 검증
@@ -163,21 +164,23 @@
         text: "블록, 자동차, 퍼즐 같은 장난감으로 놀 때, 한 번 마음에 든 놀이 방식(패턴)을 여러 번 반복하는 편이다.",
         hint: "예: 같은 길로만 자동차를 굴리기, 같은 모양으로만 블록 쌓기, 같은 퍼즐만 여러 번 맞추기" },
 
-      // T/F (요청 반영: 메인은 '설명 수용', 서브는 '공정/규칙')
+      // T/F
+      // 메인: 설명/이유로 진정되는지(T) vs 설명을 거부하는지(F), 서브: 공평한 기준(T) vs 감정 표현(F)
       { id: "TF1", axis: "TF", isMain: true,  reverse: false,
         text: "아이가 화났을 때 “왜 안 되는지/어떻게 하면 되는지”를 짧게 설명해주면, 비교적 빨리 진정되는 편이다.",
-        hint: "반대로 설명을 들으면 더 예민해지거나 거부하면 F 쪽일 수 있어요." },
+        hint: "반대로 설명을 들으면 더 예민해지거나 “싫어!”라고 거부하면 F 쪽일 수 있어요" },
       { id: "TF2", axis: "TF", isMain: false, reverse: false,
         text: "같은 장난감을 두고 다툴 때, 아이가 “번갈아 하자/차례야/규칙이야”처럼 공평한 기준을 먼저 말하는 편이다.",
-        hint: "예: “내 차례야!”, “약속했잖아!”" },
+        hint: "반대로 “나 속상해…”, “나 기분 나빠”처럼 감정을 먼저 말하는 편이면 F 쪽일 수 있어요" },
 
-      // J/P (요청 반영: '오늘 뭐해?'를 메인, 정리-다음활동 수긍을 서브)
+      // J/P
+      // 메인: 일정/순서를 미리 알고 싶어 하는지(J), 서브: 정리→다음 활동 전환이 어떤지(J/P)
       { id: "JP1", axis: "JP", isMain: true,  reverse: false,
         text: "아이가 “오늘 뭐 해?”처럼 다음에 할 일을 자주 확인하는 편이다.",
-        hint: "불안해서 묻는 경우는 제외하고, 평소 확인 습관 기준" },
+        hint: "예: “지금 놀고 그다음에 뭐 해?”처럼 순서를 물어보기" },
       { id: "JP2", axis: "JP", isMain: false, reverse: false,
         text: "“놀던 거 정리하고 다음 거 하자”라고 하면, 아이가 비교적 잘 수긍하고 정리로 넘어가는 편이다.",
-        hint: "반대로 “아직 더 할래!” 하며 버티거나, 정리 시작까지 시간이 오래 걸리는 편" }
+        hint: "반대로 “아직 더 할래!” 하며 버티거나, 정리 시작까지 시간이 오래 걸리는 편이면 P 쪽 경향일 수 있어요" }
     ];
 
     function renderQuestions() {
