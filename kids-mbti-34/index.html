@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-6540004747918466">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="만 3~4세(보호자 관찰) 8문항으로 우리 아이 성향을 재미로 확인해요. 결과는 진단이 아닌 참고용 경향입니다." />
+  <link rel="canonical" href="https://aimbti.xyz/kids-mbti-34" />
+  <title>만 3~4세 우리 아이 성향 테스트 | 8문항(재미로)</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-33VJ9T8RW5');
+  </script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aimbti.xyz/kids-mbti-34">
+  <meta property="og:title" content="🧒 만 3~4세 우리 아이 성향 테스트 | 8문항(재미로)">
+  <meta property="og:description" content="보호자 관찰로 답하는 8문항. 동점이면 메인 질문으로 결정해요. 결과는 참고용 경향입니다.">
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2966/2966487.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="만 3~4세 우리 아이 성향 테스트 · 8문항(재미로)">
+  <meta name="twitter:description" content="보호자 관찰 8문항으로 우리 아이 성향을 재미로 확인해요.">
+  <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/2966/2966487.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "만 3~4세 우리 아이 성향 테스트",
+    "description": "보호자 관찰로 답하는 8문항 기반의 참고용 성향(경향) 테스트",
+    "url": "https://aimbti.xyz/kids-mbti-34",
+    "applicationCategory": "EntertainmentApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
+    body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #93c5fd 0%, #c4b5fd 100%); color: #334155; min-height: 100vh; }
+    .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .clean-card { background: #fff; border: 1px solid #e0e7ff; border-radius: 22px; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.12); }
+    .bg-point { background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%); }
+    .text-point { color: #6366f1; }
+    .chip { border: 1px solid #e2e8f0; background: #f8fafc; }
+    .chip-checked { border-color: #6366f1; background: #eef2ff; color: #3730a3; }
+  </style>
+</head>
+
+<body class="min-h-screen relative pb-10">
+  <div class="w-full max-w-3xl mx-auto px-4 py-8">
+    <div id="input-page" class="fade-in">
+      <div class="text-center mb-7">
+        <h1 class="text-3xl md:text-4xl font-black text-white leading-tight drop-shadow">
+          만 3~4세 우리 아이 성향<br><span class="text-yellow-300">8문항</span>으로 보기 🧒
+        </h1>
+        <p class="mt-3 text-white/90 text-sm md:text-base font-semibold bg-black/20 inline-block px-4 py-2 rounded-full">
+          보호자 관찰용 · 결과는 참고(재미로)
+        </p>
+        <p class="mt-2 text-white/80 text-xs">
+          최근 2~4주 기준으로 “자주 보이는 모습”을 골라주세요.
+        </p>
+      </div>
+
+      <div class="clean-card p-6 md:p-8">
+        <div class="mb-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-600 leading-relaxed">
+          <p class="font-bold text-slate-700"><i class="fas fa-sparkles mr-2 text-indigo-500"></i>진단이 아니라 “참고용”이에요</p>
+          <p class="mt-1 text-xs text-slate-500">컨디션/환경에 따라 결과가 달라질 수 있어요. 부담 없이 봐주세요.</p>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <div id="questions" class="space-y-5"></div>
+
+          <div>
+            <div class="flex flex-col gap-3 mt-2">
+              <button onclick="runTest(false)" class="w-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                <span>결과 보기</span> <i class="fas fa-clipboard-check"></i>
+              </button>
+              <button onclick="runTest(true)" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                <span>쿠팡 다녀와서 더 자세한 내용 보기</span> <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+            <p class="text-center text-xs text-white/80 mt-2">(그냥 재미로 보세요~)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="result-page" class="hidden fade-in">
+      <div class="flex items-center justify-between mb-6">
+        <button onclick="resetPage()" class="text-white hover:text-yellow-300 font-medium text-sm flex items-center gap-2 transition-colors">
+          <i class="fas fa-chevron-left"></i> 다시하기
+        </button>
+        <span class="text-[10px] font-bold text-white bg-white/20 px-2 py-1 rounded">VER 1.0 (3~4세)</span>
+      </div>
+
+      <div id="result-content" class="space-y-6"></div>
+
+      <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
+        <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-indigo-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-indigo-50 transition-all text-sm group">
+          <i class="fas fa-share-alt group-hover:text-indigo-600 transition-colors"></i> 결과 공유하기
+        </button>
+        <a href="https://link.coupang.com/a/ddddJ5" target="_blank" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 border border-orange-400 rounded-full shadow-sm text-white font-bold hover:opacity-90 transition-all text-sm">
+          <i class="fas fa-shopping-cart"></i> 아 맞다 나 쿠팡에 살거있다!
+        </a>
+      </div>
+
+      <div class="mt-8 flex justify-center w-full overflow-hidden">
+        <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource="
+          width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 pt-8 pb-6 border-t border-white/20 text-center">
+    <p class="text-xs text-white/70">© 2025 재밌는웹페이지연구소. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const LIKERT = [
+      { label: "매우 그렇다", value:  3 },
+      { label: "그렇다",     value:  2 },
+      { label: "조금 그렇다", value:  1 },
+      { label: "조금 아니다", value: -1 },
+      { label: "아니다",     value: -2 },
+      { label: "매우 아니다", value: -3 }
+    ];
+
+    const AXES = {
+      EI: { left: "E", right: "I" },
+      SN: { left: "S", right: "N" },
+      TF: { left: "T", right: "F" },
+      JP: { left: "J", right: "P" }
+    };
+
+    // reverse: true이면 "그렇다"가 right(오른쪽) 성향으로 점수 반영됨 (예: SN-서브는 N쪽이라 reverse)
+    const QUESTIONS = [
+      // E/I
+      { id: "EI1", axis: "EI", isMain: true,  reverse: false,
+        text: "처음 보는 놀이터/키즈카페에서, 아이가 먼저 다른 아이에게 다가가 같이 놀자고 시도하는 편이다.",
+        hint: "예: 장난감을 보여주거나 말을 건다." },
+      { id: "EI2", axis: "EI", isMain: false, reverse: false,
+        text: "낯선 어른/친척을 만나면, 아이가 말/표정/몸짓으로 먼저 반응하고 관심을 보이는 편이다.",
+        hint: "예: 인사, 질문, 제스처 등 반응이 빠르다." },
+
+      // S/N (3~4세는 상상놀이/용도대로 놀이로 구분)
+      { id: "SN1", axis: "SN", isMain: true,  reverse: false,
+        text: "장난감은 정해진 용도대로(차는 굴리고, 인형은 안고) 놀이하는 편이다.",
+        hint: "예: 같은 방식으로 반복해서 노는 편" },
+      { id: "SN2", axis: "SN", isMain: false, reverse: true,
+        text: "장난감/물건을 다른 걸로 “이라고 하며” 바꿔서 상상놀이(역할/스토리)를 자주 한다.",
+        hint: "예: 블록=케이크, 막대=마법봉" },
+
+      // T/F (요청 반영: 메인은 '설명 수용', 서브는 '공정/규칙')
+      { id: "TF1", axis: "TF", isMain: true,  reverse: false,
+        text: "아이가 화났을 때 “왜 안 되는지/어떻게 하면 되는지”를 짧게 설명해주면, 비교적 빨리 진정되는 편이다.",
+        hint: "반대로 설명을 들으면 더 예민해지거나 거부하면 F 쪽일 수 있어요." },
+      { id: "TF2", axis: "TF", isMain: false, reverse: false,
+        text: "같은 장난감을 두고 다툴 때, 아이가 “번갈아 하자/차례야/규칙이야”처럼 공평한 기준을 먼저 말하는 편이다.",
+        hint: "예: “내 차례야!”, “약속했잖아!”" },
+
+      // J/P (요청 반영: '오늘 뭐해?'를 메인, 정리-다음활동 수긍을 서브)
+      { id: "JP1", axis: "JP", isMain: true,  reverse: false,
+        text: "아이가 “오늘 뭐 해?/이따 뭐 해?/지금 어디 가?”처럼 다음에 할 일을 자주 확인하는 편이다.",
+        hint: "불안해서 묻는 경우는 제외하고, 평소 호기심/확인 습관 기준" },
+      { id: "JP2", axis: "JP", isMain: false, reverse: false,
+        text: "“놀던 거 정리하고 다음 거 하자”라고 하면, 아이가 비교적 잘 수긍하고 정리로 넘어가는 편이다.",
+        hint: "반대로 전환이 어렵고 오래 걸리면 P 쪽일 수 있어요." }
+    ];
+
+    function renderQuestions() {
+      const root = document.getElementById("questions");
+      root.innerHTML = "";
+
+      QUESTIONS.forEach((q, idx) => {
+        const options = LIKERT.map((o, i) => {
+          const oid = `${q.id}_${i}`;
+          return `
+            <div class="flex-1 min-w-[94px]">
+              <input id="${oid}" type="radio" name="${q.id}" value="${o.value}" class="sr-only peer" />
+              <label for="${oid}" class="block text-center px-3 py-2 rounded-xl text-[13px] font-extrabold text-slate-700 chip hover:bg-indigo-50 hover:border-indigo-200 cursor-pointer transition peer-checked:chip-checked peer-checked:ring-2 peer-checked:ring-indigo-200">
+                ${o.label}
+              </label>
+            </div>
+          `;
+        }).join("");
+
+        root.insertAdjacentHTML("beforeend", `
+          <div class="p-4 rounded-2xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between gap-3">
+              <div class="text-xs font-black text-slate-500">질문 ${idx + 1}</div>
+              <div class="text-[10px] font-black ${q.isMain ? 'text-indigo-600 bg-indigo-50 border border-indigo-200' : 'text-slate-500 bg-slate-50 border border-slate-200'} px-2 py-1 rounded-full">
+                ${q.isMain ? '메인' : '서브'}
+              </div>
+            </div>
+            <div class="mt-1 text-base font-extrabold text-slate-800 leading-snug">${q.text}</div>
+            <div class="text-xs text-slate-500 mt-1">${q.hint}</div>
+            <div class="flex flex-wrap gap-2 mt-3">
+              ${options}
+            </div>
+          </div>
+        `);
+      });
+    }
+
+    function getAnswerValue(qid) {
+      const el = document.querySelector(`input[name="${qid}"]:checked`);
+      if (!el) return null;
+      return parseInt(el.value, 10);
+    }
+
+    function computeAxis(axisKey) {
+      const axis = AXES[axisKey];
+      const qs = QUESTIONS.filter(q => q.axis === axisKey);
+      const mainQ = qs.find(q => q.isMain);
+      const subQ = qs.find(q => !q.isMain);
+
+      const mainRaw = getAnswerValue(mainQ.id);
+      const subRaw = getAnswerValue(subQ.id);
+      if (mainRaw === null || subRaw === null) return null;
+
+      const mainScore = mainQ.reverse ? -mainRaw : mainRaw;
+      const subScore  = subQ.reverse  ? -subRaw  : subRaw;
+      const total = mainScore + subScore;
+
+      let letter = "";
+      if (total > 0) letter = axis.left;
+      else if (total < 0) letter = axis.right;
+      else letter = (mainScore > 0 ? axis.left : axis.right); // 동점이면 메인으로 결정
+
+      return { axisKey, left: axis.left, right: axis.right, total, mainScore, subScore, letter };
+    }
+
+    function friendlyLabel(axisKey, letter) {
+      const map = {
+        EI: { E: "외향(E)", I: "내향(I)" },
+        SN: { S: "감각(S)", N: "직관(N)" },
+        TF: { T: "설명/기준(T)", F: "공감/마음(F)" },
+        JP: { J: "계획/확인(J)", P: "유연/즉흥(P)" }
+      };
+      return map[axisKey]?.[letter] || letter;
+    }
+
+    function renderResult(result) {
+      const type = result.EI.letter + result.SN.letter + result.TF.letter + result.JP.letter;
+
+      const axisCards = ["EI","SN","TF","JP"].map(k => {
+        const r = result[k];
+        const picked = friendlyLabel(k, r.letter);
+        const other = friendlyLabel(k, r.letter === r.left ? r.right : r.left);
+
+        const strength = Math.abs(r.total);
+        const strengthText = strength >= 5 ? "꽤 뚜렷" : strength >= 3 ? "보통" : "아슬아슬(상황 영향)";
+        const tieText = (r.total === 0) ? " (동점 → 메인으로 결정)" : "";
+
+        return `
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <div class="flex items-center justify-between">
+              <div class="font-black text-slate-800">${k}</div>
+              <div class="text-xs font-black text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-1 rounded-full">${strengthText}${tieText}</div>
+            </div>
+            <div class="mt-2 text-lg font-extrabold text-slate-900">
+              <span class="text-point">${picked}</span>
+              <span class="text-slate-400 text-sm font-bold"> vs ${other}</span>
+            </div>
+            <div class="mt-2 text-xs text-slate-500 leading-relaxed">
+              메인 점수: ${r.mainScore > 0 ? '+' : ''}${r.mainScore} · 서브 점수: ${r.subScore > 0 ? '+' : ''}${r.subScore} · 합계: ${r.total > 0 ? '+' : ''}${r.total}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const tips = {
+        E: "새로운 친구/놀이에 에너지를 얻는 편. ‘같이 하기’ 활동을 자주 넣어주면 좋아해요.",
+        I: "낯선 환경에서 워밍업이 필요한 편. ‘관찰→참여’ 순서로 시간을 주세요.",
+        S: "익숙한 방식/손에 잡히는 놀이가 편한 편. 반복 가능한 놀이(블록, 퍼즐)를 좋아할 수 있어요.",
+        N: "상상/역할놀이가 재미있는 편. “이건 뭐로 변신할까?” 같은 질문이 잘 먹혀요.",
+        T: "짧은 설명/기준을 들으면 정리되는 편. ‘왜 안 되는지 1문장’이 효과적이에요.",
+        F: "기분/관계에 더 민감한 편. 갈등은 ‘마음 안정→행동 안내’ 순서가 좋아요.",
+        J: "예고/확인이 있으면 편한 편. “이따 ○○하고 집 가자”처럼 미리 말해주면 좋아요.",
+        P: "즉흥 변화도 잘 타는 편. 대신 정리/전환은 ‘선택지 2개’로 유도해보세요."
+      };
+
+      const typeTips = [type[0], type[1], type[2], type[3]].map(ch => `<li class="text-sm text-slate-700 leading-relaxed"><b>${ch}</b>: ${tips[ch] || ''}</li>`).join("");
+
+      document.getElementById("result-content").innerHTML = `
+        <div class="clean-card p-6 md:p-8 text-center">
+          <div class="text-xs font-black text-white bg-point inline-flex px-3 py-1 rounded-full mb-3">RESULT</div>
+          <h2 class="text-2xl md:text-3xl font-black text-slate-900 leading-tight">
+            우리 아이 성향 힌트: <span class="text-point">${type}</span>
+          </h2>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+            진단이 아니라 <b>“요즘 경향”</b> 참고용이에요. 아이는 자라면서/환경에 따라 많이 바뀔 수 있어요.
+          </p>
+        </div>
+
+        <div class="clean-card p-6 md:p-8">
+          <h3 class="font-black text-slate-900 mb-4"><i class="fas fa-magnifying-glass mr-2 text-indigo-500"></i>지표별 결과</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${axisCards}
+          </div>
+        </div>
+
+        <div class="clean-card p-6 md:p-8">
+          <h3 class="font-black text-slate-900 mb-4"><i class="fas fa-seedling mr-2 text-green-500"></i>육아/놀이 팁(짧게)</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            ${typeTips}
+          </ul>
+          <div class="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed">
+            <b>동점 처리:</b> 각 지표는 메인+서브 합으로 결정하고, 합이 0이면 <b>메인 질문 답</b>으로 결정했어요.
+          </div>
+        </div>
+      `;
+    }
+
+    function validateAllAnswered() {
+      for (const q of QUESTIONS) {
+        if (getAnswerValue(q.id) === null) return false;
+      }
+      return true;
+    }
+
+    function runTest(openCoupang) {
+      if (!validateAllAnswered()) {
+        alert("8문항 모두 답변해주세요!");
+        return;
+      }
+      if (openCoupang) {
+        window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+        setTimeout(() => showResult(), 100);
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const res = {
+        EI: computeAxis("EI"),
+        SN: computeAxis("SN"),
+        TF: computeAxis("TF"),
+        JP: computeAxis("JP")
+      };
+      renderResult(res);
+      document.getElementById("input-page").classList.add("hidden");
+      document.getElementById("result-page").classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+
+    function resetPage() {
+      document.getElementById("input-page").classList.remove("hidden");
+      document.getElementById("result-page").classList.add("hidden");
+      document.querySelectorAll('input[type="radio"]').forEach(el => { el.checked = false; });
+      window.scrollTo(0, 0);
+    }
+
+    function shareLink() {
+      const currentUrl = window.location.href;
+      const title = "만 3~4세 우리 아이 성향 테스트 · 8문항(재미로)";
+      const text = "보호자 관찰 8문항으로 우리 아이 성향을 재미로 확인해보기 🧒";
+      if (navigator.share) {
+        navigator.share({ title, text, url: currentUrl });
+      } else {
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = currentUrl;
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+        alert("링크 복사 완료!");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderQuestions();
+    });
+  </script>
+</body>
+</html>
