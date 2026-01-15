@@ -66,9 +66,7 @@
         <p class="mt-3 text-white/90 text-sm md:text-base font-semibold bg-black/20 inline-block px-4 py-2 rounded-full">
           보호자 관찰용 · 결과는 참고(재미로)
         </p>
-        <p class="mt-2 text-white/80 text-xs">
-          최근 2~4주 기준으로 “자주 보이는 모습”을 골라주세요.
-        </p>
+        
       </div>
 
       <div class="clean-card p-6 md:p-8">
@@ -186,8 +184,8 @@
           const oid = `${q.id}_${i}`;
           return `
             <div class="flex items-center justify-center">
-              <input id="${oid}" type="radio" name="${q.id}" value="${o.value}" class="sr-only peer" />
-              <label for="${oid}" title="${o.label}" aria-label="${o.label}" class="cursor-pointer">
+              <label class="cursor-pointer inline-flex items-center justify-center" title="${o.label}" aria-label="${o.label}">
+                <input id="${oid}" type="radio" name="${q.id}" value="${o.value}" class="sr-only peer" />
                 <span class="block w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-slate-300 bg-white transition-all peer-checked:bg-indigo-600 peer-checked:border-indigo-600 peer-focus:ring-2 peer-focus:ring-indigo-200"></span>
               </label>
             </div>
@@ -202,11 +200,11 @@
             <div class="mt-1 text-base font-extrabold text-slate-800 leading-snug">${q.text}</div>
             <div class="text-xs text-slate-500 mt-1">${q.hint}</div>
             <div class="mt-4 flex items-center gap-3">
-              <div class="text-[11px] font-black text-slate-500 whitespace-nowrap">매우 그렇다</div>
+              <div class="text-[11px] font-black text-slate-600 whitespace-nowrap">매우 그렇다 ⭕️</div>
               <div class="flex-1 grid grid-cols-6 gap-2 md:gap-3">
                 ${options}
               </div>
-              <div class="text-[11px] font-black text-slate-500 whitespace-nowrap">매우 아니다</div>
+              <div class="text-[11px] font-black text-slate-600 whitespace-nowrap">매우 아니다 ❌</div>
             </div>
           </div>
         `);
