@@ -4,9 +4,9 @@
   <meta name="google-adsense-account" content="ca-pub-6540004747918466">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="만 3~4세(보호자 관찰) 8문항으로 우리 아이 성향을 재미로 확인해요. 결과는 진단이 아닌 참고용 경향입니다." />
+  <meta name="description" content="미취학 우리아이(보호자 관찰) 8문항으로 우리 아이 성향을 재미로 확인해요. 결과는 진단이 아닌 참고용 경향입니다." />
   <link rel="canonical" href="https://aimbti.xyz/kids-mbti-34" />
-  <title>만 3~4세 우리 아이 성향 테스트 | 8문항(재미로)</title>
+  <title>미취학 우리아이 성향 테스트 | 8문항(재미로)</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -21,12 +21,12 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aimbti.xyz/kids-mbti-34">
-  <meta property="og:title" content="🧒 만 3~4세 우리 아이 성향 테스트 | 8문항(재미로)">
+  <meta property="og:title" content="🧒 미취학 우리아이 성향 테스트 | 8문항(재미로)">
   <meta property="og:description" content="보호자 관찰로 답하는 8문항. 동점이면 메인 질문으로 결정해요. 결과는 참고용 경향입니다.">
   <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2966/2966487.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="만 3~4세 우리 아이 성향 테스트 · 8문항(재미로)">
+  <meta name="twitter:title" content="미취학 우리아이 성향 테스트 · 8문항(재미로)">
   <meta name="twitter:description" content="보호자 관찰 8문항으로 우리 아이 성향을 재미로 확인해요.">
   <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/2966/2966487.png">
 
@@ -34,7 +34,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "만 3~4세 우리 아이 성향 테스트",
+    "name": "미취학 우리아이 성향 테스트",
     "description": "보호자 관찰로 답하는 8문항 기반의 참고용 성향(경향) 테스트",
     "url": "https://aimbti.xyz/kids-mbti-34",
     "applicationCategory": "EntertainmentApplication",
@@ -61,7 +61,7 @@
     <div id="input-page" class="fade-in">
       <div class="text-center mb-7">
         <h1 class="text-3xl md:text-4xl font-black text-white leading-tight drop-shadow">
-          만 3~4세 우리 아이 성향<br><span class="text-yellow-300">8문항</span>으로 보기 🧒
+          미취학 우리아이 성향<br><span class="text-yellow-300">8문항</span>으로 보기 🧒
         </h1>
         <p class="mt-3 text-white/90 text-sm md:text-base font-semibold bg-black/20 inline-block px-4 py-2 rounded-full">
           보호자 관찰용 · 결과는 참고(재미로)
@@ -100,7 +100,7 @@
         <button onclick="resetPage()" class="text-white hover:text-yellow-300 font-medium text-sm flex items-center gap-2 transition-colors">
           <i class="fas fa-chevron-left"></i> 다시하기
         </button>
-        <span class="text-[10px] font-bold text-white bg-white/20 px-2 py-1 rounded">VER 1.0 (3~4세)</span>
+        <span class="text-[10px] font-bold text-white bg-white/20 px-2 py-1 rounded">VER 1.0 (미취학)</span>
       </div>
 
       <div id="result-content" class="space-y-6"></div>
@@ -185,10 +185,10 @@
         const options = LIKERT.map((o, i) => {
           const oid = `${q.id}_${i}`;
           return `
-            <div class="flex-1 min-w-[94px]">
+            <div class="flex items-center justify-center">
               <input id="${oid}" type="radio" name="${q.id}" value="${o.value}" class="sr-only peer" />
-              <label for="${oid}" class="block text-center px-3 py-2 rounded-xl text-[13px] font-extrabold text-slate-700 chip hover:bg-indigo-50 hover:border-indigo-200 cursor-pointer transition peer-checked:chip-checked peer-checked:ring-2 peer-checked:ring-indigo-200">
-                ${o.label}
+              <label for="${oid}" title="${o.label}" aria-label="${o.label}" class="cursor-pointer">
+                <span class="block w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-slate-300 bg-white transition-all peer-checked:bg-indigo-600 peer-checked:border-indigo-600 peer-focus:ring-2 peer-focus:ring-indigo-200"></span>
               </label>
             </div>
           `;
@@ -198,14 +198,15 @@
           <div class="p-4 rounded-2xl border border-slate-200 bg-white">
             <div class="flex items-center justify-between gap-3">
               <div class="text-xs font-black text-slate-500">질문 ${idx + 1}</div>
-              <div class="text-[10px] font-black ${q.isMain ? 'text-indigo-600 bg-indigo-50 border border-indigo-200' : 'text-slate-500 bg-slate-50 border border-slate-200'} px-2 py-1 rounded-full">
-                ${q.isMain ? '메인' : '서브'}
-              </div>
             </div>
             <div class="mt-1 text-base font-extrabold text-slate-800 leading-snug">${q.text}</div>
             <div class="text-xs text-slate-500 mt-1">${q.hint}</div>
-            <div class="flex flex-wrap gap-2 mt-3">
-              ${options}
+            <div class="mt-4 flex items-center gap-3">
+              <div class="text-[11px] font-black text-slate-500 whitespace-nowrap">매우 그렇다</div>
+              <div class="flex-1 grid grid-cols-6 gap-2 md:gap-3">
+                ${options}
+              </div>
+              <div class="text-[11px] font-black text-slate-500 whitespace-nowrap">매우 아니다</div>
             </div>
           </div>
         `);
@@ -364,7 +365,7 @@
 
     function shareLink() {
       const currentUrl = window.location.href;
-      const title = "만 3~4세 우리 아이 성향 테스트 · 8문항(재미로)";
+      const title = "미취학 우리아이 성향 테스트 · 8문항(재미로)";
       const text = "보호자 관찰 8문항으로 우리 아이 성향을 재미로 확인해보기 🧒";
       if (navigator.share) {
         navigator.share({ title, text, url: currentUrl });
