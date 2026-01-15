@@ -45,7 +45,7 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
-    body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #fde68a 0%, #fdba74 100%); color: #334155; min-height: 100vh; }
+    body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #fff7d6 0%, #ffe7b3 100%); color: #334155; min-height: 100vh; }
     .fade-in { animation: fadeIn 0.8s ease-out forwards; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .clean-card { background: #fff; border: 1px solid #fde68a; border-radius: 22px; box-shadow: 0 8px 28px rgba(245, 158, 11, 0.18); }
@@ -86,6 +86,9 @@
               <button onclick="runTest(true)" class="w-full bg-point hover:opacity-95 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all active:scale-[0.98] flex items-center justify-center gap-2">
                 <span>쿠팡 다녀와서 더 자세한 내용 보기</span> <i class="fas fa-shopping-cart"></i>
               </button>
+              <p class="text-center text-[11px] text-slate-700/80 leading-relaxed">
+                진단이 아니라 참고용이에요. 컨디션/환경에 따라 결과가 달라질 수 있어요. 부담 없이 봐주세요.
+              </p>
             </div>
             <p class="text-center text-xs text-white/80 mt-2">(그냥 재미로 보세요~)</p>
           </div>
@@ -121,9 +124,6 @@
 
   <footer class="mt-12 pt-8 pb-6 border-t border-white/20 text-center">
     <p class="text-xs text-white/70">© 2026 재밌는웹페이지연구소. All rights reserved.</p>
-    <p class="mt-2 text-[10px] text-white/70">
-      진단이 아니라 참고용이에요. 컨디션/환경에 따라 결과가 달라질 수 있어요. 부담 없이 봐주세요.
-    </p>
   </footer>
 
   <script>
