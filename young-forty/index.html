@@ -31,29 +31,53 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
-        body { font-family: 'Pretendard', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #334155; min-height: 100vh; }
+        :root{
+            --bg1:#0b1220;
+            --bg2:#111827;
+            --accent1:#7c3aed;
+            --accent2:#06b6d4;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            min-height: 100vh;
+            color: #0f172a;
+            background:
+                radial-gradient(1200px 800px at 15% 10%, rgba(124, 58, 237, 0.35) 0%, rgba(124, 58, 237, 0) 60%),
+                radial-gradient(900px 700px at 85% 20%, rgba(6, 182, 212, 0.28) 0%, rgba(6, 182, 212, 0) 55%),
+                linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+            background-attachment: fixed;
+        }
         
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .clean-card { background: #ffffff; border-radius: 24px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        .text-point { color: #667eea; }
-        .bg-point { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .clean-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            box-shadow:
+                0 20px 55px rgba(2, 6, 23, 0.25),
+                0 2px 8px rgba(2, 6, 23, 0.08);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(10px);
+        }
+        .text-point { color: var(--accent1); }
+        .bg-point { background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%); }
         .score-bar { transition: width 1.5s ease-out; }
         
         .answer-btn { 
             transition: all 0.3s ease; 
-            border: 2px solid #e2e8f0;
+            border: 1px solid rgba(15, 23, 42, 0.10);
         }
         .answer-btn:hover { 
             transform: translateY(-2px); 
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(2, 6, 23, 0.12);
+            border-color: rgba(124, 58, 237, 0.55);
         }
         .answer-btn.selected { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
             color: white;
-            border-color: #667eea;
+            border-color: rgba(124, 58, 237, 0.75);
         }
         
         .question-card {
@@ -67,29 +91,28 @@
 </head>
 <body class="min-h-screen relative pb-10">
 
-    <div class="w-full max-w-3xl mx-auto px-4 py-8">
+    <div class="w-full max-w-3xl mx-auto px-4 py-10">
 
         <!-- 시작 페이지 -->
         <div id="start-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
             <div class="text-center mb-10">
-                <span class="inline-block bg-white border border-purple-200 text-purple-600 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Young Forty Test</span>
-                <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight drop-shadow-lg">
-                    나는 진짜<br><span class="text-yellow-300">영포티</span>일까? 🎯
+                <span class="inline-block bg-white/10 border border-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 tracking-wide backdrop-blur">Young Forty Test</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                    내가 설마<br><span class="text-white">영포티</span>일까?
                 </h1>
-                <p class="text-white/90 text-sm md:text-base drop-shadow">8가지 질문으로 알아보는<br>영포티 성향 검사 · 2026년 최신판</p>
+                <p class="text-white/80 text-sm md:text-base">8가지 질문 · 약 1분</p>
             </div>
 
             <div class="clean-card p-8 md:p-10 shadow-2xl bg-white">
                 <div class="text-center mb-6">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
-                        🎨
+                    <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-white shadow-lg">
+                        ✨
                     </div>
                     <h2 class="text-xl font-bold text-slate-800 mb-2">영포티란?</h2>
                     <p class="text-sm text-slate-600 leading-relaxed">
-                        40대 나이에 맞게 중후하고 품격 있는 매력을 가져야 하는데,<br>
-                        아직도 어린 줄 알고 나대는 사람을 비꼬는 말입니다.<br>
-                        나이에 맞지 않는 젊은 척, 유행 따라하기, 트렌드에 과도하게 집착하는 모습을 보일 때<br>
-                        주변 사람들이 '영포티'라고 부르곤 합니다. 당신은 혹시...?
+                        ‘영포티’는 또래보다 최신 트렌드에 민감해 보일 때<br>
+                        가볍게 농담처럼 쓰이기도 하는 표현이에요.<br>
+                        <span class="font-semibold text-slate-700">나는 어느 쪽인지</span> 간단히 체크해보세요.
                     </p>
                 </div>
                 
@@ -102,7 +125,7 @@
         <!-- 질문 페이지 -->
         <div id="question-page" class="hidden fade-in">
             <div class="flex items-center justify-between mb-6">
-                <button id="back-to-start" onclick="backToStart()" class="text-white hover:text-yellow-200 font-medium text-sm flex items-center gap-2 transition-colors drop-shadow">
+                <button id="back-to-start" onclick="backToStart()" class="text-white/85 hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 처음으로
                 </button>
                 <span class="text-[10px] font-bold text-white bg-white/20 backdrop-blur px-2 py-1 rounded">질문 <span id="current-question-num">1</span>/8</span>
@@ -158,7 +181,7 @@
         <!-- 결과 페이지 -->
         <div id="result-page" class="hidden fade-in">
             <div class="flex items-center justify-between mb-6">
-                <button id="back-btn" onclick="backToStart()" class="text-white hover:text-yellow-200 font-medium text-sm flex items-center gap-2 transition-colors drop-shadow">
+                <button id="back-btn" onclick="backToStart()" class="text-white/85 hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
                 <span class="text-[10px] font-bold text-white bg-white/20 backdrop-blur px-2 py-1 rounded">RESULT</span>
@@ -183,36 +206,36 @@
         // 질문 데이터
         const questions = [
             {
-                text: "최신 스마트폰 앱이나 SNS 기능을 빠르게 배우고, 젊은 세대와 어울리면서 디지털 트렌드를 따라잡으려고 노력한다.",
-                category: "디지털 능력"
+                text: "나는 또래에 비해 새로운 앱/기능(예: 최신 SNS 기능)을 비교적 빨리 익히는 편이다.",
+                category: "디지털"
             },
             {
-                text: "20-30대가 즐기는 유행 음악, 드라마, 유튜브 콘텐츠를 자주 보며, 젊은 세대 문화에 열광한다.",
-                category: "트렌드 수용"
+                text: "최신 유행(음악/드라마/유튜브 등)을 놓치지 않으려고 챙겨보는 편이다.",
+                category: "콘텐츠"
             },
             {
-                text: "외모 관리와 체형 관리를 위해 운동, 다이어트, 성형 등에 과도하게 신경을 쓰며, 젊어 보이기 위해 노력한다.",
-                category: "외모 관리"
+                text: "옷/헤어스타일을 고를 때 ‘요즘 유행’인지 여부를 꽤 중요하게 생각한다.",
+                category: "스타일"
             },
             {
-                text: "젊은 사람들이 가는 맛집, 카페, 전시회, 공연 등을 자주 찾아가며, '나도 젊은 사람들과 똑같다'는 식으로 행동한다.",
-                category: "문화 활동"
+                text: "새로 뜨는 카페/맛집/전시 같은 ‘핫플’ 정보를 보면 한 번쯤 가보고 싶다.",
+                category: "라이프"
             },
             {
-                text: "젊은 세대의 유행어나 밈을 자주 사용하며, SNS에서 젊은 스타일의 사진을 올리고 좋아요를 받는 것에 집착한다.",
-                category: "SNS 활용"
+                text: "신조어·밈을 보면 뜻을 찾아보거나 써보고 싶은 마음이 든다.",
+                category: "밈"
             },
             {
-                text: "나이에 맞지 않는 화려한 옷차림이나 액세서리를 하고, 젊은 사람들만 입는 브랜드나 스타일을 무리하게 따라한다.",
-                category: "패션 감각"
+                text: "사진/영상 올릴 때 릴스·숏폼처럼 ‘요즘 형식’을 시도해보는 편이다.",
+                category: "SNS"
             },
             {
-                text: "나이보다 젊어 보이려고 애쓰며, 나이를 숨기거나 실제보다 어리게 보이기 위해 노력한다.",
-                category: "나이 인식"
+                text: "20~30대와 대화할 때 그들의 관심사/트렌드를 이해하려고 노력하는 편이다.",
+                category: "소통"
             },
             {
-                text: "젊은 사람들과 어울리기를 좋아하며, 자기 나이 또래나 어른들과는 거리감을 두고 젊은 사람들과만 친하게 지낸다.",
-                category: "사교 관계"
+                text: "‘나이보다 감각이 중요’하다고 생각하며, 새로운 것에 대한 거부감이 적은 편이다.",
+                category: "마인드"
             }
         ];
 
@@ -303,35 +326,35 @@
         function getResultType(score) {
             if (score >= 80) {
                 return {
-                    title: "🔥 완전 영포티!",
-                    emoji: "😱",
-                    desc: "당신은 완전한 영포티입니다. 나이에 맞지 않게 젊은 척하는 모습이 두드러집니다.",
-                    detail: "디지털 트렌드부터 SNS, 패션, 문화 활동까지 모든 영역에서 젊은 세대를 무리하게 따라하려는 모습이 보입니다. 나이에 맞는 중후한 매력보다는 어린 스타일에 과도하게 집착하고 있네요. 주변 사람들이 당신을 보며 '영포티'라고 생각할 수 있습니다.",
-                    color: "from-red-500 to-orange-500"
+                    title: "🚨 트렌드 레이더 MAX",
+                    emoji: "🛰️",
+                    desc: "또래 대비 트렌드 반응 속도가 빠른 편이에요. ‘영포티’ 농담을 들을 확률이 있습니다.",
+                    detail: "새로운 것에 열려 있는 건 큰 장점이에요. 다만 ‘센스’가 ‘과시’로 비치지 않도록, 상황에 맞게 강약만 조절하면 훨씬 더 멋있어질 타입입니다.",
+                    color: "from-violet-500 to-cyan-500"
                 };
             } else if (score >= 60) {
                 return {
-                    title: "⚠️ 영포티 경향",
-                    emoji: "🤔",
-                    desc: "당신은 영포티 성향이 있습니다. 일부 영역에서 젊은 척하는 모습이 보입니다.",
-                    detail: "몇 가지 영역에서 나이에 맞지 않는 행동이나 스타일을 보이고 있습니다. 가끔 젊은 세대를 따라하려는 모습이 보이지만, 아직 완전한 영포티는 아닙니다. 나이에 맞는 품격 있는 매력을 키워가는 것이 좋을 것 같습니다.",
-                    color: "from-orange-500 to-yellow-500"
+                    title: "⚖️ 트렌드 민감형",
+                    emoji: "📡",
+                    desc: "최신 트렌드에 관심이 많은 편이에요. ‘영포티’와 ‘센스’ 사이 어딘가!",
+                    detail: "유행을 잘 읽는 편이라 대화 소재가 풍부합니다. ‘내가 요즘을 좀 안다’는 티가 과해질 때만 살짝 조절하면 호감도가 더 올라가요.",
+                    color: "from-sky-500 to-violet-500"
                 };
             } else if (score >= 40) {
                 return {
-                    title: "💼 일반 40대",
-                    emoji: "😊",
-                    desc: "당신은 평범한 40대입니다. 영포티와는 거리가 있습니다.",
-                    detail: "일부 젊은 감각을 유지하지만, 전반적으로는 나이에 맞는 차분한 모습을 보이고 있습니다. 가끔 새로운 것에 도전하는 것도 좋지만, 과도하게 젊은 척하지 않는 선에서 균형을 잘 맞추고 계시네요.",
-                    color: "from-blue-500 to-indigo-500"
+                    title: "😌 밸런스형",
+                    emoji: "🧩",
+                    desc: "유행도 챙기고, 나만의 페이스도 지키는 편이에요. ‘영포티’ 걱정은 크게 없어요.",
+                    detail: "필요할 때는 트렌드도 따라가고, 아닐 때는 과감히 안 하는 타입. 가장 무난하게 호감받는 균형형입니다.",
+                    color: "from-emerald-500 to-teal-500"
                 };
             } else {
                 return {
-                    title: "🏛️ 품격 있는 40대",
-                    emoji: "✨",
-                    desc: "당신은 나이에 맞는 중후하고 품격 있는 매력을 가진 40대입니다. 영포티와는 거리가 멉니다.",
-                    detail: "젊은 트렌드에 과도하게 집착하지 않고, 자신만의 확고한 가치관과 라이프스타일을 가지고 계십니다. 나이에 맞는 품격과 중후함을 보여주며, 주변 사람들에게도 신뢰받는 모습입니다. 영포티와는 완전히 거리가 먼 멋진 40대이시네요!",
-                    color: "from-green-500 to-emerald-500"
+                    title: "🧱 클래식 안정형",
+                    emoji: "🕴️",
+                    desc: "트렌드보다 ‘내 스타일’이 우선인 타입이에요. 영포티와는 거리가 멉니다.",
+                    detail: "유행을 억지로 따라가기보다 본인 기준이 뚜렷합니다. 필요할 때만 가볍게 트렌드를 참고하면 더 완성도 있는 인상으로 보일 수 있어요.",
+                    color: "from-slate-500 to-gray-500"
                 };
             }
         }
