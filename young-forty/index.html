@@ -331,9 +331,13 @@
                 return raw;
             });
             const totalScore = adjustedScores.reduce((sum, score) => sum + score, 0);
-            // 100점 만점으로 변환: (총점 - 8) / (40 - 8) * 100
-            const percentage = Math.round(((totalScore - 8) / (40 - 8)) * 100);
-            return Math.min(100, Math.max(0, percentage));
+            // 100점 만점으로 변환(기본 선형)
+            const linear = ((totalScore - 8) / (40 - 8)) * 100;
+            // 일반적으로 '매우 아니다'를 잘 선택하지 않는 점을 반영해,
+            // 중간대 점수가 조금 더 잘 올라가도록 완만한 곡선 보정을 적용
+            const curveExponent = 0.75; // 1보다 작을수록(0~1) 점수가 전반적으로 올라감
+            const curved = Math.round(Math.pow(Math.min(100, Math.max(0, linear)) / 100, curveExponent) * 100);
+            return Math.min(100, Math.max(0, curved));
         }
 
         function buildOverallComment(adjustedScores) {
