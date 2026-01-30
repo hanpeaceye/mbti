@@ -172,9 +172,20 @@
                     </button>
                 </div>
 
-                <button id="next-btn" onclick="nextQuestion()" class="w-full mt-6 bg-slate-200 text-slate-400 font-bold py-4 rounded-xl text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
-                    <span>다음 질문</span> <i class="fas fa-arrow-right"></i>
-                </button>
+                <div id="next-btn-area" class="mt-6">
+                    <button id="next-btn" onclick="nextQuestion()" class="w-full bg-slate-200 text-slate-400 font-bold py-4 rounded-xl text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
+                        <span>다음 질문</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div id="final-btn-area" class="mt-6 flex flex-col gap-3 hidden">
+                    <button type="button" onclick="showResultDirect()" class="w-full text-slate-400 hover:text-slate-600 font-medium py-2 text-sm transition-all flex items-center justify-center gap-2 underline">
+                        <span>결과 바로 확인하기</span>
+                    </button>
+                    <button type="button" id="final-submit-btn" onclick="showResultWithCoupang()" class="w-full bg-slate-200 text-slate-400 font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
+                        <span class="text-xs opacity-70">쿠팡 다녀와서</span> <span class="text-lg">내용 확인하기</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -265,6 +276,8 @@
             answers = [];
             selectedAnswer = null;
             resetButtons();
+            document.getElementById('next-btn-area').classList.remove('hidden');
+            document.getElementById('final-btn-area').classList.add('hidden');
         }
 
         function showQuestion(index) {
@@ -277,9 +290,23 @@
             
             selectedAnswer = null;
             resetButtons();
-            document.getElementById('next-btn').disabled = true;
-            document.getElementById('next-btn').classList.remove('bg-point', 'text-white');
-            document.getElementById('next-btn').classList.add('bg-slate-200', 'text-slate-400');
+            
+            // 마지막 질문인지 체크하여 버튼 영역 전환
+            if (index === questions.length - 1) {
+                document.getElementById('next-btn-area').classList.add('hidden');
+                document.getElementById('final-btn-area').classList.remove('hidden');
+                // 마지막 버튼은 활성화/비활성화 로직이 별도로 필요하므로 초기엔 비활성화
+                document.getElementById('final-submit-btn').disabled = true;
+                document.getElementById('final-submit-btn').classList.remove('bg-point', 'text-white');
+                document.getElementById('final-submit-btn').classList.add('bg-slate-200', 'text-slate-400');
+            } else {
+                document.getElementById('next-btn-area').classList.remove('hidden');
+                document.getElementById('final-btn-area').classList.add('hidden');
+                
+                document.getElementById('next-btn').disabled = true;
+                document.getElementById('next-btn').classList.remove('bg-point', 'text-white');
+                document.getElementById('next-btn').classList.add('bg-slate-200', 'text-slate-400');
+            }
         }
 
         function selectAnswer(score) {
@@ -295,9 +322,18 @@
                 }
             });
             
-            document.getElementById('next-btn').disabled = false;
-            document.getElementById('next-btn').classList.remove('bg-slate-200', 'text-slate-400');
-            document.getElementById('next-btn').classList.add('bg-point', 'text-white');
+            // 현재 질문이 마지막인지 아닌지에 따라 활성화할 버튼 결정
+            if (currentQuestionIndex === questions.length - 1) {
+                const finalBtn = document.getElementById('final-submit-btn');
+                finalBtn.disabled = false;
+                finalBtn.classList.remove('bg-slate-200', 'text-slate-400');
+                finalBtn.classList.add('bg-point', 'text-white');
+            } else {
+                const nextBtn = document.getElementById('next-btn');
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('bg-slate-200', 'text-slate-400');
+                nextBtn.classList.add('bg-point', 'text-white');
+            }
         }
 
         function resetButtons() {
@@ -317,9 +353,29 @@
             
             if (currentQuestionIndex < questions.length - 1) {
                 showQuestion(currentQuestionIndex + 1);
-            } else {
-                showResult();
             }
+        }
+
+        function showResultDirect() {
+            if (selectedAnswer === null) return;
+            if (answers.length < questions.length) answers.push(selectedAnswer);
+            showResult();
+        }
+
+        function showResultWithCoupang() {
+            if (selectedAnswer === null) return;
+            if (answers.length < questions.length) answers.push(selectedAnswer);
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => {
+                showResult();
+            }, 100);
+        }
+
+        function goTest(targetUrl) {
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => {
+                location.href = targetUrl;
+            }, 100);
         }
 
         function calculateScore() {
@@ -438,6 +494,67 @@
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-left text-sm text-slate-700 leading-relaxed">
                         <p class="font-bold text-slate-800 mb-2">📝 종합 평가</p>
                         <p>${overallComment}</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center w-full overflow-hidden">
+                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+                </div>
+
+                <!-- 쿠팡 아이쇼핑 후 다른 서비스 둘러보기 -->
+                <div class="mt-10 w-full max-w-3xl mx-auto">
+                    <div class="text-center mb-6 relative">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-white/30"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span>
+                        </div>
+                        <h3 class="mt-4 text-white font-bold text-sm animate-bounce drop-shadow">
+                            🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 서비스도 둘러보기
+                        </h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                        <button onclick="goTest('/')" class="bg-white/95 border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-heart-broken"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">왜 싸우는지 분석</p>
+                        </button>
+
+                        <button onclick="goTest('/some')" class="bg-white/95 border border-pink-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center text-pink-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-kiss-wink-heart"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">썸남썸녀 공략</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">플러팅 필승 전략</p>
+                        </button>
+
+                        <button onclick="goTest('/friends-travel')" class="bg-white/95 border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">우정 여행 판독기</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">절교 방지 가이드</p>
+                        </button>
+
+                        <button onclick="goTest('/biz')" class="bg-white/95 border border-indigo-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">직장상사 공략</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">사회생활 치트키</p>
+                        </button>
+
+                        <button onclick="goTest('/kids-mbti-34')" class="bg-white/95 border border-amber-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center text-amber-500 mb-2 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-700 text-sm">미취학 우리아이</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">8문항 성향 테스트</p>
+                        </button>
                     </div>
                 </div>
             `;
