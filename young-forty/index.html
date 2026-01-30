@@ -370,7 +370,8 @@
                     emoji: "🛰️",
                     desc: "또래 대비 트렌드 반응 속도가 빠른 편이에요. ‘영포티’ 농담을 들을 확률이 있습니다.",
                     detail: "새로운 것에 열려 있는 건 큰 장점이에요. 다만 ‘센스’가 ‘과시’로 비치지 않도록, 상황에 맞게 강약만 조절하면 훨씬 더 멋있어질 타입입니다.",
-                    color: "from-violet-500 to-cyan-500"
+                    color: "from-violet-500 to-cyan-500",
+                    img: "img/type_young.png"
                 };
             } else if (score >= 60) {
                 return {
@@ -378,7 +379,8 @@
                     emoji: "📡",
                     desc: "최신 트렌드에 관심이 많은 편이에요. ‘영포티’와 ‘센스’ 사이 어딘가!",
                     detail: "유행을 잘 읽는 편이라 대화 소재가 풍부합니다. ‘내가 요즘을 좀 안다’는 티가 과해질 때만 살짝 조절하면 호감도가 더 올라가요.",
-                    color: "from-sky-500 to-violet-500"
+                    color: "from-sky-500 to-violet-500",
+                    img: "img/type_young.png"
                 };
             } else if (score >= 40) {
                 return {
@@ -386,7 +388,8 @@
                     emoji: "🧩",
                     desc: "유행도 챙기고, 나만의 페이스도 지키는 편이에요. ‘영포티’ 걱정은 크게 없어요.",
                     detail: "필요할 때는 트렌드도 따라가고, 아닐 때는 과감히 안 하는 타입. 가장 무난하게 호감받는 균형형입니다.",
-                    color: "from-emerald-500 to-teal-500"
+                    color: "from-emerald-500 to-teal-500",
+                    img: "img/type_balance.png"
                 };
             } else {
                 return {
@@ -394,7 +397,8 @@
                     emoji: "🕴️",
                     desc: "트렌드보다 ‘내 스타일’이 우선인 타입이에요. 영포티와는 거리가 멉니다.",
                     detail: "유행을 억지로 따라가기보다 본인 기준이 뚜렷합니다. 필요할 때만 가볍게 트렌드를 참고하면 더 완성도 있는 인상으로 보일 수 있어요.",
-                    color: "from-slate-500 to-gray-500"
+                    color: "from-slate-500 to-gray-500",
+                    img: "img/type_classic.png"
                 };
             }
         }
@@ -415,7 +419,7 @@
             const resultHTML = `
                 <div class="clean-card p-8 md:p-10 text-center bg-white">
                     <div class="mb-6 flex justify-center">
-                        <img src="img/result_image.png" alt="영포티 결과 이미지" class="w-40 h-40 object-cover rounded-full shadow-lg border-4 border-slate-100">
+                        <img src="${result.img}" alt="영포티 결과 이미지" class="w-40 h-40 object-cover rounded-full shadow-lg border-4 border-slate-100">
                     </div>
                     
                     <div class="text-4xl mb-2">${result.emoji}</div>
