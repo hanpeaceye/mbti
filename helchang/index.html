@@ -4,9 +4,9 @@
     <meta name="google-adsense-account" content="ca-pub-6540004747918466">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hel창 판독기 - 나는 Hel창일까? 6가지 질문으로 알아보는 Hel창지수 테스트. 득근하세요!">
-    <link rel="canonical" href="https://aimbti.xyz/helchang">
-    <title>Hel창 판독기 | 나는 Hel창일까?</title>
+    <meta name="description" content="헬창 자가진단 - 나는 헬창일까? 6문항으로 내 헬창지수(0~100) 확인. 헬창은 나쁜 말이 아니에요.">
+    <link rel="canonical" href="https://aimbti.xyz/healchang">
+    <title>헬창 자가진단 | 나는 헬창일까? 지수로 확인</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
@@ -19,14 +19,14 @@
     </script>
     
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aimbti.xyz/helchang">
-    <meta property="og:title" content="Hel창 판독기 | 나는 Hel창일까?">
-    <meta property="og:description" content="6가지 질문으로 알아보는 Hel창지수. 득근하세요!">
+    <meta property="og:url" content="https://aimbti.xyz/healchang">
+    <meta property="og:title" content="헬창 자가진단 | 나는 헬창일까? 지수로 확인">
+    <meta property="og:description" content="6문항으로 내 헬창지수(0~100) 확인. 헬창은 나쁜 말이 아니에요.">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/857/857681.png">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Hel창 판독기 | 나는 Hel창일까?">
-    <meta name="twitter:description" content="6가지 질문으로 알아보는 Hel창지수">
+    <meta name="twitter:title" content="헬창 자가진단 | 나는 헬창일까? 지수로 확인">
+    <meta name="twitter:description" content="6문항으로 내 헬창지수(0~100) 확인">
     <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/857/857681.png">
     
     <style>
@@ -94,11 +94,12 @@
         <!-- 시작 페이지 -->
         <div id="start-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
             <div class="text-center mb-10">
-                <span class="inline-block bg-white/10 border border-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 tracking-wide backdrop-blur">Helchang Test</span>
+                <span class="inline-block bg-white/10 border border-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 tracking-wide backdrop-blur">헬창 자가진단</span>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
-                    내가 설마<br><span class="text-amber-300">Hel창</span>일까?
+                    나는 <span class="text-amber-300">헬창</span>일까?<br>
+                    <span class="text-lg font-semibold text-white/90">지수로 확인해보기</span>
                 </h1>
-                <p class="text-white/80 text-sm md:text-base">6가지 질문 · 약 1분 · 득근하세요</p>
+                <p class="text-white/80 text-sm md:text-base">6문항 · 약 1분 · 0~100점</p>
             </div>
 
             <div class="clean-card p-8 md:p-10 shadow-2xl bg-white">
@@ -106,16 +107,16 @@
                     <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl shadow-lg">
                         🏋️
                     </div>
-                    <h2 class="text-xl font-bold text-slate-800 mb-2">Hel창이란?</h2>
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">헬창 지수 자가진단</h2>
                     <p class="text-sm text-slate-600 leading-relaxed">
-                        ‘Hel창’은 헬스에 푹 빠진 사람을 가리키는 말이에요.<br>
-                        근손실·득근 드립, 3대 수치, 단백질 신경…<br>
-                        <span class="font-semibold text-slate-700">내 Hel창지수</span>를 재밌게 체크해보세요.
+                        헬창은 나쁜 말이 아니에요. 헬스에 푹 빠진 사람을 이르는 말이에요.<br>
+                        6문항에 답하면 <span class="font-semibold text-slate-700">내 헬창지수(0~100)</span>가 나와요.<br>
+                        재밌게 점수 확인해보세요.
                     </p>
                 </div>
                 
                 <button onclick="startTest()" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
-                    <span>판독 시작하기</span> <i class="fas fa-dumbbell"></i>
+                    <span>자가진단 시작하기</span> <i class="fas fa-dumbbell"></i>
                 </button>
             </div>
         </div>
@@ -212,7 +213,7 @@
     </div>
 
     <script>
-        // 질문 데이터 (Hel창 성향: 높을수록 Hel창)
+        // 질문 데이터 (헬창 성향: 높을수록 헬창)
         const questions = [
             { text: "'근손실' '득근' 같은 말을 일상에서 자주 쓰거나 금방 이해한다.", category: "밈", reverse: false },
             { text: "단백질(닭가슴살, 프로틴 등)을 평소에 신경 쓰며 먹는 편이다.", category: "식단", reverse: false },
@@ -340,26 +341,26 @@
             const avg = adjustedScores.reduce((s, v) => s + v, 0) / adjustedScores.length;
             if (avg >= 4.2) return "일상이 헬스 중심으로 돌아가는 타입이에요. 득근하세요! 다만 근손실 걱정보다 회복·휴식도 챙기면 오래 가요.";
             if (avg >= 3.4) return "헬스가 습관이 된 편이에요. 적당히 밀면서도 라이프 밸런스는 유지하는 스타일.";
-            if (avg >= 2.6) return "할 때는 하고, 안 할 때는 편하게 사는 타입이에요. Hel창과 비Hel창 사이 어딘가.";
-            if (avg >= 1.8) return "가끔 운동하는 수준이에요. Hel창과는 거리가 있어요.";
-            return "헬스보다 다른 걸 우선하는 편이에요. Hel창 지수는 낮아요.";
+            if (avg >= 2.6) return "할 때는 하고, 안 할 때는 편하게 사는 타입이에요. 헬창과 비헬창 사이 어딘가.";
+            if (avg >= 1.8) return "가끔 운동하는 수준이에요. 헬창과는 거리가 있어요.";
+            return "헬스보다 다른 걸 우선하는 편이에요. 헬창 지수는 낮아요.";
         }
 
         // 결과 5단계
         function getResultType(score) {
             if (score >= 80) {
-                return { title: "🏆 만렙 Hel창", emoji: "💪", desc: "근손실을 극도로 경계하고, 득근이 인사말인 타입. 진정한 Hel창이에요.", detail: "3대 수치·단백질·헬스장 일정이 일상의 축이에요. 득근하세요! 다만 회복과 휴식도 잊지 마세요.", color: "from-orange-500 to-amber-500", icon: "🏋️" };
+                return { title: "🏆 만렙 헬창", emoji: "💪", desc: "근손실을 극도로 경계하고, 득근이 인사말인 타입. 진정한 헬창이에요.", detail: "3대 수치·단백질·헬스장 일정이 일상의 축이에요. 득근하세요! 다만 회복과 휴식도 잊지 마세요.", color: "from-orange-500 to-amber-500", icon: "🏋️" };
             }
             if (score >= 60) {
-                return { title: "🔥 Hel창 기질", emoji: "🔥", desc: "헬스에 꽂혀 있는 편이에요. '클럽보다 헬스클럽'이 공감 가는 타입.", detail: "근손실·득근 드립 이해하고, 단백질·무게 신경 쓰는 편. 조금만 더 가면 만렙 Hel창.", color: "from-amber-500 to-orange-400", icon: "🔥" };
+                return { title: "🔥 헬창 기질", emoji: "🔥", desc: "헬스에 꽂혀 있는 편이에요. '클럽보다 헬스클럽'이 공감 가는 타입.", detail: "근손실·득근 드립 이해하고, 단백질·무게 신경 쓰는 편. 조금만 더 가면 만렙 헬창.", color: "from-amber-500 to-orange-400", icon: "🔥" };
             }
             if (score >= 40) {
-                return { title: "🧘 라이트 Hel창", emoji: "🧘", desc: "운동은 챙기되 미치진 않는 타입. Hel창과 일반인 사이.", detail: "가끔 근손실 드립 알아듣고, 헬스도 꾸준히 하는 편. 밸런스 좋아요.", color: "from-lime-500 to-emerald-500", icon: "🧘" };
+                return { title: "🧘 라이트 헬창", emoji: "🧘", desc: "운동은 챙기되 미치진 않는 타입. 헬창과 일반인 사이.", detail: "가끔 근손실 드립 알아듣고, 헬스도 꾸준히 하는 편. 밸런스 좋아요.", color: "from-lime-500 to-emerald-500", icon: "🧘" };
             }
             if (score >= 20) {
                 return { title: "🚶 가끔 헬스형", emoji: "🚶", desc: "헬스장 가긴 하는데 일상의 중심은 아닌 타입.", detail: "득근·근손실이 뭔지 알 수도 있지만, 몸보다 맛·휴식이 우선인 편이에요.", color: "from-sky-500 to-slate-400", icon: "🚶" };
             }
-            return { title: "🌱 평범한 일상형", emoji: "🌱", desc: "헬스보다 다른 게 우선인 타입. Hel창과는 거리가 멀어요.", detail: "운동은 건강할 때만 해도 된다고 생각하는 편. 전혀 부끄러울 건 없어요.", color: "from-slate-400 to-slate-500", icon: "🌱" };
+            return { title: "🌱 평범한 일상형", emoji: "🌱", desc: "헬스보다 다른 게 우선인 타입. 헬창과는 거리가 멀어요.", detail: "운동은 건강할 때만 해도 된다고 생각하는 편. 전혀 부끄러울 건 없어요.", color: "from-slate-400 to-slate-500", icon: "🌱" };
         }
 
         function showResult() {
@@ -387,7 +388,7 @@
                     <p class="text-slate-600 text-base mb-6 leading-relaxed">${result.desc}</p>
                     <div class="mb-6">
                         <div class="text-5xl font-black bg-gradient-to-r ${result.color} bg-clip-text text-transparent mb-2">
-                            ${score}<span class="text-xl text-slate-400 ml-1 font-bold">Hel창지수</span>
+                            ${score}<span class="text-xl text-slate-400 ml-1 font-bold">헬창지수</span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-4 mb-4 overflow-hidden">
                             <div class="bg-gradient-to-r ${result.color} h-4 rounded-full score-bar" style="width: 0%"></div>
@@ -457,7 +458,7 @@
             const s = calculateScore();
             const r = getResultType(s);
             if (navigator.share) {
-                navigator.share({ title: 'Hel창 판독기 결과', text: `나는 ${s}점! ${r.title} 결과를 확인해보세요! 득근하세요!`, url: currentUrl });
+                navigator.share({ title: '헬창 자가진단 결과', text: `나는 ${s}점! ${r.title} 결과를 확인해보세요! 득근하세요!`, url: currentUrl });
             } else {
                 const t = document.createElement("textarea");
                 document.body.appendChild(t);
