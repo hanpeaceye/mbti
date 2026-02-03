@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-6540004747918466">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hel창 판독기 - 나는 Hel창일까? 6가지 질문으로 알아보는 Hel창지수 테스트. 득근하세요!">
+    <link rel="canonical" href="https://aimbti.xyz/helchang">
+    <title>Hel창 판독기 | 나는 Hel창일까?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJ9T8RW5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-33VJ9T8RW5');
+    </script>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimbti.xyz/helchang">
+    <meta property="og:title" content="Hel창 판독기 | 나는 Hel창일까?">
+    <meta property="og:description" content="6가지 질문으로 알아보는 Hel창지수. 득근하세요!">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/857/857681.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hel창 판독기 | 나는 Hel창일까?">
+    <meta name="twitter:description" content="6가지 질문으로 알아보는 Hel창지수">
+    <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/857/857681.png">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
+        :root{
+            --bg1:#0f172a;
+            --bg2:#1e293b;
+            --accent1:#ea580c;
+            --accent2:#f59e0b;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            min-height: 100vh;
+            color: #0f172a;
+            background:
+                radial-gradient(1200px 800px at 20% 10%, rgba(234, 88, 12, 0.3) 0%, rgba(234, 88, 12, 0) 60%),
+                radial-gradient(900px 700px at 80% 20%, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0) 55%),
+                linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+            background-attachment: fixed;
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .clean-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            box-shadow:
+                0 20px 55px rgba(2, 6, 23, 0.25),
+                0 2px 8px rgba(2, 6, 23, 0.08);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(10px);
+        }
+        .text-point { color: var(--accent1); }
+        .bg-point { background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%); }
+        .score-bar { transition: width 1.5s ease-out; }
+        
+        .answer-btn { 
+            transition: all 0.3s ease; 
+            border: 1px solid rgba(15, 23, 42, 0.10);
+        }
+        .answer-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 25px rgba(2, 6, 23, 0.12);
+            border-color: rgba(234, 88, 12, 0.5);
+        }
+        .answer-btn.selected { 
+            background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+            color: white;
+            border-color: rgba(234, 88, 12, 0.75);
+        }
+        
+        .question-card { animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative pb-10">
+
+    <div class="w-full max-w-3xl mx-auto px-4 py-10">
+
+        <!-- 시작 페이지 -->
+        <div id="start-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-white/10 border border-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 tracking-wide backdrop-blur">Helchang Test</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
+                    내가 설마<br><span class="text-amber-300">Hel창</span>일까?
+                </h1>
+                <p class="text-white/80 text-sm md:text-base">6가지 질문 · 약 1분 · 득근하세요</p>
+            </div>
+
+            <div class="clean-card p-8 md:p-10 shadow-2xl bg-white">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl shadow-lg">
+                        🏋️
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">Hel창이란?</h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ‘Hel창’은 헬스에 푹 빠진 사람을 가리키는 말이에요.<br>
+                        근손실·득근 드립, 3대 수치, 단백질 신경…<br>
+                        <span class="font-semibold text-slate-700">내 Hel창지수</span>를 재밌게 체크해보세요.
+                    </p>
+                </div>
+                
+                <button onclick="startTest()" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                    <span>판독 시작하기</span> <i class="fas fa-dumbbell"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 질문 페이지 -->
+        <div id="question-page" class="hidden fade-in">
+            <div class="flex items-center justify-between mb-6">
+                <button id="back-to-start" onclick="backToStart()" class="text-white/85 hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">
+                    <i class="fas fa-chevron-left"></i> 처음으로
+                </button>
+                <span class="text-[10px] font-bold text-white bg-white/20 backdrop-blur px-2 py-1 rounded">질문 <span id="current-question-num">1</span>/6</span>
+            </div>
+
+            <div class="clean-card p-6 md:p-8 question-card bg-white">
+                <div class="mb-6">
+                    <div class="w-full bg-slate-100 rounded-full h-2 mb-4">
+                        <div id="progress-bar" class="bg-point h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
+                    </div>
+                    <h2 id="question-text" class="text-xl md:text-2xl font-bold text-slate-800 mb-2 leading-tight"></h2>
+                </div>
+
+                <div class="space-y-3">
+                    <button onclick="selectAnswer(5)" class="answer-btn w-full p-4 rounded-xl text-left font-medium text-slate-700 bg-slate-50">
+                        <div class="flex items-center justify-between">
+                            <span>매우 그렇다</span>
+                            <i class="fas fa-check-circle opacity-0"></i>
+                        </div>
+                    </button>
+                    <button onclick="selectAnswer(4)" class="answer-btn w-full p-4 rounded-xl text-left font-medium text-slate-700 bg-slate-50">
+                        <div class="flex items-center justify-between">
+                            <span>그렇다</span>
+                            <i class="fas fa-check-circle opacity-0"></i>
+                        </div>
+                    </button>
+                    <button onclick="selectAnswer(3)" class="answer-btn w-full p-4 rounded-xl text-left font-medium text-slate-700 bg-slate-50">
+                        <div class="flex items-center justify-between">
+                            <span>보통</span>
+                            <i class="fas fa-check-circle opacity-0"></i>
+                        </div>
+                    </button>
+                    <button onclick="selectAnswer(2)" class="answer-btn w-full p-4 rounded-xl text-left font-medium text-slate-700 bg-slate-50">
+                        <div class="flex items-center justify-between">
+                            <span>아니다</span>
+                            <i class="fas fa-check-circle opacity-0"></i>
+                        </div>
+                    </button>
+                    <button onclick="selectAnswer(1)" class="answer-btn w-full p-4 rounded-xl text-left font-medium text-slate-700 bg-slate-50">
+                        <div class="flex items-center justify-between">
+                            <span>매우 아니다</span>
+                            <i class="fas fa-check-circle opacity-0"></i>
+                        </div>
+                    </button>
+                </div>
+
+                <div id="next-btn-area" class="mt-6">
+                    <button id="next-btn" onclick="nextQuestion()" class="w-full bg-slate-200 text-slate-400 font-bold py-4 rounded-xl text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
+                        <span>다음 질문</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div id="final-btn-area" class="mt-6 flex flex-col gap-3 hidden">
+                    <button type="button" id="final-submit-btn" onclick="showResultWithCoupang()" class="w-full bg-slate-200 text-slate-400 font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
+                        <span class="text-xs opacity-70">쿠팡 다녀와서</span> <span class="text-lg">내용 확인하기</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button type="button" onclick="showResultDirect()" class="w-full text-slate-400 hover:text-slate-600 font-medium py-2 text-sm transition-all flex items-center justify-center gap-2 underline">
+                        <span>결과 바로 확인하기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 페이지 -->
+        <div id="result-page" class="hidden fade-in">
+            <div class="flex items-center justify-between mb-6">
+                <button id="back-btn" onclick="backToStart()" class="text-white/85 hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">
+                    <i class="fas fa-chevron-left"></i> 다시하기
+                </button>
+                <span class="text-[10px] font-bold text-white bg-white/20 backdrop-blur px-2 py-1 rounded">RESULT</span>
+            </div>
+
+            <div id="result-content" class="space-y-6"></div>
+
+            <div class="mt-8 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
+                <button onclick="shareLink()" class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-orange-200 rounded-full shadow-sm text-slate-600 font-bold hover:bg-orange-50 transition-all text-sm group">
+                    <i class="fas fa-share-alt group-hover:text-orange-600 transition-colors"></i> 결과 공유하기
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="fixed bottom-2 right-2 text-[10px] text-white/50 font-mono pointer-events-none select-none z-50">
+        Ver 1.0
+    </div>
+
+    <script>
+        // 질문 데이터 (Hel창 성향: 높을수록 Hel창)
+        const questions = [
+            { text: "'근손실' '득근' 같은 말을 일상에서 자주 쓰거나 금방 이해한다.", category: "밈", reverse: false },
+            { text: "단백질(닭가슴살, 프로틴 등)을 평소에 신경 쓰며 먹는 편이다.", category: "식단", reverse: false },
+            { text: "헬스장을 며칠 못 가면 불안하거나 괜히 허전하다.", category: "습관", reverse: false },
+            { text: "벤치프레스, 스쿼트 같은 무게나 3대 수치에 관심이 있다.", category: "수치", reverse: false },
+            { text: "운동은 건강할 정도로만 하면 된다고 생각한다.", category: "가치관", reverse: true },
+            { text: "옷을 고를 때 몸매·근육이 잘 보이는지 살짝이라도 신경 쓰는 편이다.", category: "스타일", reverse: false }
+        ];
+
+        let currentQuestionIndex = 0;
+        let answers = [];
+        let selectedAnswer = null;
+
+        function startTest() {
+            document.getElementById('start-page').classList.add('hidden');
+            document.getElementById('question-page').classList.remove('hidden');
+            showQuestion(0);
+        }
+
+        function backToStart() {
+            document.getElementById('start-page').classList.remove('hidden');
+            document.getElementById('question-page').classList.add('hidden');
+            document.getElementById('result-page').classList.add('hidden');
+            currentQuestionIndex = 0;
+            answers = [];
+            selectedAnswer = null;
+            resetButtons();
+            document.getElementById('next-btn-area').classList.remove('hidden');
+            document.getElementById('final-btn-area').classList.add('hidden');
+        }
+
+        function showQuestion(index) {
+            currentQuestionIndex = index;
+            const question = questions[index];
+            document.getElementById('question-text').textContent = question.text;
+            document.getElementById('current-question-num').textContent = index + 1;
+            document.getElementById('progress-bar').style.width = ((index + 1) / questions.length * 100) + '%';
+            selectedAnswer = null;
+            resetButtons();
+            if (index === questions.length - 1) {
+                document.getElementById('next-btn-area').classList.add('hidden');
+                document.getElementById('final-btn-area').classList.remove('hidden');
+                document.getElementById('final-submit-btn').disabled = true;
+                document.getElementById('final-submit-btn').classList.remove('bg-point', 'text-white');
+                document.getElementById('final-submit-btn').classList.add('bg-slate-200', 'text-slate-400');
+            } else {
+                document.getElementById('next-btn-area').classList.remove('hidden');
+                document.getElementById('final-btn-area').classList.add('hidden');
+                document.getElementById('next-btn').disabled = true;
+                document.getElementById('next-btn').classList.remove('bg-point', 'text-white');
+                document.getElementById('next-btn').classList.add('bg-slate-200', 'text-slate-400');
+            }
+        }
+
+        function selectAnswer(score) {
+            selectedAnswer = score;
+            resetButtons();
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                if (index === (5 - score)) {
+                    btn.classList.add('selected');
+                    btn.querySelector('i').classList.remove('opacity-0');
+                    btn.querySelector('i').classList.add('opacity-100');
+                }
+            });
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById('final-submit-btn').disabled = false;
+                document.getElementById('final-submit-btn').classList.remove('bg-slate-200', 'text-slate-400');
+                document.getElementById('final-submit-btn').classList.add('bg-point', 'text-white');
+            } else {
+                document.getElementById('next-btn').disabled = false;
+                document.getElementById('next-btn').classList.remove('bg-slate-200', 'text-slate-400');
+                document.getElementById('next-btn').classList.add('bg-point', 'text-white');
+            }
+        }
+
+        function resetButtons() {
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+                const icon = btn.querySelector('i');
+                icon.classList.add('opacity-0');
+                icon.classList.remove('opacity-100');
+            });
+        }
+
+        function nextQuestion() {
+            if (selectedAnswer === null) return;
+            answers.push(selectedAnswer);
+            if (currentQuestionIndex < questions.length - 1) showQuestion(currentQuestionIndex + 1);
+        }
+
+        function showResultDirect() {
+            if (selectedAnswer === null) return;
+            if (answers.length < questions.length) answers.push(selectedAnswer);
+            showResult();
+        }
+
+        function showResultWithCoupang() {
+            if (selectedAnswer === null) return;
+            if (answers.length < questions.length) answers.push(selectedAnswer);
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => showResult(), 100);
+        }
+
+        function goTest(targetUrl) {
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => { location.href = targetUrl; }, 100);
+        }
+
+        function calculateScore() {
+            const adjustedScores = answers.map((raw, idx) => {
+                const q = questions[idx];
+                if (q && q.reverse) return 6 - raw;
+                return raw;
+            });
+            const totalScore = adjustedScores.reduce((sum, s) => sum + s, 0);
+            const minTotal = questions.length * 1, maxTotal = questions.length * 5;
+            const linear = ((totalScore - minTotal) / (maxTotal - minTotal)) * 100;
+            const curved = Math.round(Math.pow(Math.min(100, Math.max(0, linear)) / 100, 0.8) * 100);
+            return Math.min(100, Math.max(0, curved));
+        }
+
+        function buildOverallComment(adjustedScores) {
+            const avg = adjustedScores.reduce((s, v) => s + v, 0) / adjustedScores.length;
+            if (avg >= 4.2) return "일상이 헬스 중심으로 돌아가는 타입이에요. 득근하세요! 다만 근손실 걱정보다 회복·휴식도 챙기면 오래 가요.";
+            if (avg >= 3.4) return "헬스가 습관이 된 편이에요. 적당히 밀면서도 라이프 밸런스는 유지하는 스타일.";
+            if (avg >= 2.6) return "할 때는 하고, 안 할 때는 편하게 사는 타입이에요. Hel창과 비Hel창 사이 어딘가.";
+            if (avg >= 1.8) return "가끔 운동하는 수준이에요. Hel창과는 거리가 있어요.";
+            return "헬스보다 다른 걸 우선하는 편이에요. Hel창 지수는 낮아요.";
+        }
+
+        // 결과 5단계
+        function getResultType(score) {
+            if (score >= 80) {
+                return { title: "🏆 만렙 Hel창", emoji: "💪", desc: "근손실을 극도로 경계하고, 득근이 인사말인 타입. 진정한 Hel창이에요.", detail: "3대 수치·단백질·헬스장 일정이 일상의 축이에요. 득근하세요! 다만 회복과 휴식도 잊지 마세요.", color: "from-orange-500 to-amber-500", icon: "🏋️" };
+            }
+            if (score >= 60) {
+                return { title: "🔥 Hel창 기질", emoji: "🔥", desc: "헬스에 꽂혀 있는 편이에요. '클럽보다 헬스클럽'이 공감 가는 타입.", detail: "근손실·득근 드립 이해하고, 단백질·무게 신경 쓰는 편. 조금만 더 가면 만렙 Hel창.", color: "from-amber-500 to-orange-400", icon: "🔥" };
+            }
+            if (score >= 40) {
+                return { title: "🧘 라이트 Hel창", emoji: "🧘", desc: "운동은 챙기되 미치진 않는 타입. Hel창과 일반인 사이.", detail: "가끔 근손실 드립 알아듣고, 헬스도 꾸준히 하는 편. 밸런스 좋아요.", color: "from-lime-500 to-emerald-500", icon: "🧘" };
+            }
+            if (score >= 20) {
+                return { title: "🚶 가끔 헬스형", emoji: "🚶", desc: "헬스장 가긴 하는데 일상의 중심은 아닌 타입.", detail: "득근·근손실이 뭔지 알 수도 있지만, 몸보다 맛·휴식이 우선인 편이에요.", color: "from-sky-500 to-slate-400", icon: "🚶" };
+            }
+            return { title: "🌱 평범한 일상형", emoji: "🌱", desc: "헬스보다 다른 게 우선인 타입. Hel창과는 거리가 멀어요.", detail: "운동은 건강할 때만 해도 된다고 생각하는 편. 전혀 부끄러울 건 없어요.", color: "from-slate-400 to-slate-500", icon: "🌱" };
+        }
+
+        function showResult() {
+            const score = calculateScore();
+            const result = getResultType(score);
+            const adjustedScores = answers.map((raw, idx) => {
+                const q = questions[idx];
+                if (q && q.reverse) return 6 - raw;
+                return raw;
+            });
+            const overallComment = buildOverallComment(adjustedScores);
+
+            document.getElementById('question-page').classList.add('hidden');
+            document.getElementById('result-page').classList.remove('hidden');
+
+            const resultHTML = `
+                <div class="clean-card p-8 md:p-10 text-center bg-white">
+                    <div class="mb-6 flex justify-center">
+                        <div class="w-48 h-48 rounded-full bg-gradient-to-br ${result.color} flex items-center justify-center text-7xl shadow-xl border-4 border-white">
+                            ${result.icon}
+                        </div>
+                    </div>
+                    <div class="text-4xl mb-2">${result.emoji}</div>
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-2">${result.title}</h2>
+                    <p class="text-slate-600 text-base mb-6 leading-relaxed">${result.desc}</p>
+                    <div class="mb-6">
+                        <div class="text-5xl font-black bg-gradient-to-r ${result.color} bg-clip-text text-transparent mb-2">
+                            ${score}<span class="text-xl text-slate-400 ml-1 font-bold">Hel창지수</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-4 mb-4 overflow-hidden">
+                            <div class="bg-gradient-to-r ${result.color} h-4 rounded-full score-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-left text-sm text-slate-700 leading-relaxed">
+                        <p class="font-bold text-slate-800 mb-2">📝 종합 평가</p>
+                        <p>${overallComment}</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center w-full overflow-hidden">
+                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+                </div>
+
+                <div class="mt-10 w-full max-w-3xl mx-auto">
+                    <div class="text-center mb-6 relative">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-t border-white/30"></div></div>
+                        <div class="relative flex justify-center"><span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span></div>
+                        <h3 class="mt-4 text-white font-bold text-sm animate-bounce drop-shadow">🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 서비스도 둘러보기</h3>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                        <button onclick="goTest('/')" class="bg-white/95 border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-heart-broken"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">왜 싸우는지 분석</p>
+                        </button>
+                        <button onclick="goTest('/some')" class="bg-white/95 border border-pink-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center text-pink-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-kiss-wink-heart"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">썸남썸녀 공략</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">플러팅 필승 전략</p>
+                        </button>
+                        <button onclick="goTest('/friends-travel')" class="bg-white/95 border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-plane"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">우정 여행 판독기</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">절교 방지 가이드</p>
+                        </button>
+                        <button onclick="goTest('/young-forty')" class="bg-white/95 border border-violet-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-violet-50 rounded-full flex items-center justify-center text-violet-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-sparkles"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">영포티 검사</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">나는 진짜 영포티일까?</p>
+                        </button>
+                        <button onclick="goTest('/biz')" class="bg-white/95 border border-indigo-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-briefcase"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">직장상사 공략</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">사회생활 치트키</p>
+                        </button>
+                        <button onclick="goTest('/kids-mbti-34')" class="bg-white/95 border border-amber-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                            <div class="w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center text-amber-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-baby"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">미취학 우리아이</h3>
+                            <p class="text-[10px] text-slate-400 mt-1">8문항 성향 테스트</p>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('result-content').innerHTML = resultHTML;
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                const bar = document.querySelector('.score-bar');
+                if (bar) bar.style.width = score + '%';
+            }, 300);
+        }
+
+        window.shareLink = function() {
+            const currentUrl = window.location.href;
+            const s = calculateScore();
+            const r = getResultType(s);
+            if (navigator.share) {
+                navigator.share({ title: 'Hel창 판독기 결과', text: `나는 ${s}점! ${r.title} 결과를 확인해보세요! 득근하세요!`, url: currentUrl });
+            } else {
+                const t = document.createElement("textarea");
+                document.body.appendChild(t);
+                t.value = currentUrl;
+                t.select();
+                document.execCommand('copy');
+                document.body.removeChild(t);
+                alert('링크 복사 완료!');
+            }
+        };
+    </script>
+
+    <footer class="mt-12 pt-8 pb-6 text-center">
+        <p class="text-xs text-white/70">© 2026 재밌는웹페이지연구소. All rights reserved.</p>
+    </footer>
+</body>
+</html>
