@@ -332,9 +332,11 @@
             });
             const totalScore = adjustedScores.reduce((sum, s) => sum + s, 0);
             const minTotal = questions.length * 1, maxTotal = questions.length * 5;
+            if (totalScore === minTotal) return 0;
             const linear = ((totalScore - minTotal) / (maxTotal - minTotal)) * 100;
             const curved = Math.round(Math.pow(Math.min(100, Math.max(0, linear)) / 100, 0.8) * 100);
-            return Math.min(100, Math.max(0, curved));
+            const boosted = Math.round(curved * 1.15);
+            return Math.min(100, Math.max(0, boosted));
         }
 
         function buildOverallComment(adjustedScores) {
