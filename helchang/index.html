@@ -215,11 +215,11 @@
     <script>
         // 질문 데이터 (헬창 성향: 높을수록 헬창)
         const questions = [
-            { text: "'근손실' '득근' 같은 말을 일상에서 자주 쓰거나 금방 이해한다.", category: "밈", reverse: false },
-            { text: "단백질(닭가슴살, 프로틴 등)을 평소에 신경 쓰며 먹는 편이다.", category: "식단", reverse: false },
-            { text: "헬스장을 며칠 못 가면 불안하거나 괜히 허전하다.", category: "습관", reverse: false },
-            { text: "벤치프레스, 스쿼트 같은 무게나 3대 수치에 관심이 있다.", category: "수치", reverse: false },
-            { text: "운동은 건강할 정도로만 하면 된다고 생각한다.", category: "가치관", reverse: true },
+            { text: "근손실, 분할법, 프리웨이트, 광배, 둔근 이라는 단어를 잘 안다.", category: "용어", reverse: false },
+            { text: "식사를 할 때 메뉴 재료가 탄수화물, 단백질, 지방의 비율로 보인다.", category: "식단", reverse: false },
+            { text: "헬스장이나 운동을 가는데 힘든 것보다 못 갔을 때가 더 힘들다.", category: "습관", reverse: false },
+            { text: "등 근육을 신경 쓰고 운동을 한다.", category: "운동", reverse: false },
+            { text: "원판의 무게만 맞으면 브랜드는 중요하지 않다.", category: "장비", reverse: false },
             { text: "옷을 고를 때 몸매·근육이 잘 보이는지 살짝이라도 신경 쓰는 편이다.", category: "스타일", reverse: false }
         ];
 
@@ -355,12 +355,12 @@
                 return { title: "🔥 헬창 기질", emoji: "🔥", desc: "헬스에 꽂혀 있는 편이에요. '클럽보다 헬스클럽'이 공감 가는 타입.", detail: "근손실·득근 드립 이해하고, 단백질·무게 신경 쓰는 편. 조금만 더 가면 만렙 헬창.", color: "from-amber-500 to-orange-400", icon: "🔥" };
             }
             if (score >= 40) {
-                return { title: "🧘 라이트 헬창", emoji: "🧘", desc: "운동은 챙기되 미치진 않는 타입. 헬창과 일반인 사이.", detail: "가끔 근손실 드립 알아듣고, 헬스도 꾸준히 하는 편. 밸런스 좋아요.", color: "from-lime-500 to-emerald-500", icon: "🧘" };
+                return { title: "🚶 가끔 헬스형", emoji: "🚶", desc: "헬스장 가긴 하는데 일상의 중심은 아닌 타입.", detail: "득근·근손실이 뭔지 알 수도 있지만, 몸보다 맛·휴식이 우선인 편이에요.", color: "from-lime-500 to-emerald-500", icon: "🚶" };
             }
             if (score >= 20) {
-                return { title: "🚶 가끔 헬스형", emoji: "🚶", desc: "헬스장 가긴 하는데 일상의 중심은 아닌 타입.", detail: "득근·근손실이 뭔지 알 수도 있지만, 몸보다 맛·휴식이 우선인 편이에요.", color: "from-sky-500 to-slate-400", icon: "🚶" };
+                return { title: "🌱 평범한 일상형", emoji: "🌱", desc: "헬스보다 다른 게 우선인 타입. 헬창과는 거리가 멀어요.", detail: "운동은 건강할 때만 해도 된다고 생각하는 편. 전혀 부끄러울 건 없어요.", color: "from-sky-500 to-slate-400", icon: "🌱" };
             }
-            return { title: "🌱 평범한 일상형", emoji: "🌱", desc: "헬스보다 다른 게 우선인 타입. 헬창과는 거리가 멀어요.", detail: "운동은 건강할 때만 해도 된다고 생각하는 편. 전혀 부끄러울 건 없어요.", color: "from-slate-400 to-slate-500", icon: "🌱" };
+            return { title: "🌿 숨쉬기 운동만 하는 자연인", emoji: "🌿", desc: "헬스보다 숨쉬기만 해도 운동이라 생각하는 타입.", detail: "움직이는 것보다 안정과 휴식이 우선. 자연인 라이프, 전혀 부끄러울 건 없어요.", color: "from-slate-400 to-slate-500", icon: "🌿" };
         }
 
         function showResult() {
@@ -387,8 +387,9 @@
                     <h2 class="text-3xl font-extrabold text-slate-800 mb-2">${result.title}</h2>
                     <p class="text-slate-600 text-base mb-6 leading-relaxed">${result.desc}</p>
                     <div class="mb-6">
-                        <div class="text-5xl font-black bg-gradient-to-r ${result.color} bg-clip-text text-transparent mb-2">
-                            ${score}<span class="text-xl text-slate-400 ml-1 font-bold">헬창지수</span>
+                        <div class="mb-2">
+                            <span class="text-xl text-slate-500 font-bold">헬창지수</span>
+                            <span class="text-7xl font-black bg-gradient-to-r ${result.color} bg-clip-text text-transparent ml-2">${score}</span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-4 mb-4 overflow-hidden">
                             <div class="bg-gradient-to-r ${result.color} h-4 rounded-full score-bar" style="width: 0%"></div>
