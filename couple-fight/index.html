@@ -4,9 +4,9 @@
     <meta name="google-adsense-account" content="ca-pub-6540004747918466">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AIMBTI 성향 테스트 포털 - 커플 싸움 판독기, 썸남썸녀 공략, 우정 여행, 영포티 검사, 헬창 자가진단, 키즈 MBTI 등 여러 가지 성향 테스트를 한 곳에서 즐겨보세요.">
+    <meta name="description" content="MBTI 기반 커플 싸움 원인 분석 및 화해 방법 가이드. 당신과 연인의 MBTI로 갈등 원인을 파악하고 관계를 개선하세요. 무료 MBTI 연애 상담 서비스.">
     <link rel="canonical" href="https://aimbti.xyz">
-    <title>AIMBTI 성향 테스트 포털 | 연애·우정·아이·영포티·헬창</title>
+    <title>커플 싸움 판독기 | 연애 평화 유지 가이드</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
@@ -20,21 +20,21 @@
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimbti.xyz">
-    <meta property="og:title" content="AIMBTI 성향 테스트 포털 | 연애·우정·아이·영포티·헬창">
-    <meta property="og:description" content="커플 싸움 판독기부터 영포티·헬창·우정 여행·키즈 MBTI까지, 여러 가지 성향 테스트를 한 번에 즐겨보세요.">
+    <meta property="og:title" content="💑 커플 싸움 판독기 | MBTI 연애 처방전">
+    <meta property="og:description" content="우리는 도대체 왜 싸울까? 싸우는 이유와 화해하는 방법, 그리고 관계를 지키는 시크릿 처방전 💊">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AIMBTI 성향 테스트 포털 | 여러 가지 성향 테스트">
-    <meta name="twitter:description" content="연애, 우정, 아이, 영포티, 헬창까지 다양한 테스트를 한 곳에서.">
+    <meta name="twitter:title" content="커플 싸움 판독기 | MBTI 연애 처방전">
+    <meta name="twitter:description" content="MBTI로 알아보는 커플 갈등 원인과 화해 방법">
     <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
     
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "AIMBTI 성향 테스트 포털",
-      "description": "커플 싸움 판독기, 썸남썸녀 공략, 우정 여행, 영포티 검사, 헬창 자가진단, 키즈 MBTI 등 여러 가지 성향 테스트 모음",
+      "name": "커플 싸움 판독기",
+      "description": "MBTI 기반 커플 갈등 분석 및 관계 개선 가이드",
       "url": "https://aimbti.xyz",
       "applicationCategory": "LifestyleApplication",
       "operatingSystem": "Any",
@@ -95,6 +95,31 @@
                 </p>
             </div>
 
+            <div class="clean-card p-8 md:p-10 shadow-lg bg-white">
+                <div class="flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">나의 MBTI</label>
+                            <input id="mbti-a" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ENFP" maxlength="4">
+                        </div>
+                        <i class="fas fa-heart-broken text-rose-300 text-xl mt-2 md:mt-0 animate-pulse"></i>
+                        <div class="w-full">
+                            <label class="block text-xs font-bold text-slate-400 mb-2 ml-1">연인의 MBTI</label>
+                            <input id="mbti-b" oninput="this.value = this.value.toUpperCase()" class="w-full bg-rose-50/50 border border-rose-200 rounded-xl p-4 text-center text-2xl font-bold uppercase text-slate-800 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 outline-none transition placeholder-rose-300 tracking-widest" placeholder="ISTJ" maxlength="4">
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3 mt-4">
+                        <button onclick="showResultDirect()" class="w-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>내용 확인</span> <i class="fas fa-stethoscope"></i>
+                        </button>
+                        <button onclick="showResultWithCoupang()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span class="text-xs opacity-70">쿠팡 다녀와서</span> <span class="text-lg">결과 보기</span> <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <div class="mt-10 w-full max-w-3xl">
                 
                 <div class="text-center mb-6 relative">
@@ -102,15 +127,15 @@
                         <div class="w-full border-t border-slate-200"></div>
                     </div>
                     <div class="relative flex justify-center">
-                        <span class="bg-slate-50 px-4 text-xs font-bold text-slate-400 tracking-widest uppercase">TEST LIST</span>
+                        <span class="bg-slate-50 px-4 text-xs font-bold text-slate-400 tracking-widest uppercase">BONUS</span>
                     </div>
-                    <h3 class="mt-3 text-slate-800 font-bold text-sm">
-                        재밌는웹페이지연구소가 만든<br>지금 할 수 있는 테스트 목록
+                    <h3 class="mt-4 text-slate-800 font-bold text-sm animate-bounce">
+                        🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 테스트 하러 가기
                     </h3>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-3 md:gap-4">
-                    <button onclick="goTest('/couple-fight')" class="bg-white border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                    <button onclick="goTest('/')" class="bg-white border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
                         <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform">
                             <i class="fas fa-heart-broken"></i>
                         </div>
