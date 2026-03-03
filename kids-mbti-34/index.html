@@ -112,63 +112,8 @@
 
       <div class="mt-12 pt-8 border-t border-amber-200/50">
         <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <a href="/" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-2 text-rose-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-heart-broken"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">커플 싸움 판독기</p>
-            <p class="text-[10px] text-slate-400">우리가 싸우는 이유</p>
-          </a>
-          <a href="/some" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-2 text-pink-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-kiss-wink-heart"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">썸남썸녀 공략</p>
-            <p class="text-[10px] text-slate-400">꼬시는 법이 궁금해?</p>
-          </a>
-          <a href="/biz" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-briefcase"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">직장상사 공략</p>
-            <p class="text-[10px] text-slate-400">사회생활 치트키</p>
-          </a>
-          <a href="/friends-travel" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-2 text-sky-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-plane"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">우정 여행 판독기</p>
-            <p class="text-[10px] text-slate-400">여행 가서 안 싸우려면</p>
-          </a>
-          <a href="/cops-robbers" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-2 text-emerald-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-running"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">경도 게임 전략</p>
-            <p class="text-[10px] text-slate-400">맞춤형 처방전</p>
-          </a>
-          <a href="/exercise" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-2 text-purple-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-dumbbell"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">운동 추천</p>
-            <p class="text-[10px] text-slate-400">MBTI별 운동법</p>
-          </a>
-          <a href="/kids-mbti" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-child"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">만 5세 미만 MBTI</p>
-            <p class="text-[10px] text-slate-400">아이 성향 테스트</p>
-          </a>
-          <a href="/2026bible" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
-            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-2 text-blue-500 group-hover:scale-110 transition-transform">
-              <i class="fas fa-book"></i>
-            </div>
-            <p class="text-sm font-bold text-slate-700">2026 성경</p>
-            <p class="text-[10px] text-slate-400">MBTI별 성경 구절</p>
-          </a>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          ${getOtherTestsHtml('/kids-mbti-34')}
         </div>
       </div>
 
@@ -193,6 +138,34 @@
   </footer>
 
   <script>
+    const testList = [
+        { url: '/stock-knowledge', icon: 'fa-chart-line', color: 'red', title: '주식 능력고사', desc: '내 주식 지식 레벨은?' },
+        { url: '/couple-fight', icon: 'fa-heart-broken', color: 'rose', title: '커플 싸움 판독기', desc: '왜 싸우는지 분석' },
+        { url: '/some', icon: 'fa-kiss-wink-heart', color: 'pink', title: '썸남썸녀 공략', desc: '플러팅 필승 전략' },
+        { url: '/friends-travel', icon: 'fa-plane', color: 'sky', title: '우정 여행 판독기', desc: '절교 방지 가이드' },
+        { url: '/biz', icon: 'fa-briefcase', color: 'indigo', title: '직장상사 공략', desc: '사회생활 치트키' },
+        { url: '/cops-robbers', icon: 'fa-running', color: 'purple', title: '경도 게임 전략', desc: '승리 전술 가이드' },
+        { url: '/kids-mbti-34', icon: 'fa-baby', color: 'amber', title: '미취학 우리아이', desc: '8문항 성향 테스트' },
+        { url: '/young-forty', icon: 'fa-sparkles', color: 'violet', title: '영포티 검사', desc: '나는 진짜 영포티일까?' },
+        { url: '/helchang', icon: 'fa-dumbbell', color: 'amber', title: '헬창 판독기', desc: '나는 헬창일까? 득근하세요' }
+    ];
+
+    function getOtherTestsHtml(currentUrl) {
+        const otherTests = testList.filter(t => t.url !== currentUrl);
+        otherTests.sort(() => Math.random() - 0.5);
+        const selectedTests = otherTests.slice(0, 6);
+        
+        return selectedTests.map(test => `
+            <button onclick="location.href='${test.url}'" class="bg-white border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fas ${test.icon}"></i>
+                </div>
+                <h3 class="font-bold text-slate-700 text-sm">${test.title}</h3>
+                <p class="text-[10px] text-slate-400 mt-1">${test.desc}</p>
+            </button>
+        `).join('');
+    }
+
     const LIKERT = [
       { label: "매우 그렇다", value:  3 },
       { label: "그렇다",     value:  2 },

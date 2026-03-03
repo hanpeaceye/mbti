@@ -211,6 +211,34 @@
     </div>
 
     <script>
+        const testList = [
+            { url: '/stock-knowledge', icon: 'fa-chart-line', color: 'red', title: '주식 능력고사', desc: '내 주식 지식 레벨은?' },
+            { url: '/couple-fight', icon: 'fa-heart-broken', color: 'rose', title: '커플 싸움 판독기', desc: '왜 싸우는지 분석' },
+            { url: '/some', icon: 'fa-kiss-wink-heart', color: 'pink', title: '썸남썸녀 공략', desc: '플러팅 필승 전략' },
+            { url: '/friends-travel', icon: 'fa-plane', color: 'sky', title: '우정 여행 판독기', desc: '절교 방지 가이드' },
+            { url: '/biz', icon: 'fa-briefcase', color: 'indigo', title: '직장상사 공략', desc: '사회생활 치트키' },
+            { url: '/cops-robbers', icon: 'fa-running', color: 'purple', title: '경도 게임 전략', desc: '승리 전술 가이드' },
+            { url: '/kids-mbti-34', icon: 'fa-baby', color: 'amber', title: '미취학 우리아이', desc: '8문항 성향 테스트' },
+            { url: '/young-forty', icon: 'fa-sparkles', color: 'violet', title: '영포티 검사', desc: '나는 진짜 영포티일까?' },
+            { url: '/helchang', icon: 'fa-dumbbell', color: 'amber', title: '헬창 판독기', desc: '나는 헬창일까? 득근하세요' }
+        ];
+
+        function getOtherTestsHtml(currentUrl) {
+            const otherTests = testList.filter(t => t.url !== currentUrl);
+            otherTests.sort(() => Math.random() - 0.5);
+            const selectedTests = otherTests.slice(0, 6);
+            
+            return selectedTests.map(test => `
+                <button onclick="goTest('${test.url}')" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                    <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fas ${test.icon}"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-700 text-sm">${test.title}</h3>
+                    <p class="text-[10px] text-slate-400 mt-1">${test.desc}</p>
+                </button>
+            `).join('');
+        }
+
         // 질문 데이터 (10문제, 총 100점)
         // 난이도: 하(5점), 중(10점), 상(15점)
         const questions = [
@@ -224,7 +252,7 @@
             },
             {
                 text: "기업이 이익의 일부를 주주들에게 현금이나 주식으로 나눠주는 것은?",
-                options: ["이자", "배당 (Dividend)", "증자", "감자"],
+                options: ["이자 (Interest)", "배당 (Dividend)", "증자 (Capital Increase)", "감자 (Capital Reduction)"],
                 correct: 1,
                 difficulty: "하",
                 difficultyClass: "diff-low",
@@ -240,7 +268,7 @@
             },
             {
                 text: "현재 주가를 주당순이익(EPS)으로 나눈 것으로, 주식이 고평가되었는지 판단하는 대표적인 지표는?",
-                options: ["PER (주가수익비율)", "PBR (주가순자산비율)", "ROE (자기자본이익률)", "EPS (주당순이익)"],
+                options: ["PER (주가수익비율)", "PBR (주가순자산비율)", "ROE (자기자본이익률)", "BPS (주당순자산가치)"],
                 correct: 0,
                 difficulty: "중",
                 difficultyClass: "diff-mid",
@@ -255,9 +283,9 @@
                 score: 10
             },
             {
-                text: "캔들 차트에서 시가보다 종가가 낮을 때(주가 하락), 한국 증시에서는 보통 무슨 색으로 표시하나?",
-                options: ["빨간색", "파란색", "초록색", "검은색"],
-                correct: 1,
+                text: "단기 이동평균선이 장기 이동평균선을 아래에서 위로 뚫고 올라가는 현상으로, 주가 상승의 신호로 해석되는 것은?",
+                options: ["골든크로스 (Golden Cross)", "데드크로스 (Dead Cross)", "손절매 (Stop Loss)", "물타기 (Scale Trading)"],
+                correct: 0,
                 difficulty: "중",
                 difficultyClass: "diff-mid",
                 score: 10
@@ -272,7 +300,7 @@
             },
             {
                 text: "주가 하락이 예상될 때 주식을 빌려서 먼저 팔고, 나중에 싼 값에 사서 갚아 차익을 남기는 매매 기법은?",
-                options: ["선물 거래", "옵션 거래", "공매도 (Short Selling)", "스캘핑"],
+                options: ["선물 거래 (Futures Trading)", "옵션 거래 (Options Trading)", "공매도 (Short Selling)", "스캘핑 (Scalping)"],
                 correct: 2,
                 difficulty: "상",
                 difficultyClass: "diff-high",
@@ -288,7 +316,7 @@
             },
             {
                 text: "기업이 투입한 자기자본 대비 얼마만큼의 이익을 냈는지 보여주는 수익성 지표는?",
-                options: ["PER", "ROE (Return on Equity)", "ROA", "EBITDA"],
+                options: ["PER", "ROE", "ROA", "EBITDA"],
                 correct: 1,
                 difficulty: "상",
                 difficultyClass: "diff-high",
@@ -544,26 +572,7 @@
                     </div>
                     
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                        <button onclick="goTest('/')" class="bg-white/95 border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                            <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-heart-broken"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
-                        </button>
-
-                        <button onclick="goTest('/young-forty')" class="bg-white/95 border border-violet-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                            <div class="w-10 h-10 bg-violet-50 rounded-full flex items-center justify-center text-violet-500 mb-2 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-700 text-sm">영포티 테스트</h3>
-                        </button>
-
-                        <button onclick="goTest('/biz')" class="bg-white/95 border border-indigo-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                            <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500 mb-2 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-briefcase"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-700 text-sm">직장상사 공략</h3>
-                        </button>
+                        ${getOtherTestsHtml('/stock-knowledge')}
                     </div>
                 </div>
             `;
