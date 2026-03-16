@@ -174,12 +174,9 @@
                     </button>
                 </div>
 
-                <div id="final-btn-area" class="mt-6 flex flex-col gap-3 hidden">
-                    <button type="button" id="final-submit-btn" onclick="showResultWithCoupang()" class="w-full bg-slate-200 text-slate-400 font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
-                        <span class="text-xs opacity-70">쿠팡 다녀와서</span> <span class="text-lg">채점 결과 확인</span> <i class="fas fa-arrow-right"></i>
-                    </button>
-                    <button type="button" onclick="showResultDirect()" class="w-full text-slate-400 hover:text-slate-600 font-medium py-2 text-sm transition-all flex items-center justify-center gap-2 underline">
-                        <span>결과 바로 확인하기</span>
+                <div id="final-btn-area" class="mt-6 hidden">
+                    <button type="button" id="final-submit-btn" onclick="showResultDirect()" class="w-full bg-point hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg text-base transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" disabled>
+                        <span>결과 보기</span> <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
@@ -188,8 +185,8 @@
         <!-- 결과 페이지 -->
         <div id="result-page" class="hidden fade-in">
             <div class="flex items-center justify-between mb-6">
-                <button id="back-btn" onclick="backToStart()" class="text-white/85 hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">
-                    <i class="fas fa-chevron-left"></i> 재시험 보기
+                <button id="back-btn" onclick="backToStartWithCoupang()" class="text-white/85 hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">
+                    <i class="fas fa-chevron-left"></i> 쿠팡 다녀와서 다시하기
                 </button>
                 <span class="text-[10px] font-bold text-white bg-white/20 backdrop-blur px-2 py-1 rounded">SCORE CARD</span>
             </div>
@@ -440,14 +437,10 @@
             showResult();
         }
 
-        function showResultWithCoupang() {
-            if (selectedOptionIndex === null) return;
-            if (selectedOptionIndex === questions[currentQuestionIndex].correct) {
-                totalScore += questions[currentQuestionIndex].score;
-            }
+        function backToStartWithCoupang() {
             window.open('https://link.coupang.com/a/ddddJ5', '_blank');
             setTimeout(() => {
-                showResult();
+                backToStart();
             }, 100);
         }
 
