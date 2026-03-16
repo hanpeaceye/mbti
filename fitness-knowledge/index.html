@@ -140,6 +140,27 @@
                     <span>시험 시작하기</span> <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
+
+            <div class="mt-6 w-full">
+                <div class="flex justify-center w-full overflow-hidden">
+                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
+                </div>
+                <div class="mt-0 w-full max-w-3xl mx-auto">
+                    <div class="text-center mb-2 relative">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-white/30"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span>
+                        </div>
+                        <h3 class="mt-2 text-white font-bold text-sm drop-shadow">
+                            🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 서비스도 둘러보기
+                        </h3>
+                    </div>
+                    <div id="start-page-services-grid" class="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 질문 페이지 -->
@@ -586,6 +607,13 @@
                 alert('링크 복사 완료!');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('start-page-services-grid');
+            if (grid) {
+                grid.innerHTML = getOtherTestsHtml('/fitness-knowledge');
+            }
+        });
     </script>
     
     <footer class="mt-12 pt-8 pb-6 text-center">
