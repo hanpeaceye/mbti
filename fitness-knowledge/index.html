@@ -222,10 +222,7 @@
 
         function getOtherTestsHtml(currentUrl) {
             const otherTests = testList.filter(t => t.url !== currentUrl);
-            otherTests.sort(() => Math.random() - 0.5);
-            const selectedTests = otherTests.slice(0, 6);
-            
-            return selectedTests.map(test => `
+            return otherTests.map(test => `
                 <button onclick="goTest('${test.url}')" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
                     <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
                         <i class="fas ${test.icon}"></i>
@@ -530,24 +527,24 @@
                     </div>
                 </div>
 
-                <div class="mt-8 flex justify-center w-full overflow-hidden">
+                <div class="mt-0 flex justify-center w-full overflow-hidden">
                     <iframe src="https://ads-partners.coupang.com/widgets.html?id=950069&template=carousel&trackingCode=AF3238435&subId=&width=680&height=160&tsource=" width="680" height="160" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics style="max-width: 100%;"></iframe>
                 </div>
 
-                <div class="mt-10 w-full max-w-3xl mx-auto">
-                    <div class="text-center mb-6 relative">
+                <div class="mt-0 w-full max-w-3xl mx-auto">
+                    <div class="text-center mb-2 relative">
                         <div class="absolute inset-0 flex items-center" aria-hidden="true">
                             <div class="w-full border-t border-white/30"></div>
                         </div>
                         <div class="relative flex justify-center">
                             <span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span>
                         </div>
-                        <h3 class="mt-4 text-white font-bold text-sm animate-bounce drop-shadow">
+                        <h3 class="mt-2 text-white font-bold text-sm drop-shadow">
                             🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 서비스도 둘러보기
                         </h3>
                     </div>
                     
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2">
                         ${getOtherTestsHtml('/fitness-knowledge')}
                     </div>
                 </div>
