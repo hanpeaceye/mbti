@@ -121,7 +121,7 @@
                         <span class="bg-slate-50 px-4 text-xs font-bold text-slate-400 tracking-widest uppercase">BONUS</span>
                     </div>
                     <h3 class="mt-4 text-slate-800 font-bold text-sm animate-bounce">
-                        🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 테스트 하러 가기
+                        🔍 다른 테스트 하러 가기
                     </h3>
                 </div>
                 
@@ -169,13 +169,7 @@
 
             <script>
                 function goTest(targetUrl) {
-                    // 1. 새 탭에서 쿠팡 열기 (아이쇼핑)
-                    window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-                    
-                    // 2. 현재 탭은 해당 테스트 페이지로 이동 (약간의 딜레이 후 자연스럽게)
-                    setTimeout(() => {
-                        location.href = targetUrl;
-                    }, 100);
+                    location.href = targetUrl;
                 }
             </script>
         </div>

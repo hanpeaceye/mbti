@@ -348,8 +348,7 @@
         }
 
         function goTest(targetUrl) {
-            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
-            setTimeout(() => { location.href = targetUrl; }, 100);
+            location.href = targetUrl;
         }
 
         function calculateScore() {
@@ -439,7 +438,7 @@
                     <div class="text-center mb-6 relative">
                         <div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-t border-white/30"></div></div>
                         <div class="relative flex justify-center"><span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span></div>
-                        <h3 class="mt-4 text-white font-bold text-sm animate-bounce drop-shadow">🛍️ 쿠팡 아이쇼핑 잠깐 하고<br>다른 서비스도 둘러보기</h3>
+                        <h3 class="mt-4 text-white font-bold text-sm animate-bounce drop-shadow">🔍 다른 서비스도 둘러보기</h3>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                         ${getOtherTestsHtml('/helchang')}
