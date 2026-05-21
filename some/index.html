@@ -113,33 +113,7 @@
                     </h3>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-3 md:gap-4">
-                    <button onclick="goTest('/')" class="bg-white border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                        <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-heart-broken"></i></div>
-                        <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">왜 싸우는지 분석</p>
-                    </button>
-                    <button onclick="goTest('/some')" class="bg-white border border-pink-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                        <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center text-pink-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-kiss-wink-heart"></i></div>
-                        <h3 class="font-bold text-slate-700 text-sm">썸남썸녀 공략</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">플러팅 필승 전략</p>
-                    </button>
-                    <button onclick="goTest('/friends-travel')" class="bg-white border border-sky-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                        <div class="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-plane"></i></div>
-                        <h3 class="font-bold text-slate-700 text-sm">우정 여행 판독기</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">절교 방지 가이드</p>
-                    </button>
-                    <button onclick="goTest('/biz')" class="bg-white border border-indigo-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                        <div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-briefcase"></i></div>
-                        <h3 class="font-bold text-slate-700 text-sm">직장상사 공략</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">사회생활 치트키</p>
-                    </button>
-                    <button onclick="goTest('/cops-robbers')" class="bg-white border border-purple-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                        <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-purple-500 mb-2 group-hover:scale-110 transition-transform"><i class="fas fa-running"></i></div>
-                        <h3 class="font-bold text-slate-700 text-sm">경도 게임 전략</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">승리 전술 가이드</p>
-                    </button>
-                </div>
+                <div data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4"></div>
             </div>
         </div>
 
@@ -155,9 +129,7 @@
 
             <div class="mt-12 pt-8 border-t border-rose-200/50">
                 <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    ${getOtherTestsHtml('/some')}
-                </div>
+                <div data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
             </div>
 
             <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
@@ -184,6 +156,7 @@
     <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">Ver 4.0 Messenger+</div>
     <script>
         const testList = [
+            { url: '/fitness-knowledge', icon: 'fa-dumbbell', color: 'orange', title: '헬스 능력고사', desc: '보디빌딩 지식 테스트' },
             { url: '/stock-knowledge', icon: 'fa-chart-line', color: 'red', title: '주식 능력고사', desc: '내 주식 지식 레벨은?' },
             { url: '/couple-fight', icon: 'fa-heart-broken', color: 'rose', title: '커플 싸움 판독기', desc: '왜 싸우는지 분석' },
             { url: '/some', icon: 'fa-kiss-wink-heart', color: 'pink', title: '썸남썸녀 공략', desc: '플러팅 필승 전략' },
@@ -195,21 +168,23 @@
             { url: '/helchang', icon: 'fa-dumbbell', color: 'amber', title: '헬창 판독기', desc: '나는 헬창일까? 득근하세요' }
         ];
 
-        function getOtherTestsHtml(currentUrl) {
-            const otherTests = testList.filter(t => t.url !== currentUrl);
-            otherTests.sort(() => Math.random() - 0.5);
-            const selectedTests = otherTests.slice(0, 6);
-            
-            return selectedTests.map(test => `
-                <button onclick="goTest('${test.url}')" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                    <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fas ${test.icon}"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-700 text-sm">${test.title}</h3>
-                    <p class="text-[10px] text-slate-400 mt-1">${test.desc}</p>
-                </button>
-            `).join('');
+    function getOtherTestsHtml(currentUrl) {
+        return testList.filter(t => t.url !== currentUrl).map(test => `
+            <button onclick="location.href='${test.url}'" class="bg-white border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fas ${test.icon}"></i>
+                </div>
+                <h3 class="font-bold text-slate-700 text-sm">${test.title}</h3>
+                <p class="text-[10px] text-slate-400 mt-1">${test.desc}</p>
+            </button>
+        `).join('');
+    }
+        function initTestGrids(currentUrl) {
+            document.querySelectorAll('[data-test-grid]').forEach(grid => {
+                grid.innerHTML = getOtherTestsHtml(currentUrl);
+            });
         }
+
 
         // 전역 함수 정의
         function goTest(targetUrl) {
@@ -514,6 +489,10 @@
             }
         }
 
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            initTestGrids('/some');
+        });
     </script>
 </body>
 </html>

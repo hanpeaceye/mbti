@@ -98,6 +98,21 @@
           </div>
         </div>
       </div>
+
+      <div class="mt-10 w-full max-w-3xl">
+        <div class="text-center mb-6 relative">
+          <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-amber-300/50"></div>
+          </div>
+          <div class="relative flex justify-center">
+            <span class="bg-yellow-100 px-4 text-xs font-bold text-amber-700 tracking-widest uppercase">BONUS</span>
+          </div>
+          <h3 class="mt-4 text-slate-800 font-bold text-sm">
+            🔍 다른 테스트 하러 가기
+          </h3>
+        </div>
+        <div data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+      </div>
     </div>
 
     <div id="result-page" class="hidden fade-in">
@@ -112,9 +127,7 @@
 
       <div class="mt-12 pt-8 border-t border-amber-200/50">
         <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-          ${getOtherTestsHtml('/kids-mbti-34')}
-        </div>
+        <div data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
       </div>
 
       <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
@@ -139,6 +152,7 @@
 
   <script>
     const testList = [
+        { url: '/fitness-knowledge', icon: 'fa-dumbbell', color: 'orange', title: '헬스 능력고사', desc: '보디빌딩 지식 테스트' },
         { url: '/stock-knowledge', icon: 'fa-chart-line', color: 'red', title: '주식 능력고사', desc: '내 주식 지식 레벨은?' },
         { url: '/couple-fight', icon: 'fa-heart-broken', color: 'rose', title: '커플 싸움 판독기', desc: '왜 싸우는지 분석' },
         { url: '/some', icon: 'fa-kiss-wink-heart', color: 'pink', title: '썸남썸녀 공략', desc: '플러팅 필승 전략' },
@@ -151,11 +165,7 @@
     ];
 
     function getOtherTestsHtml(currentUrl) {
-        const otherTests = testList.filter(t => t.url !== currentUrl);
-        otherTests.sort(() => Math.random() - 0.5);
-        const selectedTests = otherTests.slice(0, 6);
-        
-        return selectedTests.map(test => `
+        return testList.filter(t => t.url !== currentUrl).map(test => `
             <button onclick="location.href='${test.url}'" class="bg-white border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
                 <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
                     <i class="fas ${test.icon}"></i>
@@ -165,6 +175,12 @@
             </button>
         `).join('');
     }
+    function initTestGrids(currentUrl) {
+    document.querySelectorAll('[data-test-grid]').forEach(grid => {
+    grid.innerHTML = getOtherTestsHtml(currentUrl);
+    });
+    }
+
 
     const LIKERT = [
       { label: "매우 그렇다", value:  3 },
@@ -456,6 +472,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+        initTestGrids('/kids-mbti-34');
+
       renderQuestions();
     });
   </script>

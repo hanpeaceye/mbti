@@ -156,9 +156,7 @@
                         </h3>
                     </div>
                     
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                        ${getOtherTestsHtml('/cops-robbers')}
-                    </div>
+                    <div data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
                 </div>
             </div>
         </div>
@@ -166,6 +164,7 @@
 
     <script>
         const testList = [
+            { url: '/fitness-knowledge', icon: 'fa-dumbbell', color: 'orange', title: '헬스 능력고사', desc: '보디빌딩 지식 테스트' },
             { url: '/stock-knowledge', icon: 'fa-chart-line', color: 'red', title: '주식 능력고사', desc: '내 주식 지식 레벨은?' },
             { url: '/couple-fight', icon: 'fa-heart-broken', color: 'rose', title: '커플 싸움 판독기', desc: '왜 싸우는지 분석' },
             { url: '/some', icon: 'fa-kiss-wink-heart', color: 'pink', title: '썸남썸녀 공략', desc: '플러팅 필승 전략' },
@@ -177,21 +176,23 @@
             { url: '/helchang', icon: 'fa-dumbbell', color: 'amber', title: '헬창 판독기', desc: '나는 헬창일까? 득근하세요' }
         ];
 
-        function getOtherTestsHtml(currentUrl) {
-            const otherTests = testList.filter(t => t.url !== currentUrl);
-            otherTests.sort(() => Math.random() - 0.5);
-            const selectedTests = otherTests.slice(0, 6);
-            
-            return selectedTests.map(test => `
-                <button onclick="goTest('${test.url}')" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                    <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fas ${test.icon}"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-700 text-sm">${test.title}</h3>
-                    <p class="text-[10px] text-slate-400 mt-1">${test.desc}</p>
-                </button>
-            `).join('');
+    function getOtherTestsHtml(currentUrl) {
+        return testList.filter(t => t.url !== currentUrl).map(test => `
+            <button onclick="location.href='${test.url}'" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fas ${test.icon}"></i>
+                </div>
+                <h3 class="font-bold text-slate-700 text-sm">${test.title}</h3>
+                <p class="text-[10px] text-slate-400 mt-1">${test.desc}</p>
+            </button>
+        `).join('');
+    }
+        function initTestGrids(currentUrl) {
+            document.querySelectorAll('[data-test-grid]').forEach(grid => {
+                grid.innerHTML = getOtherTestsHtml(currentUrl);
+            });
         }
+
 
         function goTest(targetUrl) {
             location.href = targetUrl;
@@ -457,6 +458,10 @@
                 alert('링크 복사 완료!');
             }
         }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            initTestGrids('/cops-robbers');
+        });
     </script>
 </body>
 </html>
