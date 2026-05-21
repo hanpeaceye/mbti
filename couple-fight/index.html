@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MBTI 기반 커플 싸움 원인 분석 및 화해 방법 가이드. 당신과 연인의 MBTI로 갈등 원인을 파악하고 관계를 개선하세요. 무료 MBTI 연애 상담 서비스.">
-    <link rel="canonical" href="https://aimbti.xyz">
+    <link rel="canonical" href="https://aimbti.xyz/couple-fight">
     <title>커플 싸움 판독기 | 연애 평화 유지 가이드</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     </script>
     
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aimbti.xyz">
+    <meta property="og:url" content="https://aimbti.xyz/couple-fight">
     <meta property="og:title" content="💑 커플 싸움 판독기 | MBTI 연애 처방전">
     <meta property="og:description" content="우리는 도대체 왜 싸울까? 싸우는 이유와 화해하는 방법, 그리고 관계를 지키는 시크릿 처방전 💊">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/9355/9355325.png">
@@ -35,7 +35,7 @@
       "@type": "WebApplication",
       "name": "커플 싸움 판독기",
       "description": "MBTI 기반 커플 갈등 분석 및 관계 개선 가이드",
-      "url": "https://aimbti.xyz",
+      "url": "https://aimbti.xyz/couple-fight",
       "applicationCategory": "LifestyleApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -85,14 +85,11 @@
 
         <div id="input-page" class="flex flex-col justify-center min-h-[80vh] fade-in">
             <div class="text-center mb-10">
-                <span class="inline-block bg-white border border-rose-200 text-rose-500 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">AIMBTI TEST PORTAL</span>
+                <span class="inline-block bg-white border border-rose-200 text-rose-500 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wide">Couple Clinic Center</span>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
-                    오늘은 어떤 <span class="text-point">테스트</span> 해볼까? 🔍
+                    우리는 도대체,<br>왜 맨날 <span class="text-point">싸울까?</span> 🤬
                 </h1>
-                <p class="text-slate-500 text-sm md:text-base">
-                    커플 싸움, 썸 공략, 우정 여행, 영포티, 헬창, 키즈 MBTI까지<br>
-                    여러 가지 성향 테스트를 한 곳에서 가볍게 즐겨보세요.
-                </p>
+                <p class="text-slate-500 text-sm md:text-base">MBTI로 분석하는 우리 커플 갈등 원인과<br>오래가는 연애를 위한 맞춤형 처방전</p>
             </div>
 
             <div class="clean-card p-8 md:p-10 shadow-lg bg-white">
@@ -135,12 +132,12 @@
                 </div>
                 
                 <div class="grid grid-cols-2 gap-3 md:gap-4">
-                    <button onclick="goTest('/')" class="bg-white border border-rose-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
-                        <div class="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mb-2 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-heart-broken"></i>
+                    <button onclick="goTest('/')" class="bg-white border border-slate-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+                        <div class="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-500 mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-th-large"></i>
                         </div>
-                        <h3 class="font-bold text-slate-700 text-sm">커플 싸움 판독기</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">왜 싸우는지 분석</p>
+                        <h3 class="font-bold text-slate-700 text-sm">전체 테스트 목록</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">다른 테스트도 둘러보기</p>
                     </button>
 
                     <button onclick="goTest('/some')" class="bg-white border border-pink-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
@@ -223,9 +220,7 @@
 
             <div class="mt-12 pt-8 border-t border-rose-200/50">
                 <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 상황별 공략법</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    ${getOtherTestsHtml('/couple-fight')}
-                </div>
+                <div id="other-tests-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
             </div>
 
             <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 w-full px-4">
@@ -282,6 +277,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const otherTestsGrid = document.getElementById('other-tests-grid');
+            if (otherTestsGrid) {
+                otherTestsGrid.innerHTML = getOtherTestsHtml('/couple-fight');
+            }
+
             const validMbtiList = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
 
             // 1. [데이터] 연인 싸움 분석 (구체적 상황 묘사 강화)
