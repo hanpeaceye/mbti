@@ -122,7 +122,7 @@
                 <button onclick="resetPage()" class="text-slate-400 hover:text-slate-700 font-medium text-sm flex items-center gap-2 transition-colors">
                     <i class="fas fa-chevron-left"></i> 다시하기
                 </button>
-                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">VER 4.0 MESSENGER+</span>
+                <span class="text-[10px] font-bold text-rose-500 bg-rose-100 px-2 py-1 rounded">VER 4.1 PAIR+</span>
             </div>
 
             <div id="result-content" class="space-y-6"></div>
@@ -153,7 +153,7 @@
         </p>
     </footer>
 
-    <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">Ver 4.0 Messenger+</div>
+    <div class="fixed bottom-2 right-2 text-[10px] text-slate-300 font-mono pointer-events-none select-none z-50">Ver 4.1 Pair+</div>
     <script>
         const testList = [
             { url: '/fitness-knowledge', icon: 'fa-dumbbell', color: 'orange', title: '헬스 능력고사', desc: '보디빌딩 지식 테스트' },
@@ -242,106 +242,158 @@
             };
 
             const secretData = {
-                "S": { appeal: "👀 <b>시각적 자극:</b><br>'오늘 예쁘다'보다 '오늘 입은 옷 진짜 잘 어울려'라고 구체적으로 칭찬하세요. 깔끔한 외모는 필수입니다.", beware: "☁️ <b>뜬구름 잡기:</b><br>'만약에 좀비가 나타나면...' 같은 비현실적인 주제보다 '지금 맛있는 거', '오늘 날씨' 이야기를 하세요." },
-                "N": { appeal: "✨ <b>상상력 자극:</b><br>'너는 인생에서 뭐가 제일 중요해?' 같은 심오한 질문을 던지세요. 독특한 취향(영화, 음악)을 어필하면 흥미를 느낍니다.", beware: "🤖 <b>현실주의:</b><br>상대방의 꿈이나 상상을 '그건 돈이 안 되잖아', '현실적으로 불가능해'라고 짓밟지 마세요. 꼰대로 찍힙니다." },
-                "T": { appeal: "🧠 <b>지적인 매력:</b><br>자기 일 잘하고 똑부러지는 모습을 보여주세요. 고민 상담할 때 감정에 호소하기보다 '그래서 이렇게 해결하려고 해'라고 주관을 보여주세요.", beware: "😭 <b>감정 과잉:</b><br>아직 사귀지도 않는데 징징거리거나 서운해하면 '피곤한 스타일'이라며 도망갑니다. 쿨하게 대하세요." },
-                "F": { appeal: "🥰 <b>다정한 공감:</b><br>눈을 맞추고 고개를 끄덕여주세요. '정말? 힘들었겠다'라는 말 한마디가 그 사람의 마음을 엽니다. 사소한 배려에 심장이 반응합니다.", beware: "❄️ <b>차가운 말투:</b><br>장난이라도 팩폭을 날리면 상처받고 마음을 닫습니다. 비판할 때는 반드시 쿠션어('너를 위해서 하는 말인데~')를 사용하세요." },
-                "J": { role: "📅 계획적인 접근", good: "약속 시간 엄수 & 데이트 코스 준비", bad: "당일 약속 취소 & '아무거나' 시전" },
-                "P": { role: "🎉 유연한 접근", good: "즉흥적인 제안 & 돌발 상황 즐기기", bad: "하나부터 열까지 통제하려 들기" }
+                "J": { role: "계획형 접근", good: "약속 시간·장소를 미리 정하기", bad: "당일 취소, '아무거나'로 밀어붙이기" },
+                "P": { role: "유연형 접근", good: "즉흥 제안·분위기 따라 가기", bad: "모든 걸 통제하려 들기" }
             };
 
-            // 나의 MBTI 기준 상대방에게 조심해야 할 점
-            function getMyCautionPoints(myMbti, theirMbti) {
-                const mySN = myMbti.includes('S') ? 'S' : 'N';
-                const myTF = myMbti.includes('T') ? 'T' : 'F';
-                const myJP = myMbti.includes('J') ? 'J' : 'P';
-                const theirSN = theirMbti.includes('S') ? 'S' : 'N';
-                const theirTF = theirMbti.includes('T') ? 'T' : 'F';
-                const theirJP = theirMbti.includes('J') ? 'J' : 'P';
-                
-                let cautions = [];
-                
-                // S vs N 충돌
-                if (mySN === 'S' && theirSN === 'N') {
-                    cautions.push("⚠️ <b>당신은 현실적(S)인데 상대는 상상력(N)을 좋아해요.</b> '만약에...' 같은 가정 질문에 답답해하지 말고, 함께 상상의 나래를 펼쳐보세요.");
-                } else if (mySN === 'N' && theirSN === 'S') {
-                    cautions.push("⚠️ <b>당신은 추상적(N)인데 상대는 구체적(S)을 원해요.</b> '뭐 먹을래?' 같은 질문에 '아무거나'라고 하지 말고, '파스타 어때?'처럼 구체적으로 제안하세요.");
-                }
-                
-                // T vs F 충돌
-                if (myTF === 'T' && theirTF === 'F') {
-                    cautions.push("🚨 <b>최대 주의!</b> 당신은 해결책(T)을 주려 하지만, 상대는 <b>공감(F)</b>을 원합니다. '이렇게 해봐'보다 '힘들었겠다, 속상했겠다'를 먼저 말하세요.");
-                } else if (myTF === 'F' && theirTF === 'T') {
-                    cautions.push("🚨 <b>최대 주의!</b> 당신은 위로(F)를 원하지만, 상대는 <b>해결책(T)</b>을 원합니다. 감정 호소보다 '이렇게 해결하려고 해'라고 말하세요.");
-                }
-                
-                // J vs P 충돌
-                if (myJP === 'J' && theirJP === 'P') {
-                    cautions.push("⚠️ <b>당신은 계획(J)을 좋아하지만 상대는 유연함(P)을 원해요.</b> 약속을 너무 구체적으로 잡지 말고, 30분 정도 여유를 두세요.");
-                } else if (myJP === 'P' && theirJP === 'J') {
-                    cautions.push("⚠️ <b>당신은 즉흥적(P)이지만 상대는 계획(J)을 원해요.</b> '지금 나와' 같은 번개는 금물! 최소 하루 전에 약속을 잡으세요.");
-                }
-                
-                return cautions.length > 0 ? cautions.join('<br><br>') : "✨ 당신과 상대방의 성향이 잘 맞아요! 자연스럽게 대화하면 됩니다.";
+            function getAxes(mbti) {
+                return { E: mbti[0], S: mbti[1], T: mbti[2], J: mbti[3] };
             }
 
-            // 메신저 주의사항
-            function getMessengerTips(myMbti, theirMbti) {
-                const theirTF = theirMbti.includes('T') ? 'T' : 'F';
-                const theirJP = theirMbti.includes('J') ? 'J' : 'P';
-                
-                let tips = [];
-                
-                if (theirTF === 'T') {
-                    tips.push("<b>용건만 간결하게:</b> '안녕~ 오늘 뭐해? 밥 먹었어? 어제 잠은 잘 잤어?' 같은 연속 질문은 부담스러워요. '오늘 저녁 시간 되나요?'처럼 한 번에 용건을 말하세요.");
-                    tips.push("<b>이모티콘 절제:</b> 과도한 이모티콘(😍💕💖💝)은 '감정 과다'로 느껴질 수 있어요. 적당히 사용하세요.");
-                } else {
-                    tips.push("<b>리액션 필수:</b> 'ㅋㅋ', '대박', '진짜?' 같은 반응을 자주 넣어주세요. 읽씹하면 '무관심'으로 오해받아요.");
-                    tips.push("<b>이모티콘 활용:</b> 😊💕 같은 이모티콘으로 따뜻함을 전달하세요. 텍스트만으로는 감정 전달이 어려워요.");
-                }
-                
-                if (theirJP === 'J') {
-                    tips.push("<b>약속은 구체적으로:</b> '언제 한번 만나자'는 인사치레예요. '이번 주 토요일 6시 강남역 어때요?'처럼 구체적으로 제안하세요.");
-                    tips.push("<b>답장 타이밍:</b> 너무 빠르게 답장하면 부담스러울 수 있어요. 1-2시간 간격이 적당합니다.");
-                } else {
-                    tips.push("<b>즉흥 제안 OK:</b> '지금 나와' 같은 번개 제안도 괜찮아요! 유연하게 대응하는 모습이 매력적입니다.");
-                    tips.push("<b>답장 속도:</b> 빠른 답장이 좋아요. 읽씹하면 '관심 없나?'라고 생각할 수 있어요.");
-                }
-                
-                return tips.map(tip => `<div class="mb-3 last:mb-0">${tip}</div>`).join('');
-            }
+            function getPairStrategy(myMbti, theirMbti) {
+                const me = getAxes(myMbti);
+                const them = getAxes(theirMbti);
+                const axisReasons = [];
 
-            // 전화 주의사항
-            function getCallTips(myMbti, theirMbti) {
-                const theirTF = theirMbti.includes('T') ? 'T' : 'F';
-                const theirJP = theirMbti.includes('J') ? 'J' : 'P';
-                const theirEI = theirMbti.includes('E') ? 'E' : 'I';
-                
-                let tips = [];
-                
-                if (theirEI === 'I') {
-                    tips.push("<b>전화 전 카톡으로 사전 공지:</b> 내향형(I)은 갑작스러운 전화를 부담스러워해요. '지금 통화 괜찮아요?'라고 먼저 물어보세요.");
-                    tips.push("<b>짧고 굵게:</b> 장시간 통화는 피로해요. 10-15분 정도로 핵심만 말하고 마무리하세요.");
+                if (me.E === them.E) {
+                    axisReasons.push({
+                        label: me.E === 'E' ? 'E ↔ E' : 'I ↔ I',
+                        text: me.E === 'E'
+                            ? '둘 다 에너지가 비슷해서 만남·연락 템포가 맞기 쉬워요.'
+                            : '둘 다 조용히 알아가는 편이라 깊은 대화로 가까워지기 좋아요.',
+                        tone: 'good'
+                    });
                 } else {
-                    tips.push("<b>전화로 대화 OK:</b> 외향형(E)은 전화 대화를 즐겨요. 긴 대화도 문제없습니다.");
-                    tips.push("<b>즉흥 통화 가능:</b> 갑자기 전화해도 괜찮아요. 오히려 '생각났다'는 느낌이 좋습니다.");
+                    axisReasons.push({
+                        label: 'E ↔ I',
+                        text: me.E === 'E'
+                            ? '당신은 적극적, 상대는 혼자 시간이 필요해요. 연락 빈도를 절반으로 줄이고 만남은 짧게 자주.'
+                            : '상대가 먼저 이끌어줄 수 있어요. 카톡보다 짧은 만남·전화가 더 잘 통합니다.',
+                        tone: 'warn'
+                    });
                 }
-                
-                if (theirTF === 'T') {
-                    tips.push("<b>용건부터 말하기:</b> '어떻게 지내?' 같은 인사보다 '이거 물어볼 게 있어서'처럼 용건을 먼저 말하세요.");
-                    tips.push("<b>감정 표현 절제:</b> '너무 보고 싶어서 전화했어' 같은 감정 표현은 부담스러울 수 있어요.");
+
+                if (me.S === them.S) {
+                    axisReasons.push({
+                        label: me.S === 'S' ? 'S ↔ S' : 'N ↔ N',
+                        text: me.S === 'S'
+                            ? '현실적인 대화·구체적 약속이 둘 다 편해요.'
+                            : '상상·가치관 이야기로 금방 친해질 수 있어요.',
+                        tone: 'good'
+                    });
                 } else {
-                    tips.push("<b>따뜻한 인사 먼저:</b> '어떻게 지내? 요즘 잘 지내?' 같은 안부 인사를 먼저 하세요.");
-                    tips.push("<b>감정 표현 OK:</b> '너무 보고 싶어서 전화했어' 같은 솔직한 표현이 좋아요.");
+                    axisReasons.push({
+                        label: 'S ↔ N',
+                        text: me.S === 'S'
+                            ? '상대는 "만약에"·꿈 이야기를 좋아해요. 팩트만 던지지 말고 한 번 따라가 보세요.'
+                            : '상대는 "뭐 먹을래?"에 "파스타 어때?"처럼 구체적 제안을 원해요.',
+                        tone: 'warn'
+                    });
                 }
-                
-                if (theirJP === 'J') {
-                    tips.push("<b>시간 약속:</b> '30분 후에 통화할까요?'처럼 시간을 정해서 통화하는 게 좋아요.");
+
+                if (me.T === them.T) {
+                    axisReasons.push({
+                        label: me.T === 'T' ? 'T ↔ T' : 'F ↔ F',
+                        text: me.T === 'T'
+                            ? '논리·해결책 중심 대화가 서로 편해요.'
+                            : '공감·리액션 중심으로 대화 코드가 맞아요.',
+                        tone: 'good'
+                    });
                 } else {
-                    tips.push("<b>즉흥 통화:</b> '지금 통화 괜찮아요?'라고 바로 물어봐도 OK입니다.");
+                    axisReasons.push({
+                        label: 'T ↔ F',
+                        text: me.T === 'T'
+                            ? '상대는 해결책보다 "힘들었겠다" 공감을 먼저 원해요. 이 축이 가장 중요합니다.'
+                            : '상대는 감정 호소보다 "그래서 이렇게 할 거야"처럼 명확한 말을 선호해요.',
+                        tone: 'critical'
+                    });
                 }
-                
-                return tips.map(tip => `<div class="mb-3 last:mb-0">${tip}</div>`).join('');
+
+                if (me.J === them.J) {
+                    axisReasons.push({
+                        label: me.J === 'J' ? 'J ↔ J' : 'P ↔ P',
+                        text: me.J === 'J'
+                            ? '약속·일정 스타일이 비슷해서 데이트 잡기 수월해요.'
+                            : '즉흥·유연한 만남이 둘 다 부담 없어요.',
+                        tone: 'good'
+                    });
+                } else {
+                    axisReasons.push({
+                        label: 'J ↔ P',
+                        text: me.J === 'J'
+                            ? '상대는 "지금 나와" 같은 번개를 좋아할 수 있어요. 너무 빡빡한 계획은 피하세요.'
+                            : '상대는 하루 전·구체적 약속을 원해요. "언제 한번"은 인사치레예요.',
+                        tone: 'warn'
+                    });
+                }
+
+                const kakaoByTheir = {
+                    'TJ': ['이번 주 토요일 6시, ○○역 3번 출구에서 밥 먹을래?', '○요일 저녁 시간 되면 카페에서 얘기하고 싶어.', '용건 하나 있는데, 이번 주말에 30분만 시간 될까?'],
+                    'TP': ['오늘 저녁에 드라이브 갈 사람 구해 🚗', '지금 ○○ 카페 앞인데, 잠깐 만날래?', '갑자기인데 오늘 시간 되면 맛집 같이 가자.'],
+                    'FJ': ['오늘 하루 어땠어? 😊', '요즘 바쁘지? 힘들면 말해, 내가 들어줄게.', '○○ 봤는데 너 생각나서 연락했어 💕'],
+                    'FP': ['오늘 날씨 좋던데 산책 같이 할래?', '너 얘기 듣고 싶어서 연락했어 ☺️', '○○ 맛집 발견했는데 같이 가볼래?']
+                };
+                const theirKey = them.T + them.J;
+                const kakaoPool = kakaoByTheir[theirKey] || kakaoByTheir['FP'];
+                const pairIdx = (myMbti.charCodeAt(0) + myMbti.charCodeAt(2) + theirMbti.charCodeAt(1)) % kakaoPool.length;
+                let firstKakao = kakaoPool[pairIdx];
+                if (me.E === 'I' && them.E === 'I') firstKakao = '부담 없이 답해도 돼. ' + firstKakao;
+                if (me.T === 'T' && them.T === 'F') firstKakao = firstKakao.replace(/\?$/, '') + ' 힘든 일 있으면 말해줘.';
+
+                const dateByPair = {
+                    'SJ': '영화관 → 맛집 → 카페처럼 정해진 코스',
+                    'SP': '맛집 투어·드라이브·즉흥 핫플',
+                    'NJ': '전시회·북카페 → 조용한 바',
+                    'NP': '팝업·플리마켓·처음 가보는 곳'
+                };
+                const dateKey = them.S + them.J;
+                const dateIdea = dateByPair[dateKey] || dateByPair['SP'];
+                const dateExtra = me.J === 'J' && them.J === 'P'
+                    ? ' (대략적 시간만 정하고 장소는 만나서 정하기)'
+                    : me.J === 'P' && them.J === 'J'
+                    ? ' (장소·시간을 미리 정해서 제안하기)'
+                    : '';
+
+                const avoidFromAxis = [];
+                if (me.T !== them.T && me.T === 'T') avoidFromAxis.push('"힘들면 ○○ 해봐" 식 해결책 먼저 던지기');
+                if (me.T !== them.T && me.T === 'F') avoidFromAxis.push('서운해~ 징징거리며 감정 호소하기');
+                if (me.J !== them.J && me.J === 'J') avoidFromAxis.push('분 단위 일정표 들이밀기');
+                if (me.J !== them.J && me.J === 'P') avoidFromAxis.push('당일 아침 번개 만남·약속 취소');
+                if (me.E !== them.E && me.E === 'E') avoidFromAxis.push('연속 카톡·"지금 뭐해?" 재촉');
+                if (me.S !== them.S && me.S === 'S') avoidFromAxis.push('현실 무시한 가정·추상적 잡담만 하기');
+
+                const msgLines = [];
+                if (them.T === 'T') {
+                    msgLines.push('카톡은 용건 위주·이모티콘 절제. 연속 질문은 한 번에 하나만.');
+                } else {
+                    msgLines.push('카톡은 리액션(ㅋㅋ, 대박)과 😊 이모티콘으로 따뜻함 전달.');
+                }
+                if (them.J === 'J') {
+                    msgLines.push('약속은 "토요일 6시 ○○역"처럼 구체적으로. 답장은 1~2시간 간격.');
+                } else {
+                    msgLines.push('즉흥 "지금 나와"도 OK. 읽씹은 최대의 적.');
+                }
+                if (them.E === 'I') {
+                    msgLines.push('전화 전 "지금 통화 괜찮아?" 카톡 먼저. 통화는 10~15분.');
+                } else {
+                    msgLines.push('전화도 부담 없음. 갑작스러운 통화도 괜찮을 수 있어요.');
+                }
+
+                const cautions = axisReasons
+                    .filter(r => r.tone === 'warn' || r.tone === 'critical')
+                    .map(r => `<b>${r.label}:</b> ${r.text}`);
+
+                const approach = secretData[them.J];
+
+                return {
+                    axisReasons,
+                    firstKakao,
+                    dateIdea: dateIdea + dateExtra,
+                    avoidFromAxis,
+                    commGuide: msgLines,
+                    cautions,
+                    approach
+                };
             }
 
             const formatList = (str) => {
@@ -349,122 +401,116 @@
                 return `<ul class="style-list space-y-2">` + str.split(',').map(item => `<li>${item.trim()}</li>`).join('') + `</ul>`;
             };
 
+            const axisToneClass = (tone) => {
+                if (tone === 'good') return 'bg-emerald-50 border-emerald-200 text-emerald-800';
+                if (tone === 'critical') return 'bg-red-50 border-red-300 text-red-800';
+                return 'bg-amber-50 border-amber-200 text-amber-900';
+            };
+
             // 점수 계산 로직
             let score = 50; 
             const sameSN = (valA.includes('S') === valB.includes('S'));
             const sameTF = (valA.includes('T') === valB.includes('T'));
             const sameJP = (valA.includes('J') === valB.includes('J'));
+            const sameEI = (valA[0] === valB[0]);
 
             if(sameSN) score += 20; else score -= 10;
             if(sameJP) score += 10; else score -= 5;
-            if(!sameTF) score += 15; 
+            if(!sameTF) score += 15;
+            if(sameEI) score += 5; else score -= 3;
             score = Math.min(100, Math.max(10, score));
 
-            let title, desc, conflict;
-            if (score >= 80) { title = "🔥 썸 단계 생략 가능!"; desc = "만나자마자 스파크가 튑니다. 오늘부터 1일 해도 될 정도예요."; }
-            else if (score >= 60) { title = "💖 그린라이트 켜짐"; desc = "서로 호감이 생길 확률이 매우 높습니다. 조금만 용기 내세요."; }
-            else if (score >= 40) { title = "⚡ 노력하면 썸 가능"; desc = "매력을 느끼지만 접근 방식에 주의가 필요합니다."; }
-            else { title = "🌪 공략 난이도 최상"; desc = "취향이 완전히 다릅니다. 하지만 원래 나쁜 남자/여자에게 끌리는 법이죠."; }
+            let title, desc;
+            if (score >= 80) { title = "썸 단계 생략 가능"; desc = "성향 조합이 잘 맞아요. 용기 내서 다음 단계로 가도 됩니다."; }
+            else if (score >= 60) { title = "그린라이트 켜짐"; desc = "접근 방식만 맞추면 호감이 생길 확률이 높아요."; }
+            else if (score >= 40) { title = "노력하면 썸 가능"; desc = "매력은 있지만 축 차이를 의식해서 대화해야 해요."; }
+            else { title = "공략 난이도 최상"; desc = "취향이 많이 달라요. 아래 조합 가이드를 꼭 참고하세요."; }
 
-            if (!sameTF) {
-                if (valA.includes('T')) conflict = "⚠️ <b>[접근 주의]</b> 논리적인 해결책 제시는 잠시 넣어두세요. 상대방(F)은 <b>공감과 리액션</b>을 원합니다. '그랬구나' 연습하세요.";
-                else conflict = "⚠️ <b>[접근 주의]</b> 감정적인 호소는 부담스러울 수 있어요. 상대방(T)에게는 <b>깔끔하고 명확하게</b> 용건을 말하는 게 좋습니다. 징징대지 마세요.";
-            } else {
-                conflict = "✨ <b>[어필 포인트]</b> 대화 코드가 잘 맞아서 금방 친해질 수 있어요! 공통 관심사만 찾으면 게임 끝입니다.";
-            }
-
-            // 결과 화면 구성
             const tData = mbtiData[valB];
-            const snKey = valB.includes('S') ? 'S' : 'N';
-            const tfKey = valB.includes('T') ? 'T' : 'F';
-            const jpKey = valB.includes('J') ? 'J' : 'P';
-            
-            const secretAppeal = secretData[snKey].appeal + "<br><br>" + secretData[tfKey].appeal;
-            const secretBeware = secretData[snKey].beware + "<br><br>" + secretData[tfKey].beware;
-            const secretRole = secretData[jpKey];
-            
-            // 나의 MBTI 기준 주의사항
-            const myCaution = getMyCautionPoints(valA, valB);
-            const messengerTips = getMessengerTips(valA, valB);
-            const callTips = getCallTips(valA, valB);
+            const pair = getPairStrategy(valA, valB);
+
+            const axisReasonsHtml = pair.axisReasons.map(r => `
+                <div class="px-3 py-2 rounded-lg border text-xs leading-relaxed ${axisToneClass(r.tone)}">
+                    <span class="font-bold">${r.label}</span> ${r.text}
+                </div>
+            `).join('');
+
+            const avoidAll = [...pair.avoidFromAxis];
+            const dislikeFirst = tData.dislike.split(',').slice(0, 2).map(s => s.trim());
+            dislikeFirst.forEach(d => { if (!avoidAll.some(a => a.includes(d.slice(0, 4)))) avoidAll.push(d); });
 
             const resultHTML = `
                 <div class="clean-card p-6 md:p-8 bg-white">
-                    <div class="text-center mb-6">
-                        <h2 class="text-2xl font-extrabold text-slate-800 mb-2">
-                            <span class="text-point">${valB}</span> 그 사람은<br>"${tData.type}"
+                    <div class="text-center mb-4">
+                        <p class="text-xs font-bold text-slate-400 tracking-widest mb-2">${valA} → ${valB}</p>
+                        <h2 class="text-2xl font-extrabold text-slate-800 mb-1">
+                            <span class="text-point">${valB}</span> · ${tData.type}
                         </h2>
+                        <p class="text-sm text-slate-500 mt-2">${tData.tip}</p>
                     </div>
-                    <div class="space-y-4 text-left">
-                        <div class="bg-rose-50 p-5 rounded-xl border-l-4 border-rose-400">
-                            <p class="font-bold text-rose-600 text-sm mb-3 flex items-center"><i class="fas fa-heart mr-2"></i>호감 포인트 (Like)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-100">
+                            <p class="font-bold text-rose-600 text-sm mb-2"><i class="fas fa-heart mr-1"></i>그 사람이 좋아하는 것</p>
                             <div class="text-slate-600 text-sm">${formatList(tData.like)}</div>
                         </div>
-                        <div class="bg-slate-50 p-5 rounded-xl border-l-4 border-slate-400">
-                            <p class="font-bold text-slate-600 text-sm mb-3 flex items-center"><i class="fas fa-times-circle mr-2"></i>정떨어지는 행동 (Dislike)</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-600 text-sm mb-2"><i class="fas fa-times-circle mr-1"></i>그 사람이 싫어하는 것</p>
                             <div class="text-slate-600 text-sm">${formatList(tData.dislike)}</div>
                         </div>
-                    </div>
-                    <div class="mt-5 text-xs text-slate-400 word-keep break-keep leading-relaxed bg-indigo-50 border border-indigo-100 p-3 rounded-lg">
-                        <span class="font-bold text-indigo-600 flex items-center"><i class="fas fa-lightbulb mr-1"></i>꼬시기 Tip:</span> <span class="text-slate-600">${tData.tip}</span>
                     </div>
                 </div>
 
                 <div class="clean-card p-6 md:p-8 text-center bg-white">
-                    <h3 class="font-bold text-slate-400 text-xs tracking-widest mb-2">FLIRTING SCORE</h3>
+                    <h3 class="font-bold text-slate-400 text-xs tracking-widest mb-2">이 조합의 공략 난이도</h3>
                     <div class="text-5xl font-black text-rose-500 mb-2">${score}<span class="text-2xl text-slate-300">/100</span></div>
-                    <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden">
+                    <div class="w-full bg-slate-100 rounded-full h-3 mb-4 overflow-hidden">
                         <div class="bg-gradient-to-r from-rose-300 to-rose-600 h-3 rounded-full score-bar" style="width: 0%"></div>
                     </div>
                     <h4 class="text-lg font-bold text-slate-800 mb-1">${title}</h4>
-                    <p class="text-sm text-slate-500 mb-4 leading-relaxed word-keep break-keep">${desc}</p>
-                    <div class="bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 text-left text-sm text-slate-600 leading-snug word-keep break-keep">
-                        ${conflict}
+                    <p class="text-sm text-slate-500 mb-4">${desc}</p>
+                    <div class="space-y-2 text-left">${axisReasonsHtml}</div>
+                </div>
+
+                <div class="clean-card p-6 md:p-8 bg-white">
+                    <h4 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-paper-plane text-rose-500"></i> 첫 접근 시나리오
+                    </h4>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                            <p class="text-xs font-bold text-blue-600 mb-2">카톡 첫 문장 (복붙 OK)</p>
+                            <p class="text-slate-800 text-sm font-medium leading-relaxed">"${pair.firstKakao}"</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-xl border border-violet-100">
+                            <p class="text-xs font-bold text-violet-600 mb-2">데이트 제안 스타일</p>
+                            <p class="text-slate-700 text-sm">${pair.dateIdea}</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <p class="text-xs font-bold text-slate-600 mb-2">이 조합에서 특히 하지 말 것</p>
+                            <ul class="style-list text-sm text-slate-600">${avoidAll.map(a => `<li>${a}</li>`).join('')}</ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="clean-card relative overflow-hidden bg-white">
-                    <div class="p-6 md:p-8 h-full bg-white">
-                        <div class="flex items-center justify-center gap-2 mb-8">
-                            <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">PREMIUM</span>
-                            <h4 class="font-bold text-slate-800 text-lg">맞춤 플러팅 가이드</h4>
+                <div class="clean-card p-6 md:p-8 bg-white">
+                    <h4 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-user-shield text-red-500"></i> ${valA}가 특히 조심할 점
+                    </h4>
+                    ${pair.cautions.length > 0
+                        ? `<div class="space-y-3 text-sm text-slate-700 leading-relaxed">${pair.cautions.map(c => `<div class="bg-red-50/80 p-3 rounded-lg border border-red-100">${c}</div>`).join('')}</div>`
+                        : `<p class="text-sm text-emerald-700 bg-emerald-50 p-4 rounded-xl">축 차이가 크지 않아요. 상대 유형만 의식하면 됩니다.</p>`
+                    }
+                    <div class="mt-5 pt-5 border-t border-slate-100">
+                        <p class="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wide">연락 · 통화 가이드</p>
+                        <ul class="style-list text-sm text-slate-600">${pair.commGuide.map(l => `<li>${l}</li>`).join('')}</ul>
+                    </div>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="bg-indigo-50 p-4 rounded-xl text-center border border-indigo-100">
+                            <p class="text-xs text-slate-500 mb-1">접근 스타일</p>
+                            <p class="font-bold text-indigo-700">${pair.approach.role}</p>
                         </div>
-                        <div class="space-y-6">
-                            <div class="bg-rose-50 p-5 rounded-2xl border border-rose-100 shadow-sm">
-                                <h5 class="font-bold text-rose-600 text-sm mb-3 flex items-center"><i class="fas fa-heart mr-2"></i>심쿵 포인트 (Appeal)</h5>
-                                <div class="text-slate-700 text-sm leading-relaxed">${secretAppeal}</div>
-                            </div>
-                            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                <h5 class="font-bold text-slate-600 text-sm mb-3 flex items-center"><i class="fas fa-ban mr-2"></i>절대 금지 (Beware)</h5>
-                                <div class="text-slate-700 text-sm leading-relaxed">${secretBeware}</div>
-                            </div>
-                            <div class="bg-red-50 p-5 rounded-2xl border-l-4 border-red-500 shadow-sm">
-                                <h5 class="font-bold text-red-600 text-sm mb-3 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i>내가 조심해야 할 점 (${valA} 기준)</h5>
-                                <div class="text-slate-700 text-sm leading-relaxed">${myCaution}</div>
-                            </div>
-                            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border border-blue-200 shadow-sm">
-                                <h5 class="font-bold text-blue-600 text-sm mb-4 flex items-center"><i class="fas fa-comments mr-2"></i>통신 주의사항</h5>
-                                <div class="space-y-4">
-                                    <div>
-                                        <h6 class="font-semibold text-blue-700 text-xs mb-2 flex items-center"><i class="fas fa-comment-dots mr-1 text-xs"></i>카톡/메신저</h6>
-                                        <div class="text-slate-700 text-sm leading-relaxed pl-4 border-l-2 border-blue-200">${messengerTips}</div>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-semibold text-purple-700 text-xs mb-2 flex items-center"><i class="fas fa-phone mr-1 text-xs"></i>전화</h6>
-                                        <div class="text-slate-700 text-sm leading-relaxed pl-4 border-l-2 border-purple-200">${callTips}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 text-center flex flex-col justify-center">
-                                    <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Approaching Style</p>
-                                    <p class="text-lg font-black text-indigo-600 break-keep">${secretRole.role}</p>
-                                </div>
-                                <div class="bg-white p-5 rounded-2xl border border-slate-200">
-                                    <div class="text-xs text-blue-600 font-bold mb-2 flex items-center justify-center"><i class="fas fa-check-circle mr-1"></i>${secretRole.good}</div>
-                                    <div class="text-xs text-rose-500 font-bold flex items-center justify-center"><i class="fas fa-times-circle mr-1"></i>${secretRole.bad}</div>
-                                </div>
-                            </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 text-xs space-y-1">
+                            <p class="text-blue-600 font-bold"><i class="fas fa-check mr-1"></i>${pair.approach.good}</p>
+                            <p class="text-rose-500 font-bold"><i class="fas fa-times mr-1"></i>${pair.approach.bad}</p>
                         </div>
                     </div>
                 </div>
