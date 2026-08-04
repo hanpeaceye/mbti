@@ -154,7 +154,7 @@
                             <span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span>
                         </div>
                         <h3 class="mt-2 text-white font-bold text-sm drop-shadow">
-                            🔍 다른 서비스도 둘러보기
+                            🛍️ 쿠팡 잠깐 보고<br>다른 서비스도 둘러보기
                         </h3>
                     </div>
                     <div id="start-page-services-grid" data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2">
@@ -243,7 +243,7 @@
 
     function getOtherTestsHtml(currentUrl) {
         return testList.filter(t => t.url !== currentUrl).map(test => `
-            <button onclick="location.href='${test.url}'" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+            <button onclick="goTest('${test.url}')" class="bg-white/95 border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
                 <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
                     <i class="fas ${test.icon}"></i>
                 </div>
@@ -468,7 +468,10 @@
         }
 
         function goTest(targetUrl) {
-            location.href = targetUrl;
+            window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+            setTimeout(() => {
+                location.href = targetUrl;
+            }, 100);
         }
 
         function getResultType(score) {
@@ -563,7 +566,7 @@
                             <span class="bg-transparent px-4 text-xs font-bold text-white/80 tracking-widest uppercase">BONUS</span>
                         </div>
                         <h3 class="mt-2 text-white font-bold text-sm drop-shadow">
-                            🔍 다른 서비스도 둘러보기
+                            🛍️ 쿠팡 잠깐 보고<br>다른 서비스도 둘러보기
                         </h3>
                     </div>
                     

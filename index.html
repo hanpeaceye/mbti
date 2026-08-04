@@ -204,7 +204,10 @@
                 }
 
                 function goTest(targetUrl) {
-                    location.href = targetUrl;
+                    window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                    setTimeout(() => {
+                        location.href = targetUrl;
+                    }, 100);
                 }
 
                 // 페이지 로드 시 리스트 렌더링
@@ -223,7 +226,7 @@
             <div id="result-content" class="space-y-6"></div>
 
             <div class="mt-12 pt-8 border-t border-rose-200/50">
-                <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 상황별 공략법</h3>
+                <h3 class="text-center font-bold text-slate-800 mb-6">🛍️ 쿠팡 잠깐 보고 다른 상황별 공략법</h3>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <a href="/some" class="clean-card p-4 text-center hover:shadow-md transition-shadow group bg-white">
                         <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-2 text-pink-500 group-hover:scale-110 transition-transform">

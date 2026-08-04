@@ -121,7 +121,7 @@
                         <span class="bg-slate-50 px-4 text-xs font-bold text-slate-400 tracking-widest uppercase">BONUS</span>
                     </div>
                     <h3 class="mt-4 text-slate-800 font-bold text-sm animate-bounce">
-                        🔍 다른 테스트 하러 가기
+                        🛍️ 쿠팡 잠깐 보고<br>다른 테스트 하러 가기
                     </h3>
                 </div>
                 
@@ -130,7 +130,10 @@
 
             <script>
                 function goTest(targetUrl) {
-                    location.href = targetUrl;
+                    window.open('https://link.coupang.com/a/ddddJ5', '_blank');
+                    setTimeout(() => {
+                        location.href = targetUrl;
+                    }, 100);
                 }
             </script>
         </div>
@@ -146,7 +149,7 @@
             <div id="result-content" class="space-y-6"></div>
 
             <div class="mt-12 pt-8 border-t border-slate-200">
-                <h3 class="text-center font-bold text-slate-800 mb-6">👀 다른 테스트도 해보세요!</h3>
+                <h3 class="text-center font-bold text-slate-800 mb-6">🛍️ 쿠팡 잠깐 보고 다른 테스트도 해보세요!</h3>
                 <div data-test-grid class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
             </div>
 
@@ -190,7 +193,7 @@
 
     function getOtherTestsHtml(currentUrl) {
         return testList.filter(t => t.url !== currentUrl).map(test => `
-            <button onclick="location.href='${test.url}'" class="bg-white border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
+            <button onclick="goTest('${test.url}')" class="bg-white border border-${test.color}-100 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center text-center w-full">
                 <div class="w-10 h-10 bg-${test.color}-50 rounded-full flex items-center justify-center text-${test.color}-500 mb-2 group-hover:scale-110 transition-transform">
                     <i class="fas ${test.icon}"></i>
                 </div>
